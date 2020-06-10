@@ -92,6 +92,13 @@
 					"modules" : [
 						"retail/slrpt/byloc"
 					]					
+				},
+				{
+					"title" : "Chatbot",
+					"disabled" : false,
+					"modules" : [
+						"retail/chatbot/pendingfollowup"
+					]					
 				}
 
 				
