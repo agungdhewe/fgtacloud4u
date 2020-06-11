@@ -20,7 +20,8 @@
 					"modules" : [
 						"ent/general/curr",
 						"ent/general/country",
-						"ent/general/bank"
+						"ent/general/bank",
+						"ent/general/gender"
 					]
 				},
 
