@@ -8,7 +8,8 @@
 			"modules" : [
 				"hrms/master/edu",
 				"hrms/master/marital",
-				"hrms/master/hrstatus"
+				"hrms/master/hrstatus",
+				"hrms/master/hrgrd"
 			]					
 		}
 
