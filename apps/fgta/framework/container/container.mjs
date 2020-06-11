@@ -342,6 +342,19 @@ async function init_data() {
 
 
 async function composemodulelist(mdlist) {
+	if (mdlist == null) {
+		return;
+	}
+
+	if (!('MODULES' in mdlist)) {
+		return;
+	}	
+
+	if ( typeof mdlist.MODULES[Symbol.iterator] !== 'function') {
+		return;
+	}
+
+
 	for (let mdlico of mdlist.MODULES) {
 		mdlico.level = mdlist.level+1
 		mdlico.id = ModuleShortcuts.length
@@ -355,6 +368,20 @@ async function composemodulelist(mdlist) {
 
 
 async function CreateModuleList(mdlist) {
+	if (mdlist == null) {
+		return;
+	}
+
+	if (!('MODULES' in mdlist)) {
+		return;
+	}	
+
+	if ( typeof mdlist.MODULES[Symbol.iterator] !== 'function') {
+		return;
+	}
+
+
+
 	let prev_level = CurrentState.MenuLevel
 	let next_level = mdlist.level
 
