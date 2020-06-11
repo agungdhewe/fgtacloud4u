@@ -2,13 +2,12 @@
 
 const pnl_exitbar = $('#pnl_exitbar');
 const btn_exit = $('#btn_exit');
-const btn_login = $('#btn_login');
-const btn_test = $('#btn_test');
+const el_btn_login = document.getElementById('btn_login')
 
 const obj = {
-	txt_username: $('#obj_txt_username'),
-	txt_password: $('#obj_txt_password'),
-	chk_rememberme: $('#obj_chk_rememberme')
+	el_txt_username: document.getElementById('txt_username'),
+	el_txt_password: document.getElementById('txt_password'),
+	el_chk_rememberme: document.getElementById('chk_rememberme')
 }
 
 const api = {
@@ -19,59 +18,42 @@ const api = {
 
 export async function init() {
 
-	obj.txt_username.textbox('textbox').bind('keypress', (evt)=>{
+	obj.el_txt_username.addEventListener('keypress', (evt)=>{
 		txt_username_keypress(evt)
 	})	
 
-	obj.txt_password.textbox('textbox').bind('keypress', (evt)=>{
+	obj.el_txt_password.addEventListener('keypress', (evt)=>{
 		txt_password_keypress(evt)
+	})	
+
+	btn_login.addEventListener('click', ()=>{ 
+		btn_login_click() 
 	})
 
-
-
-	btn_login.linkbutton({
-		onClick: ()=> { btn_login_click() }
-	})
-
-
-
-	obj.chk_rememberme.checked = false
-	obj.chk_rememberme.checkbox({
-		checked: obj.chk_rememberme.checked,
-		onChange: (checked) => { chk_rememberme_checkedchange(checked) }
-	})
-
-	setTimeout(()=>{
-		obj.txt_username.textbox('textbox').focus()
-		obj.txt_username.textbox('resize', '100%')
-		obj.txt_password.textbox('resize', '100%')
-	}, 400)	
 }
 
 
 function txt_username_keypress(evt) {
-	let username = obj.txt_username.textbox('getText')
+	let username = obj.el_txt_username.value
 	if (evt.key==='Enter') {
 		if (username.trim()!=='') {
-			obj.txt_password.textbox('textbox').focus()
+			obj.el_txt_password.focus();
 		}
 	}
 }
 
 function txt_password_keypress(evt) {
-	let password = obj.txt_password.textbox('getValue')
+	let password = obj.el_txt_password.value
 	if (evt.key==='Enter') {
 		btn_login_click()
 	}	
 }
 
-function chk_rememberme_checkedchange(checked) {
-	obj.chk_rememberme.checked=checked
-}
+
 
 function btn_login_click() {
-	let username = obj.txt_username.textbox('getText')
-	let password = obj.txt_password.textbox('getValue')
+	let username = obj.el_txt_username.value
+	let password = obj.el_txt_password.value
 
 	let ajax_args = {
 		username: username,

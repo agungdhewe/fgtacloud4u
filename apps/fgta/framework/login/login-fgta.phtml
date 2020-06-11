@@ -8,7 +8,15 @@
 		height: 100vh;
 		align-items: center;
 		justify-content: center;
-		background-color: #c9ced8		
+		background-color: #c9ced8;
+		
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Safari */
+		-khtml-user-select: none; /* Konqueror HTML */
+		-moz-user-select: none; /* Old versions of Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+		user-select: none; /* Non-prefixed version, currently
+								supported by Chrome, Edge, Opera and Firefox */		
 	}
 
 	.login-box {
@@ -38,6 +46,62 @@
 		}
 	}
 
+
+	.email-login {
+		position:relative;
+		float: left;
+		width: 100%;
+		height:auto;
+		margin-top: 20px;
+		text-align:center;
+}
+
+
+
+	.u-form-group{
+		width:100%;
+		margin-bottom: 10px;
+
+
+	}
+
+
+	.u-form-group input[type="checkbox"] {
+		border: 0px;
+	}
+
+	.u-form-group input[type="text"],
+	.u-form-group input[type="password"]{
+		width: 100%;
+		height:45px;
+		outline: none;
+		border: 1px solid #ddd;
+		padding: 0 10px;
+		border-radius: 2px;
+		color: #333;
+		font-size:0.8rem;
+		-webkit-transition:all 0.1s linear;
+		-moz-transition:all 0.1s linear;
+		transition:all 0.1s linear;
+	}
+
+	.u-form-group input:focus{
+		border-color: #358efb;
+	}
+
+	.u-form-group button{
+		width:100%;
+		border: none;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		font-weight: normal;
+		padding: 14px 0;
+		border-radius: 2px;
+		text-transform: uppercase;
+	}	
+
+
 </style>
 
 
@@ -49,8 +113,32 @@
 		<div style="font-weight: bold; font-size: larger; margin-bottom: 18px; height: 100px; background-color: #194c7b; text-align: left; padding-top: 15px; padding-left: 10px">
 			<img src="images/fgta.png" width="210px" height="53px" border="0px">
 		</div>
-		
-		<div style="margin-left: 10px;" >
+
+		<div style="padding: 15px 15px 15px 15px; ">
+			<div class="u-form-group">
+				<input id="txt_username" type="text" placeholder="Username"/>
+			</div>
+
+			<div class="u-form-group">
+				<input id="txt_password" type="password" placeholder="Password"/>
+			</div>
+
+			<div class="u-form-group">	
+				<input type="checkbox" id="chk_rememberme"> Remember me
+				<label for="chk_rememberme">Remember me</label>
+			</div>
+
+			<div class="u-form-group" style="margin-top: 35px">
+				<button id="btn_login" class="c8">Login</button>
+			</div>
+
+
+		</div>
+
+
+
+
+		<!-- <div style="margin-left: 10px;" >
 			<div style="width:225px; margin-top: 20px; margin-bottom: 5px">Username</div>
 			<div style="width:225px">
 				<input id="obj_txt_username" class="easyui-textbox" style="width:100%">
@@ -72,7 +160,7 @@
 
 		<div style="margin-top: 25px; margin-left: 10px;">
 			<input id="obj_chk_rememberme" class="easyui-checkbox" label="Remember Me" labelPosition="after" labelAlign="left" labelWidth="100px" data-options="">
-		</div>
+		</div> -->
 
 
 	</div> 
