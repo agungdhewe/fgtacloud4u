@@ -1,0 +1,15 @@
+{
+	"title" : "Retail",
+	"disabled" : false,
+	"modules" : [
+		{
+			"title" : "Master Data",
+			"disabled" : false,
+			"modules" : [
+				"hrms/master/edu"
+			]					
+		}
+
+		
+	]
+}

@@ -71,7 +71,19 @@
 			"title" : "Retail",
 			"disabled" : false,
 			"file" : "modules-tfi-retail.json"
-		}
+		},
+
+		{
+			"title" : "HRMS",
+			"disabled" : false,
+			"file" : "modules-tfi-hrms.json"
+		},
+		
+		{
+			"title" : "CRM",
+			"disabled" : false
+			
+		}		
 
 	]
 }

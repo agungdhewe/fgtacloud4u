@@ -6,8 +6,8 @@
 			"title" : "Inventory",
 			"disabled" : false,
 			"modules" : [
-				"retail/inv/seagroup",
-				"retail/inv/sea"
+				"retail/master/seagroup",
+				"retail/master/sea"
 			]					
 		},
 		{
