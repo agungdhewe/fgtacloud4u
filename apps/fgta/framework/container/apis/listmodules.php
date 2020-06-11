@@ -61,12 +61,12 @@ class ListModules extends WebAPI {
 			throw new WebException("format json pada file '$modulepath' salah",  500);
 		}
 
-		$USERMODULES = $this->CreateModuleHierarchy($modulesrawdata['modules'], $userdata);
+		$USERMODULES = $this->CreateModuleHierarchy($modulepath, $modulesrawdata['modules'], $userdata);
 		return $USERMODULES;
 	}
 
 
-	public function CreateModuleHierarchy($modules, $userdata) {
+	public function CreateModuleHierarchy($modulepath, $modules, $userdata) {
 		if (!is_array($modules)) 
 			return;
 
@@ -76,7 +76,26 @@ class ListModules extends WebAPI {
 				// module group
 				$mdl = new ModuleGroup($moduleitem, $userdata);
 				if (array_key_exists('modules', $moduleitem)) {
-					$mdl->MODULES = $this->CreateModuleHierarchy($moduleitem['modules'], $userdata);
+					$mdl->MODULES = $this->CreateModuleHierarchy($modulepath, $moduleitem['modules'], $userdata);
+				} else if (array_key_exists('file', $moduleitem)) {
+					// link ke file lain
+					$childmodulepath = dirname($modulepath) . "/" . $moduleitem['file'];
+					if (!is_file($childmodulepath)) {
+						throw new WebException("child module menu '$childmodulepath' tidak ditemukan. Cek konfigurasi menu di '$modulepath'",  500);
+					}
+
+					$modulesjsondata = file_get_contents($childmodulepath);
+					$modulesrawdata = json_decode($modulesjsondata, true);
+					if (json_last_error()) {
+						throw new WebException("format json pada file '$childmodulepath' salah",  500);
+					}
+					
+					if (!array_key_exists('modules', $modulesrawdata)) {
+						throw new WebException("array module tidak ditemukan di root '$childmodulepath'",  500);
+					}
+
+					$mdl->MODULES = $this->CreateModuleHierarchy($childmodulepath, $modulesrawdata['modules'], $userdata);
+					
 				}
 			} else {
 				// module

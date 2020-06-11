@@ -1,0 +1,38 @@
+{
+	"title" : "Retail",
+	"disabled" : false,
+	"modules" : [
+		{
+			"title" : "Inventory",
+			"disabled" : false,
+			"modules" : [
+				"retail/inv/seagroup",
+				"retail/inv/sea"
+			]					
+		},
+		{
+			"title" : "Inventory Report",
+			"disabled" : false,
+			"modules" : [
+				"retail/invrpt/invart"
+			]					
+		},
+		{
+			"title" : "Sales Report",
+			"disabled" : false,
+			"modules" : [
+				"retail/slrpt/sldash",
+				"retail/slrpt/byloc"
+			]					
+		},
+		{
+			"title" : "Chatbot",
+			"disabled" : false,
+			"modules" : [
+				"retail/chatbot/pendingfollowup"
+			]					
+		}
+
+		
+	]
+}
