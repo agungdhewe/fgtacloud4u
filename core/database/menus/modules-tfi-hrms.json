@@ -6,7 +6,8 @@
 			"title" : "Master Data",
 			"disabled" : false,
 			"modules" : [
-				"hrms/master/edu"
+				"hrms/master/edu",
+				"hrms/master/marital"
 			]					
 		}
 
