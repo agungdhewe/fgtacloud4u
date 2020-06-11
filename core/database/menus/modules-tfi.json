@@ -21,7 +21,8 @@
 						"ent/general/curr",
 						"ent/general/country",
 						"ent/general/bank",
-						"ent/general/gender"
+						"ent/general/gender",
+						"ent/general/religion"
 					]
 				},
 
