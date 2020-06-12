@@ -9,7 +9,8 @@
 				"hrms/master/edu",
 				"hrms/master/marital",
 				"hrms/master/hrstatus",
-				"hrms/master/hrgrd"
+				"hrms/master/hrgrd",
+				"hrms/master/hrsection"
 			]					
 		}
 
