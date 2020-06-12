@@ -40,6 +40,7 @@
 					"title" : "Organisation",
 					"disabled" : false,
 					"modules" : [
+						"ent/organisation/authlevel",
 						"ent/organisation/auth",
 						"ent/organisation/unitgroup",
 						"ent/organisation/unit",
