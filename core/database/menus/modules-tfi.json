@@ -3,6 +3,7 @@
 	"modules": [
 		{
 			"title" : "Administrator",
+			"icon" : "icon-admin-white.png",
 			"disabled" : false,
 			"modules" : [
 				"fgta/framework/fggroup",
@@ -12,6 +13,7 @@
 
 		{
 			"title" : "Enterprise",
+			"icon" : "icon-enterprise-white.png",
 			"disabled" : false,
 			"modules" : [
 				{
@@ -72,18 +74,21 @@
 
 		{
 			"title" : "Retail",
+			"icon" : "icon-retail-white.png",
 			"disabled" : false,
 			"file" : "modules-tfi-retail.json"
 		},
 
 		{
-			"title" : "HRMS",
+			"title" : "hrms",
+			"icon" : "icon-hrms-white.png",
 			"disabled" : false,
 			"file" : "modules-tfi-hrms.json"
 		},
 		
 		{
-			"title" : "CRM",
+			"title" : "crm",
+			"icon" : "icon-cs-white.png",
 			"disabled" : false
 			
 		}		
