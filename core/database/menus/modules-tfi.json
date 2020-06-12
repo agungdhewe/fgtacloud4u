@@ -31,7 +31,7 @@
 
 				{
 					"title" : "Affiliation",
-					"icon" : "icon-affiliation-white.png",
+					"icon" : "icon-affiliation-white.png", 
 					"disabled" : false,
 					"modules" : [
 						"ent/affiliation/partnertype",
