@@ -554,8 +554,15 @@ export function ShowMessage(message, buttons) {
 			if (typeof btnclick === 'function') {
 				btn.click_handler()
 			}
-			progressmask.parentNode.removeChild(progressmask);
-			progresswaitmask.parentNode.removeChild(progresswaitmask);
+
+			if (progressmask.parentNode!=null) {
+				progressmask.parentNode.removeChild(progressmask);
+			}
+			
+			if (progresswaitmask.parentNode!=null) {
+				progresswaitmask.parentNode.removeChild(progresswaitmask);
+			}
+			
 			uibase.dlgmaskshowing = 'none';
 		}
 

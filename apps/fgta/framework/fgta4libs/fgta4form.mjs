@@ -467,6 +467,8 @@ function getValue(self, obj) {
 	if (obj.objecttypeclass=='easyui-checkbox') {
 		var options = obj.checkbox('options')
 		return options.checked
+	} else if (obj.objecttypeclass=='easyui-combobox') {
+		return obj.combobox('getValue')
 	} else {
 		return obj.textbox('getValue')
 	}
@@ -866,7 +868,7 @@ async function save(self, opt, fn_callback) {
 						} 
 						if (obj.display!=null) {
 							if (result.dataresponse[obj.display]!=null) {
-								setValue(self, obj, result.dataresponse[obj.display])
+								setValue(self, obj, result.dataresponse[mapping], result.dataresponse[obj.display])
 							} else {
 								setValue(self, obj, result.dataresponse[mapping])
 							}
