@@ -4,6 +4,7 @@
 	"modules" : [
 		{
 			"title" : "Master Data",
+			"icon" : "icon-hrmaster-white.png",
 			"disabled" : false,
 			"modules" : [
 				"hrms/master/edu",
