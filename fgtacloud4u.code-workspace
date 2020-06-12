@@ -3,5 +3,10 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"files.watcherExclude": {
+			"/server/apps/crm": true
+		}
+	}
 }
