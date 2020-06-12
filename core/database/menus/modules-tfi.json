@@ -2,7 +2,7 @@
 	"title": "home *****",
 	"modules": [
 		{
-			"title" : "Administrato",
+			"title" : "Administrator",
 			"icon" : "icon-admin-white.png",
 			"disabled" : false,
 			"modules" : [
