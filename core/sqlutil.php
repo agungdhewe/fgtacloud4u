@@ -52,7 +52,10 @@ class SqlUtility {
 
 			if (is_bool($value)) {
 				$value = $value ? 1 : 0;
-			} 			
+			} else if ($value=='--NULL--') {
+				$value = null;
+			}
+
 			$params[$paramname] = $value;
 		}
 
@@ -86,7 +89,9 @@ class SqlUtility {
 
 			if (is_bool($value)) {
 				$value = $value ? 1 : 0;
-			} 
+			} else if ($value=='--NULL--') {
+				$value = null;
+			}
 
 			$params[$paramname] = $value;
 		}

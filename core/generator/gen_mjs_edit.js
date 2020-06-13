@@ -81,7 +81,7 @@ module.exports = async (fsd, genconfig) => {
 				hapuspilihansama = '';
 				if (recursivetable) {
 					skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
-					updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
+					updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--' ? result.dataresponse.${fieldname} : '--NULL--', result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
 					hapuspilihansama = `
 			// hapus pilihan yang sama dengan data saat ini
 			var id = obj.${primarycomppreix}${primarykey}.textbox('getText')
@@ -94,6 +94,9 @@ module.exports = async (fsd, genconfig) => {
 			
 			`;	
 
+				} else if (allownull) {
+					skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
+					updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--' ? result.dataresponse.${fieldname} : '--NULL--', result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
 				}
 
 				var datasample = ''

@@ -108,7 +108,7 @@ class DataSave extends WebAPI {
 				$dataresponse[$key] = $value;
 			}
 			$result->dataresponse = (object) array_merge($dataresponse, [
-				// misalnya ada data yang perlu dilookup ditaruh disini
+				//  untuk lookup atau modify response ditaruh disini
 /*{__LOOKUPFIELD__}*/				
 			]);
 

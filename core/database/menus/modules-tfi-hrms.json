@@ -12,7 +12,8 @@
 				"hrms/master/hrstatus",
 				"hrms/master/hrgrd",
 				"hrms/master/hrsection",
-				"hrms/master/hrjob"
+				"hrms/master/hrjob",
+				"hrms/master/empl"
 			]					
 		}
 

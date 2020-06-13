@@ -192,6 +192,10 @@ function init(self) {
 					if  (obj.attr('uppercase').toLowerCase() === "true") {
 						$(textbox).css('text-transform', 'uppercase')
 					}
+				} else 	if (obj.attr('lowercase')!==undefined) {
+					if  (obj.attr('lowercase').toLowerCase() === "true") {
+						$(textbox).css('text-transform', 'lowercase')
+					}
 				}
 			}
 		}

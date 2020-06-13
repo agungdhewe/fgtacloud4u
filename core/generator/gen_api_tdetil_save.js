@@ -29,22 +29,27 @@ module.exports = async (fsd, genconfig) => {
 	var fields = []
 	var fieldreturn = []	
 	for (var fieldname in data) {
-		fields.push(fieldname)
+		fields.push(fieldname);
+		fieldreturn.push(fieldname);
+
 
 		var comptype = data[fieldname].comp.comptype
 		if (comptype=='datebox') {
 			tosqldate += `\t\t\t$obj->${fieldname} = (\\DateTime::createFromFormat('d/m/Y',$obj->${fieldname}))->format('Y-m-d');`
+			lookupfields += `\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($row['${fieldname}'])),\r\n`;
 		}
 		
-		var uppercase = data[fieldname].uppercase
+		var uppercase = data[fieldname].uppercase;
+		var lowercase = data[fieldname].lowercase;
 		if (uppercase===true) {
 			uppercasefields += `\t\t\t$obj->${fieldname} = strtoupper($obj->${fieldname});\r\n`
-			fieldreturn.push(fieldname)
-		}		
+		} else if (lowercase===true) {
+			uppercasefields += `\t\t\t$obj->${fieldname} = strtolower($obj->${fieldname});\r\n`
+		}		 
 
 		var allownull = data[fieldname].null;
 		if (allownull) {
-			setnullfields += `\t\t\tif ($obj->${fieldname}=='--NULL--') { unset($obj->${fieldname}); }\r\n`
+			setnullfields += `\t\t\t// if ($obj->${fieldname}=='--NULL--') { unset($obj->${fieldname}); }\r\n`
 		}
 
 		// untuk componen yang tienya combo, tambah lookup

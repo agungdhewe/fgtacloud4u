@@ -16,7 +16,7 @@ const colFgBlack = "\x1b[30m"
 const colBright = "\x1b[1m"
 const BgYellow = "\x1b[43m"
 
-const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'text', 'suppresslist', 'options']
+const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'lowercase', 'text', 'suppresslist', 'options']
 const detil_props = ['table', 'form', 'headerview', 'title']
 
 
