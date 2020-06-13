@@ -75,7 +75,8 @@ function btn_login_click() {
 		$ui.unmask();
 		if (err) {
 			if (err.status==401) {
-				$.messager.alert('Login', err.errormessage, 'warning');
+				//$.messager.alert('Login', err.errormessage, 'warning');
+				$ui.ShowMessage('[WARNING]'+err.errormessage);
 			} else {
 				$ui.ShowErrorWindow();
 			}
