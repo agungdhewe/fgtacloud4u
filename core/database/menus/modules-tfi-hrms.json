@@ -11,7 +11,8 @@
 				"hrms/master/marital",
 				"hrms/master/hrstatus",
 				"hrms/master/hrgrd",
-				"hrms/master/hrsection"
+				"hrms/master/hrsection",
+				"hrms/master/hrjob"
 			]					
 		}
 
