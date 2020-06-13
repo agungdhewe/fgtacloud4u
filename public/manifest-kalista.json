@@ -4,5 +4,12 @@
 	"lang": "en-US",
 	"start_url": "/",
 	"display": "standalone",
-	"theme_color": "#9c6ea7"
-  }
+	"theme_color": "#9c6ea7",
+	"icons": [
+		{
+		  "src": "images/kalistaicon.png",
+		  "sizes": "32x32",
+		  "type": "image/png"
+		}
+	]
+}
