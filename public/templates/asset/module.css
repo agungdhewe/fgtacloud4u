@@ -369,6 +369,7 @@ h1 {
 	/* text-underline-position: under; */
 	color: blue;
 	cursor: pointer;
+	margin-bottom: 20px;
 }
 
 .fgform-errorbox {

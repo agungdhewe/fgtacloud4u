@@ -178,7 +178,7 @@ function RenderFooter(self) {
 	var tbl = self.table
 	var divfooter = document.createElement('div')
 
-	divfooter.setAttribute("style", "margin-top: 15px; display: flex; justify-content: space-between;")
+	divfooter.setAttribute("style", "margin-top: 15px; margin-bottom: 40px; display: flex; justify-content: space-between;")
 
 
 
@@ -577,7 +577,7 @@ async function dataload(self, records) {
 			self.btnNext.innerHTML = `Load next ${sisa} records`
 		} else {
 			self.btnNext.disable()
-			self.btnNext.innerHTML = `finished load ${self.datastate.total} records`
+			self.btnNext.innerHTML = `<b>Finished</b> load ${self.datastate.total} records`
 		}
 	} else {
 		self.btnNext.disable()
@@ -645,7 +645,7 @@ async function listload(self, fn_listloading, fn_listloaded) {
 				self.btnNext.innerHTML = `Load next ${sisa} records`
 			} else {
 				self.btnNext.disable()
-				self.btnNext.innerHTML = `finished load ${self.datastate.total} records`
+				self.btnNext.innerHTML = `<b>Finished</b> load ${self.datastate.total} records`
 			}
 		} else {
 			self.btnNext.disable()
