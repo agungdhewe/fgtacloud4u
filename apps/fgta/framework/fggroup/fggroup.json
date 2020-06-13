@@ -1,5 +1,6 @@
 {
 	"title" : "Groups",
+	"icon" : "icon-group-white.png",
 	"allowanonymous" : true,
 	"allowedgroups" : ["super", "administrator"],
 	"apis" : {

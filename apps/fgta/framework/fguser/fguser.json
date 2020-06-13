@@ -1,5 +1,6 @@
 {
 	"title" : "Users",
+	"icon" : "icon-user-white.png",
 	"allowanonymous" : true,
 	"allowedgroups" : ["super", "administrator"],
 	"apis" : {
