@@ -16,8 +16,19 @@ if (!defined('FGTA4')) {
 		<title><?=$this->title?></title>
 		<!-- <base href="<?=__BASEADDRESS?>"> -->
 		<base href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']); ?> ">
-		<link rel="shortcut icon" href="images/favicon.ico">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="images/<?=__FAVICON?>">
+		<link rel="manifest" href="<?=__MANIFESTNAME?>">
+
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="application-name" content="<?=__APPDISPLAYNAME?>">
+		<meta name="apple-mobile-web-app-title" content="<?=__APPDISPLAYNAME?>">
+		<meta name="theme-color" content="#9c6ea7">
+		<meta name="msapplication-navbutton-color" content="#9c6ea7">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="msapplication-starturl" content="/">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="-1" />

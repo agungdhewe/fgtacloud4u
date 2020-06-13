@@ -1,0 +1,8 @@
+{
+	"name": "FGTA",
+	"short_name": "FGTA",
+	"lang": "en-US",
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#1a4d79"
+  }
