@@ -56,8 +56,11 @@ module.exports = async (fsd, genconfig) => {
 
 		var settouppercase = ''
 		var uppercase = data[fieldname].uppercase
+		var lowercase = data[fieldname].lowercase;
 		if (uppercase===true) {
 			settouppercase = 'uppercase="true"'
+		} else if (lowercase===true) {
+			settouppercase = 'lowercase="true"'
 		}		
 
 			if (compclass=='easyui-checkbox') {
