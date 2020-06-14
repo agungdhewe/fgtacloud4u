@@ -34,6 +34,7 @@
 					"icon" : "icon-affiliation-white.png", 
 					"disabled" : false,
 					"modules" : [
+						"ent/affiliation/contacttype",
 						"ent/affiliation/partnertype",
 						"ent/affiliation/partnerorg",
 						"ent/affiliation/partner"						
