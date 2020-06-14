@@ -93,7 +93,8 @@
 		{
 			"title" : "crm",
 			"icon" : "icon-cs-white.png",
-			"disabled" : false
+			"disabled" : false,
+			"file" : "modules-fgta-crm.json"
 			
 		}		
 

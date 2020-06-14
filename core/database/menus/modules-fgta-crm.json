@@ -1,0 +1,16 @@
+{
+	"title" : "CRM",
+	"disabled" : false,
+	"modules" : [
+		{
+			"title" : "CRM Master",
+			"icon" : "icon-crmdata-white.png",
+			"disabled" : false,
+			"modules" : [
+				"crm/master/crmsource"
+			]					
+		}
+
+		
+	]
+}
