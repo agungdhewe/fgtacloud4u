@@ -80,14 +80,14 @@
 			"title" : "Retail",
 			"icon" : "icon-retail-white.png",
 			"disabled" : false,
-			"file" : "modules-tfi-retail.json"
+			"file" : "modules-fgta-retail.json"
 		},
 
 		{
 			"title" : "hrms",
 			"icon" : "icon-hrms-white.png",
 			"disabled" : false,
-			"file" : "modules-tfi-hrms.json"
+			"file" : "modules-fgta-hrms.json"
 		},
 		
 		{
