@@ -4,5 +4,12 @@
 	"lang": "en-US",
 	"start_url": "/",
 	"display": "standalone",
-	"theme_color": "#1a4d79"
+	"theme_color": "#1a4d79",
+	"icons": [
+		{
+		  "src": "images/fgtacloudicon.png",
+		  "sizes": "32x32",
+		  "type": "image/png"
+		}
+	]	
   }
