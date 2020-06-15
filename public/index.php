@@ -74,12 +74,15 @@ if ($ENV_FGTA_APP_NAME != '') {
 	$FGTA_APP_NAME = $ENV_FGTA_APP_NAME;
 	define('__MANIFESTNAME', 'manifest-' . strtolower($FGTA_APP_NAME) . '.json');
 	define('__FAVICON', 'favicon-' . strtolower($FGTA_APP_NAME) . '.ico');
+	define('__ICON32', strtolower($FGTA_APP_NAME).'icon.png');
 	define('__APPDISPLAYNAME', $FGTA_APP_NAME);
 } else {
 	define('__MANIFESTNAME', 'manifest.json');
 	define('__FAVICON', 'favicon.ico');
+	define('__ICON32', 'fgtacloudicon.png');
 	define('__APPDISPLAYNAME', 'FGTA Dev');
 }
+
 define('__APPNAME', $FGTA_APP_NAME);
 
 
