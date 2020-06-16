@@ -48,8 +48,12 @@ class ListModules extends WebAPI {
 
 
 				if (!is_file($menu)) {
+					echo "<hr>";
 					print_r($userdata);
-					throw new Exception('path: '. __LOCALDB_DIR);
+					echo "<hr>";
+					echo __LOCALDB_DIR;
+					echo "<hr>";
+					throw new \Exception('path: '. __LOCALDB_DIR);
 				}
 
 
