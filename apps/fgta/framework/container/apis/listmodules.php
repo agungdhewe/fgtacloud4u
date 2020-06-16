@@ -49,6 +49,8 @@ class ListModules extends WebAPI {
 
 				if (!is_file($menu)) {
 					echo "<hr>";
+					echo $menu;
+					echo "<hr>";
 					print_r($userdata);
 					echo "<hr>";
 					echo __LOCALDB_DIR;
