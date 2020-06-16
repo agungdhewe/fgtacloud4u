@@ -47,16 +47,16 @@ class ListModules extends WebAPI {
 				}
 
 
-				if (!is_file($menu)) {
-					echo "<hr>";
-					echo $menu;
-					echo "<hr>";
-					print_r($userdata);
-					echo "<hr>";
-					echo __LOCALDB_DIR;
-					echo "<hr>";
-					throw new \Exception('path: '. __LOCALDB_DIR);
-				}
+				// if (!is_file($menu)) {
+				// 	echo "<hr>";
+				// 	echo $menu;
+				// 	echo "<hr>";
+				// 	print_r($userdata);
+				// 	echo "<hr>";
+				// 	echo __LOCALDB_DIR;
+				// 	echo "<hr>";
+				// 	throw new \Exception('path: '. __LOCALDB_DIR);
+				// }
 
 
 				return $menu;
