@@ -1,0 +1,8 @@
+{
+	"title" : "Image pick color",
+	"allowanonymous" : true,
+	"allowedgroups" : ["public"],
+	"apis" : {
+	}	
+}
+

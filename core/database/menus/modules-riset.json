@@ -1,0 +1,6 @@
+{
+	"title": "riset",
+	"modules": [
+		"fgta/riset/imagecolorpicker"
+	]
+}

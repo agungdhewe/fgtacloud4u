@@ -43,6 +43,12 @@ class DoLogin extends WebAPI {
 				$userdata->userfullname =  'example';
 				$userdata->groups = ['public'];
 				$userdata->menu = 'modules-example.json';
+			} else if ($username=='riset' && $password='riset') {
+				$userdata = new WebUser();
+				$userdata->username = 'riset';
+				$userdata->userfullname =  'riset';
+				$userdata->groups = ['public'];
+				$userdata->menu = 'modules-riset.json';				
 			} else {
 				$userdata = $this->fgta4cloud_login($username, md5($password));
 			}

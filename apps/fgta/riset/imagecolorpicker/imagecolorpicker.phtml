@@ -1,0 +1,20 @@
+Test pick color
+
+<div >
+	<img id="obj_viewimage" height="400" width="400" src="images/samplebag.jpg"/>
+</div>
+
+<canvas id="obj_canvas"></canvas>
+
+<div>
+	<!-- <input id="obj_PIC" type="file" onchange="updatepic(this)"> -->
+	<input id="obj_picture" type="file" name="file" accept="image/*" onchange="$ui.updatepicture(this)"/>
+</div>
+
+
+<div>
+	<button onclick="$ui.uploadimage()">Upload</button>
+</div>
+
+
+<div id="el_color" style="border: 1px solid #ccc; width: 40px; height: 40px;"></div>
