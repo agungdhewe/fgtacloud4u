@@ -45,6 +45,14 @@ class ListModules extends WebAPI {
 						$menu = realpath($usermenu);
 					}
 				}
+
+
+				if (!is_file($menu)) {
+					print_r($userdata);
+					throw new Exception('path: '. __LOCALDB_DIR);
+				}
+
+
 				return $menu;
 		}
 	
