@@ -18,8 +18,22 @@ class ModuleRoute extends Route {
 		$reqinfo->modulecsspath = $reqinfo->modulerequestinfo == '' ? "$reqinfo->moduledir/$reqinfo->modulename.css" : "$reqinfo->moduledir/$reqinfo->modulerequestinfo.css";
 		$reqinfo->modulecssurl = $reqinfo->modulerequestinfo == '' ? "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulename.css" : "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulerequestinfo.css";
 
+		
 		if (array_key_exists('variancename', $_GET)) {
 			$reqinfo->variancename = $_GET['variancename'];
+			if (property_exists($reqinfo->moduleconfig, 'variance')) {
+				if (property_exists($reqinfo->moduleconfig->variance, $reqinfo->variancename)) {
+					$variancedata = $reqinfo->moduleconfig->variance->{$reqinfo->variancename};
+					if (property_exists($variancedata, 'title')) {
+						$reqinfo->moduleconfig->title = $variancedata->title;
+					}
+					if (property_exists($variancedata, 'allowedgroups')) {
+						$reqinfo->moduleconfig->allowedgroups = $variancedata->allowedgroups;
+					}					
+				}
+			}
+
+
 		} else {
 			$reqinfo->variancename = '';
 		}

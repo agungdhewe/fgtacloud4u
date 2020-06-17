@@ -52,6 +52,7 @@ export async function init() {
 
 
 	pnl_iframe.on("load", function() {
+		console.log('load module');
 		let iframetitletext = pnl_iframe.contents().find("title").html()
 		obj_txt_title.html(iframetitletext)
 		$(document).attr("title", iframetitletext + ' - ' + $ui.basetitle);
