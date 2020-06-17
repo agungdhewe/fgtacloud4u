@@ -430,7 +430,6 @@ async function CreateModuleList(mdlist) {
 
 	for (let mdlico of mdlist.MODULES) {
 		if (mdlico.type=='module') {
-			console.log('testsetestsetet');
 			cbutton.CreateModuleShortcut(mdlico, next_elpnl, OpenModule)
 		} else {
 			cbutton.CreateModuleGroup(mdlico, next_elpnl, CreateModuleList)
