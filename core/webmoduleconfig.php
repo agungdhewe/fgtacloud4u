@@ -34,6 +34,10 @@ class WebModuleConfig {
 					$moduleconfig->title = $modulefullname;
 				}
 
+				if (!property_exists($moduleconfig, 'variance')) {
+					$moduleconfig->variance = new \stdClass;
+				}
+
 				if (!property_exists($moduleconfig, 'allowanonymous')) {
 					$moduleconfig->allowanonymous = false;
 				}
@@ -63,6 +67,7 @@ class WebModuleConfig {
 				}	
 						
 				$this->title = $moduleconfig->title;
+				$this->variance = $moduleconfig->variance;
 				$this->allowanonymous = $moduleconfig->allowanonymous;
 				$this->allowedgroups = $moduleconfig->allowedgroups;
 				$this->disabled = $moduleconfig->disabled;
@@ -77,6 +82,12 @@ class WebModuleConfig {
 				if (property_exists($moduleconfig, 'title')) {
 					$this->title = $moduleconfig->title;
 				}
+
+
+				if (property_exists($moduleconfig, 'variance')) {
+					$this->variance = $moduleconfig->variance;
+				}				
+
 
 				if (property_exists($moduleconfig, 'allowanonymous')) {
 					$this->allowanonymous = $moduleconfig->allowanonymous;

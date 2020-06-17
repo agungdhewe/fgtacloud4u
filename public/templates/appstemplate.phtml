@@ -35,6 +35,7 @@ if (!defined('FGTA4')) {
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="-1" />
 		<meta name="modulefullname" content="<?=$this->reqinfo->modulefullname?>" />
+		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
 		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
 
 
@@ -244,7 +245,11 @@ if (!defined('FGTA4')) {
 		window.preparemodule = async (fn_callback) => {
 			if (window.$ui!==undefined) {
 				await window.$ui.ready()
-				await window.$ui.init()
+				
+				var variancename = document.querySelector('meta[name="variancename"]').content
+				await window.$ui.init({
+					variancename: variancename
+				})
 			}
 			fn_callback()
 		}

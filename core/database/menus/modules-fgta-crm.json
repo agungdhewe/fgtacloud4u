@@ -13,8 +13,11 @@
 
 		{
 			"title" : "Engage",
+			"icon" : "icon-crmengage-white.png",
 			"disabled" : false,
 			"modules" : [
+				"crm/engage/crmevent",
+				{"program":"crm/engage/crmevent",  "variancename":"commit"}
 			]					
 		}		
 

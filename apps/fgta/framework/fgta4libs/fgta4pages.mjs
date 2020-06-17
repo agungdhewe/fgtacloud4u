@@ -5,7 +5,7 @@ var CurrentPage = null
 var slider = null;
 var PAGES = null;
 
-export function initPages(pages) {
+export function initPages(pages, args) {
 	var pagenum = 0;
 	for (let page of pages) {
 		pagenum++
@@ -18,7 +18,7 @@ export function initPages(pages) {
 		ITEMS[id] = page.panel
 
 		if (typeof ITEMS[id].handler.init === 'function') {
-			ITEMS[id].handler.init({id:id, pagenum:pagenum})
+			ITEMS[id].handler.init({id:id, pagenum:pagenum, args: args})
 		}
 
 		if (CurrentPage==null) {

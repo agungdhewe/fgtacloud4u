@@ -86,7 +86,17 @@ class ListModules extends WebAPI {
 
 		$USERMODULES = array();
 		foreach ($modules as $moduleitem) {
+			
+			$itemtype = 'program';
 			if (is_array($moduleitem)) {
+				if (array_key_exists('program', $moduleitem)) {
+					$itemtype = 'program-withparam';
+				} else {
+					$itemtype = 'programgroup';
+				}
+			}
+
+			if ($itemtype=='programgroup') {
 				// module group
 				$mdl = new ModuleGroup($moduleitem, $userdata);
 				if (array_key_exists('modules', $moduleitem)) {
@@ -111,10 +121,13 @@ class ListModules extends WebAPI {
 					$mdl->MODULES = $this->CreateModuleHierarchy($childmodulepath, $modulesrawdata['modules'], $userdata);
 					
 				}
+			} else if ($itemtype=='program-withparam') {
+				$modulefullname = $moduleitem['program'];
+				$variancename =  $moduleitem['variancename'];
+				$mdl = new ModuleShorcut($modulefullname, $userdata, $variancename);
 			} else {
-				// module
 				$modulefullname = $moduleitem;
-				$mdl = new ModuleShorcut($moduleitem, $userdata);
+				$mdl = new ModuleShorcut($modulefullname, $userdata);
 			}
 			array_push($USERMODULES, $mdl);
 		}
@@ -154,17 +167,21 @@ class ModuleShorcut extends ModuleIcon {
 
 	private $userdata;
 
-	function __construct($modulefullname, $userdata) {
+	function __construct($modulefullname, $userdata, $variancename=null) {
 		$this->userdata = $userdata;
 		$this->modulefullname = $modulefullname;
 
-		$moduleinfo = $this->get_module_info($modulefullname);
+		$moduleinfo = $this->get_module_info($modulefullname, $variancename);
 
 	}
 
-	function get_module_info($modulefullname) {
+	function get_module_info($modulefullname, $variancename=null) {
 		$modulepath = __ROOT_DIR."/apps/$modulefullname";
 		$modulename = basename($modulepath);
+
+		if ($variancename!=null) {
+			$x = 0;
+		}
 
 		// cek file konfigurasi
 		$moduleconfigpath = "$modulepath/$modulename.json";
@@ -196,12 +213,39 @@ class ModuleShorcut extends ModuleIcon {
 		
 		// cek apakah modulenya diperbolehkan
 		$this->disabled = true;
+
+		// variance
+		if ($variancename!=null) {
+
+			$this->variancename = $variancename;
+
+			if (property_exists($moduleconfig->variance, $variancename)) {
+				$variancedata = $moduleconfig->variance->{$variancename};
+			} else {
+				$variancedata = new \stdClass;
+			}
+
+			if (property_exists($variancedata, 'title')) {
+				$this->title = $variancedata->title;
+			}
+
+			if (property_exists($variancedata, 'icon')) {
+				$this->icon = $variancedata->icon;
+			}
+
+			if (property_exists($variancedata, 'allowedgroups')) {
+				$this->allowedgroups = $variancedata->allowedgroups;
+			}			
+
+		}
+
 		foreach ($this->allowedgroups as $allowed_group) {
 			if (in_array($allowed_group, $this->userdata->groups)) {
 				$this->disabled = false;
 				break;
 			}
-		}
+		}		
+
 		
 	}
 

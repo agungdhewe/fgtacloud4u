@@ -63,7 +63,11 @@ export async function init() {
 			return
 		}
 
+		let meta_el_variancename  = pnl_iframe.contents().find("meta[name=variancename]"); 
+		let variancename = meta_el_variancename.attr("content")
+
 		Cookies.set('last_opened_module', modulefullname)
+		Cookies.set('last_opened_module_variance', variancename)
 		if (typeof pnl_iframe.frameloaded === 'function') {
 			pnl_iframe.frameloaded()
 		}
@@ -160,10 +164,19 @@ function init_pnl_iframe() {
 
 function open_last_module() {
 	let last_opened_module = Cookies.get('last_opened_module')
+	let last_opened_module_variance = Cookies.get('last_opened_module_variance')
 	if (last_opened_module!=null) {
-		OpenModule({
-			modulefullname: last_opened_module
-		})
+		if (last_opened_module_variance!=null) {
+			OpenModule({
+				modulefullname: last_opened_module,
+				variancename: last_opened_module_variance
+			})
+		} else {
+			OpenModule({
+				modulefullname: last_opened_module
+			})
+		}
+
 	}
 
 }
@@ -192,7 +205,7 @@ function OpenModule(module, fn_loaded) {
 	}, 5*1000)
 
 	pnl_iframe.contents().find("body").html("");
-	pnl_iframe.attr('src', './index.php/module/' + module.modulefullname)
+	pnl_iframe.attr('src', './index.php/module/' + module.modulefullname + '?variancename=' + (module.variancename===undefined ? '' : module.variancename))
 	pnl_iframe.frameloaded = () => { 
 		if (typeof fn_loaded === 'function') {
 			fn_loaded();
@@ -201,6 +214,7 @@ function OpenModule(module, fn_loaded) {
 
 	pnl_iframe.frameunloaded = () => {
 		Cookies.remove('last_opened_module');
+		Cookies.remove('last_opened_module_variance');
 		var event = new CustomEvent('OnUnload', {})
 		pnl_iframe[0].contentWindow.document.dispatchEvent(event)
 
@@ -416,6 +430,7 @@ async function CreateModuleList(mdlist) {
 
 	for (let mdlico of mdlist.MODULES) {
 		if (mdlico.type=='module') {
+			console.log('testsetestsetet');
 			cbutton.CreateModuleShortcut(mdlico, next_elpnl, OpenModule)
 		} else {
 			cbutton.CreateModuleGroup(mdlico, next_elpnl, CreateModuleList)

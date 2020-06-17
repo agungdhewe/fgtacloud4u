@@ -115,9 +115,24 @@ h1 {
 
 /* CSS icon */
 .fgta-icon-edit {
-    background: url(icon-edit.png) no-repeat center center;
+    background: url(icon-edit.svg) no-repeat center center; background-size: 16px 16px;
 }
 
+.fgta-icon-commit {
+    background: url(icon-commit.svg) no-repeat center center; background-size: 16px 16px;
+}
+
+.fgta-icon-uncommit {
+    background: url(icon-uncommit.svg) no-repeat center center; background-size: 16px 16px;
+}
+
+.fgta-icon-posting {
+    background: url(icon-posting.svg) no-repeat center center; background-size: 16px 16px;;
+}
+
+.fgta-icon-unposting {
+    background: url(icon-unposting.svg) no-repeat center center; background-size: 16px 16px;;
+}
 
 /* CSS untuk keperluan halaman-halaman aplikasi */
 

@@ -307,7 +307,7 @@ export async function apicall(api, args) {
 								if (response.redirecttologin==true) {
 
 									$ui.mask(`
-										<div class="fgdialog-vf" style="width: 300px; height: 150px;">
+										<div class="fgdialog-vf" style="width: 300px; height: 150px; background-color: #fff; color: #000">
 											<div style="flex: 1; text-align: left">
 												<div style="font-weight: bold; font-size: 1.3em; margin-bottom: 10px">
 													Session Expired

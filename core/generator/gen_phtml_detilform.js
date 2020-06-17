@@ -36,7 +36,27 @@ module.exports = async (fsd, genconfig) => {
 		var compclass = data[fieldname].comp.class
 		var prefix = data[fieldname].comp.prefix
 		var type = data[fieldname].type
+		var tips = data[fieldname].tips !== undefined ? data[fieldname].tips : '';
+		var tipstype = data[fieldname].tipstype === 'visible' ? 'visible' : 'hidden';
 
+		var labeltipsclass, tipsvisible, tipshidden
+		if (tipstype==='visible') {
+			labeltipsclass = '';
+			tipsvisible = tips;
+			tipshidden = '';
+		} else {
+			if (tips!=='') {
+				labeltipsclass = ' easyui-tooltip';
+				tipsvisible = '';
+				tipshidden = `title="${tips}"`;
+			} else {
+				labeltipsclass = '';
+				tipsvisible = '';
+				tipshidden = '';					
+			}
+		}
+
+		
 		var stroptions = ''
 		var fdataoptions = data[fieldname].options
 
@@ -82,9 +102,10 @@ module.exports = async (fsd, genconfig) => {
 
 				formcomp_script += `
 		<div class="form_row">
-			<div class="form_label_col">${labeltext}</div>
+			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
 				<input id="${fsd.panel}-${prefix}${fieldname}" class="easyui-combo" style="width: 400px" mapping="${fieldname}" display="${options.field_display}" data-options="editable:false, valueField:'id', textField:'text' ${stroptions}">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`
 
@@ -92,9 +113,10 @@ module.exports = async (fsd, genconfig) => {
 			} else if (compclass=='easyui-combobox') {	
 				formcomp_script += `
 		<div class="form_row">
-			<div class="form_label_col">${labeltext}</div>
+			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
 				<input id="${fsd.panel}-${prefix}${fieldname}" class="easyui-combobox" style="width: 400px" mapping="${fieldname}" display="${fieldname}" data-options="editable:false, valueField:'id', textField:'text' ${stroptions}">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`
 
@@ -102,9 +124,10 @@ module.exports = async (fsd, genconfig) => {
 			} else if (compclass=='easyui-datebox') {
 				formcomp_script += `
 		<div class="form_row">
-			<div class="form_label_col">${labeltext}</div>
+			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
 				<input id="${fsd.panel}-${prefix}${fieldname}" class="easyui-datebox" style="width: 400px" mapping="${fieldname}" data-options="editable:false ${stroptions}">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`
 				
@@ -122,9 +145,10 @@ module.exports = async (fsd, genconfig) => {
 
 				formcomp_script += `
 		<div class="form_row">
-			<div class="form_label_col">${labeltext}</div>
+			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
 				<input id="${fsd.panel}-${prefix}${fieldname}" class="${compclass}" mapping="${fieldname}" ${settouppercase} ${$maxlengdcr} style="width: 400px" data-options="multiline:false ${stroptions} ${dataoptions}">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`	
 
@@ -133,9 +157,10 @@ module.exports = async (fsd, genconfig) => {
 				
 				formcomp_script += `
 		<div class="form_row">
-			<div class="form_label_col">${labeltext}</div>
+			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="${fsd.panel}-${prefix}${fieldname}" class="${compclass}" mapping="${fieldname}" style="width: 400px" data-options="precision: ${type.precision}, decimalSeparator:'.', groupSeparator:','  ${stroptions}">
+				<input id="${fsd.panel}-${prefix}${fieldname}" class="${compclass}" mapping="${fieldname}" style="width: 400px; text-align:right" data-options="precision: ${type.precision}, decimalSeparator:'.', groupSeparator:','  ${stroptions}">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`	
 
@@ -143,9 +168,10 @@ module.exports = async (fsd, genconfig) => {
 			} else {
 				formcomp_script += `
 		<div class="form_row">
-			<div class="form_label_col">${labeltext}</div>
+			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
 				<input id="${fsd.panel}-${prefix}${fieldname}" class="${compclass}" mapping="${fieldname}" style="width: 400px" data-options="multiline: false  ${stroptions}">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`				
 

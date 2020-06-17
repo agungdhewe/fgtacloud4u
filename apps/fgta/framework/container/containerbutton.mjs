@@ -8,7 +8,7 @@ export async function CreateModuleShortcut(mdlico, elpnl, OpenModule) {
 	btn.setImage('images/icons/' + mdlico.icon)
 	btn.setClick(() => { 
 		btn.setLoading(true)
-		OpenModule({modulefullname: mdlico.modulefullname}, ()=>{
+		OpenModule({modulefullname: mdlico.modulefullname, variancename: mdlico.variancename}, ()=>{
 			btn.setLoading(false)
 		})
 	})
