@@ -1,4 +1,5 @@
 var this_page_id;
+var this_page_options;
 
 const tbl_list = $('#pnl_list-tbl_list')
 
@@ -12,7 +13,9 @@ let grd_list = {}
 let last_scrolltop = 0
 
 export async function init(opt) {
-	this_page_id = opt.id
+	this_page_id = opt.id;
+	this_page_options = opt;
+
 	
 	grd_list = new global.fgta4grid(tbl_list, {
 		OnRowFormatting: (tr) => { grd_list_rowformatting(tr) },
@@ -82,6 +85,12 @@ function btn_load_click() {
 		if (search!='') {
 			options.criteria['search'] = search
 		}
+
+		// switch (this_page_options.variancename) {
+		// 	case 'commit' :
+		//		break;
+		// }
+
 	}
 
 	var fn_listloaded = async (result, options) => {

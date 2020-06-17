@@ -1,4 +1,5 @@
 var this_page_id;
+var this_page_options;
 
 /*--__SLIDESELECTLIB__--*/
 
@@ -15,16 +16,26 @@ const obj = {
 let form = {}
 
 export async function init(opt) {
-	this_page_id = opt.id
+	this_page_id = opt.id;
+	this_page_options = opt;
+
+
+	var disableedit = false;
+	// switch (this_page_options.variancename) {
+	// 	case 'commit' :
+	//		btn_edit.linkbutton('disable');
+	//		disableedit = true;
+	//		break;
+	// }
 
 
 	form = new global.fgta4form(pnl_form, {
 		primary: obj./*--__FORMCOMPID__--*/,
 		autoid: /*--__AUTOID__--*/,
 		logview: '/*--__LOGVIEW__--*/',
-		btn_edit: btn_edit,
-		btn_save: btn_save,
-		btn_delete: btn_delete,		
+		btn_edit: disableedit==true? $('<a>edit</a>') : btn_edit,
+		btn_save: disableedit==true? $('<a>save</a>') : btn_save,
+		btn_delete: disableedit==true? $('<a>delete</a>') : btn_delete,		
 		objects : obj,
 		OnDataSaving: async (data, options) => { await form_datasaving(data, options) },
 		OnDataSaveError: async (data, options) => { await form_datasaveerror(data, options) },

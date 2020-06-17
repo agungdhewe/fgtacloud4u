@@ -1,5 +1,6 @@
 {
 	"title" : "__PROGRAM_TITLE__",
+	"variance" : {},
 	"allowanonymous" : true,
 	"allowedgroups" : ["public"],
 	"apis" : {

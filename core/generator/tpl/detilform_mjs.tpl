@@ -1,4 +1,5 @@
 var this_page_id;
+var this_page_options;
 
 /*--__SLIDESELECTLIB__--*/
 
@@ -24,6 +25,8 @@ let header_data = {}
 
 export async function init(opt) {
 	this_page_id = opt.id
+	this_page_options = opt;
+
 	
 	form = new global.fgta4form(pnl_form, {
 		primary: obj.<--__FORMCOMPID__-->,

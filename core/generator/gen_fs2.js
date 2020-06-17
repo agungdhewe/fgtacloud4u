@@ -213,11 +213,11 @@ function InitDetilPages(genconfig) {
 		var detil = genconfig.schema.detils[detilname]
 		if (detil.form===true) {
 			genconfig.pages[`${detilname}grid`] = {
-				mjs: {program: 'gen_mjs_detilgrid', panel: `pnl_edit${detilname}grid`,handler: `pEdit${CapFL(detilname)}grid`, filename: `${genconfig.basename}-${detilname}grid.js`, detilname: detilname},
+				mjs: {program: 'gen_mjs_detilgrid', panel: `pnl_edit${detilname}grid`,handler: `pEdit${CapFL(detilname)}grid`, filename: `${genconfig.basename}-${detilname}grid.mjs`, detilname: detilname},
 				phtml: {program: 'gen_phtml_detilgrid', panel: `pnl_edit${detilname}grid`, filename: `${genconfig.basename}-${detilname}grid.phtml`, detilname: detilname}
 			}
 			genconfig.pages[`${detilname}form`] = {
-				mjs: {program: 'gen_mjs_detilform', panel: `pnl_edit${detilname}form`, handler: `pEdit${CapFL(detilname)}form`, filename: `${genconfig.basename}-${detilname}form.js`, detilname: detilname},
+				mjs: {program: 'gen_mjs_detilform', panel: `pnl_edit${detilname}form`, handler: `pEdit${CapFL(detilname)}form`, filename: `${genconfig.basename}-${detilname}form.mjs`, detilname: detilname},
 				phtml: {program: 'gen_phtml_detilform',  panel: `pnl_edit${detilname}form`, filename: `${genconfig.basename}-${detilname}form.phtml`, detilname: detilname}
 			}
 
@@ -233,7 +233,7 @@ function InitDetilPages(genconfig) {
 
 		} else {
 			genconfig.pages[detilname] = {
-				mjs: {program: 'gen_mjs_blank', panel: `pnl_edit${detilname}`, handler: `pEdit${CapFL(detilname)}`, filename: `${genconfig.basename}-${detilname}.js`, detilname: detilname},
+				mjs: {program: 'gen_mjs_blank', panel: `pnl_edit${detilname}`, handler: `pEdit${CapFL(detilname)}`, filename: `${genconfig.basename}-${detilname}.mjs`, detilname: detilname},
 				phtml: {program: 'gen_phtml_blank', panel: `pnl_edit${detilname}`, filename: `${genconfig.basename}-${detilname}.phtml`, detilname: detilname}					
 			}
 		}
