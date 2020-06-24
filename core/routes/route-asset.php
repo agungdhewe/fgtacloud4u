@@ -59,6 +59,9 @@ class AssetRoute extends Route {
 				if ($pmin_time > $pori_time) {
 					$assetpath = $assetpath_min;
 				}
+			} else {
+				// minify js
+
 			}
 		}
 

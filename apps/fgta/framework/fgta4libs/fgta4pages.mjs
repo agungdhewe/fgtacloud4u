@@ -18,7 +18,11 @@ export function initPages(pages, opt) {
 		ITEMS[id] = page.panel
 
 		if (typeof ITEMS[id].handler.init === 'function') {
-			ITEMS[id].handler.init(Object.assign(opt, {id:id, pagenum:pagenum}))
+			if (opt!=null) {
+				ITEMS[id].handler.init(Object.assign(opt, {id:id, pagenum:pagenum}));
+			} else {
+				ITEMS[id].handler.init({id:id, pagenum:pagenum});
+			}
 		}
 
 		if (CurrentPage==null) {
