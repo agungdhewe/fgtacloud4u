@@ -1,6 +1,7 @@
 {
 	"title": "riset",
 	"modules": [
-		"fgta/riset/imagecolorpicker"
+		"fgta/riset/imagecolorpicker",
+		"fgta/riset/postdata"
 	]
 }
