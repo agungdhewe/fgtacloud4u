@@ -38,7 +38,8 @@ if (!defined('FGTA4')) {
 		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
 		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
 
-		<link rel="preload" as="image" href="templates/asset/loading.gif" />
+		<link rel="preload" as="image" href="templates/<?=__TEMPLATE?>/asset/loading.gif" />
+		<link rel="preload" as="image" href="templates/<?=__TEMPLATE?>/asset/icon-loading.gif" />
 		
 		<link rel="stylesheet" type="text/css" href="jslibs/easyui/themes/material/easyui.css" />
 		<link rel="stylesheet" type="text/css" href="jslibs/easyui/themes/color.css" />
@@ -48,12 +49,12 @@ if (!defined('FGTA4')) {
 		<link rel="stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
 		-->
 
-		<link rel="stylesheet" type="text/css" href="templates/asset/module.css" />
+		<link rel="stylesheet" type="text/css" href="templates/<?=__TEMPLATE?>/asset/module.css" />
 		<?php
-		$app_css_path = __ROOT_DIR . "/public/templates/asset/module-" . __APPNAME . ".css";
+		$app_css_path = __ROOT_DIR . "/public/templates/".__TEMPLATE."/asset/module-" . __APPNAME . ".css";
 		if (\is_file($app_css_path)) {
 		?>
-		<link rel="stylesheet" type="text/css" href="templates/asset/module-<?=__APPNAME?>.css" />
+		<link rel="stylesheet" type="text/css" href="templates/<?=__TEMPLATE?>/asset/module-<?=__APPNAME?>.css" />
 		<?php } ?>
 		
 
@@ -86,7 +87,9 @@ if (!defined('FGTA4')) {
 					} 
 					var today = dd + '/' + mm + '/' + yyyy;
 					return today
-				}
+				},
+				template: '<?=__TEMPLATE?>',
+				useotp: false, //!--PROXY_VARIABLE--
 			}
 
 			window.isMobileOrTablet = () => {
@@ -251,7 +254,7 @@ if (!defined('FGTA4')) {
 	<?php if (is_file($this->reqinfo->modulejspath)) { ?>
 
 	<script type="module">
-		import * as uibaseclass from './jslibs/uibase4.js'
+		import * as uibaseclass from './index.php/jslibs/uibase4.js'
 		import * as ui from '<?=$this->reqinfo->modulejsurl?>';
 
 		let uibase = Object.assign({}, uibaseclass)

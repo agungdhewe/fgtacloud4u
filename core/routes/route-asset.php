@@ -51,17 +51,31 @@ class AssetRoute extends Route {
 		//header("Content-type: " . mime_content_type ( $reqinfo->assetpath));
 
 		$assetpath = $reqinfo->assetpath;
+		// if ($reqinfo->assetextension=='mjs') {
+		// 	$assetpath_min = \str_replace('.mjs', '.min.mjs', $reqinfo->assetpath);
+		// 	if (\is_file($assetpath_min)) {
+		// 		$pmin_time = \filemtime($assetpath_min);
+		// 		$pori_time = \filemtime($assetpath);
+		// 		if ($pmin_time > $pori_time) {
+		// 			$assetpath = $assetpath_min;
+		// 		}
+		// 	} else {
+		// 		// minify js
+
+		// 	}
+		// }
+
 		if ($reqinfo->assetextension=='mjs') {
-			$assetpath_min = \str_replace('.mjs', '.min.mjs', $reqinfo->assetpath);
+			$modulerequest_min = \str_replace('.mjs', '.min.mjs', $reqinfo->modulerequestinfo);
+
+			// cek di localdb dir
+			$assetpath_min = __OBFUSCATED_DIR . "/$reqinfo->appsgroup/". $reqinfo->appsname . "%D%" .  $reqinfo->modulename . "%D%" . $modulerequest_min;
 			if (\is_file($assetpath_min)) {
 				$pmin_time = \filemtime($assetpath_min);
 				$pori_time = \filemtime($assetpath);
 				if ($pmin_time > $pori_time) {
 					$assetpath = $assetpath_min;
-				}
-			} else {
-				// minify js
-
+				}				
 			}
 		}
 

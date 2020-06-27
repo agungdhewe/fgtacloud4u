@@ -5,7 +5,7 @@ export async function CreateModuleShortcut(mdlico, elpnl, OpenModule) {
 	btn.setDisabled(mdlico.disabled)
 	btn.setText(mdlico.title)
 	btn.setTextColor(mdlico.forecolor)
-	btn.setImage('images/icons/' + mdlico.icon)
+	btn.setImage('index.php/images/icons/' + mdlico.icon)
 	btn.setClick(() => { 
 		btn.setLoading(true)
 		OpenModule({modulefullname: mdlico.modulefullname, variancename: mdlico.variancename}, ()=>{
@@ -23,7 +23,7 @@ export async function CreateModuleGroup(mdlico, elpnl, CreateModuleList) {
 	btn.setDisabled(mdlico.disabled)
 	btn.setText(mdlico.title)
 	btn.setTextColor(mdlico.forecolor)
-	btn.setImage('images/icons/' + mdlico.icon)
+	btn.setImage('index.php/images/icons/' + mdlico.icon)
 	btn.setClick(() => { 
 		CreateModuleList(mdlico)
 	})

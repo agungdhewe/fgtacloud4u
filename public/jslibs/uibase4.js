@@ -229,19 +229,20 @@ export function unmask(code=null, fn_maskclear) {
 
 
 async function getOtp(apipath) {
-	let apiurl = `getotp.php?api=${apipath}`
-	let ajax_otp = async (apiurl) => {
+	var otp_skel = {
+		success: false,
+		value: '',
+		encrypt: false,
+		password: ''
+	}
+
+	var apiurl = `getotp.php?api=${apipath}`
+	var ajax_otp = async (apiurl) => {
 		return new Promise(function(resolve, reject) {
-			let xhr = new XMLHttpRequest();
+			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange= function () {
 				if (xhr.readyState==4) {
-					let otp = {
-						success: false,
-						value: '',
-						encrypt: false,
-						password: ''
-					}
-
+					var otp = Object.assign({}, otp_skel);
 					try {
 						if (xhr.response!==null) {
 							if (xhr.response.trim()!='') {
@@ -264,8 +265,16 @@ async function getOtp(apipath) {
 	}
 
 	try {
+		var useotp = window.global.useotp;
+		var otp = {};
 
-		var otp = await ajax_otp(apiurl);
+		if (useotp) {
+			otp = await ajax_otp(apiurl);
+		} else {
+			otp = Object.assign({}, otp_skel);
+			otp.success = true;
+		}
+		
 		if (otp.success!==true) {
 			throw 'request OTP error';
 		}

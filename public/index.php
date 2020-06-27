@@ -86,6 +86,28 @@ if ($ENV_FGTA_APP_NAME != '') {
 define('__APPNAME', $FGTA_APP_NAME);
 
 
+$FGTA_OBFUSCATED_DIR = __ROOT_DIR.'/core/database/obfuscated';
+$ENV_FGTA_OBFUSCATED_DIR=getenv('FGTA_OBFUSCATED_DIR');
+if ($ENV_FGTA_OBFUSCATED_DIR != '') {
+	$FGTA_OBFUSCATED_DIR = $ENV_FGTA_OBFUSCATED_DIR;
+}
+define('__OBFUSCATED_DIR', $FGTA_OBFUSCATED_DIR);
+
+
+$FGTA_TEMPLATE = 'fgta-erp';
+$ENV_FGTA_TEMPLATE=getenv('FGTA_TEMPLATE');
+if ($ENV_FGTA_TEMPLATE != '') {
+	$tpldir = __ROOT_DIR . "/templates/$ENV_FGTA_TEMPLATE";
+	if (!is_file($tpldir)) {
+		die("Template: '$ENV_FGTA_TEMPLATE' not found, please check server environtment setting.");
+	} else {
+		$FGTA_TEMPLATE = $ENV_FGTA_TEMPLATE;
+	}
+}
+define('__TEMPLATE', $FGTA_TEMPLATE);
+
+
+
 
 require_once $FGTA_DBCONF_PATH;
 require_once __ROOT_DIR.'/core/webauth.php';
@@ -116,7 +138,7 @@ try {
 	$routeswitch = trim($reqs[0])!='' ? trim($reqs[0]) : 'index';
 
 
-
+	$isapps = true;
 	try {
 		switch ($routeswitch) {
 
@@ -132,6 +154,16 @@ try {
 				require_once __ROOT_DIR.'/core/routes/route-api.php';
 				break;
 			
+			case 'jslibs' :
+				$isapps = false;
+				require_once __ROOT_DIR.'/core/routes/route-jslibs.php';
+				break;					
+
+			case 'images' :
+				$isapps = false;
+				require_once __ROOT_DIR.'/core/routes/route-images.php';
+				break;	
+
 			case 'info' :
 				phpinfo();
 				die();
@@ -157,27 +189,26 @@ try {
 
 
 		$ROUTER->configuration = $configuration;
-
 		$ROUTER->SendHeader();
 
-		$reqinfo = $ROUTER->PrepareRequestInfo($reqs);
+		$reqinfo = $ROUTER->PrepareRequestInfo($reqs, $isapps);
 
+		if ($isapps) {
+			//cek apakah ada dbconfig di ovveride di appsgroup
+			if (is_file($reqinfo->appgroupdbconfigpath)) {
+				include_once $reqinfo->appgroupdbconfigpath;
+			}
 
-		//cek apakah ada dbconfig di ovveride di appsgroup
-		if (is_file($reqinfo->appgroupdbconfigpath)) {
-			include_once $reqinfo->appgroupdbconfigpath;
+			$currentapi = $reqinfo->modulefullname."/".$reqinfo->modulerequestinfo;
+			$ROUTER->auth = new WebAuth();
+			if ($currentapi!=API_LOGIN_URL) {
+				$ROUTER->auth->SessionCheck(); // selain API untuk login, harus dicek session nya
+			} 
+
+			if ($reqinfo->moduleconfig->title=='Container') {
+				$reqinfo->moduleconfig->title = $configuration->basetitle;
+			}
 		}
-
-		$currentapi = $reqinfo->modulefullname."/".$reqinfo->modulerequestinfo;
-		$ROUTER->auth = new WebAuth();
-		if ($currentapi!=API_LOGIN_URL) {
-			$ROUTER->auth->SessionCheck(); // selain API untuk login, harus dicek session nya
-		} 
-
-		if ($reqinfo->moduleconfig->title=='Container') {
-			$reqinfo->moduleconfig->title = $configuration->basetitle;
-		}
-
 		
 		if (method_exists($ROUTER, 'ProcessRequest')) {
 			$ROUTER->ProcessRequest($reqinfo);

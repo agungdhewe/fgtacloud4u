@@ -16,5 +16,8 @@
 	"description": "",
 	"dependencies": {
 		"rimraf": "^3.0.2"
-	}
+	},
+	"devDependencies": {
+		"javascript-obfuscator": "^1.1.0"
+	}	
 }

@@ -198,7 +198,7 @@ function OpenModule(module, fn_loaded) {
 		// apabila frame belum muncul dalam 5 detik, munculkan loading
 		if (CurrentState.SlowLoading) {
 			$ui.mask(`<div style="color:white">
-				<img src="./templates/asset/icon-loading.gif" width="32px" height="32px"><br>
+				<img src="./templates/${window.global.template}/asset/icon-loading.gif" width="32px" height="32px"><br>
 				opening ${module.modulefullname},<br>
 				this is take more time than ussual, please wait...
 				</div>`)
