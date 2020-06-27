@@ -14,17 +14,18 @@ class ListModules extends WebAPI {
 
 	function __construct() {
 		$this->debugoutput = true;
-		switch (__APPNAME) {
-			case "kalista" :
-				WebModuleConfig::$DefaultShortcutBackgroundColor = "#9d6da9";
-				WebModuleConfig::$DefaultModulegroupBackgroundColor = "#9d6da9";
-				break;
+		// switch (__APPNAME) {
+		// 	case "kalista" :
+		// 		WebModuleConfig::$DefaultShortcutBackgroundColor = "#9d6da9";
+		// 		WebModuleConfig::$DefaultModulegroupBackgroundColor = "#9d6da9";
+		// 		break;
 
-			default:
-				WebModuleConfig::$DefaultShortcutBackgroundColor = "#3F4756"; // "#9d6da9";
-				WebModuleConfig::$DefaultModulegroupBackgroundColor = "#3F4756"; //"#9d6da9";ssss
-		}
-
+		// 	default:
+		// 		WebModuleConfig::$DefaultShortcutBackgroundColor = "#3F4756"; // "#9d6da9";
+		// 		WebModuleConfig::$DefaultModulegroupBackgroundColor = "#3F4756"; //"#9d6da9";ssss
+		// }
+		WebModuleConfig::$DefaultShortcutBackgroundColor = '';
+		WebModuleConfig::$DefaultModulegroupBackgroundColor = '';
 
 	}
 

@@ -1,6 +1,7 @@
 
 export async function CreateModuleShortcut(mdlico, elpnl, OpenModule) {
 	let btn = CreateButton(mdlico)
+	btn.classList.add('buttonprogramicon');
 	btn.style.backgroundColor = mdlico.backcolor;
 	btn.setDisabled(mdlico.disabled)
 	btn.setText(mdlico.title)
@@ -18,6 +19,7 @@ export async function CreateModuleShortcut(mdlico, elpnl, OpenModule) {
 
 export async function CreateModuleGroup(mdlico, elpnl, CreateModuleList) {
 	let btn = CreateButton(mdlico)
+	btn.classList.add('buttonprogramicon')
 	btn.style.borderRadius = '14px'
 	btn.style.backgroundColor = mdlico.backcolor;
 	btn.setDisabled(mdlico.disabled)
