@@ -39,7 +39,7 @@ if (!defined('FGTA4')) {
 		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
 
 		<link rel="preload" as="image" href="templates/<?=__TEMPLATE?>/asset/loading.gif" />
-		<link rel="preload" as="image" href="templates/<?=__TEMPLATE?>/asset/icon-loading.gif" />
+		<!-- <link rel="preload" as="image" href="templates/<?=__TEMPLATE?>/asset/icon-loading.gif" /> -->
 		
 		<link rel="stylesheet" type="text/css" href="jslibs/easyui/themes/material/easyui.css" />
 		<link rel="stylesheet" type="text/css" href="jslibs/easyui/themes/color.css" />
@@ -89,6 +89,7 @@ if (!defined('FGTA4')) {
 					return today
 				},
 				template: '<?=__TEMPLATE?>',
+				iconloading: 'data:image/gif;base64,R0lGODlhIAAgAPABAP///wAAACH5BAkHAAEAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAgACAAAAItjI+py+0Po5y02osz2Bxk1HWfEXJjUG5n6o3smsLhSdf2jef6zvf+DwwKh5YCACH5BAkHAAEAIf8LSW1hZ2VNYWdpY2sNZ2FtbWE9MC40NTQ1NQAsAAAAACAAIAAAAi2Mj6nL7Q+jnLTai7MDvHNteB4YiB1pfmAKoKlrwiJJ1/aN5/rO9/4PDAqHiwIAIfkECQcAAQAh/wtJbWFnZU1hZ2ljaw1nYW1tYT0wLjQ1NDU1ACwAAAAAIAAgAAACK4yPqcvtD6OctNqLs968+w+G4kiWAYCmAKeqbIu+sNzS7gbHeG72/g8MQgoAIfkECQcAAQAh/wtJbWFnZU1hZ2ljaw1nYW1tYT0wLjQ1NDU1ACwAAAAAIAAgAAACK4yPqcvtD6OctNqLs968+w+G4khuwIkCXZpyLOq+qinHr83ibcn3/g/8FAAAOw==',
 				useotp: false, //!--PROXY_VARIABLE--
 			}
 
