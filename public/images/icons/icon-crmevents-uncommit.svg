@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Capa_1"
+   x="0px"
+   y="0px"
+   width="612px"
+   height="612px"
+   viewBox="0 0 612 612"
+   style="enable-background:new 0 0 612 612;"
+   xml:space="preserve"
+   sodipodi:docname="icon-crmevents-uncommit.svg"
+   inkscape:export-filename="/home/agung/Development/fgtacloud4u/server/public/images/icons/icon-crmevents-uncommit.png"
+   inkscape:export-xdpi="5.019608"
+   inkscape:export-ydpi="5.019608"
+   inkscape:version="0.92.5 (0.92.5+68)"><metadata
+   id="metadata61"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+   id="defs59">
+	
+</defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1325"
+   inkscape:window-height="747"
+   id="namedview57"
+   showgrid="false"
+   inkscape:zoom="0.51361256"
+   inkscape:cx="153.84688"
+   inkscape:cy="224.35746"
+   inkscape:window-x="41"
+   inkscape:window-y="21"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Capa_1"
+   inkscape:snap-global="false" />
+<g
+   id="g22">
+		<path
+   inkscape:connector-curvature="0"
+   id="path2"
+   d="m 497.25,317.012 c -10.763,-2.482 -21.951,-3.84 -33.469,-3.84 -3.218,0 -6.397,0.139 -9.562,0.34 -73.436,4.681 -132.292,62.815 -138.135,135.926 -0.315,3.949 -0.521,7.923 -0.521,11.953 0,12.369 1.539,24.375 4.394,35.859 16.037,64.527 74.335,112.359 143.825,112.359 81.859,0 148.218,-66.359 148.218,-148.218 0,-70.342 -49.018,-129.2 -114.75,-144.379 z m -33.469,242.394 c -54.133,0 -98.016,-43.883 -98.016,-98.016 0,-54.133 43.883,-98.016 98.016,-98.016 54.133,0 98.016,43.883 98.016,98.016 0,54.133 -43.883,98.016 -98.016,98.016 z" />
+		
+		<path
+   inkscape:connector-curvature="0"
+   id="path6"
+   d="m 124.312,114.75 c 9.228,0 16.734,-7.507 16.734,-16.734 V 57.375 19.125 c 0,-9.228 -7.506,-16.734 -16.734,-16.734 h -14.344 c -9.228,0 -16.734,7.507 -16.734,16.734 v 38.25 40.641 c 0,9.228 7.506,16.734 16.734,16.734 z" />
+		<path
+   inkscape:connector-curvature="0"
+   id="path8"
+   d="m 387.281,114.75 c 9.228,0 16.734,-7.507 16.734,-16.734 V 57.375 19.125 c 0,-9.228 -7.507,-16.734 -16.734,-16.734 h -14.344 c -9.228,0 -16.734,7.507 -16.734,16.734 v 38.25 40.641 c 0,9.228 7.507,16.734 16.734,16.734 z" />
+		<path
+   inkscape:connector-curvature="0"
+   id="path10"
+   d="m 285.666,497.25 c -2.333,-11.6 -3.572,-23.586 -3.572,-35.859 0,-4.021 0.177,-7.999 0.435,-11.953 H 71.719 c -15.845,0 -28.688,-12.843 -28.688,-28.688 v -229.5 h 411.188 v 88.707 c 3.165,-0.163 6.354,-0.253 9.562,-0.253 11.437,0 22.61,1.109 33.469,3.141 V 95.625 c 0,-21.124 -17.126,-38.25 -38.25,-38.25 h -31.078 v 40.641 c 0,22.41 -18.23,40.641 -40.641,40.641 h -14.344 c -22.41,0 -40.641,-18.231 -40.641,-40.641 V 57.375 H 164.953 v 40.641 c 0,22.41 -18.231,40.641 -40.641,40.641 h -14.344 c -22.41,0 -40.641,-18.231 -40.641,-40.641 V 57.375 H 38.25 C 17.126,57.375 0,74.501 0,95.625 V 459 c 0,21.124 17.126,38.25 38.25,38.25 z" />
+		<circle
+   id="circle12"
+   r="37.953999"
+   cy="262.96899"
+   cx="134.774" />
+		<circle
+   id="circle14"
+   r="37.953999"
+   cy="262.96899"
+   cx="248.625" />
+		<circle
+   id="circle16"
+   r="37.953999"
+   cy="262.96899"
+   cx="362.47699" />
+		<circle
+   id="circle18"
+   r="37.952999"
+   cy="377.71899"
+   cx="248.625" />
+		<circle
+   id="circle20"
+   r="37.952999"
+   cy="377.71899"
+   cx="134.774" />
+	</g>
+<g
+   id="g26">
+</g>
+<g
+   id="g28">
+</g>
+<g
+   id="g30">
+</g>
+<g
+   id="g32">
+</g>
+<g
+   id="g34">
+</g>
+<g
+   id="g36">
+</g>
+<g
+   id="g38">
+</g>
+<g
+   id="g40">
+</g>
+<g
+   id="g42">
+</g>
+<g
+   id="g44">
+</g>
+<g
+   id="g46">
+</g>
+<g
+   id="g48">
+</g>
+<g
+   id="g50">
+</g>
+<g
+   id="g52">
+</g>
+<g
+   id="g54">
+</g>
+<rect
+   style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00157475;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+   id="rect926"
+   width="44.780834"
+   height="280.36697"
+   x="-49.427113"
+   y="508.85291"
+   transform="rotate(-47.770198)" /><rect
+   style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00157475;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+   id="rect926-3"
+   width="44.780834"
+   height="280.36697"
+   x="629.95288"
+   y="-171.04874"
+   transform="rotate(47.024141)" /></svg>

@@ -17,7 +17,8 @@
 			"disabled" : false,
 			"modules" : [
 				"crm/engage/crmevent",
-				{"program":"crm/engage/crmevent",  "variancename":"commit"}
+				{"program":"crm/engage/crmevent",  "variancename":"commit"},
+				{"program":"crm/engage/crmevent",  "variancename":"uncommit"}
 			]					
 		}		
 
