@@ -1,10 +1,21 @@
 <?php
-switch (__APPNAME) {
-	case "kalista" :
-		require_once dirname(__FILE__).'/login-kalista.phtml';
-		break;
+// switch (__APPNAME) {
+// 	case "kalista" :
+// 		require_once dirname(__FILE__).'/login-kalista.phtml';
+// 		break;
 
-	default:
-		require_once dirname(__FILE__).'/login-fgta.phtml';
+// 	default:
+// 		// require_once dirname(__FILE__).'/login-fgta.phtml';
+// 		$default = dirname(__FILE__).'/login-fgta.phtml';
+// 		$byapp = dirname(__FILE__).'/login-' .__APPNAME .  '.phtml';
+// 		require_once dirname(__FILE__).'/login-default.phtml';
+// }
+
+$loginform_default = dirname(__FILE__).'/login-fgta.phtml';
+$loginform_byapp = dirname(__FILE__).'/login-' .__APPNAME .  '.phtml';
+
+if (is_file($loginform_byapp )) {
+	require_once $loginform_byapp;
+} else {
+	require_once $loginform_default;
 }
-

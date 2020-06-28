@@ -2,6 +2,7 @@ apps/ent
 apps/retail
 apps/crm
 apps/hrms
+apps/finact
 node_modules
 fgtacloud4u_SyncSettings.ffs_gui
 .sync.ffs_db
