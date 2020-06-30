@@ -4,8 +4,7 @@ apps/crm
 apps/hrms
 apps/finact
 node_modules
-public_pt
-public_tvone
+public_*
 update
 fgtacloud4u_SyncSettings.ffs_gui
 .sync.ffs_db
