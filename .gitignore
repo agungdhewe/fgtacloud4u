@@ -1,8 +1,5 @@
-apps/ent
-apps/retail
-apps/crm
-apps/hrms
-apps/finact
+apps/*
+!apps/fgta
 node_modules
 public_*
 update
