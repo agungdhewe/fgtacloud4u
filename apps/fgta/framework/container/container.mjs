@@ -254,13 +254,17 @@ export async function OpenHomeMenu() {
 
 
 async function btn_logout_click() {
-	let logout = await $ui.exitconfirm('Anda yakin mau logout ?');
-	if (logout) {
-		Cookies.remove('tokenid');
-		location.reload();
+	$ui.ShowMessage('Apakah anda mau logout ?', {
+		Ya: () => {
+			Cookies.remove('tokenid');
+			location.reload();
+			//TODO: buat ajax agar saat logout menghapus session di server
+		},
+		Tidak: () => {
 
-		//TODO: buat ajax agar saat logout menghapus session di server
-	}
+		}
+	})
+
 }
 
 

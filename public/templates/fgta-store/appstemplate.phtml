@@ -1,0 +1,38 @@
+<?php namespace FGTA4\module; 
+if (!defined('FGTA4')) {
+	die('Forbiden');
+}
+?><!DOCTYPE HTML>
+<html>
+	<head>
+		<title><?=$this->title?></title>
+		<!-- <base href="<?=__BASEADDRESS?>"> -->
+		<base href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']); ?> ">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="manifest" href="manifest.json">
+		<!-- <link rel="icon" sizes="192x192" href="images/<?=__ICON32?>">
+		<link rel="apple-touch-icon" sizes="192x192" href="images/<?=__ICON32?>">
+		 -->
+		 <meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="application-name" content="<?=__APPDISPLAYNAME?>">
+		<meta name="apple-mobile-web-app-title" content="<?=__APPDISPLAYNAME?>">
+		<meta name="theme-color" content="#9c6ea7">
+		<meta name="msapplication-navbutton-color" content="#9c6ea7">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="msapplication-starturl" content="/">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="-1" />
+		<meta name="modulefullname" content="<?=$this->reqinfo->modulefullname?>" />
+		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
+		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
+
+	</head>
+	<body>
+		<?php require_once $this->reqinfo->moduleviewpath ?>
+
+	</body>
+</html>

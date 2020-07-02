@@ -16,8 +16,8 @@ if (!defined('FGTA4')) {
 		<title><?=$this->title?></title>
 		<!-- <base href="<?=__BASEADDRESS?>"> -->
 		<base href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']); ?> ">
-		<link rel="shortcut icon" href="images/<?=__FAVICON?>">
-		<link rel="manifest" href="<?=__MANIFESTNAME?>">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="manifest" href="manifest.json">
 		<!-- <link rel="icon" sizes="192x192" href="images/<?=__ICON32?>">
 		<link rel="apple-touch-icon" sizes="192x192" href="images/<?=__ICON32?>">
 		 -->
@@ -51,10 +51,10 @@ if (!defined('FGTA4')) {
 
 		<link rel="stylesheet" type="text/css" href="templates/<?=__TEMPLATE?>/asset/module.css" />
 		<?php
-		$app_css_path = __ROOT_DIR . "/public/templates/".__TEMPLATE."/asset/module-" . __APPNAME . ".css";
+		$app_css_path = __LOCAL_PUBLIC_DIR . "/style.css";
 		if (\is_file($app_css_path)) {
 		?>
-		<link rel="stylesheet" type="text/css" href="templates/<?=__TEMPLATE?>/asset/module-<?=__APPNAME?>.css" />
+		<link rel="stylesheet" type="text/css" href="index.php/public/style.css" />
 		<?php } ?>
 		
 

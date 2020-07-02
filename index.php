@@ -12,6 +12,9 @@
 		<a href="public_fgta">FGTA</a>
 	</div>
 	<div>
+		<a href="public_kalista">Kalista</a>
+	</div>	
+	<div>
 		<a href="public_pt">Ferrine</a>
 	</div>
 	<div>

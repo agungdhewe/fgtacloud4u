@@ -45,6 +45,19 @@ define('DB_CONFIG_PARAM', [
 
 ob_start();
 
+
+
+$FGTA_STARTMODULE = 'fgta/framework/container';
+$ENV_FGTA_STARTMODULE = getenv('FGTA_STARTMODULE');
+if ($ENV_FGTA_STARTMODULE != '') {
+	$FGTA_STARTMODULE = $ENV_FGTA_STARTMODULE;	
+} 
+define('__STARTMODULE', $FGTA_STARTMODULE);	
+
+
+
+
+
 $FGTA_LOCALDB_DIR = __ROOT_DIR.'/core/database';
 $ENV_FGTA_LOCALDB_DIR = getenv('FGTA_LOCALDB_DIR');
 if ($ENV_FGTA_LOCALDB_DIR != '') {
@@ -97,8 +110,8 @@ define('__OBFUSCATED_DIR', $FGTA_OBFUSCATED_DIR);
 $FGTA_TEMPLATE = 'fgta-erp';
 $ENV_FGTA_TEMPLATE=getenv('FGTA_TEMPLATE');
 if ($ENV_FGTA_TEMPLATE != '') {
-	$tpldir = __ROOT_DIR . "/templates/$ENV_FGTA_TEMPLATE";
-	if (!is_file($tpldir)) {
+	$tpldir = __ROOT_DIR . "/public/templates/$ENV_FGTA_TEMPLATE";
+	if (!is_dir($tpldir)) {
 		die("Template: '$ENV_FGTA_TEMPLATE' not found, please check server environtment setting.");
 	} else {
 		$FGTA_TEMPLATE = $ENV_FGTA_TEMPLATE;
@@ -107,6 +120,10 @@ if ($ENV_FGTA_TEMPLATE != '') {
 define('__TEMPLATE', $FGTA_TEMPLATE);
 
 
+
+
+
+define('__LOCAL_PUBLIC_DIR', dirname($_SERVER['SCRIPT_FILENAME']));
 
 
 require_once $FGTA_DBCONF_PATH;
@@ -159,24 +176,44 @@ try {
 				require_once __ROOT_DIR.'/core/routes/route-jslibs.php';
 				break;					
 
+			case 'public' :
+				$isapps = false;
+				require_once __ROOT_DIR.'/core/routes/route-public.php';				
+				break;
+
+
 			case 'images' :
 				$isapps = false;
 				require_once __ROOT_DIR.'/core/routes/route-images.php';
 				break;	
+
+
+			case 'favicon.ico' :
+				$isapps = false;
+				require_once __ROOT_DIR.'/core/routes/route-favicon.php';
+				break;	
+
+				
+			case 'manifest.json' :
+				$isapps = false;
+				require_once __ROOT_DIR.'/core/routes/route-manifest.php';
+				break;	
+
 
 			case 'info' :
 				phpinfo();
 				die();
 	
 			default :
-				echo "<html><body>please wait...</body></html>";
-				$startmodule = 'fgta/framework/container';
 
-				$FGTA_START_MODULE=getenv('FGTA_START_MODULE');
-				if ($FGTA_START_MODULE != '') {
-					$startmodule = $FGTA_START_MODULE;
-				}				
+				$redirectsourcepath = __ROOT_DIR . '/public/redirect.html';
+				$redirectsourcepath_local = __LOCAL_PUBLIC_DIR. '/redirect.html';
+				if (is_file($redirectsourcepath_local)) {
+					$redirectsourcepath = $redirectsourcepath_local;
+				}
+				require_once $redirectsourcepath;
 
+				$startmodule = __STARTMODULE; 
 				echo "<script>location.href='index.php/module/$startmodule'</script>";
 				die();
 				
