@@ -65,7 +65,7 @@ $ sudo apt install git
 ```
 
 
-##Installasi FGTA##
+##Deploy FGTA (Manual Install)##
 Pada direktori *home*, buat direktori dengan nama ``fgtacloud4u``
 
 Untuk keperluan pembuatan file2 di environtment fgta, anda tidak perlu menggunakan *sudo*. Karena semua file dan direktori di sini akan kita set kepemilikannya sebgai ``fgta``.
@@ -118,7 +118,7 @@ Ulangi langkan ini sampai semuai direktri untuk modul terbuat.
 
 
 
-##Auto Setup##
+##Deploy FGTA (Menggunakan Script)##
 Untuk memudahkan anda melakukan setup awal, copy script berikut. Diasumsikan module yang akan disetup adalah ent, hrms, retail dan crm.
 
 ```
@@ -175,8 +175,9 @@ cd $PUBLICSOL
 touch .htaccess
 echo "SetEnv FGTA_APP_NAME \"$SOLUTION\"" >> .htaccess
 echo "SetEnv FGTA_APP_TITLE \"$TITLE\"" >> .htaccess
-echo "$ROOTDIR/fgtacloud4u/server/public_$SOLUTION/dbconfig.php" >> .htaccess
-echo "$ROOTDIR/fgtacloud4u/server_data/$SOLUTION" >> .htaccess
+echo "SetEnv FGTA_DBCONF_PATH \"$ROOTDIR/fgtacloud4u/server/public_$SOLUTION/dbconfig.php\"" >> .htaccess
+echo "SetEnv FGTA_LOCALDB_DIR \"$ROOTDIR/fgtacloud4u/server_data/$SOLUTION\"" >> .htaccess
+
 
 
 # kembali ke fgtacloud4u/server
