@@ -33,7 +33,7 @@ class CopyprogAccess {
 			if ($prj_dc_name=='.' || $prj_dc_name=='..' || $prj_dc_name=='fgta') { continue; }
 			$prj_path = $apps_dir . "/$prj_dc_name";	
 			if (!is_dir($prj_path)) { continue; }
-			echo $prj_path."\r\n";	
+			// echo $prj_path."\r\n";	
 			$this->PrjReadDir($prj_path);
 		
 		}
@@ -49,7 +49,7 @@ class CopyprogAccess {
 			if ($mod_dc_name=='.' || $mod_dc_name=='..' || $mod_dc_name=='.git' || $mod_dc_name=='.vscode') { continue; }
 			$mod_path = $prj_path . "/$mod_dc_name";
 			if (!is_dir($mod_path)) { continue; }
-			echo "$mod_path\n";
+			// echo "$mod_path\n";
 			$this->ProReadDir($mod_path);
 
 		}
@@ -63,7 +63,7 @@ class CopyprogAccess {
 			if ($pro_dc_name=='.' || $pro_dc_name=='..' ) { continue; }
 			$pro_path = $mod_path . "/$pro_dc_name";
 			if (!is_dir($pro_path)) { continue; }
-			echo "$pro_path\n";
+			// echo "$pro_path\n";
 			$this->CopyJson($pro_dc_name, $pro_path);
 
 		}
@@ -73,13 +73,14 @@ class CopyprogAccess {
 	function CopyJson($pro_dc_name, $pro_path) {
 		global $apps_dir, $target_config_dir;
 		$json_config_path = "$pro_path/$pro_dc_name.json";
-		echo "$json_config_path\n";
+		// echo "$json_config_path\n";
 		if (is_file($json_config_path)) {
 			$new_json_config_path = $target_config_dir. "/" . str_replace(array($apps_dir.'/', '/'), array('', '#'), "$pro_path.json");
 			if (is_file($new_json_config_path)) {
 				return;
 			}
 
+			echo "$new_json_config_path\n";
 			copy($json_config_path, $new_json_config_path);
 
 		}
