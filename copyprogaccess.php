@@ -1,5 +1,10 @@
 <?php
 
+if(function_exists('xdebug_disable')) { 
+	echo "disabling xdebug\r\n";
+	xdebug_disable(); 
+}
+
 // copy akses program dan konfigurasi di deployment server
 // contoh target:  /home/agung/Development/fgtacloud4u/server_data/progaccess
 
