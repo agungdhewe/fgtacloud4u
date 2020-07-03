@@ -17,7 +17,7 @@
 		<div class="form_row">
 			<div class="form_label_col">Username</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_user_name" class="easyui-textbox" mapping="user_name"  maxlength="30" style="width: 400px" data-options="multiline: false , required: true, invalidMessage: 'Username harus diisi' ">
+				<input id="pnl_edit-txt_user_name" class="easyui-textbox" mapping="user_name" lowercase="true" maxlength="30" style="width: 400px" data-options="multiline: false , required: true, invalidMessage: 'Username harus diisi' ">
 			</div>
 		</div>
 
@@ -31,7 +31,7 @@
 		<div class="form_row">
 			<div class="form_label_col">Email</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_user_email" class="easyui-textbox" mapping="user_email"  maxlength="150" style="width: 400px" data-options="multiline: false , required: true, validType: ['email'], invalidMessage: 'Email harus diisi dengan benar' ">
+				<input id="pnl_edit-txt_user_email" class="easyui-textbox" mapping="user_email"  lowercase="true" maxlength="150" style="width: 400px" data-options="multiline: false , required: true, validType: ['email'], invalidMessage: 'Email harus diisi dengan benar' ">
 			</div>
 		</div>
 

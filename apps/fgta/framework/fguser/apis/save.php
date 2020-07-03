@@ -55,9 +55,9 @@ class DataSave extends WebAPI {
 			// apabila ada tanggal, ubah ke format sql sbb:
 			// $obj->tanggal = (\DateTime::createFromFormat('d/m/Y',$obj->tanggal))->format('Y-m-d');
 
+			$obj->user_name = strtolower($obj->user_name);	
 			$obj->user_fullname = strtoupper($obj->user_fullname);
-
-
+			$obj->user_email = strtolower($obj->user_email);	
 
 
 			$this->db->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
