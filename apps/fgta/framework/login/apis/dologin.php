@@ -159,6 +159,7 @@ class DoLogin extends WebAPI {
 			/* ambil real group */ 
 			$group_memberof = ['public'];
 			foreach ($user_groups as $group_id) {
+				$group_id = strtolower($group_id);
 				$group_file = __LOCALDB_DIR . "/grouppriv/group.$group_id.json";
 				if (is_file($group_file)) {
 					$group_file_path = realpath($group_file);
