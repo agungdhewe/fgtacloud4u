@@ -11,7 +11,8 @@ class ImageRoute extends Route {
 		'gif' => ['contenttype'=>'image/gif'],
 		'png' => ['contenttype'=>'image/png'],
 		'svg' => ['contenttype'=>'image/svg+xml'],
-		'ico' => ['contenttype'=>'image/x-icon']
+		'ico' => ['contenttype'=>'image/x-icon'],
+		'jpg' => ['contenttype'=>'image/jpeg']
 	);
 
 

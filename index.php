@@ -23,5 +23,8 @@
 	<div>
 		<a href="public_ecomm">e-Commerce</a>
 	</div>
+	<div>
+		<a href="public_content">Content</a>
+	</div>	
 </body>
 </html>

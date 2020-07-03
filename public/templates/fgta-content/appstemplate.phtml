@@ -1,0 +1,178 @@
+<?php namespace FGTA4\module; 
+if (!defined('FGTA4')) {
+	die('Forbiden');
+}
+?><!DOCTYPE HTML>
+<html>
+	<head>
+		<title><?=$this->title?></title>
+		<!-- <base href="<?=__BASEADDRESS?>"> -->
+		<base href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']); ?> ">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="manifest" href="manifest.json">
+		<!-- <link rel="icon" sizes="192x192" href="images/<?=__ICON32?>">
+		<link rel="apple-touch-icon" sizes="192x192" href="images/<?=__ICON32?>">
+		 -->
+		 <meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="application-name" content="<?=__APPDISPLAYNAME?>">
+		<meta name="apple-mobile-web-app-title" content="<?=__APPDISPLAYNAME?>">
+		<meta name="theme-color" content="#9c6ea7">
+		<meta name="msapplication-navbutton-color" content="#9c6ea7">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="msapplication-starturl" content="/">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="-1" />
+		<meta name="modulefullname" content="<?=$this->reqinfo->modulefullname?>" />
+		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
+		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
+
+		<style>
+			body, html { 
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+
+			body {
+				background-color: #ddd;	
+				margin: 0 0 0 0;
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+			}
+
+			#page_head {
+				background-color: aqua;
+				height: 200px;
+				min-height: 200px;
+			}
+
+
+			#page_head-mini {
+				width: 100vw;
+				background-color:blue;
+				height: 80px;
+				min-height: 80px;
+				top: -80px;
+				position: relative;
+				margin-left: 20px;
+				visibility: hidden;
+			}
+
+			#page_content {
+				flex-grow: 1;
+				align-self: stretch;
+				vertical-align: top;
+				height: 800px;
+				min-height: 800px;
+				position: relative;				
+			}
+
+			#page_footer {
+				background-color: #666;
+				height: 300px;
+				min-height: 300px;
+			}
+		</style>
+		<script>
+			window.$fgta = {fn:{}, state:{}}
+			
+
+			window.$fgta.fn.calcheader = function(hbig, hmin) {
+				var sb = 30;
+				window.$fgta.dhvar = {
+					hbig_heigt: hbig.rect.height,
+					hmin_heigt: hmin.rect.height,
+					top_offset_real: hbig.rect.height - hmin.rect.height,
+					top_offset_start: (hbig.rect.height<(sb + hmin.rect.height)) ? 0 : hbig.rect.height - (sb + hmin.rect.height),
+				}
+			}
+
+
+			window.$fgta.fn.posheader = function(hbig, hmin, scrollTop) {
+				console.log(window.$fgta.dhvar )
+			}
+
+
+			window.$fgta.fn.setdualheader = function (hbig_id, hmin_id) {
+				window.addEventListener("load", function() {
+					var hbig = document.getElementById(hbig_id);
+					var hmin = document.getElementById(hmin_id);
+
+					hbig.rect = hbig.getBoundingClientRect();
+					hmin.rect = hmin.getBoundingClientRect();
+
+					var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+					window.$fgta.fn.calcheader(hbig, hmin);
+					window.$fgta.fn.posheader(hbig, hmin, scrollTop);
+				});
+			}
+
+			
+			window.$fgta.fn.setdualheader('page_head', 'page_head-mini');
+
+			
+
+			// window.besartampil = true;
+			// window.keciltampil = false
+			// window.onload = function () {
+
+
+
+			// 	// obj_page_head_big.style.display = 'block';
+			// 	document.addEventListener("scroll", function (ev) {
+
+			// 		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			// 		// console.log(scrollTop);
+	
+			// 		if (scrollTop>120) {
+			// 			// munculkan yang kecil
+			// 			if (!window.keciltampil) {
+			// 				console.log(scrollTop)
+			// 				console.log('mulai tampilkan yang kecil');
+			// 				window.keciltampil = true;
+			// 				window.besartampil = false;
+							
+			// 				obj_page_head_mini.style.visibility = 'visible';
+			// 				obj_page_head_mini.style.position = 'fixed';
+			// 				obj_page_head_mini.style.top = 0;
+			// 			}
+			// 		} else {
+			// 			// sembubyikan yang kecil
+			// 			if (!window.besartampil) {
+			// 				console.log(scrollTop)
+			// 				console.log('sembunyikan yang kecil');
+			// 				window.besartampil = true;
+			// 				window.keciltampil = false;
+
+			// 				obj_page_head_mini.style.visibility = 'hidden';
+			// 				obj_page_head_mini.style.position = 'relative';
+			// 				obj_page_head_mini.style.top = '-80px';								
+			// 			}
+			// 		}
+			// 	});
+			// }
+	
+		</script>	
+
+	</head>
+	<body>
+		<header id="page_head">
+			head
+		</header>
+		<header id="page_head-mini">
+			mini head
+		</header>
+		<main id="page_content">
+			<?php require_once $this->reqinfo->moduleviewpath ?>
+		</main>	
+		<footer id="page_footer">
+			footer d
+		</footer>
+	</body>
+</html>
