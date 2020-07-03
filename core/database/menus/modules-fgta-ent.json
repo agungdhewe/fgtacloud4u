@@ -1,0 +1,65 @@
+{
+	"title" : "ENT",
+	"disabled" : false,
+	"modules" : [
+		{
+			"title" : "General",
+			"icon" : "icon-general-white.png",
+			"disabled" : false,
+			"modules" : [
+				"ent/general/curr",
+				"ent/general/country",
+				"ent/general/bank",
+				"ent/general/gender",
+				"ent/general/religion"
+			]
+		},
+
+		{
+			"title" : "Affiliation",
+			"icon" : "icon-affiliation-white.png", 
+			"disabled" : false,
+			"modules" : [
+				"ent/affiliation/contacttype",
+				"ent/affiliation/partnertype",
+				"ent/affiliation/partnerorg",
+				"ent/affiliation/partner"						
+			]
+		},
+
+		{
+			"title" : "Organisation",
+			"icon" : "icon-organiszation-white.png",
+			"disabled" : false,
+			"modules" : [
+				"ent/organisation/authlevel",
+				"ent/organisation/auth",
+				"ent/organisation/unitgroup",
+				"ent/organisation/unit",
+				"ent/organisation/depttype",
+				"ent/organisation/deptmodel",
+				"ent/organisation/deptgroup",
+				"ent/organisation/dept"
+			]
+		},
+
+		{
+			"title" : "Location",
+			"icon" : "icon-location-white.png",
+			"disabled":false,
+			"modules" : [
+				"ent/location/area",
+				"ent/location/prov",
+				"ent/location/city",
+				"ent/location/zone",
+				"ent/location/landtype",
+				"ent/location/land",
+				"ent/location/sitegroup",
+				"ent/location/sitemodel",
+				"ent/location/site"
+			]
+		}
+
+		
+	]
+}

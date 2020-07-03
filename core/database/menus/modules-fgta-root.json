@@ -1,0 +1,9 @@
+{
+	"title" : "ROOT",
+	"icon" : "icon-admin-white.png",
+	"disabled" : false,
+	"modules" : [
+		"fgta/framework/fggroup",
+		"fgta/framework/fguser"				
+	]
+}
