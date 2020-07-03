@@ -47,6 +47,8 @@ ob_start();
 
 
 
+// Saat pertama site di load tampa parameter, 
+// yang akan ditampilkan pertama
 $FGTA_STARTMODULE = 'fgta/framework/container';
 $ENV_FGTA_STARTMODULE = getenv('FGTA_STARTMODULE');
 if ($ENV_FGTA_STARTMODULE != '') {
@@ -55,6 +57,14 @@ if ($ENV_FGTA_STARTMODULE != '') {
 define('__STARTMODULE', $FGTA_STARTMODULE);	
 
 
+
+// Default menu yang muncul saat pembuatan group
+$FGTA_MENUDEF = 'modules-fgta';
+$ENV_FGTA_MENUDEF = getenv('FGTA_MENUDEF');
+if ($ENV_FGTA_MENUDEF != '') {
+	$FGTA_MENUDEF = $ENV_FGTA_MENUDEF;	
+} 
+define('__MENUDEF', $FGTA_MENUDEF);	
 
 
 

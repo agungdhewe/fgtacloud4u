@@ -150,7 +150,7 @@ export function createnew() {
 		form.rowid = null
 
 		// set nilai-nilai default untuk form
-		data.group_menu = "modules-dev"
+		data.group_menu = window.global.FGTA_MENUDEF;
 
 		options.OnCanceled = () => {
 			$ui.getPages().show('pnl_list')
