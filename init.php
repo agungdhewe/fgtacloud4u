@@ -27,13 +27,20 @@ class init {
 
 		mkdir($path);
 		$this->projectpath = $path;
+		$this->projectpath_win = dirname(__FILE__)."\\public_$namaproject";
+
 	}
 
 	
 	function CreateSymlink() {
 		$tosymlink = ["images", "jslibs", "templates", "index.php", "getotp.php", "info.php"];
 		foreach ($tosymlink as $objname) {
-			echo "$objname\r\n";
+			$source = dirname(__FILE__)."\\public\\$objname";
+			$target = $this->projectpath_win."\\$objname";	
+			
+			$cmd = "MKLINK /D $target $source";
+			// echo $cmd;
+			system($cmd);	
 		}
 	}
 
