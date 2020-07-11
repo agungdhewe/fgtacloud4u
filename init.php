@@ -31,7 +31,10 @@ class init {
 
 	
 	function CreateSymlink() {
-
+		$tosymlink = ["images", "jslibs", "templates", "index.php", "getotp.php", "info.php"];
+		foreach ($tosymlink as $objname) {
+			echo "$objname\r\n";
+		}
 	}
 
 
