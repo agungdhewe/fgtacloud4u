@@ -5,6 +5,8 @@
 <body>
 	<h1>FGTA Development</h1>
 
+
+	<!--
 	<div>
 		<a href="public">Default</a>
 	</div>
@@ -29,5 +31,6 @@
 	<div>
 		<a href="public_content">Content</a>
 	</div>	
+	-->
 </body>
 </html>
