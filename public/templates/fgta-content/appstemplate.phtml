@@ -5,6 +5,7 @@ if (!defined('FGTA4')) {
 ?><!DOCTYPE HTML>
 <html>
 	<head>
+		
 		<title><?=$this->title?></title>
 		<!-- <base href="<?=__BASEADDRESS?>"> -->
 		<base href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']); ?> ">
@@ -29,150 +30,395 @@ if (!defined('FGTA4')) {
 		<meta name="modulefullname" content="<?=$this->reqinfo->modulefullname?>" />
 		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
 		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
+		<meta name="home" content="<?=__STARTMODULE?>" />
 
 		<style>
-			body, html { 
+			@font-face {
+				font-family: 'Droid Sans';
+				font-style: normal;
+				font-weight: 300;
+				src: local('Droid Sans Regular'), local('DroidSans-Regular'), url('./templates/fgta-content/asset/droidsans.woff2') format('woff2');
+				unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;	
+				font-stretch: condensed;
+			}
+
+
+			html { 
 				width: 100%;
 				height: 100%;
 				padding: 0;
 				margin: 0;
+				font-family: Droid Sans; 
+				font-size: 14px;
 			}
 
 			body {
+				width: 100%;
+				height: 100%;
+				padding: 0 0 0 0 ;
+				margin: 0 0 0 0;							
 				background-color: #ddd;	
-				margin: 0 0 0 0;
 				display: flex;
 				flex-direction: column;
 				min-height: 100vh;
+				font-family: Droid Sans; 
+				font-size: 14px;				
 			}
 
-			#page_head {
+
+			button {
+				border: none;
+				outline: none;
+				font-weight: normal;
+				padding: 10px 20px 10px 20px;
+				border-radius: 2px;	
+				text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+				background-color:#0a3670;
+				color: #fff	;
+				margin-top: 5px;
+				margin-bottom: 5px;	
+			}
+
+			button:hover {
+				background-color:#0e4792;	
+				transform: translateY(-1px);
+			}			
+
+			button:focus {
+				-webkit-box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.4);
+				-moz-box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.4);
+				box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.4);
+				transform: translateY(-1px);				
+			}
+
+			button:active {
+				background-color:#165cb8;	
+				transform: translateY(1px);	
+			}
+
+
+
+			input[type="text"],
+			input[type="email"],
+			input[type="password"] {
+				height:30px;
+				outline: none;
+				border: 1px solid #ccc;
+				padding: 0 10px;
+				border-radius: 2px;
+				color: #333;
+				margin-top: 5px;
+				margin-bottom: 5px;
+			}
+
+			input[type="text"]:hover,
+			input[type="email"]:hover,
+			input[type="password"]:hover {
+				border-color: #999;
+			}
+
+			input[type="text"]:disabled ,
+			input[type="email"]:disabled,
+			input[type="password"]:disabled  {
+				background-color: #dddddd;	
+			}
+			
+			input[type="text"]:focus ,
+			input[type="email"]:focus,
+			input[type="password"]:focus  {
+				-webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+				-moz-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+				box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+				transform: translateY(-2px);
+			}
+
+
+			input[type="text"]:invalid ,
+			input[type="email"]:invalid,
+			input[type="password"]:invalid  {
+				border-color: #ff7171;
+				background-color: #ffeaea;
+			}	
+
+			input[type="text"]:invalid:required ,
+			input[type="email"]:invalid:required,
+			input[type="password"]:invalid:required  {
+				border-color: #ff7171;
+				background-color: #ffeaea;
+			}
+
+
+
+
+			/* CHECKBOX */
+			input[type="checkbox"] {
+				position: absolute; 
+				opacity: 0;
+			}
+
+			input[type="checkbox"] + label {
+				position: relative;
+				cursor: pointer;
+				top: 7px;
+				/* border: 1px solid blue; */
+				padding-right: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+
+			input[type="checkbox"]:focus + label {
+				text-shadow: 1px 1px 2px rgba(0,0,0,.2);
+				top: 6px;
+			}
+
+
+			input[type="checkbox"] + label:before {
+				content: '';
+				margin-right: 5px;
+				display: inline-block;
+				vertical-align: text-top;
+				width: 16px;
+				height: 16px;
+				border: 1px solid #ccc;
+				border-radius: 2px;
+				background: white;	
+				margin-top: -1px;
+				margin-bottom: 14px;
+			}
+
+			input[type="checkbox"]:hover + label:before {
+				border-color: #999;
+			}
+
+			input[type="checkbox"]:focus + label:before {
+				transform: translateY(-1px);
+				-webkit-box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.75);
+				-moz-box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.75);
+				box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.75);
+			}
+
+			input[type="checkbox"]:checked + label:after {
+				content: '';
+				position: absolute;
+				left: 3px;
+				top: 7px;
+				width: 10px;
+				height: 4px;
+				border: 3px solid #333;
+				border-top: none;
+				border-right: none;				
+				transform: rotate(-45deg);
+			}
+
+
+
+
+			/* SELECT */
+			select {
+				height:30px;
+				outline: none;
+				border: 1px solid #ccc;
+				padding: 0 10px;
+				border-radius: 2px;
+				color: #333;
+				background-color: #fff;
+				margin-top: 5px;
+				margin-bottom: 5px;							
+			}
+
+			select:disabled {
+				background-color: #dddddd;		
+			}
+
+			select:focus {
+				-webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+				-moz-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+				box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+				transform: translateY(-2px);					
+			}
+
+
+			label {
+				height:30px;
+				color: #333;
+				font-size: 0.9em;
+				-webkit-touch-callout: none; /* iOS Safari */
+				-webkit-user-select: none; /* Safari */
+				-khtml-user-select: none; /* Konqueror HTML */
+				-moz-user-select: none; /* Old versions of Firefox */
+				-ms-user-select: none; /* Internet Explorer/Edge */
+				user-select: none; /* Non-prefixed version, currently
+									supported by Chrome, Edge, Opera and Firefox */
+			}
+
+
+			#page_head-big {
+				width: 100%;
 				background-color: aqua;
-				height: 200px;
-				min-height: 200px;
+				z-index: 99995;
+				position: fixed;
+				opacity: 0;
 			}
 
 
 			#page_head-mini {
-				width: 100vw;
+				width: 100%;
 				background-color:blue;
-				height: 80px;
-				min-height: 80px;
-				top: -80px;
-				position: relative;
-				margin-left: 20px;
-				visibility: hidden;
+				z-index: 99996;
+				position: fixed;
+				opacity: 0;
 			}
+
+			#page_head-logo {
+				background-color:red;
+				z-index: 99997;	
+				position: fixed;
+				opacity: 0;	
+			}
+
+			#page_head-menu {
+				display: flex;
+				flex-direction: row-reverse;
+				align-items: flex-end;
+				justify-content: flex-start; 
+				z-index: 99999;
+				font-size: 1em;
+				position: fixed;
+				right: 0px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				margin-right: 10px;
+			}
+
 
 			#page_content {
 				flex-grow: 1;
 				align-self: stretch;
 				vertical-align: top;
-				height: 800px;
-				min-height: 800px;
-				position: relative;				
+				position: relative;		
+				opacity: 0;	
+				z-index: 1000000;	
 			}
 
 			#page_footer {
-				background-color: #666;
+				background-color: rgb(20, 20, 20);
 				height: 300px;
 				min-height: 300px;
+				color:rgb(221, 221, 221)
 			}
+
+
+			.contentpanel {
+				width: 100%;
+				display: none
+			}
+
+			.headshadow {
+				-webkit-box-shadow: 0px -8px 11px 8px rgba(0,0,0,0.75);
+				-moz-box-shadow: 0px -8px 11px 8px rgba(0,0,0,0.75);
+				box-shadow: 0px -8px 11px 8px rgba(0,0,0,0.75);
+			}
+
+
+
+
+
+
+
+
+
 		</style>
+		<?php
+		$app_css_path = __LOCAL_PUBLIC_DIR . "/style-content.css";
+		if (\is_file($app_css_path)) {
+		?>
+		<link rel="stylesheet" type="text/css" href="index.php/public/style-content.css" />
+		<?php } ?>	
+		
+		
 		<script>
-			window.$fgta = {fn:{}, state:{}}
-			
-
-			window.$fgta.fn.calcheader = function(hbig, hmin) {
-				var sb = 30;
-				window.$fgta.dhvar = {
-					hbig_heigt: hbig.rect.height,
-					hmin_heigt: hmin.rect.height,
-					top_offset_real: hbig.rect.height - hmin.rect.height,
-					top_offset_start: (hbig.rect.height<(sb + hmin.rect.height)) ? 0 : hbig.rect.height - (sb + hmin.rect.height),
-				}
-			}
-
-
-			window.$fgta.fn.posheader = function(hbig, hmin, scrollTop) {
-				console.log(window.$fgta.dhvar )
-			}
-
-
-			window.$fgta.fn.setdualheader = function (hbig_id, hmin_id) {
-				window.addEventListener("load", function() {
-					var hbig = document.getElementById(hbig_id);
-					var hmin = document.getElementById(hmin_id);
-
-					hbig.rect = hbig.getBoundingClientRect();
-					hmin.rect = hmin.getBoundingClientRect();
-
-					var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-					window.$fgta.fn.calcheader(hbig, hmin);
-					window.$fgta.fn.posheader(hbig, hmin, scrollTop);
-				});
-			}
-
-			
-			window.$fgta.fn.setdualheader('page_head', 'page_head-mini');
-
-			
-
-			// window.besartampil = true;
-			// window.keciltampil = false
-			// window.onload = function () {
-
-
-
-			// 	// obj_page_head_big.style.display = 'block';
-			// 	document.addEventListener("scroll", function (ev) {
-
-			// 		var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-			// 		// console.log(scrollTop);
-	
-			// 		if (scrollTop>120) {
-			// 			// munculkan yang kecil
-			// 			if (!window.keciltampil) {
-			// 				console.log(scrollTop)
-			// 				console.log('mulai tampilkan yang kecil');
-			// 				window.keciltampil = true;
-			// 				window.besartampil = false;
-							
-			// 				obj_page_head_mini.style.visibility = 'visible';
-			// 				obj_page_head_mini.style.position = 'fixed';
-			// 				obj_page_head_mini.style.top = 0;
-			// 			}
-			// 		} else {
-			// 			// sembubyikan yang kecil
-			// 			if (!window.besartampil) {
-			// 				console.log(scrollTop)
-			// 				console.log('sembunyikan yang kecil');
-			// 				window.besartampil = true;
-			// 				window.keciltampil = false;
-
-			// 				obj_page_head_mini.style.visibility = 'hidden';
-			// 				obj_page_head_mini.style.position = 'relative';
-			// 				obj_page_head_mini.style.top = '-80px';								
-			// 			}
-			// 		}
-			// 	});
-			// }
-	
-		</script>	
-
+			var useminiheader = '<?=property_exists($this, "useminiheader") ? ($this->useminiheader ? "true" : "false") : "false"  ?>';
+			window.$fgta = {
+				useminiheader: useminiheader === 'true' ? true : false,
+				showmenulist: true,
+				showaccount: true
+			}			
+		</script>
+		<script src="index.php/jslibs/fgtacontenthead.js"></script>
+		<?php
+		$app_script_path = __LOCAL_PUBLIC_DIR . "/script-content.js";
+		if (\is_file($app_script_path)) {
+		?>
+		<script src="index.php/public/script-content.js"></script>
+		<?php } ?>		
 	</head>
 	<body>
-		<header id="page_head">
-			head
-		</header>
-		<header id="page_head-mini">
-			mini head
-		</header>
+
+	
+
+		<header id="page_head-mini" class="headshadow"></header>
+		<header id="page_head-logo" ></header>
+		<header id="page_head-big" class="headshadow"></header>
+		<div id="page_head-menu">
+			<div id="page_head-menu_account" style="opacity: 0;">
+				<?php
+				$this->auth->handlers = (object) array(
+					'signin' => 'content/auth/signin',
+					'signout' => 'content/auth/signout',
+					'register' => 'content/auth/register',
+					'account' => 'content/auth/account'
+				);
+				?>
+				<?php
+				$tp_account_path = __LOCAL_PUBLIC_DIR . "/page-account.phtml";
+				if (\is_file($tp_account_path)) {
+					require_once $tp_account_path;
+				} else { ?>
+				control account disini
+				<?php } ?>	
+			</div>
+
+			<div id="page_head-menu_split" style="opacity: 0;">
+				&nbsp;|&nbsp;
+			</div>
+
+			<div id="page_head-menu_list" style="opacity: 0;">
+				<?php
+				$tp_menu_path = __LOCAL_PUBLIC_DIR . "/page-menu.phtml";
+				if (\is_file($tp_menu_path)) {
+					require_once $tp_menu_path;
+				} else { ?>
+				menu halaman di sini
+				<?php } ?>				
+			</div>
+
+
+		</div>
+
+
 		<main id="page_content">
+			<div style="margin: 20px 20px 50px 20px">
 			<?php require_once $this->reqinfo->moduleviewpath ?>
+			</div>
 		</main>	
+
+		<?php
+		$tp_footer_path = __LOCAL_PUBLIC_DIR . "/page-footer.phtml";
+		if (\is_file($tp_footer_path)) {
+			require_once $tp_footer_path;
+		} else { ?>
 		<footer id="page_footer">
 			footer d
 		</footer>
+		<?php } ?>
 	</body>
 </html>
+<?php require_once dirname(__FILE__).'/appactivator.phtml'; ?>
+
+
+<!--
+* lagi WFH di Kota Tangerang	
+* 2020-07-07	
+* panjitengkorak@null.net
+-------------------------
+END OF TEMPLATE -->

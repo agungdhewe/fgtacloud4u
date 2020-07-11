@@ -21,6 +21,9 @@
 		<a href="public_tvone">TVOne</a>
 	</div>
 	<div>
+		<a href="public_tvoneclient">TVOne-Client</a>
+	</div>
+	<div>
 		<a href="public_ecomm">e-Commerce</a>
 	</div>
 	<div>

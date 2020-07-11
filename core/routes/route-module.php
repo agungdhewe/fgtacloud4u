@@ -42,11 +42,11 @@ class ModuleRoute extends Route {
 
 		if (!$reqinfo->moduleconfig->allowanonymous) {
 			if (!$this->auth->is_login()) {
-				$reqinfo->moduledir = __ROOT_DIR . "/apps/fgta/framework/login";
+				$reqinfo->moduledir = __ROOT_DIR . "/apps/" . __FGTA_LOGIN;
 				$reqinfo->modulecontrollerpath = "$reqinfo->moduledir/login.php";
 				$reqinfo->moduleviewpath = "$reqinfo->moduledir/login.phtml";
 				$reqinfo->modulejspath = "$reqinfo->moduledir/login.mjs";
-				$reqinfo->modulejsurl = "./index.php/asset/fgta/framework/login/login.mjs";
+				$reqinfo->modulejsurl = "./index.php/asset/". __FGTA_LOGIN ."/login.mjs";
 			} else {
 				// check apakah group yang dimiliki diperolehkan
 				$allowed = false;

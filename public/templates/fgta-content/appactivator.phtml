@@ -1,0 +1,51 @@
+
+		
+<?php if (property_exists($this, 'preloadscripts')) { ?>
+<!-- Preaload Scripts -->
+	<?php if (is_array($this->preloadscripts)) { 
+			foreach ($this->preloadscripts as $script) {	
+	?><script src="<?=$script?>"></script>			
+	<?php }}} ?>		
+
+
+	
+	<?php if (property_exists($this, 'preloadsstyles')) { ?>
+<!-- Preaload Styles -->
+	<?php if (is_array($this->preloadsstyles)) { 
+			foreach ($this->preloadsstyles as $style) {	
+	?><script src="<?=$script?>"></script>			
+	<?php }}} ?>	
+
+
+
+	<?php if (is_file($this->reqinfo->modulecsspath)) { ?>		
+<!-- CSS Module <?php //echo($this->reqinfo->modulecsspath) ?> -->	
+	<link rel="stylesheet" type="text/css" href="<?=$this->reqinfo->modulecssurl?>" />
+	<?php } ?>
+
+
+	<!-- Script Module <?php //echo($this->reqinfo->modulejspath) ?> -->	
+	<?php if (is_file($this->reqinfo->modulejspath)) { ?>
+
+	<script type="module">
+		import * as fgtabaseclass from './index.php/jslibs/fgtabase.js'
+		import * as fgta from '<?=$this->reqinfo->modulejsurl?>';
+		var fgtabase = Object.assign({}, fgtabaseclass);
+		if (window.$fgta===undefined) { window.$fgta = {} }
+		Object.assign(window.$fgta, fgtabase, fgta);
+	</script>
+	<?php } else { ?>
+	<script>console.log('script untuk module (<?=$this->reqinfo->modulejsurl?>) belum tersedia');</script>	
+	<?php } ?>
+	<script>
+		window.addEventListener("load", async function() {
+			if (window.$fgta!==undefined) {
+				if (typeof window.$fgta.ready === 'function') {
+					var param = {};
+					await window.$fgta.ready();
+					await window.$fgta.init(param);					
+				} 
+			}
+		});
+	</script>
+

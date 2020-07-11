@@ -68,6 +68,17 @@ define('__MENUDEF', $FGTA_MENUDEF);
 
 
 
+// Custom Login
+$FGTA_LOGIN = 'fgta/framework/login';
+$ENV_FGTA_LOGIN = getenv('FGTA_LOGIN');
+if ($ENV_FGTA_LOGIN != '') {
+	$FGTA_LOGIN = $ENV_FGTA_LOGIN;	
+} 
+define('__FGTA_LOGIN', $FGTA_LOGIN);	
+
+
+
+// Lokasi Direktori lokal database
 $FGTA_LOCALDB_DIR = __ROOT_DIR.'/core/database';
 $ENV_FGTA_LOCALDB_DIR = getenv('FGTA_LOCALDB_DIR');
 if ($ENV_FGTA_LOCALDB_DIR != '') {
@@ -80,6 +91,7 @@ if ($ENV_FGTA_LOCALDB_DIR != '') {
 define('__LOCALDB_DIR', $FGTA_LOCALDB_DIR);	
 
 
+// Lokasi konfigurasi koneksi database
 $FGTA_DBCONF_PATH = __ROOT_DIR.'/public/dbconfig.php';
 $ENV_FGTA_DBCONF_PATH=getenv('FGTA_DBCONF_PATH');
 if ($ENV_FGTA_DBCONF_PATH != '') {
@@ -109,6 +121,8 @@ if ($ENV_FGTA_APP_NAME != '') {
 define('__APPNAME', $FGTA_APP_NAME);
 
 
+
+// Direktori untuk menyimpan mjs yang di obfuscated
 $FGTA_OBFUSCATED_DIR = __ROOT_DIR.'/core/database/obfuscated';
 $ENV_FGTA_OBFUSCATED_DIR=getenv('FGTA_OBFUSCATED_DIR');
 if ($ENV_FGTA_OBFUSCATED_DIR != '') {
@@ -117,6 +131,7 @@ if ($ENV_FGTA_OBFUSCATED_DIR != '') {
 define('__OBFUSCATED_DIR', $FGTA_OBFUSCATED_DIR);
 
 
+// Template yang digunakan
 $FGTA_TEMPLATE = 'fgta-erp';
 $ENV_FGTA_TEMPLATE=getenv('FGTA_TEMPLATE');
 if ($ENV_FGTA_TEMPLATE != '') {
@@ -128,6 +143,9 @@ if ($ENV_FGTA_TEMPLATE != '') {
 	}
 }
 define('__TEMPLATE', $FGTA_TEMPLATE);
+
+
+
 
 
 
