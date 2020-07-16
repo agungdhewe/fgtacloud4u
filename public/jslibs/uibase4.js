@@ -666,7 +666,6 @@ export function ShowMessage(message, buttons) {
 			ev.stopPropagation()
 		}
 	}
-	document.addEventListener("keyup", EnterPressed)
 
 
 	Object.assign(progressbuttonbar.style, {
@@ -711,8 +710,10 @@ export function ShowMessage(message, buttons) {
 				opacity += 1;
 				progressmask.style.opacity = opacity/10
 			} else {
-				uibase.dlgmaskshowing = 'showed'
-				
+				document.addEventListener("keyup", EnterPressed)
+
+				uibase.dlgmaskshowing = 'showed';
+				// console.log('dialog showed');
 				clearInterval(fadein);
 			}
 		}, 20)

@@ -59,12 +59,21 @@ class init {
 	}
 
 
+	function CreateHtaccess() {
+		$target = $this->projectpath_win."\\.htaccess";
+		$fp = fopen($target, "w");
+		// fputs($p)			
+	}
+
+
 	function execute() {
 		try {
+
 			$this->CheckCommand();
 			$this->CreateProjectDir($this->projectname);
 			$this->CreateSymlink();
 			$this->CopyFromPublic();
+			$this->CreateHtaccess();
 			
 
 		} catch (Exception $ex) {

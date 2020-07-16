@@ -8,14 +8,8 @@
 				"fgta/framework/fggroup",
 				"fgta/framework/fguser"				
 			]
-		},
-
-		{
-			"title" : "Your Apps",
-			"disabled" : false,
-			"modules" : [
-				
-			]
 		}
+
+		
 	]
 }
