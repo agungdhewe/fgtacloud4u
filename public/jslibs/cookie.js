@@ -49,7 +49,8 @@
 			}
 
 			attributes = extend({
-				path: '/'
+				path: '/',
+				SameSite: "Strict"
 			}, api.defaults, attributes);
 
 			if (typeof attributes.expires === 'number') {
