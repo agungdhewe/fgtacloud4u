@@ -771,10 +771,13 @@ function set_state_textbox(self, obj, viewonly) {
 	var p = obj.parent();
 	p.find('.textbox-text').each(function() {
 		var op = $(this).parent();
+		//console.log(op.width());
 		if (iscombo) {
 			$(this).width(op.width()-33);
 		} else {
-			$(this).width(op.width());
+			$(this).css('padding-right', '10px');
+			$(this).width(op.width()-10);
+
 		}
 	});
 
