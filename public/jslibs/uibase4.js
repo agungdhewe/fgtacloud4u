@@ -59,7 +59,19 @@ export async function ready() {
 		fn_cancel(events.OnButtonHome.detail.cancel)
 	}
 
-	console.log(`module ready`)
+
+	// var parse = async () => {
+	// 	return new Promise((resolve, reject) => {
+	// 		$.parser.onComplete = function() {
+	// 			console.log('parsed');
+	// 			resolve();
+	// 		}
+	// 		$.parser.parse();
+	// 	});
+	// }
+
+	// await parse();
+	console.log(`module ready`);
 }
 
 
@@ -626,7 +638,8 @@ export function ShowMessage(message, buttons) {
 			justifyContent: 'center',
 			alignItems: 'center',
 			marginLeft: '3px',
-			marginRight: '3px'		
+			marginRight: '3px',
+			marginBottom: '20px'		
 		})
 	
 		$(btn).linkbutton({})

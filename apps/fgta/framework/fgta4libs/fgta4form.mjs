@@ -745,6 +745,7 @@ function set_state_textbox(self, obj, viewonly) {
 
 	// console.log(obj.textbox('getText'))
 
+	var iscombo = obj.hasClass('easyui-combo') ? true : false;
 	var opt = obj.textbox('options')
 	if (obj.object_isdisabled || opt.disabled) {
 		obj.textbox('textbox').css('background-color', '');
@@ -757,7 +758,7 @@ function set_state_textbox(self, obj, viewonly) {
 			}
 		} else {
 			obj.textbox('readonly', false)
-			if (obj.hasClass('easyui-combo')) {
+			if (iscombo) {
 				var textbox = obj.combo('textbox')
 				$(textbox).attr('disabled', true)
 				textbox.css('color', obj.colorbase)
@@ -765,6 +766,17 @@ function set_state_textbox(self, obj, viewonly) {
 			obj.textbox('textbox').css('background', 'rgb(255, 224, 149)');
 		}
 	}
+
+	// ini untuk fix di mozila firefox
+	var p = obj.parent();
+	p.find('.textbox-text').each(function() {
+		var op = $(this).parent();
+		if (iscombo) {
+			$(this).width(op.width()-33);
+		} else {
+			$(this).width(op.width());
+		}
+	});
 
 	if (text!=value) {
 		obj.textbox('setValue', value)
