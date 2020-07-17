@@ -95,6 +95,7 @@
 				stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
 			}
 
+			// console.log(key + '=' + value + stringifiedAttributes);
 			return (document.cookie = key + '=' + value + stringifiedAttributes);
 		}
 

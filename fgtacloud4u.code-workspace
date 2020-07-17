@@ -4,6 +4,16 @@
 			"path": "."
 		}
 	],
+	"settings": {
+		"files.watcherExclude": {
+			"/public_*": true
+		},
+		"files.exclude": {
+			".sync.ffs_db": true,
+			"**/node_modules": true,
+			"public_*": true
+		}
+	},
 
 
 

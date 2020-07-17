@@ -182,7 +182,7 @@ try {
 	$reqs = explode('/', ltrim($_SERVER['PATH_INFO'], '/'));
 	$routeswitch = trim($reqs[0])!='' ? trim($reqs[0]) : 'index';
 
-
+	$usesession = false;
 	$isapps = true;
 	try {
 		switch ($routeswitch) {
@@ -192,10 +192,12 @@ try {
 				break;
 	
 			case 'module':
+				$usesession = true;
 				require_once __ROOT_DIR.'/core/routes/route-module.php';
 				break;
 				
 			case 'api' :
+				$usesession = true;
 				require_once __ROOT_DIR.'/core/routes/route-api.php';
 				break;
 			
@@ -266,9 +268,11 @@ try {
 
 			$currentapi = $reqinfo->modulefullname."/".$reqinfo->modulerequestinfo;
 			$ROUTER->auth = new WebAuth();
-			if ($currentapi!=API_LOGIN_URL) {
-				$ROUTER->auth->SessionCheck(); // selain API untuk login, harus dicek session nya
-			} 
+			if ($usesession) {
+				if ($currentapi!=API_LOGIN_URL) {
+					$ROUTER->auth->SessionCheck(); // selain API untuk login, harus dicek session nya
+				} 
+			}
 
 			if ($reqinfo->moduleconfig->title=='Container') {
 				$reqinfo->moduleconfig->title = $configuration->basetitle;

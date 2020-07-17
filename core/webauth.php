@@ -13,6 +13,13 @@ class WebAuth {
 	}
 
 	public function SessionCheck() {
+		$currentCookieParams = session_get_cookie_params(); 
+		session_set_cookie_params(
+			$currentCookieParams["lifetime"], 
+			'/;SameSite=Strict'
+		);
+
+
 		$tokenid = '';
 		if (array_key_exists('tokenid', $_COOKIE)) {
 			$tokenid = $_COOKIE['tokenid'];

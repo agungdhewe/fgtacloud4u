@@ -52,12 +52,18 @@ class DoLogin extends WebAPI {
 			} else {
 				$userdata = $this->fgta4cloud_login($username, md5($password));
 			}
-		
-			
-			//login berhasil, mulai session
-			session_start(["name" => 'tokenid']);
-			$userdata->tokenid = session_id();
 
+			//login berhasil, mulai session
+			// $tokenid = uniqid();
+			// setcookie('tokenid', $tokenid, 0, '/; samesite=strict');
+			$currentCookieParams = session_get_cookie_params(); 
+			session_set_cookie_params(
+				$currentCookieParams["lifetime"], 
+				'/;SameSite=Strict'
+			);
+			session_start(["name" => 'tokenid']);
+			
+			$userdata->tokenid = session_id();
 			$this->auth->session_user_start($userdata);
 
 			return $userdata;

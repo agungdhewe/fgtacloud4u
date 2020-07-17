@@ -1,6 +1,9 @@
 {
 	"title": "home *****",
 	"modules": [
+		"ent/organisation/docs",
+
+
 		{
 			"title" : "Administrator",
 			"disabled" : false,
@@ -8,7 +11,14 @@
 				"fgta/framework/fggroup",
 				"fgta/framework/fguser"				
 			]
-		}
+		},
+
+		{
+			"title" : "Enterprise",
+			"icon" : "icon-enterprise-white.png",
+			"disabled" : false,
+			"file" : "modules-fgta-ent.json"
+		}		
 
 		
 	]

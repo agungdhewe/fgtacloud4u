@@ -67,8 +67,8 @@ export async function init() {
 		let meta_el_variancename  = pnl_iframe.contents().find("meta[name=variancename]"); 
 		let variancename = meta_el_variancename.attr("content")
 
-		Cookies.set('last_opened_module', modulefullname)
-		Cookies.set('last_opened_module_variance', variancename)
+		Cookies.set('last_opened_module', modulefullname, {SameSite: "Strict"})
+		Cookies.set('last_opened_module_variance', variancename, {SameSite: "Strict"})
 		if (typeof pnl_iframe.frameloaded === 'function') {
 			pnl_iframe.frameloaded()
 		}
