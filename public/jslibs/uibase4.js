@@ -71,6 +71,7 @@ export async function ready() {
 	// }
 
 	// await parse();
+	// $.parser.parse();
 	console.log(`module ready`);
 }
 

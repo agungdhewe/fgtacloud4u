@@ -13,8 +13,19 @@
 <!-- Preaload Styles -->
 	<?php if (is_array($this->preloadsstyles)) { 
 			foreach ($this->preloadsstyles as $style) {	
-	?><script src="<?=$script?>"></script>			
+	?><link rel="stylesheet" type="text/css" href="<?=$style?>">		
 	<?php }}} ?>	
+
+
+
+
+	<?php
+		$app_css_path = __LOCAL_PUBLIC_DIR . "/style-content.css";
+		if (\is_file($app_css_path)) {
+		?>
+		<link rel="stylesheet" type="text/css" href="index.php/public/style-content.css" />
+	<?php } ?>	
+
 
 
 

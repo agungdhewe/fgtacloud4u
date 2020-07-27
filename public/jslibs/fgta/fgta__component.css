@@ -1,0 +1,210 @@
+button {
+	border: none;
+	outline: none;
+	font-weight: normal;
+	padding: 10px 20px 10px 20px;
+	border-radius: 2px;	
+	text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+	background-color:#0a3670;
+	color: #fff	;
+	margin-top: 5px;
+	margin-bottom: 5px;	
+}
+
+button:hover {
+	background-color:#0e4792;	
+	transform: translateY(-1px);
+}			
+
+button:focus {
+	-webkit-box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.4);
+	-moz-box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.4);
+	box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.4);
+	transform: translateY(-1px);				
+}
+
+button:active {
+	background-color:#165cb8;	
+	transform: translateY(1px);	
+}
+
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	height:30px;
+	outline: none;
+	border: 1px solid #ccc;
+	padding: 0 10px;
+	border-radius: 2px;
+	color: #333;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+	border-color: #999;
+}
+
+
+input[type="text"]:disabled ,
+input[type="email"]:disabled,
+input[type="password"]:disabled  {
+	background-color: #dddddd;	
+}
+
+input[type="text"]:focus ,
+input[type="email"]:focus,
+input[type="password"]:focus  {
+	-webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+	-moz-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+	box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+	transform: translateY(-2px);
+}
+
+
+input[type="text"]:invalid ,
+input[type="email"]:invalid,
+input[type="password"]:invalid  {
+	border-color: #ff7171;
+	background-color: #ffeaea;
+}	
+
+input[type="text"]:invalid:required ,
+input[type="email"]:invalid:required,
+input[type="password"]:invalid:required  {
+	border-color: #ff7171;
+	background-color: #ffeaea;
+}
+
+
+
+
+/* CHECKBOX */
+input[type="checkbox"] {
+	position: absolute; 
+	opacity: 0;
+	margin-top: -10px;
+	/* display: none; */
+}
+
+
+
+input[type="checkbox"] + label {
+	position: relative;
+	cursor: pointer;
+	top: 7px;
+	/* border: 1px solid blue; */
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+input[type="checkbox"]:focus + label {
+	text-shadow: 1px 1px 2px rgba(0,0,0,.2);
+	top: 6px;
+}
+
+
+input[type="checkbox"] + label:before {
+	content: '';
+	margin-right: 5px;
+	display: inline-block;
+	vertical-align: text-top;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	background: white;	
+	margin-top: -1px;
+	margin-bottom: 14px;
+}
+
+input[type="checkbox"]:hover + label:before {
+	border-color: #999;
+}
+
+input[type="checkbox"]:focus + label:before {
+	transform: translateY(-1px);
+	-webkit-box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.75);
+	box-shadow: 1px 1px 4px -1px rgba(0,0,0,0.75);
+}
+
+input[type="checkbox"]:checked + label:after {
+	content: '';
+	position: absolute;
+	left: 3px;
+	top: 7px;
+	width: 10px;
+	height: 4px;
+	border: 3px solid #333;
+	border-top: none;
+	border-right: none;				
+	transform: rotate(-45deg) translateY(1px) translateX(-2px);
+}
+
+input[type="checkbox"]:active {
+	transform: translateY(1px);	
+}
+
+
+
+/* SELECT */
+select {
+	height:30px;
+	outline: none;
+	border: 1px solid #ccc;
+	padding: 0 10px;
+	border-radius: 2px;
+	color: #333;
+	background-color: #fff;
+	margin-top: 5px;
+	margin-bottom: 5px;							
+}
+
+select:disabled {
+	background-color: #dddddd;		
+}
+
+select:focus {
+	-webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+	-moz-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+	box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.4);
+	transform: translateY(-2px);					
+}
+
+select:invalid  {
+	border-color: #ff7171;
+	background-color: #ffeaea;
+}
+
+select:invalid:required  {
+	border-color: #ff7171;
+	background-color: #ffeaea;
+}
+
+
+
+
+
+label {
+	margin-top: 5px;
+	display: inline-block;
+	height:22px;
+	padding-top: 7px;
+	vertical-align: middle;
+	color: #333;
+	font-size: 0.9em;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+						supported by Chrome, Edge, Opera and Firefox */
+}

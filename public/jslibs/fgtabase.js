@@ -28,15 +28,16 @@ export async function init() {
 
 export async function CreatePanelPages(panels, param) {
 	var fp;
+	var previouspanel = null;
 	for (var p of panels) {
 		var panel = p.panel;
 		panel.handler = p.handler;
+		panel.previouspanel = previouspanel;
 
 		let id = panel.id;
 		panel.show = function() {
 			showPanel(id);
 		}
-
 
 		if (panel.handler!==undefined) {
 			if (typeof panel.handler.init==='function') {
@@ -49,25 +50,36 @@ export async function CreatePanelPages(panels, param) {
 		if (fp===undefined) {
 			fp = panel;
 			fp.style.display = 'block';
-			STATE.currentpanel = id;
+			STATE.currentpanel_id = id;
 		}
+
+		previouspanel = panel;
 	}
 
+
+	var open_panel_id = window.location.hash.substr(1);
+	if (open_panel_id!="") {
+		showPanel(open_panel_id);
+		console.log(open_panel_id);
+	}
 	
 }
 
 
 export function showPanel(id) {
-	if (id===STATE.currentpanel) {
+	if (id===STATE.currentpanel_id) {
 		return;
 	}
 
+	var panelfound = false;
 	for (var panel_id in PANELS) {
 		var panel = PANELS[panel_id]
 		if (panel.id===id) {
+			panelfound=true;
 			panel.style.display = 'block';
 			panel.style.visibility = 'visible';
 			panel.style.opacity = 1;
+			STATE.currentpanel_id = panel.id;
 		} else {
 			panel.style.display = 'none';
 			panel.style.visibility = 'hidden';
@@ -75,6 +87,19 @@ export function showPanel(id) {
 		}
 	}
 
+	if (!panelfound) {
+		console.error(`panel ${id} not found.`);
+		alert(`panel ${id} not found.`)
+	}
+
 }
 
+
+
+export function showPreviousPanel() {
+	var panel = PANELS[STATE.currentpanel_id];
+	if (panel.previouspanel!=null) {
+		showPanel(panel.previouspanel.id);
+	}
+}
 

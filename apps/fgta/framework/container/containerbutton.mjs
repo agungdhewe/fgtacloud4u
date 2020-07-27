@@ -44,7 +44,7 @@ function CreateButton() {
 	buttoncontainer.iconloaded = false
 	buttoncontainer.width = '80px'
 	buttoncontainer.height = '80px'
-
+	buttoncontainer.classList.add('icon-noselect');
 
 	let buttonwrapper = document.createElement('div')
 	buttonwrapper.style.width = '80px'

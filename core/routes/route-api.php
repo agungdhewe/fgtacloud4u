@@ -52,6 +52,12 @@ class ApiRoute extends Route {
 		}
 
 
+		$otp = $_SERVER['HTTP_OTP'];
+		if (!$this->isvalidotp($otp)) {
+			throw new \FGTA4\exceptions\WebException("OTP tidak valid", 401);
+		}
+
+
 		require_once $reqinfo->apipath;
 
 
@@ -144,6 +150,42 @@ class ApiRoute extends Route {
 
 
 		echo json_encode($res);
+	}
+
+
+	public function isvalidotp($otp) {
+		$DB_CONFIG = DB_CONFIG[$GLOBALS['MAINDB']];
+		$DB_CONFIG['param'] = DB_CONFIG_PARAM[$GLOBALS['MAINDBTYPE']];
+		$db = new \PDO(
+					$DB_CONFIG['DSN'], 
+					$DB_CONFIG['user'], 
+					$DB_CONFIG['pass'], 
+					$DB_CONFIG['param']
+		);
+
+		try {
+
+			$db->query("DELETE FROM fgt_otp WHERE expired<CURRENT_TIME");
+			$rows = array();
+			foreach($db->query("SELECT * FROM fgt_otp WHERE otp='$otp'") as $row) {
+				$rows[] = $row;
+			};
+
+			if (count($rows)==0) {
+				return false;
+			}
+
+			if ($row->tokenid!=$this->auth->get_tokenid()) {
+				return false;
+			}
+
+			$db->query("DELETE FROM fgt_otp WHERE otp='$otp'");			
+
+			return true;
+		} catch (Exception $ex) {
+			throw new \FGTA4\exceptions\WebException($ex->getMessage(), 500);
+		}
+
 	}
 
 

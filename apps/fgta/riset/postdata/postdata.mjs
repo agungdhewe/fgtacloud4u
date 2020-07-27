@@ -2,6 +2,10 @@ const btn_submit = $('#btn_submit');
 const obj_nama = $('#obj_nama');
 const obj_alamat = $('#obj_alamat');
 
+
+export const SIZE = {width:0, height:0}
+
+
 export function init(opt) {
 
 	obj_nama.textbox('setText', 'agung');
@@ -12,8 +16,19 @@ export function init(opt) {
 		onClick: () => {
 			btn_submit_click();
 		}
+	});
+	
+	
+	document.addEventListener('OnSizeRecalculated', (ev) => {
+		OnSizeRecalculated(ev.detail.width, ev.detail.height)
 	})	
 }
+
+export function OnSizeRecalculated(width, height) {
+	SIZE.width = width
+	SIZE.height = height
+}
+
 
 
 async function btn_submit_click() {	
