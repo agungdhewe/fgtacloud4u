@@ -103,3 +103,12 @@ export function showPreviousPanel() {
 	}
 }
 
+
+export function getPanel(panel_id) {
+	return PANELS[panel_id];
+}
+
+export function getPanelHandler(panel_id) {
+	var panel = getPanel(panel_id);
+	return panel.handler;
+}

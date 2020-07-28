@@ -7,6 +7,7 @@ var EVENTS = {
 	// 'ngikngok' : (comp, params) => { Textbox_Ngikngok(comp, params) }
 }
 
+var thisform;
 
 export function Textbox(obj, opt) {
 	if (opt==null) { opt = {} }
@@ -25,17 +26,25 @@ export function Textbox(obj, opt) {
 }
 
 
+export function Textbox_setForm(form) {
+	thisform = form;
+	console.log(form);
+}
+
+
+
+
 function PrepareProperties(comp) {
 	// Text
 	Object.defineProperty(comp, 'Text', {
-		get: function() { return el.value; },
-		set: function(text) { el.value = text; }
+		get: function() { return comp.value; },
+		set: function(text) { comp.value = text; }
 	});
 
 	// Readonly
 	Object.defineProperty(comp, 'Readonly', {
-		get: function() { return el.value; },
-		set: function(text) { el.value = text; }
+		get: function() { return comp.value; },
+		set: function(text) { comp.value = text; }
 	});	
 }
 

@@ -5,6 +5,10 @@ import { Component } from './fgta__component-base.mjs'
 var EVENTS = {
 }
 
+var ITEMS = {
+
+}
+
 export function Form(obj, opt) {
 	if (opt==null) { opt = {} }
 	Object.assign(opt, {
@@ -13,7 +17,7 @@ export function Form(obj, opt) {
 
 	var el = (typeof obj==='string') ?  document.getElementById(obj) : obj;
 	var comp = Object.assign(el, Component(el, opt));
-
+	
 
 	PrepareProperties(comp);
 	comp.Readonly = false;
@@ -28,7 +32,25 @@ export function Form(obj, opt) {
 		return await Form_CheckError(comp, fn_on_error);
 	}  
 
+
+	comp.add = function(obj) {
+		Form_add(comp, obj);
+	}
+
 	return comp;
+}
+
+
+function Form_add(comp, obj) {
+	for (var obj_id in ITEMS) {
+		if (obj_id == obj.id) {
+			return;
+		}
+	}
+
+	ITEMS[obj.id] = obj;
+
+	return obj;
 }
 
 
@@ -40,6 +62,12 @@ function PrepareProperties(comp) {
 			comp.states.readonly = value;
 			Form_Readonly_Set(comp, value);
 		}
+	});	
+
+
+	Object.defineProperty(comp, 'Items', {
+		get: function() { return ITEMS; }
+		
 	});	
 }
 

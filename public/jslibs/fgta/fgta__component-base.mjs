@@ -1,10 +1,31 @@
+var thisform;
+
 export function Component(el, opt) {
-	return {
+	var comp = {
 		// handle: function(eventname, fn_handler) {
 		// 	el.addEventListener(eventname, fn_handler);
 		// },
 		states: {
 		},
+
+
+		getMapping: function() {
+			var mapdata = el.getAttributeNode('mapping');
+			if (mapdata==null) {
+				return undefined;
+			} else {
+				return mapdata.value;
+			}
+		},
+
+		getInvalidMessage: function() {
+			var attribute = el.getAttributeNode('invalidMessage');
+			if (attribute==null) {
+				return undefined;
+			} else {
+				return attribute.value;
+			}
+		},		
 
 		RaiseEvent: function(eventname, params) {
 			if (el["on"+eventname]!==undefined) {
@@ -22,4 +43,12 @@ export function Component(el, opt) {
 			}
 		}
 	}
+
+
+
+
+
+	return comp;
 }
+
+

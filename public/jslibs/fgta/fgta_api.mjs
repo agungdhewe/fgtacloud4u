@@ -52,7 +52,11 @@ async function getOtp(apiname, postheader) {
 		var ajaxresult = await ajax.post(getotpurl, {}, postheader);
 		var otp = Object.assign(otp_skel, JSON.parse(ajaxresult));
 		if (!otp.success) {
-			throw new Error('OTP request Error');
+			if (otp.errormessage!='') {
+				throw new Error(otp.errormessage);
+			} else {
+				throw new Error('OTP request Error');
+			}
 		}
 		return otp;
 	} catch (err) {
@@ -105,6 +109,7 @@ function getActualError(err) {
 				var e = JSON.parse(err.xhr_responsetext);
 				err.message = e.errormessage;
 			} catch (err) {
+				// showDebugOutput(err.xhr_responsetext, 'Result');
 				console.log(err.xhr_responsetext);
 				console.error(err);
 			}

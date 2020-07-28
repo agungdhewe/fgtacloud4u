@@ -1,4 +1,4 @@
-import { Textbox } from './fgta_textbox.mjs';
+import { Textbox, Textbox_setForm } from './fgta_textbox.mjs';
 import { Button } from './fgta_button.mjs';
 import { Dropdown } from './fgta_dropdown.mjs';
 import { Form } from './fgta_form.mjs';

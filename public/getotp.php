@@ -26,6 +26,7 @@ $otp->success = false;
 $otp->value = '';
 $otp->password = '1234';
 $otp->encrypt = false;
+$otp->errormessage = 'OTP Request error';
 
 if ($tokenid!='') {
 	// sudah login
@@ -47,7 +48,13 @@ if ($tokenid!='') {
 		if (json_last_error()==JSON_ERROR_NONE) {
 			if (property_exists($jd->apis, $api_basename)) {
 				$apidata = $jd->apis->$api_basename;
-			} 
+			} else {
+				$otp->errormessage = "Anonymous akses ke $api tidak diperbolehkan.";
+				$apidata = (object) [
+					"allowanonymous" => false
+				];
+			}
+			
 			if ($apidata->allowanonymous) {
 				$otp->value = uniqid();
 				$otp->success = true;				
@@ -58,6 +65,8 @@ if ($tokenid!='') {
 
 
 if ($otp->success) {
+	unset($otp->errormessage);
+
 	// simpan token di database
 
 	// Lokasi konfigurasi koneksi database
