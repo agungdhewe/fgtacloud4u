@@ -60,6 +60,7 @@ class JslibsRoute extends Route {
 			}
 		}
 
+		header("Access-Control-Allow-Origin: *");
 		header("Content-type: " . self::ALLOWED_EXTENSIONS[$reqinfo->jslibs_extension]['contenttype']);
 		header('Content-Length: ' . filesize($jslibs_path));
 		readfile($jslibs_path);	
