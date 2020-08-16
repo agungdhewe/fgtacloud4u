@@ -58,6 +58,17 @@ class cli {
 	public function execute() {
 	}	
 
+	function getServer() {
+		return (object) [
+			'host' => __MAILER_HOST,
+			'port' => __MAILER_PORT,
+			'username' => __MAILER_USERNAME,
+			'password' => __MAILER_PASSWORD,
+			'fromname' => __MAILER_FROMNAME,
+			'from' => __MAILER_FROMEMAIL
+		];
+	}
+
 	function SendMail($recipients, $subject, $message, $attachments) {
 		
 		try {
@@ -111,6 +122,12 @@ class cli {
 
 				} else {
 					$mailer->AddAddress($recp, $recp);
+				}
+			}
+
+			if (is_array($attachments)) {
+				foreach($attachments as $filepath) {
+					$mailer->addAttachment($filepath);
 				}
 			}
 
@@ -175,6 +192,19 @@ class htaccess {
 		} else {
 			define('__LOCALDB_DIR', $FGTA_LOCALDB_DIR);	
 		}
+
+		$FGTA_MAILER = "host:port:username:password:fromname:fromemail";
+		if (array_key_exists('FGTA_MAILER', $_SERVER)) {
+			$FGTA_MAILER = $_SERVER['FGTA_MAILER'];
+		}
+
+		$MAILER = explode(":", $FGTA_MAILER);
+		define('__MAILER_HOST', $MAILER[0]);
+		define('__MAILER_PORT', $MAILER[1]);
+		define('__MAILER_USERNAME', $MAILER[2]);
+		define('__MAILER_PASSWORD', $MAILER[3]);
+		define('__MAILER_FROMNAME', $MAILER[4]);
+		define('__MAILER_FROMEMAIL', $MAILER[5]);
 
 	}
 }
