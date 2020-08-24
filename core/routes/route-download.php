@@ -5,6 +5,10 @@ if (!defined('FGTA4')) {
 }
 
 require_once __ROOT_DIR.'/core/webapi.php';
+require_once __ROOT_DIR.'/core/debug.php';
+
+
+use \FGTA4\debug;
 
 
 class ApiRoute extends Route {
@@ -70,13 +74,13 @@ class ApiRoute extends Route {
 			$this->debugoutput = $API->debugoutput;
 		}
 
-		if (!method_exists($API, 'execute')) {
-			throw new \FGTA4\exceptions\WebException("Method 'execute' pada API tidak ditemukan", 500);
+		if (!method_exists($API, 'download')) {
+			throw new \FGTA4\exceptions\WebException("Method 'download' pada API tidak ditemukan", 500);
 		}
 		
 		//$API->execute();
 		$classname = get_class($API);
-		$apimethod = new \ReflectionMethod($classname, 'execute');
+		$apimethod = new \ReflectionMethod($classname, 'download');
 		$params = $apimethod->getParameters();
 		$executingparameters = [];
 		foreach ($params as $param) {
@@ -122,13 +126,19 @@ class ApiRoute extends Route {
 	}
 
 	public function ShowResult($content) {
-		$res = new \stdClass;
-		$res->ajaxsuccess = true;
-		$res->errormessage = null;
-		$res->result = $this->result;
-		$res->output = $content;
-		$res->debugoutput = $this->debugoutput;
-		echo json_encode($res);
+		// $res = new \stdClass;
+		// $res->ajaxsuccess = true;
+		// $res->errormessage = null;
+		// $res->result = $this->result;
+		// $res->output = $content;
+		// $res->debugoutput = $this->debugoutput;
+		// echo json_encode($res);
+		debug::log($content);
+		if ($this->result!=null) {
+			echo $this->result;
+		}
+		debug::close();
+		
 	}
 
 	public function ShowError($ex) {

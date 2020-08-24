@@ -12,7 +12,9 @@
 			".sync.ffs_db": true,
 			"**/node_modules": true,
 			"public_*": true
-		}
+		},
+		"editor.insertSpaces": false,
+		"editor.detectIndentation": false
 	},
 
 

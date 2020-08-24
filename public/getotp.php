@@ -88,22 +88,33 @@ if ($otp->success) {
 		\PDO::ATTR_PERSISTENT=>true			
 	];
 
-	$db = new \PDO(
-				$DB_CONFIG['DSN'], 
-				$DB_CONFIG['user'], 
-				$DB_CONFIG['pass'], 
-				$DB_CONFIG['param']
-	);
 
-
-	// 5f15cec4d228d
-	// onohl2ookpnapgpvgo65dkg734
 	try {
-		$sql = "INSERT INTO fgt_otp (otp, tokenid, expired) VALUES ('$otp->value', '$tokenid', TIMESTAMPADD(minute, 1, NOW()))";
-		$db->query($sql);
+		$db = new \PDO(
+			$DB_CONFIG['DSN'], 
+			$DB_CONFIG['user'], 
+			$DB_CONFIG['pass'], 
+			$DB_CONFIG['param']
+		);
+
+		// 5f15cec4d228d
+		// onohl2ookpnapgpvgo65dkg734
+		try {
+			$sql = "INSERT INTO fgt_otp (otp, tokenid, expired) VALUES ('$otp->value', '$tokenid', TIMESTAMPADD(minute, 1, NOW()))";
+			$db->query($sql);
+		} catch (Exception $ex) {
+			$otp->success = false;	
+			$otp->errormessage = $ex->getMessage();
+			die(json_encode($otp));
+		}
+
 	} catch (Exception $ex) {
-		die('otp error');
+		$otp->success = false;
+		$otp->errormessage = $ex->getMessage();
+		die(json_encode($otp));
 	}
+
+
 }
 
 

@@ -40,10 +40,13 @@ class ListModules extends WebAPI {
 			default:
 				$menu = realpath(__LOCALDB_DIR . '/menus/modules-public.json');
 				$userdata = json_decode($_SESSION['userdata']);
-				if (array_key_exists('menu', $userdata)) {
+				// if (array_key_exists('menu', $userdata)) {
+				if (property_exists($userdata, 'menu')) {	
 					$usermenu = __LOCALDB_DIR . "/menus/$userdata->menu";
 					if (is_file($usermenu)) {
 						$menu = realpath($usermenu);
+					} else {
+						throw new \Exception("File Menu: '<b>$usermenu</b>' tidak ditemukan");
 					}
 				}
 

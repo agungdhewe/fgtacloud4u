@@ -200,6 +200,12 @@ try {
 				$usesession = true;
 				require_once __ROOT_DIR.'/core/routes/route-api.php';
 				break;
+
+			case 'download' :
+				$usesession = true;
+				require_once __ROOT_DIR.'/core/routes/route-download.php';
+				break;
+
 			
 			case 'jslibs' :
 				$isapps = false;
@@ -235,7 +241,6 @@ try {
 				die();
 	
 			default :
-
 				$redirectsourcepath = __ROOT_DIR . '/public/redirect.html';
 				$redirectsourcepath_local = __LOCAL_PUBLIC_DIR. '/redirect.html';
 				if (is_file($redirectsourcepath_local)) {

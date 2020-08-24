@@ -164,6 +164,7 @@ export function mask(message, code=null) {
 	})
 
 	uibase.maskshowing = 'showing'; 
+	// console.log('mask showing');	
 	let progresswait = document.getElementById('__progresswaitmask__')
 	if (progresswait!==null) {
 		let progresswaitingtext = document.getElementById('__progresswaiting__')
@@ -182,7 +183,7 @@ export function mask(message, code=null) {
 				progressmask.style.opacity = opacity/10
 			} else {
 				uibase.maskshowing = 'showed'
-				
+				// console.log('mask showed');	
 				clearInterval(fadein);
 			}
 		}, 20)
@@ -202,6 +203,10 @@ export function unmask(code=null, fn_maskclear) {
 
 
 	maskcode = null;
+	if ($ui.forceclosemask) {
+		uibase.maskshowing='showed';
+		$ui.forceclosemask = false;
+	}
 
 	let wait = setInterval(() => {
 		if (uibase.maskshowing=='showed') {
@@ -289,13 +294,115 @@ async function getOtp(apipath) {
 		}
 		
 		if (otp.success!==true) {
-			throw 'request OTP error';
+			throw 'request OTP error\r\n ' + otp.errormessage;
 		}
 		return otp;
 
 	} catch (err) {
 		throw err;
 	}
+}
+
+
+
+
+export async function download(url, args) {
+
+
+	fgta_output_content.html('')	
+	fgta_output_error.html('')
+
+	let postparams = {}
+	for (let paramname in args) {
+		// console.log(paramname, typeof args[paramname])
+		if (typeof args[paramname] === 'object') {
+			postparams[paramname] = JSON.stringify(args[paramname])
+		} else {
+			postparams[paramname] = args[paramname]
+		}
+		
+	}
+
+	let downloadurl = `index.php/download/${url}`
+	let ajax = async (downloadurl, postparams, otp) => {
+		let urlEncodedDataPairs = [];
+		for (let postparamname in postparams) {
+			urlEncodedDataPairs.push(encodeURIComponent(postparamname) + '=' + encodeURIComponent(postparams[postparamname]));
+		}
+		let urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+		
+
+		return new Promise(function(resolve, reject) {
+			let xhr = new XMLHttpRequest();
+
+			xhr.onload = function() {
+				if(xhr.status === 200) {
+					var disposition = xhr.getResponseHeader('content-disposition');
+					var matches = /"([^"]*)"/.exec(disposition);
+					var filename = (matches != null && matches[1] ? matches[1] : 'filename');
+
+					var blob = new Blob([xhr.response], { type: 'application/pdf' });
+					resolve({
+						filename: filename,
+						data: blob
+					})
+				}
+			};		
+
+			xhr.responseType = "blob";
+			xhr.open("POST", downloadurl, true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.setRequestHeader('cache-control', 'no-cache, must-revalidate, post-check=0, pre-check=0');
+			xhr.setRequestHeader('cache-control', 'max-age=0');
+			xhr.setRequestHeader('expires', '0');
+			xhr.setRequestHeader('expires', 'Tue, 01 Jan 1980 1:00:00 GMT');
+			xhr.setRequestHeader('pragma', 'no-cache');
+			xhr.setRequestHeader('otp', otp.value);
+
+
+			if (otp.encrypt) {
+				xhr.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
+				if ($ui.Crypto===undefined) {
+					$ui.Crypto = new Encryption();
+				}
+				urlEncodedData = $ui.Crypto.encrypt(urlEncodedData, otp.password);
+			} else {
+				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');	
+			}
+
+
+			if (Cookies.get('tokenid')!==undefined) {
+				xhr.setRequestHeader("tokenid", Cookies.get('tokenid'));
+			}
+			
+			xhr.send(urlEncodedData);			
+		})
+	}
+
+	try {
+		var otp = await getOtp(url);
+		var res = await ajax(downloadurl, postparams, otp)
+
+		var link = document.createElement('a');
+		link.href = window.URL.createObjectURL(res.data);
+		link.download = res.filename;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+
+	} catch (err) {
+		if (typeof err == 'string') {
+			err = {errormessage: err}
+		}
+
+		// fgta_output_content.html('')
+		fgta_output_error.html(err.errormessage)
+		throw err
+
+	}
+
+
+
 }
 
 

@@ -88,7 +88,7 @@ module.exports = async (fsd, genconfig) => {
 		<div class="form_row">
 			<div class="form_label_col"></div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="${fsd.panel}-${prefix}${fieldname}" class="easyui-checkbox c1" mapping="${fieldname}" data-options="label: '${labeltext}', labelPosition: 'after', disabled:false, checked: false ${stroptions}">
+				<input id="${fsd.panel}-${prefix}${fieldname}" class="easyui-checkbox c1" mapping="${fieldname}" data-options="label: '${labeltext}', labelPosition: 'after', checked: false ${stroptions}">
 			</div>
 		</div>\r\n`	
 
