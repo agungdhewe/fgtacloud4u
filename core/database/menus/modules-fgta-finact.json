@@ -1,0 +1,39 @@
+{
+	"title" : "Finance Accounting",
+	"disabled" : false,
+	"modules" : [
+
+		{
+			"title" : "Master Data",
+			"disabled" : false,
+			"modules" : [
+				"finact/master/coatype",
+				"finact/master/coatype",
+				"finact/master/coamodel",
+				"finact/master/coagroup",
+				"finact/master/coa",
+				"finact/master/projecttype",
+				"finact/master/project",
+				"finact/master/jurnalmodel",
+				"finact/master/jurnaltype",
+				"finact/master/periode",
+				"finact/master/accbudgetmodel",
+				"finact/master/accbudgettype",
+				"finact/master/accbudgetgroup",
+				"finact/master/accbudget",
+				"finact/master/bankrekening"					
+			]
+		},
+
+		{
+			"title" : "Budget",
+			"disabled" : false,
+			"modules" : [
+				"finact/budget/corpbudget"
+			]
+		}
+
+
+
+	]
+}
