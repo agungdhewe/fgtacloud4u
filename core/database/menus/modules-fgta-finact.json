@@ -8,7 +8,6 @@
 			"disabled" : false,
 			"modules" : [
 				"finact/master/coatype",
-				"finact/master/coatype",
 				"finact/master/coamodel",
 				"finact/master/coagroup",
 				"finact/master/coa",
