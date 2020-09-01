@@ -46,6 +46,7 @@ export async function init(opt) {
 
 	form.AllowAddRecord = true
 	form.AllowRemoveRecord = true
+	form.AllowEditRecord = true
 	form.CreateRecordStatusPage(this_page_id)
 	form.CreateLogPage(this_page_id)
 
@@ -153,6 +154,14 @@ export function open(data, rowid, hdata) {
 			.setViewMode()
 			.rowid = rowid
 
+
+		// Editable
+		if (form.AllowEditRecord!=true) {
+			btn_edit.hide();
+			btn_save.hide();
+			btn_delete.hide();
+		}
+		
 
 		// tambah baris
 		if (form.AllowAddRecord) {

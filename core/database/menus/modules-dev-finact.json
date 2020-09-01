@@ -2,6 +2,8 @@
 	"title" : "Finance Accounting",
 	"disabled" : false,
 	"modules" : [
+		"finact/budget/projbudget",
+		"finact/budget/deptbudget",
 		"finact/budget/corpbudget",
 		"finact/master/coatype",
 		"finact/master/coatype",

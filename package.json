@@ -19,5 +19,5 @@
 	},
 	"devDependencies": {
 		"javascript-obfuscator": "^1.1.0"
-	}	
+	}
 }
