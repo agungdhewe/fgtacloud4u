@@ -5,6 +5,7 @@
 		"finact/budget/projbudget",
 		"finact/budget/deptbudget",
 		"finact/budget/corpbudget",
+		{"program":"finact/budget/corpbudget", "variancename":"commit"},
 		"finact/master/coatype",
 		"finact/master/coatype",
 		"finact/master/coamodel",

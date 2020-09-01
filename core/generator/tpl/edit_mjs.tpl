@@ -23,8 +23,10 @@ export async function init(opt) {
 	var disableedit = false;
 	// switch (this_page_options.variancename) {
 	// 	case 'commit' :
-	//		btn_edit.linkbutton('disable');
 	//		disableedit = true;
+	//		btn_edit.linkbutton('disable');
+	//		btn_save.linkbutton('disable');
+	//		btn_delete.linkbutton('disable');
 	//		break;
 	// }
 
