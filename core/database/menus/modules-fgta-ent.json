@@ -39,7 +39,8 @@
 				"ent/organisation/depttype",
 				"ent/organisation/deptmodel",
 				"ent/organisation/deptgroup",
-				"ent/organisation/dept"
+				"ent/organisation/dept",
+				"ent/organisation/docs"
 			]
 		},
 

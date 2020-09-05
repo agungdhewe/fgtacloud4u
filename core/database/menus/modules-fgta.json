@@ -1,6 +1,13 @@
 {
 	"title": "home *****",
 	"modules": [
+
+		{
+			"title" : "FINACTDEV",
+			"disabled" : false,
+			"file" : "modules-dev-finact.json"
+		},
+
 		{
 			"title" : "Administrator",
 			"icon" : "icon-admin-white.png",

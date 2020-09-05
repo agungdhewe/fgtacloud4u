@@ -2,24 +2,62 @@
 	"title" : "Finance Accounting",
 	"disabled" : false,
 	"modules" : [
-		"finact/budget/projbudget",
-		"finact/budget/deptbudget",
-		"finact/budget/corpbudget",
-		{"program":"finact/budget/corpbudget", "variancename":"commit"},
-		"finact/master/coatype",
-		"finact/master/coatype",
-		"finact/master/coamodel",
-		"finact/master/coagroup",
-		"finact/master/coa",
-		"finact/master/projecttype",
-		"finact/master/project",
-		"finact/master/jurnalmodel",
-		"finact/master/jurnaltype",
-		"finact/master/periode",
-		"finact/master/accbudgetmodel",
-		"finact/master/accbudgettype",
-		"finact/master/accbudgetgroup",
-		"finact/master/accbudget",
-		"finact/master/bankrekening"
+
+		{
+			"title" : "Procurement",
+			"disabled" : false,
+			"modules" : [
+				"finact/procurement/order",
+				"finact/procurement/request"
+			]
+		},
+
+
+		{
+			"title" : "Budget",
+			"disabled" : false,
+			"modules" : [
+				"finact/budget/projbudget",
+				{"program":"finact/budget/projbudget", "variancename":"commit"},
+				{"program":"finact/budget/projbudget", "variancename":"approve"},				
+				"finact/budget/deptbudget",
+				"finact/budget/corpbudget",
+				{"program":"finact/budget/corpbudget", "variancename":"commit"},
+				{"program":"finact/budget/corpbudget", "variancename":"approve"}
+			]
+		},
+
+
+		{
+			"title" : "Master Data",
+			"disabled" : false,
+			"modules" : [
+				"finact/commodity/itemclass",
+				"finact/master/requesttype",
+				"finact/master/coatype",
+				"finact/master/coamodel",
+				"finact/master/coagroup",
+				"finact/master/coa",
+				"finact/master/projecttype",
+				"finact/master/project",
+				"finact/master/jurnalmodel",
+				"finact/master/jurnaltype",
+				"finact/master/periode",
+				"finact/master/accbudgetmodel",
+				"finact/master/accbudgettype",
+				"finact/master/accbudgetgroup",
+				"finact/master/accbudget",
+				"finact/master/bankrekening"
+			]
+		},
+
+		{
+			"title" : "Report Budget",
+			"disabled" : false,
+			"modules" : [
+				"finact/budget/usage"
+			]
+		}
+
 	]
 }

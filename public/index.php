@@ -195,7 +195,14 @@ try {
 				$usesession = true;
 				require_once __ROOT_DIR.'/core/routes/route-module.php';
 				break;
-				
+
+			
+			case 'printout':
+				$usesession = true;
+				require_once __ROOT_DIR.'/core/routes/route-printout.php';
+				break;
+
+
 			case 'api' :
 				$usesession = true;
 				require_once __ROOT_DIR.'/core/routes/route-api.php';

@@ -1,0 +1,8 @@
+{
+	"title" : "Blank Template",
+	"allowanonymous" : true,
+	"allowedgroups" : ["public"],
+	"apis" : {
+	}	
+}
+
