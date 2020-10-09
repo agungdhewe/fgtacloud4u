@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666667 8.4666667"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="icon-budgetdept-white.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.2"
+     inkscape:cx="-9.6184563"
+     inkscape:cy="22.372955"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1874"
+     inkscape:window-height="1016"
+     inkscape:window-x="46"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     units="px"
+     inkscape:snap-global="false" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 6.612788,8.0117774 -4.527091,0.03685 C 0.99571803,7.8186729 1.07545,7.374744 0.81054643,6.6333377 L 5.4799353,6.6101193 c 0.5453303,2.4676258 2.1734169,1.1503909 2.0578726,0.02612 l 0.00938,-5.80427625 H 1.9972307 L 1.9694445,2.0787306"
+       id="path1953"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1.9123538,4.3956933 0.033827,2.1660738"
+       id="path1963" />
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.2"
+       id="rect2984"
+       width="2.03093"
+       height="1.1240604"
+       x="1.2128216"
+       y="4.3340917" />
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.2"
+       id="rect2984-3"
+       width="2.03093"
+       height="1.1240604"
+       x="4.590064"
+       y="4.3220944" />
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.2"
+       id="rect2984-6"
+       width="2.03093"
+       height="1.1240604"
+       x="2.9375412"
+       y="1.7294432" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2.2628971,4.6114713 0.023624,-0.9764432 3.4295733,0.00522 -0.02673,1.211758"
+       id="path3007" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 3.9980285,3.6655663 3.9987958,2.5850681"
+       id="path3009" />
+  </g>
+</svg>

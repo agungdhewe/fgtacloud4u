@@ -20,7 +20,8 @@
 				"finact/master/accbudgettype",
 				"finact/master/accbudgetgroup",
 				"finact/master/accbudget",
-				"finact/master/bankrekening"					
+				"finact/master/bankrekening",
+				"finact/master/taxtype"					
 			]
 		},
 

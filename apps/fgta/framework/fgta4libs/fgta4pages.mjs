@@ -27,7 +27,14 @@ export function initPages(pages, opt) {
 
 		if (CurrentPage==null) {
 			CurrentPage = id
-			ITEMS[id].show()
+			ITEMS[id].show(()=>{
+				var showed = ITEMS[id].handler.showed;
+				if (typeof showed === 'function') {
+					setTimeout(()=>{
+						showed();
+					}, 100)
+				}
+			})
 		} else {
 			ITEMS[id].hide()
 		}

@@ -86,6 +86,24 @@ export function OnSizeRecalculated(width, height) {
 	// console.log(width, height);
 }
 
+export function iframe_focus(fn_callback) {
+	setTimeout(()=>{
+		pnl_iframe[0].contentWindow.focus();
+		if (typeof fn_callback === 'function') {
+			fn_callback(pnl_iframe);
+		}
+	}, 100)
+}
+
+
+export function getTitle() {
+	return obj_txt_title.html();
+}
+
+export function setTitle(text) {
+	obj_txt_title.html(text);
+}
+
 
 async function module_enter() {
 	fgta4pageslider.SlidePanelLeft(pnl_menu, pnl_iframe)
@@ -171,11 +189,11 @@ function open_last_module() {
 			OpenModule({
 				modulefullname: last_opened_module,
 				variancename: last_opened_module_variance
-			})
+			}, ()=>{})
 		} else {
 			OpenModule({
 				modulefullname: last_opened_module
-			})
+			}, ()=>{})
 		}
 
 	}
@@ -183,7 +201,7 @@ function open_last_module() {
 }
 
 
-function OpenModule(module, fn_loaded) {
+export function OpenModule(module, fn_loaded) {
 	CurrentState.LastMenuTitle = obj_txt_title.html()
 	btn_preference.hide();
 
@@ -211,6 +229,7 @@ function OpenModule(module, fn_loaded) {
 		if (typeof fn_loaded === 'function') {
 			fn_loaded();
 		}
+		iframe_focus();
 	}
 
 	pnl_iframe.frameunloaded = () => {

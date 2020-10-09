@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -15,7 +13,7 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg5421"
-   inkscape:version="0.91 r13725"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="kalista-color-pallete.svg">
   <defs
      id="defs5415">
@@ -57,12 +55,13 @@
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1325"
-     inkscape:window-height="747"
-     inkscape:window-x="41"
-     inkscape:window-y="21"
+     inkscape:window-width="1874"
+     inkscape:window-height="1016"
+     inkscape:window-x="46"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
-     showguides="false" />
+     showguides="false"
+     inkscape:document-rotation="0" />
   <metadata
      id="metadata5418">
     <rdf:RDF>
@@ -88,46 +87,50 @@
        y="6.2295904" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="25.702381"
        y="208.93155"
        id="text6523"><tspan
          sodipodi:role="line"
          id="tspan6521"
          x="25.702381"
-         y="218.29532"
-         style="stroke-width:0.26458332" /></text>
+         y="208.93155"
+         style="font-size:10.5833px;line-height:1.25;stroke-width:0.264583"> </tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot6527"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
          id="flowRegion6529"><rect
            id="rect6531"
            width="553.5636"
            height="519.21838"
            x="866.71088"
            y="930.5907" /></flowRegion><flowPara
-         id="flowPara6533" /></flowRoot>    <flowRoot
+         id="flowPara6533"
+         style="font-size:40px;line-height:1.25"> </flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot6535"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
          id="flowRegion6537"><rect
            id="rect6539"
            width="680.84283"
            height="577.80725"
            x="973.78705"
            y="849.7785" /></flowRegion><flowPara
-         id="flowPara6541" /></flowRoot>    <text
+         id="flowPara6541"
+         style="font-size:40px;line-height:1.25"> </flowPara></flowRoot>
+    <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="252.83698"
        y="256.37503"
        id="text6547"><tspan
          sodipodi:role="line"
          id="tspan6545"
          x="252.83698"
-         y="265.7388"
-         style="stroke-width:0.26458332" /></text>
+         y="256.37503"
+         style="font-size:10.5833px;line-height:1.25;stroke-width:0.264583"> </tspan></text>
     <image
        y="106.95882"
        x="14.487995"
@@ -198,7 +201,7 @@
              id="tspan4187-3-0-3"
              x="139.34332"
              y="555.08936"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:226.79281616px;line-height:1.25;font-family:'Cry Uncial';-inkscape-font-specification:'Cry Uncial';fill:#ffffff;fill-opacity:1"> </tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:226.793px;line-height:1.25;font-family:'Cry Uncial';-inkscape-font-specification:'Cry Uncial';fill:#ffffff;fill-opacity:1"> </tspan></text>
         <path
            style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.99395597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 143.82885,386.26782 c 1.65509,-3.19667 4.87238,-7.83468 16.44655,-12.58503 3.3015,-1.23072 8.99229,1.61483 10.71135,3.68062 4.19,5.03509 12.53357,26.37212 15.74576,32.48966 1.75554,3.34339 3.09758,6.38967 5.79276,8.8749 1.51656,1.39842 4.67202,3.76623 6.49633,3.70986 2.94794,-0.0912 7.51862,-7.8439 7.51862,-7.8439 0,0 -1.4456,5.45211 -2.83161,7.77692 -2.04717,3.43379 -4.1077,5.65247 -7.69134,7.11529 -3.47652,1.41907 -7.71912,0.98122 -10.62611,-1.64229 -7.77871,-7.02015 -14.22809,-26.76035 -21.41037,-40.09491 -2.5107,-4.66137 -5.89183,-9.56438 -11.14335,-7.9682 -4.34784,1.32152 -6.7538,4.11065 -9.00859,6.48708 z"
@@ -227,7 +230,7 @@
              id="tspan4187-7-5-9-6"
              x="139.34332"
              y="555.08936"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:226.79281616px;line-height:1.25;font-family:'Cry Uncial';-inkscape-font-specification:'Cry Uncial';fill:#ffffff;fill-opacity:1"> </tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:226.793px;line-height:1.25;font-family:'Cry Uncial';-inkscape-font-specification:'Cry Uncial';fill:#ffffff;fill-opacity:1"> </tspan></text>
         <path
            style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.99395597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 143.82885,386.26782 c 1.65509,-3.19667 4.87238,-7.83468 16.44655,-12.58503 3.3015,-1.23072 8.99229,1.61483 10.71135,3.68062 4.19,5.03509 12.53357,26.37212 15.74576,32.48966 1.75554,3.34339 3.09758,6.38967 5.79276,8.8749 1.51656,1.39842 4.67202,3.76623 6.49633,3.70986 2.94794,-0.0912 7.51862,-7.8439 7.51862,-7.8439 0,0 -1.4456,5.45211 -2.83161,7.77692 -2.04717,3.43379 -4.1077,5.65247 -7.69134,7.11529 -3.47652,1.41907 -7.71912,0.98122 -10.62611,-1.64229 -7.77871,-7.02015 -14.22809,-26.76035 -21.41037,-40.09491 -2.5107,-4.66137 -5.89183,-9.56438 -11.14335,-7.9682 -4.34784,1.32152 -6.7538,4.11065 -9.00859,6.48708 z"
@@ -482,30 +485,29 @@
        y="219.008" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:7.55158234px;line-height:0.5;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#460066;fill-opacity:1;stroke:none;stroke-width:0.18878955"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#460066;fill-opacity:1;stroke:none;stroke-width:0.18879"
        x="11.758194"
        y="201.76138"
-       id="text6553-9"
-       sodipodi:linespacing="137%"><tspan
+       id="text6553-9"><tspan
          sodipodi:role="line"
          x="11.758194"
          y="201.76138"
-         style="font-size:2.51719379px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18878955"
+         style="font-size:2.51719px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18879"
          id="tspan6561-7">From the Greek Kallistō, a name meaning &quot;she that is most beautiful,&quot;  which is derived</tspan><tspan
          sodipodi:role="line"
          x="11.758194"
-         y="205.58633"
-         style="font-size:2.51719379px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18878955"
+         y="205.94896"
+         style="font-size:2.51719px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18879"
          id="tspan6565-8">from kallos (beauty, beautiful). The name is borne in Roman mythology by a nymph, </tspan><tspan
          sodipodi:role="line"
          x="11.758194"
-         y="209.4113"
-         style="font-size:2.51719379px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18878955"
+         y="210.13655"
+         style="font-size:2.51719px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18879"
          id="tspan6567-2">a daughter of the Arcadian king Lycaon, and mother of Arcas. Beloved by Jupiter, </tspan><tspan
          sodipodi:role="line"
          x="11.758194"
-         y="213.23625"
-         style="font-size:2.51719379px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18878955"
+         y="214.32413"
+         style="font-size:2.51719px;line-height:137%;fill:#460066;fill-opacity:1;stroke-width:0.18879"
          id="tspan6569-5">she was transformed into a she-bear by Juno and then placed among the constellations.</tspan></text>
     <rect
        style="opacity:1;fill:#460066;fill-opacity:1;stroke:none;stroke-width:0.29409099;stroke-miterlimit:4;stroke-dasharray:none"

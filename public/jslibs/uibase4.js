@@ -660,6 +660,14 @@ export function redirecttologinpage() {
 }
 
 
+export function IsMessageShowing() {
+	if (uibase.dlgmaskshowing=='none') {
+		return false
+	} else {
+		return true;
+	}
+}
+
 
 export function ShowMessage(message, buttons) {
 	var top = $(window).scrollTop()

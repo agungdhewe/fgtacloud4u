@@ -11,7 +11,8 @@
 				"ent/general/country",
 				"ent/general/bank",
 				"ent/general/gender",
-				"ent/general/religion"
+				"ent/general/religion",
+				"ent/general/unitmeasurement"
 			]
 		},
 

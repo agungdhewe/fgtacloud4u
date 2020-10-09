@@ -31,7 +31,14 @@
 			"modules" : [
 				"retail/chatbot/pendingfollowup"
 			]					
-		}
+		},
+		{
+			"title" : "POS",
+			"disabled" : false,
+			"modules" : [
+				"retail/pos/main"
+			]					
+		}		
 
 		
 	]

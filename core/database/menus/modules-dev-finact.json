@@ -9,6 +9,7 @@
 			"modules" : [
 				"finact/procurement/order",
 				"finact/procurement/request"
+			
 			]
 		},
 
@@ -27,13 +28,23 @@
 			]
 		},
 
+		{
+			"title" : "Asset",
+			"disabled" : false,
+			"modules" : [
+				"finact/asset/ownershiptype",
+				"finact/asset/itemmodel",
+				"finact/asset/itemgroup",
+				"finact/asset/itemclass",
+				"finact/asset/itemasset"
+			]		
+		},
 
 		{
 			"title" : "Master Data",
 			"disabled" : false,
 			"modules" : [
-				"finact/commodity/itemclass",
-				"finact/master/requesttype",
+				
 				"finact/master/coatype",
 				"finact/master/coamodel",
 				"finact/master/coagroup",
@@ -47,7 +58,10 @@
 				"finact/master/accbudgettype",
 				"finact/master/accbudgetgroup",
 				"finact/master/accbudget",
-				"finact/master/bankrekening"
+				"finact/master/bankrekening",
+				"finact/master/taxtype",
+				"finact/master/trxmodel",
+				"finact/master/depremodel"
 			]
 		},
 
