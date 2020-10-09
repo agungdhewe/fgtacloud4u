@@ -13,7 +13,8 @@
 				"hrms/master/hrgrd",
 				"hrms/master/hrsection",
 				"hrms/master/hrjob",
-				"hrms/master/empl"
+				"hrms/master/empl",
+				"hrms/master/empluser"
 			]					
 		},
 		{
