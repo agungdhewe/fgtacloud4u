@@ -33,7 +33,8 @@ export function fgta4form(frm, opt) {
 	self.OnDataDeleted = typeof self.options.OnDataDeleted === 'function' ? self.options.OnDataDeleted : async ()=>{}
 	self.OnIdSetup = typeof self.options.OnIdSetup === 'function' ? self.options.OnIdSetup : async ()=>{}
 	self.OnViewModeChanged = typeof self.options.OnViewModeChanged === 'function' ? self.options.OnViewModeChanged : async ()=>{}
-	
+	self.OnFormInit = typeof self.options.OnFormInit === 'function' ? self.options.OnFormInit : ()=>{}
+	self.OnCreateRecordStatusCreated = typeof self.options.OnCreateRecordStatusCreated === 'function' ? self.options.OnCreateRecordStatusCreated : ()=>{}
 	
 	self.recordstatus = {
 		_createby: '',
@@ -199,6 +200,8 @@ function init(self) {
 				}
 			}
 		}
+
+		self.OnFormInit();
 	}, 500)
 
 }
@@ -371,7 +374,7 @@ function CreateRecordStatusPage(self, panelname) {
 					<div class="fgta-page-title" style="display: flex; align-items: center ">
 						<div>Record Status</div>
 					</div>
-					<div>
+					<div style="margin-bottom: 30px">
 						<div class="form_row">
 							<div class="form_label_col">Create By</div>
 							<div class="form_input_col" style="border: 0px solid black">
@@ -401,7 +404,7 @@ function CreateRecordStatusPage(self, panelname) {
 						</div>
 		
 					</div>
-				
+			
 				</div>`).insertAfter(`#${panelname}`)
 		
 
@@ -425,6 +428,8 @@ function CreateRecordStatusPage(self, panelname) {
 					}
 				})
 			}
+
+			self.OnCreateRecordStatusCreated();
 
 		}, 1000)
 

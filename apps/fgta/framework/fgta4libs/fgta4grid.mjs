@@ -249,6 +249,8 @@ function RenderRow(self, row) {
 				ev.stopPropagation()
 			})
 			td.appendChild(chk)
+		} else if (mapping==='') {
+			td.innerHTML = '';
 		} else {
 			td.innerHTML = record[mapping]
 			if (row.hasCellClickEvent) {
