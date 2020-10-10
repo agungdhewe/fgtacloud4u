@@ -5,6 +5,8 @@
 	"modules" : [
 		"fgta/framework/fggroup",
 		"fgta/framework/fguser",
+		"fgta/framework/fgpermission",
+		"fgta/framework/fgrole",
 		"hrms/master/empluser"	
 	]
 }

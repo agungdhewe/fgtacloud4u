@@ -22,10 +22,12 @@
 				<tr>
 					<th type="check">chk</th>
 <!--__HEADERMAP__-->
+					<th mapping=""></th>
 				</tr>
 				<tr style="background-color: #cccccc; height: 30px">
-					<td class="fgtable-head" style="width: 5px; border-bottom: 1px solid #000000; text-align: center">*</td>
+					<td class="fgtable-head" style="width: 30px; border-bottom: 1px solid #000000; text-align: center">*</td>
 <!--__HEADERROW__-->
+					<td class="fgtable-head" style="border-bottom: 1px solid #000000; text-align: center">&nbsp;</td>
 				</tr>
 			</thead>
 		</table>

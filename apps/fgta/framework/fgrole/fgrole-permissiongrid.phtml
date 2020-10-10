@@ -1,0 +1,55 @@
+<div id="pnl_editpermissiongrid">
+	<div class="fgta-page-title">Daftar Permission</div>
+	<div id="pnl_editpermissiongrid-title" style="margin-top: 0px; margin-bottom: 30px; font-weight: bold; font-size: 1.2em">XXXXXXX</div>
+
+	<!--// Untuk keperluan search di detil
+	<div id="pnl_editpermissiongrid-pnl_head" style="display: flex; align-items: flex-end">
+		<div class="list-search-wrap" style="width: calc(100% - 65px); display: flex;">
+			<div class="list-search-item" style="width: 50px;">Cari</div>
+			<div class="list-search-item">
+				<input id="pnl_editpermissiongrid-txt_search" class="easyui-textbox" style="width: 100%">
+			</div>
+			<div class="list-search-item" style="width: 45px">
+				<a href="javascript:void(0)" id="pnl_editpermissiongrid-btn_load" class="easyui-linkbutton c8" style="width: 45px">Load</a>
+			</div>
+		</div>
+	</div>	
+	//-->
+
+	<div style="margin-top: 10px; margin-bottom: 15px">
+		<table id="pnl_editpermissiongrid-tbl_list" paging="true" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th type="check">chk</th>
+					<th mapping="rolepermission_id">rolepermission_id</th>
+					<th mapping="permission_name">permission_name</th>
+
+					<th mapping=""></th>
+				</tr>
+				<tr style="background-color: #cccccc; height: 30px">
+					<td class="fgtable-head" style="width: 30px; border-bottom: 1px solid #000000; text-align: center">*</td>
+					<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">ID</td>
+					<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">Permission</td>
+
+					<td class="fgtable-head" style="border-bottom: 1px solid #000000; text-align: center">&nbsp;</td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+
+	<div id="pnl_editpermissiongrid-control" style="display: flex; justify-content: space-between; margin-bottom: 100px">
+		<div>
+			<a id="pnl_editpermissiongrid-removechecked" href="javascript:void(0)" class="easyui-linkbutton c8">Hapus Checked</a>
+		</div>
+
+		<div>
+			<a id="pnl_editpermissiongrid-addrow" href="javascript:void(0)" class="easyui-linkbutton c8">Tambah Baris</a>
+		</div>
+
+		<div>
+		</div>
+
+	</div>
+
+
+</div>	
