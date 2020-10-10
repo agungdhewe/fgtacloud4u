@@ -12,7 +12,7 @@
 			"title" : "Administrator",
 			"icon" : "icon-admin-white.png",
 			"disabled" : false,
-			"file" : "modules-fgta-root.json"
+			"file" : "modules-fgta-administrator.json"
 		},
 
 		{

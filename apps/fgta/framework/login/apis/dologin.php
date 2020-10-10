@@ -53,6 +53,21 @@ class DoLogin extends WebAPI {
 				$userdata = $this->fgta4cloud_login($username, md5($password));
 			}
 
+			//login berhasil, cek add on untuk login
+			$LoginAddonExecute = null;
+			$loginaddonpath = __LOCALCLIENT_DIR . '/loginaddon-employee.php';
+			if (is_file($loginaddonpath)) {
+				require_once $loginaddonpath;
+			} else {
+				$loginaddonpath = __DIR__ . '/loginaddon-employee.php';
+				if (is_file($loginaddonpath)) {
+					require_once $loginaddonpath;
+				}				
+			}
+			if (is_callable($LoginAddonExecute)) {
+				$LoginAddonExecute($userdata, $this->db);
+			}
+
 			//login berhasil, mulai session
 			// $tokenid = uniqid();
 			// setcookie('tokenid', $tokenid, 0, '/; samesite=strict');

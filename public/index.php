@@ -14,6 +14,8 @@ define('__BASEADDRESS', $_SERVER['REQUEST_SCHEME'] ."://".  $_SERVER['SERVER_NAM
 define('API_LOGIN_URL', 'fgta/framework/login/dologin');
 
 
+$clientdir = realpath(dirname($_SERVER["SCRIPT_FILENAME"]));
+define('__LOCALCLIENT_DIR', $clientdir);
 
 
 define('DB_CONFIG_PARAM', [
