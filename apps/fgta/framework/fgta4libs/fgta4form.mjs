@@ -34,7 +34,7 @@ export function fgta4form(frm, opt) {
 	self.OnIdSetup = typeof self.options.OnIdSetup === 'function' ? self.options.OnIdSetup : async ()=>{}
 	self.OnViewModeChanged = typeof self.options.OnViewModeChanged === 'function' ? self.options.OnViewModeChanged : async ()=>{}
 	self.OnFormInit = typeof self.options.OnFormInit === 'function' ? self.options.OnFormInit : ()=>{}
-	self.OnCreateRecordStatusCreated = typeof self.options.OnCreateRecordStatusCreated === 'function' ? self.options.OnCreateRecordStatusCreated : ()=>{}
+	self.OnRecordStatusCreated = typeof self.options.OnRecordStatusCreated === 'function' ? self.options.OnRecordStatusCreated : ()=>{}
 	
 	self.recordstatus = {
 		_createby: '',
@@ -429,7 +429,7 @@ function CreateRecordStatusPage(self, panelname) {
 				})
 			}
 
-			self.OnCreateRecordStatusCreated();
+			self.OnRecordStatusCreated();
 
 		}, 1000)
 
