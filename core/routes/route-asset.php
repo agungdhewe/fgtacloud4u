@@ -12,7 +12,8 @@ class AssetRoute extends Route {
 		'css' => ['contenttype'=>'text/css'],
 		'gif' => ['contenttype'=>'image/gif'],
 		'png' => ['contenttype'=>'image/png'],
-		'svg' => ['contenttype'=>'image/svg+xml']
+		'svg' => ['contenttype'=>'image/svg+xml'],
+		'pdf' => ['contenttype'=>'application/pdf']
 	);
 
 	public function ProcessRequest($reqinfo) {
