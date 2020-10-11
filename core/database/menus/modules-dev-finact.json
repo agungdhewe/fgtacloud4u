@@ -42,7 +42,10 @@
 
 				{"program":"finact/asset/booking", "variancename":"book"},
 				{"program":"finact/asset/booking", "variancename":"commit"},	
-				{"program":"finact/asset/booking", "variancename":"process"}				
+				{"program":"finact/asset/booking", "variancename":"process"}	,
+				
+				
+				"finact/asset/docs"
 			]		
 		},
 
