@@ -1,0 +1,8 @@
+{
+	"title" : "Etap",
+	"disabled" : false,
+	"modules" : [
+		"etap/client/config",
+		"etap/client/supvisit"
+	]
+}		

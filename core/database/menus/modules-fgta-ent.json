@@ -13,7 +13,9 @@
 				"ent/general/gender",
 				"ent/general/religion",
 				"ent/general/unitmeasurement",
-				"ent/general/week"
+				"ent/general/week",
+				"ent/general/config",
+				"ent/general/taxtype"
 			]
 		},
 

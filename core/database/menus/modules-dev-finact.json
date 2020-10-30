@@ -3,13 +3,24 @@
 	"disabled" : false,
 	"modules" : [
 
+
+		{
+			"title" : "Accounting",
+			"disabled" : false,
+			"modules" : [
+				"finact/acct/jurnal",
+				"finact/acct/billin"
+			]
+		},
+
+
 		{
 			"title" : "Procurement",
 			"disabled" : false,
 			"modules" : [
+				"finact/procurement/request",
 				"finact/procurement/order",
-				"finact/procurement/request"
-			
+				"finact/procurement/receive"
 			]
 		},
 
@@ -29,23 +40,18 @@
 		},
 
 		{
-			"title" : "Asset",
+			"title" : "Items",
 			"disabled" : false,
 			"modules" : [
-				"finact/asset/bookingtype",
-				"finact/asset/ownershiptype",
-				"finact/asset/itemmodel",
-				"finact/asset/itemspec",
-				"finact/asset/itemgroup",
-				"finact/asset/itemclass",
-				"finact/asset/itemasset",
+				"finact/items/ownershiptype",
+				"finact/items/itemmodel",
+				"finact/items/itemspec",
+				"finact/items/itemgroup",
+				"finact/items/itemclass",
+				"finact/items/itemasset",
 
-				{"program":"finact/asset/booking", "variancename":"book"},
-				{"program":"finact/asset/booking", "variancename":"commit"},	
-				{"program":"finact/asset/booking", "variancename":"process"}	,
-				
-				
-				"finact/asset/docs"
+				"finact/items/inquirytype",
+				"finact/items/inquiry"
 			]		
 		},
 
