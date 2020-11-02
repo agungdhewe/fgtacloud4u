@@ -44,6 +44,7 @@
 			"disabled" : false,
 			"modules" : [
 				"finact/items/ownershiptype",
+				"finact/items/itemmanage",
 				"finact/items/itemmodel",
 				"finact/items/itemspec",
 				"finact/items/itemgroup",
@@ -75,6 +76,7 @@
 				"finact/master/accbudgetgroup",
 				"finact/master/accbudget",
 				"finact/master/bankrekening",
+				"finact/master/taxmodel",
 				"finact/master/taxtype",
 				"finact/master/trxmodel",
 				"finact/master/depremodel"

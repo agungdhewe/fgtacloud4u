@@ -34,6 +34,7 @@ export function fgta4slideselect(obj, options) {
 		fieldValueMap: options.fieldValue,
 		fields: [],
 		data: null,
+		OnCreated: () => {},
 		OnDataLoading: (criteria) => {},
 		OnDataLoaded : (result, options) => {},
 		OnSelected: (value, display, record) => {},
@@ -101,7 +102,7 @@ function CreatePanel(self) {
 		}
 
 
-		
+		self.options.OnCreated();
 
 	}, delay_create_panel)
 

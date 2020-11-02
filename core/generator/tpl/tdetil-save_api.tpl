@@ -55,6 +55,8 @@ class DataSave extends WebAPI {
 /*{__SETNULLFIELD__}*/
 
 
+/*{__UNSETFIELD__}*/
+
 			$this->db->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
 			$this->db->beginTransaction();
 

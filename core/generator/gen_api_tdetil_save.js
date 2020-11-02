@@ -25,6 +25,7 @@ module.exports = async (fsd, genconfig) => {
 	var lookupfields = ''
 	var uppercasefields = ''
 	var setnullfields = ''
+	var unsetfields = ''
 	var tosqldate = ''
 	var fields = []
 	var fieldreturn = []	
@@ -62,6 +63,12 @@ module.exports = async (fsd, genconfig) => {
 			lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($data->${fieldname}, $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
 		}
 
+		// * Field yang tidak ikut di save */
+		var unset = data[fieldname].unset===true;
+		if (unset) {
+			unsetfields += `\t\t\tunset($obj->${fieldname});\r\n`
+		}		
+
 
 	}
 
@@ -85,6 +92,7 @@ module.exports = async (fsd, genconfig) => {
 	tplscript = tplscript.replace('/*{__LOOKUPFIELD__}*/', lookupfields)
 	tplscript = tplscript.replace('/*{__HEADERTABLE__}*/', headertable_name)
 	tplscript = tplscript.replace('/*{__HEADERPRIMARYKEY__}*/', header_primarykey)
+	tplscript = tplscript.replace('/*{__UNSETFIELD__}*/', unsetfields)
 
 	
 
