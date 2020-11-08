@@ -18,6 +18,20 @@ class WebModule {
 		require_once $template;
 	}
 
+	public function getParameter() {
+
+
+		$parameter = new \stdClass;
+		if (property_exists($this->reqinfo->moduleconfig->variance, $this->reqinfo->variancename)) {
+			$variancename = $this->reqinfo->variancename;
+			$variancedata = $this->reqinfo->moduleconfig->variance->{$variancename};
+			if (property_exists($variancedata, 'parameter')) {
+				$parameter = $variancedata->parameter;
+			}
+		}
+		return $parameter;
+	}
+
 
 	public function BeginForm($name, $title) {
 		echo "<div id=\"$name\" class=\"pagepanel\">\r\n";

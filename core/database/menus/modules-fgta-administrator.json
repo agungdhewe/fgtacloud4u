@@ -7,6 +7,8 @@
 		"fgta/framework/fguser",
 		"fgta/framework/fgpermission",
 		"fgta/framework/fgrole",
-		"hrms/master/empluser"	
+		"hrms/master/empluser"	,
+		"fgta/example/variance"	,
+		{"program":"fgta/example/variance", "variancename":"commit"}	
 	]
 }

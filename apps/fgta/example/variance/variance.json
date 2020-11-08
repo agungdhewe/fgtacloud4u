@@ -1,0 +1,16 @@
+{
+	"title" : "Test Variance Prog",
+	"variance" : {
+		"commit" : {"title": "Test variance program",  "icon" : "icon-budgetcorp-commit-white.svg", "allowedgroups" : ["public"], "parameter":{"nama":"agung"}},
+		"approve" : {"title": "Corp Budget Approve",  "icon" : "icon-budgetcorp-approve-white.svg", "allowedgroups" : ["public"]}		
+	},
+	"allowanonymous" : true,
+	"allowedgroups" : ["public"],
+	"apis" : {
+		"save" : { "allowanonymous": false, "allowedgroups" : ["public"] },
+		"delete" : { "allowanonymous": false, "allowedgroups" : ["public"] },
+		"open" : { "allowanonymous": false, "allowedgroups" : ["public"] },
+		"list" : { "allowanonymous": false, "allowedgroups" : ["public"] }
+	}	
+}
+

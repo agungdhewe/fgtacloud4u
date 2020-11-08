@@ -276,15 +276,15 @@ if (!defined('FGTA4')) {
 
 	
 	<script>
-
 		window.preparemodule = async (fn_callback) => {
 			if (window.$ui!==undefined) {
 				await window.$ui.ready()
 				
 				var variancename = document.querySelector('meta[name="variancename"]').content
 				await window.$ui.init({
-					variancename: variancename
-				})
+					variancename: variancename,
+					parameter:  JSON.parse(Base64.decode(`<?=base64_encode(json_encode($this->getParameter()))?>`))
+				});
 			}
 			fn_callback()
 		}
