@@ -1,12 +1,13 @@
 {
-	"title" : "Finance Accounting",
-	"disabled" : false,
-	"modules" : [
-
+	"title": "Finance Accounting",
+	"disabled": false,
+	"modules": [
 		{
-			"title" : "Master Data",
-			"disabled" : false,
-			"modules" : [
+			"title": "Master Data",
+			"backcolor" : "#248e91",
+			"icon" : "icon-masterdata.svg",
+			"disabled": false,
+			"modules": [
 				"finact/master/coatype",
 				"finact/master/coamodel",
 				"finact/master/coagroup",
@@ -22,49 +23,100 @@
 				"finact/master/accbudgetgroup",
 				"finact/master/accbudget",
 				"finact/master/bankrekening",
+				"finact/master/taxmodel",
 				"finact/master/taxtype",
 				"finact/master/trxmodel",
-				"finact/master/depremodel"				
+				"finact/master/depremodel"
 			]
 		},
-
 		{
-			"title" : "Asset",
-			"disabled" : false,
-			"modules" : [
-				"finact/asset/bookingtype",
-				"finact/asset/ownershiptype",
-				"finact/asset/itemmodel",
-				"finact/asset/itemspec",
-				"finact/asset/itemgroup",
-				"finact/asset/itemclass",
-				"finact/asset/itemasset",
-
-				{"program":"finact/asset/booking", "variancename":"book"},
-				{"program":"finact/asset/booking", "variancename":"commit"},	
-				{"program":"finact/asset/booking", "variancename":"process"}	,
-				
-				
-				"finact/asset/docs"
-			]		
+			"title": "Items",
+			"backcolor" : "#cb6987",
+			"icon" : "icon-items.svg",
+			"disabled": false,
+			"modules": [
+				"finact/items/ownershiptype",
+				"finact/items/itemmanage",
+				"finact/items/itemmodel",
+				"finact/items/itemspec",
+				"finact/items/itemgroup",
+				"finact/items/itemclass",
+				"finact/items/inquirytype",
+				"finact/items/inquiry",
+				{
+					"program": "finact/items/inquiry",
+					"variancename": "commit"
+				},
+				{
+					"program": "finact/items/inquiry",
+					"variancename": "approve"
+				}
+			]
 		},
-
-
 		{
-			"title" : "Budget",
-			"disabled" : false,
-			"modules" : [
+			"title": "Procurement",
+			"backcolor" : "#73779d",
+			"icon" : "icon-procurement.svg",
+			"disabled": false,
+			"modules": [
+				"finact/procurement/request",
+				{
+					"program": "finact/procurement/request",
+					"variancename": "commit"
+				},
+				{
+					"program": "finact/procurement/request",
+					"variancename": "approve"
+				},
+				"finact/procurement/contract",
+				"finact/procurement/order",
+				{
+					"program": "finact/procurement/order",
+					"variancename": "commit"
+				},
+				{
+					"program": "finact/procurement/order",
+					"variancename": "approve"
+				},
+				"finact/procurement/receive"
+			]
+		},
+		{
+			"title": "Budget",
+			"backcolor" : "#d5895b",
+			"icon" : "icon-budget.svg",
+			"disabled": false,
+			"modules": [
 				"finact/budget/projbudget",
-				{"program":"finact/budget/projbudget", "variancename":"commit"},
-				{"program":"finact/budget/projbudget", "variancename":"approve"},				
+				{
+					"program": "finact/budget/projbudget",
+					"variancename": "commit"
+				},
+				{
+					"program": "finact/budget/projbudget",
+					"variancename": "approve"
+				},
 				"finact/budget/deptbudget",
 				"finact/budget/corpbudget",
-				{"program":"finact/budget/corpbudget", "variancename":"commit"},
-				{"program":"finact/budget/corpbudget", "variancename":"approve"}
+				{
+					"program": "finact/budget/corpbudget",
+					"variancename": "commit"
+				},
+				{
+					"program": "finact/budget/corpbudget",
+					"variancename": "approve"
+				}
+			]
+		},
+		{
+			"title": "Accounting",
+			"backcolor" : "#cb6987",
+			"icon" : "icon-accounting.svg",
+			"disabled": false,
+			"modules": [
+				"finact/acct/jurnal",
+				"finact/acct/billin"
 			]
 		}
-
-
-
 	]
 }

@@ -3,9 +3,9 @@
 	"disabled" : false,
 	"modules" : [
 
-
 		{
 			"title" : "Accounting",
+			"backcolor" : "#248e91",
 			"disabled" : false,
 			"modules" : [
 				"finact/acct/jurnal",
@@ -16,6 +16,7 @@
 
 		{
 			"title" : "Procurement",
+			"backcolor" : "#cb6987",
 			"disabled" : false,
 			"modules" : [
 				"finact/procurement/request",
@@ -27,6 +28,7 @@
 
 		{
 			"title" : "Budget",
+			"backcolor" : "#73779d",
 			"disabled" : false,
 			"modules" : [
 				"finact/budget/projbudget",
@@ -58,6 +60,7 @@
 
 		{
 			"title" : "Master Data",
+			"backcolor" : "#d5895b",
 			"disabled" : false,
 			"modules" : [
 				
@@ -85,6 +88,7 @@
 
 		{
 			"title" : "Report Budget",
+			"backcolor" : "#cb6987",
 			"disabled" : false,
 			"modules" : [
 				"finact/budget/usage"
