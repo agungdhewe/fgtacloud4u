@@ -736,10 +736,14 @@ function set_state_checkbox(self, obj, viewonly) {
 		if (viewonly) {
 			obj.checkbox('disable')
 			obj.parent().find('span.checkbox.inputbox.checkbox-checked').removeClass('checkbox-checked')
-			obj.parent().find('span.checkbox.inputbox').css('background', obj.originalbackground);
+			//obj.parent().find('span.checkbox.inputbox').css('background', obj.originalbackground);
+			obj.parent().find('span.checkbox.inputbox').addClass('input-modeview');
+			obj.parent().find('span.checkbox.inputbox').removeClass('input-modeedit');
 		} else {
 			obj.checkbox('enable')
-			obj.parent().find('span.checkbox.inputbox').css('background', 'rgb(255, 224, 149)');
+			//obj.parent().find('span.checkbox.inputbox').css('background', 'rgb(255, 224, 149)');
+			obj.parent().find('span.checkbox.inputbox').addClass('input-modeedit');
+			obj.parent().find('span.checkbox.inputbox').removeClass('input-modeview');			
 		}
 	}
 }
@@ -757,7 +761,10 @@ function set_state_textbox(self, obj, viewonly) {
 	} else {
 		if (viewonly) {
 			obj.textbox('readonly', true)
-			obj.textbox('textbox').css('background', obj.originalbackground);
+			//obj.textbox('textbox').css('background', obj.originalbackground);
+			obj.textbox('textbox').addClass('input-modeview');
+			obj.textbox('textbox').removeClass('input-modeedit');
+
 			if (obj.hasClass('easyui-numberbox')) {
 				obj.numberbox('fix')
 			}
@@ -768,7 +775,9 @@ function set_state_textbox(self, obj, viewonly) {
 				$(textbox).attr('disabled', true)
 				textbox.css('color', obj.colorbase)
 			}
-			obj.textbox('textbox').css('background', 'rgb(255, 224, 149)');
+			obj.textbox('textbox').addClass('input-modeedit');
+			obj.textbox('textbox').removeClass('input-modeview');
+			//obj.textbox('textbox').css('background', 'rgb(255, 224, 149)');
 		}
 	}
 

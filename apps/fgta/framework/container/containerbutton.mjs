@@ -36,9 +36,9 @@ export async function CreateModuleGroup(mdlico, elpnl, CreateModuleList) {
 
 function CreateButton() {
 	let buttoncontainer = document.createElement('div')
-	buttoncontainer.style.marginRight = '10px'
-	buttoncontainer.style.marginBottom = '10px'
-	buttoncontainer.style.border = '1px solid #cccccc'
+	// buttoncontainer.style.marginRight = '10px'
+	// buttoncontainer.style.marginBottom = '10px'
+	//buttoncontainer.style.border = '1px solid #cccccc'
 	//buttoncontainer.style.cssFloat = 'left'
 	buttoncontainer.style.cursor = 'pointer'
 	buttoncontainer.iconloaded = false

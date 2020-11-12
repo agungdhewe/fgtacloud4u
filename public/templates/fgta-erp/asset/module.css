@@ -75,7 +75,7 @@ h1 {
 }
 
 .checkbox-checked {
-	background: rgb(255, 224, 149) !important
+	background: rgb(255, 255, 255) !important
 }
 
 
@@ -357,7 +357,7 @@ h1 {
 
 .fgtable-head {
 	color: #3F4756;
-	border-bottom: 1px solid #3F4756 !important;
+	border-bottom: 1px solid #3F4756;
 	font-weight: bold;
 	background-color: #c9ced8ff;
 	background: -webkit-linear-gradient(top,#c9ced8ff 0, #A3ACBD 100%);
