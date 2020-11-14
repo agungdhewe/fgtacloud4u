@@ -411,3 +411,14 @@ h1 {
 .buttonprogramicon {
 	background-color: #3F4756;
 }
+
+
+
+.checkbox-checked {
+	background: #ffe095 !important
+}
+
+.input-modeedit {
+	background: #ffe095;
+}
+

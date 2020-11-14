@@ -1069,19 +1069,20 @@ async function createnew(self, fn_callback) {
 
 
 	if (typeof options.OnCreated === 'function') {
-		options.OnCreated()
+		options.OnCreated();
 	}
 
-	var errordiv = self.errordiv
+	var errordiv = self.errordiv;
 	$(`#${errordiv}`).remove();
 
 
-	setViewMode(self, false)
-	commit(self)
-	markNewData(self, true)
-	self.datachanged = true
+	self.buttons.edit.linkbutton('enable');
+	setViewMode(self, false);
+	commit(self);
+	markNewData(self, true);
+	self.datachanged = true;
 
-	return self.fgta4form
+	return self.fgta4form;
 }
 
 

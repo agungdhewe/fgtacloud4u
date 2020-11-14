@@ -119,6 +119,7 @@ function init(self) {
 		var el = $(colmap)
 		var mapping = el.attr('mapping')
 		var onclick = el.attr('onclick')
+		var type = el.attr('type');
 		if (mapping===undefined) {
 			mapping = '__CHECKBOX__'
 			self.view_checkbox_column = true
@@ -128,7 +129,8 @@ function init(self) {
 		self.maps.push({
 			mapid: mapid,
 			mapping: mapping,
-			onclick: onclick		
+			onclick: onclick,
+			type: type	
 		})
 	}
 
@@ -221,8 +223,9 @@ function RenderRow(self, row) {
 
 	var record = row.record
 	for (var col of self.maps) {
-		var mapid = col.mapid
-		var mapping = col.mapping
+		var mapid = col.mapid;
+		var mapping = col.mapping;
+		var type = col.type;
 		var td = document.createElement('td')
 
 		let tdid = `${trid}-col-${mapid}`
@@ -252,12 +255,21 @@ function RenderRow(self, row) {
 		} else if (mapping==='') {
 			td.innerHTML = '';
 		} else {
-			td.innerHTML = record[mapping]
-			if (row.hasCellClickEvent) {
-				td.addEventListener('click', (ev) => {
-					var el = document.getElementById(tdid)
-					self.options.OnCellClick(el, ev)
-				})
+			if (type==='checkbox') {
+				td.setAttribute("style", "text-align: center");
+				if (record[mapping]===true || record[mapping]===1 || record[mapping]==='1') {
+					td.innerHTML = '<input class="fgta-grid-checkbox" type="checkbox" checked style="pointer-events: none"><label></label> ';
+				} else {
+					td.innerHTML = '<input class="fgta-grid-checkbox" type="checkbox" style="pointer-events: none"><label></label>';
+				}
+			} else {
+				td.innerHTML = record[mapping]
+				if (row.hasCellClickEvent) {
+					td.addEventListener('click', (ev) => {
+						var el = document.getElementById(tdid)
+						self.options.OnCellClick(el, ev)
+					})
+				}
 			}
 		}
 		
