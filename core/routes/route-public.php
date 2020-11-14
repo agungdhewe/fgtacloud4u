@@ -14,7 +14,8 @@ class ImageRoute extends Route {
 		'ico' => ['contenttype'=>'image/x-icon'],
 		'jpg' => ['contenttype'=>'image/jpeg'],
 		'js' => ['contenttype'=>'application/javascript'],
-		'mjs' => ['contenttype'=>'application/javascript']		
+		'mjs' => ['contenttype'=>'application/javascript'],
+		'woff2' => ['contenttype'=>'font/woff2']	
 	);
 
 

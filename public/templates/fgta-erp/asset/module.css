@@ -64,6 +64,18 @@ h1 {
 
 
 
+.panel-header, .panel-body {
+	border-style: none !important;
+}
+
+
+.form_input_col > span > input {
+	width: 100% !important;
+}
+
+
+
+
 .cascadepanel {
 	width: 100%;
 	border: 1px solid #ccc
@@ -305,10 +317,22 @@ h1 {
 		display: block;
 	}	
 
+
 }
 
 
 
+@media only screen and (max-width: 768px) {
+	.col_hide_768 {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 520px) {
+	.col_hide_520 {
+		display: none;
+	}
+}
 
 
 .fgdialog-vf {

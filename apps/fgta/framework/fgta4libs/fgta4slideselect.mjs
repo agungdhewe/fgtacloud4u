@@ -173,7 +173,7 @@ function CreatePanelContent(self) {
 	return `
 		<div id="${self.options.panelname}">
 			<div class="fgta-page-title" style="display: flex; align-items: center ">
-				<div>${self.options.title}</div>
+				${self.options.title}
 			</div>
 
 			<div id="${self.options.panelname}-searchbox" class="list-search-wrap" style="width: calc(100% - 65px); display: flex;">

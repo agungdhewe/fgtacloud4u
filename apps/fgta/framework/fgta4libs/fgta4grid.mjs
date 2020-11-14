@@ -117,9 +117,10 @@ function init(self) {
 	var mapid = 0
 	for (var colmap of colmapdata) {
 		var el = $(colmap)
-		var mapping = el.attr('mapping')
-		var onclick = el.attr('onclick')
+		var mapping = el.attr('mapping');
+		var onclick = el.attr('onclick');
 		var type = el.attr('type');
+		var elclasses = el.attr('class');
 		if (mapping===undefined) {
 			mapping = '__CHECKBOX__'
 			self.view_checkbox_column = true
@@ -130,7 +131,8 @@ function init(self) {
 			mapid: mapid,
 			mapping: mapping,
 			onclick: onclick,
-			type: type	
+			type: type,
+			elclasses: elclasses	
 		})
 	}
 
@@ -226,6 +228,7 @@ function RenderRow(self, row) {
 		var mapid = col.mapid;
 		var mapping = col.mapping;
 		var type = col.type;
+		var elclasses = col.elclasses;
 		var td = document.createElement('td')
 
 		let tdid = `${trid}-col-${mapid}`
@@ -234,6 +237,14 @@ function RenderRow(self, row) {
 		td.setAttribute('trid', trid)
 		td.setAttribute('dataid', self.rowcount)
 		td.setAttribute('mapping', mapping)
+		
+		if (elclasses!=null) {
+			var classes = elclasses.split(' ');
+			for (var clsname of classes) {
+				td.classList.add(clsname);
+			}
+		}
+
 		td.mapping = mapping
 
 		if (mapping==='__CHECKBOX__') {
@@ -539,11 +550,20 @@ function update (self, trid, data) {
 	for (var col of self.maps) {
 		var mapid = col.mapid
 		var mapping = col.mapping
+		var type = col.type;
 		let tdid = `${trid}-col-${mapid}`
 
 		if (data[mapping]!==undefined) {
 			var td = document.getElementById(tdid)
-			td.innerHTML = data[mapping]
+			if (type==='checkbox') {
+				if (record[mapping]===true || record[mapping]===1 || record[mapping]==='1') {
+					td.innerHTML = '<input class="fgta-grid-checkbox" type="checkbox" checked style="pointer-events: none"><label></label> ';
+				} else {
+					td.innerHTML = '<input class="fgta-grid-checkbox" type="checkbox" style="pointer-events: none"><label></label>';
+				}
+			} else {
+				td.innerHTML = data[mapping]
+			}
 		}
 		row.OnCellRender(td)
 	}

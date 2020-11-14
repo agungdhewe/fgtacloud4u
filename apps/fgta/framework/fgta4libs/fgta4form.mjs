@@ -257,13 +257,13 @@ function CreateLogPage(self, panelname) {
 				self.LoaddataLog = $ui[`loaddata_${page_log}`];
 				self.ShowLog = $ui[`show_${page_log}`] 				
 
-				$(`#${panelname}`).append(`<div style="margin-top: 5px; margin-right: 0px; margin-left: 0px; padding-left: 5px; padding-right: 5px; border-left: 1px solid #666; border-right: 0px solid #333; display: inline-block">
+				$(`#${panelname}`).append(`<div name="fgta-record-log" class="fgta-recordstatus-button" style="margin-top: 5px; margin-right: 0px; margin-left: 0px; padding-left: 5px; padding-right: 5px; border-left: 1px solid #666; border-right: 0px solid #333; display: inline-block">
 						<a href="javascript:void(0)" onclick="$ui['show_${page_log}']()">Log</a>
 					</div>`);
 
 				$(`<div id="${page_log}">
 						<div class="fgta-page-title" style="display: flex; align-items: center ">
-							<div>Record Log</div>
+							Record Log
 						</div>
 
 						<div style="margin-top: 10px">
@@ -365,14 +365,14 @@ function CreateRecordStatusPage(self, panelname) {
 				self.SetRecord = $ui[`set_${page_rec}`];
 				self.ShowRecord = $ui[`show_${page_rec}`] 
 
-				$(`#${panelname}`).append(`<div style="margin-top: 5px; margin-right: 0px; margin-left: 0px; padding-left: 5px; padding-right: 5px; border-left: 0px solid #999; border-right: 0px solid #333;  display: inline-block">
+				$(`#${panelname}`).append(`<div name="fgta-record-status" class="fgta-recordstatus-button" style="margin-top: 5px; margin-right: 0px; margin-left: 0px; padding-left: 5px; padding-right: 5px; border-left: 0px solid #999; border-right: 0px solid #333;  display: inline-block">
 						<a href="javascript:void(0)" onclick="$ui['show_${page_rec}']()">Record Status</a>
 					</div>`);
 	
 		
 				$(`<div id="${page_rec}">
 					<div class="fgta-page-title" style="display: flex; align-items: center ">
-						<div>Record Status</div>
+						Record Status
 					</div>
 					<div style="margin-bottom: 30px">
 						<div class="form_row">
