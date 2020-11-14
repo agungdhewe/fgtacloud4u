@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -14,7 +12,7 @@
    viewBox="0 0 8.4666667 8.4666667"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.5 (0.92.5+68)"
+   inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
    sodipodi:docname="icon-finact-white.svg">
   <defs
      id="defs2" />
@@ -27,26 +25,27 @@
      inkscape:pageshadow="2"
      inkscape:zoom="19.625"
      inkscape:cx="12.085015"
-     inkscape:cy="27.241505"
+     inkscape:cy="15.012206"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="1325"
-     inkscape:window-height="747"
-     inkscape:window-x="41"
-     inkscape:window-y="21"
+     inkscape:window-width="1874"
+     inkscape:window-height="1016"
+     inkscape:window-x="46"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:snap-global="false">
+     inkscape:snap-global="false"
+     inkscape:document-rotation="0">
     <sodipodi:guide
        position="1.3918444,5.014453"
        orientation="0,1"
        id="guide851"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="0.49572539,7.7409427"
+       position="0.49708861,6.642076"
        orientation="1,0"
        id="guide853"
        inkscape:locked="false" />
@@ -83,13 +82,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-288.53333)">
-    <rect
-       style="opacity:1;fill:#000000;fill-opacity:0.38297873;stroke:none;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect832"
-       width="7.5229301"
-       height="7.3746285"
-       x="-0.013481966"
-       y="289.62537" />
     <path
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.67999983;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        d="M 0.53125,11.707031 V 31.609375 H 1.875 31.675781 V 11.707031 l -15.803169,-0.01274 c -0.57917,0.641764 -1.366932,0.903883 -2.183893,0.764331 v 2.139033 H 8.9355469 v -2.890625 z m 2.6796875,7.669922 h 9.0585935 v 2.613281 H 3.2109375 Z m 10.7558595,0 h 15.029297 v 2.613281 H 13.966797 Z M 3.2109375,22.986328 h 9.0585935 v 2.533203 H 3.2109375 Z m 10.7558595,0 h 15.029297 v 2.533203 H 13.966797 Z M 3.2109375,26.515625 h 9.0585935 v 2.414063 H 3.2109375 Z m 10.7558595,0 h 15.029297 v 2.414063 H 13.966797 Z"
@@ -99,7 +91,7 @@
        sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccccc" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:2.63224697px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:2.63225px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="0.48649549"
        y="291.40228"
        id="text950"><tspan
@@ -107,7 +99,7 @@
          id="tspan948"
          x="0.48649549"
          y="291.40228"
-         style="font-weight:bold;fill:#ffffff;stroke-width:0.26458332px">Rp</tspan></text>
+         style="font-weight:bold;fill:#ffffff;stroke-width:0.264583px">Rp</tspan></text>
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect956"

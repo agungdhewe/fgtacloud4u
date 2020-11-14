@@ -11,7 +11,7 @@
 
 const uibase = {
 	maskshowing: false,
-	dlgmaskshowing: false
+	dlgmaskshowing: 'none'
 }
 
 const fgta_output = $('#fgta_output')
