@@ -1120,9 +1120,11 @@ async function dataload(self, fn_dataopening, fn_dataopened, fn_dataopenerror) {
 		var errordiv = self.errordiv
 		$(`#${errordiv}`).remove();
 
-
+		$ui.mask('opening data...');
 		let result = await $ui.apicall(apiurl, args)
+		$ui.unmask();
 
+		
 		if (result.record===undefined) {
 			throw 'Record tidak ditemukan'
 		}
@@ -1140,9 +1142,9 @@ async function dataload(self, fn_dataopening, fn_dataopened, fn_dataopenerror) {
 		if (typeof fn_dataopened === 'function') {
 			fn_dataopened(result, options)
 		}
-		
 
 	} catch (err) {
+		$ui.unmask();
 		//console.error(err)
 		if (typeof fn_dataopenerror === 'function') {
 			fn_dataopenerror(err)
