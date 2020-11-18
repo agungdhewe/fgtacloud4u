@@ -41,6 +41,8 @@
 				"finact/items/itemspec",
 				"finact/items/itemgroup",
 				"finact/items/itemclass",
+				"finact/items/itemasset",
+				"finact/items/itemstock",
 				"finact/items/inquirytype",
 				"finact/items/inquiry",
 				{

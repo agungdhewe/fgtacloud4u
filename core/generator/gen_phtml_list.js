@@ -31,6 +31,7 @@ module.exports = async (fsd, genconfig) => {
 			if (suppresslist) { continue }
 			
 			var comptype = data[fieldname].comp.comptype
+			var compclass = data[fieldname].comp.class
 			if (comptype=='combo') {
 				var options = data[fieldname].comp.options
 				var labeltext = data[fieldname].text !== undefined ? data[fieldname].text : options.field_display;
@@ -38,8 +39,13 @@ module.exports = async (fsd, genconfig) => {
 				headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">${labeltext}</td>\r\n`
 			} else {
 				var labeltext = data[fieldname].text !== undefined ? data[fieldname].text : fieldname;
-				headermap_script += `\t\t\t\t\t<th mapping="${fieldname}">${fieldname}</th>\r\n`
-				headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">${labeltext}</td>\r\n`
+				if (compclass=='easyui-checkbox') {
+					headermap_script += `\t\t\t\t\t<th mapping="${fieldname}" type="checkbox">${fieldname}</th>\r\n`
+					headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000; text-align: center">${labeltext}</td>\r\n`
+				} else {
+					headermap_script += `\t\t\t\t\t<th mapping="${fieldname}">${fieldname}</th>\r\n`
+					headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000;">${labeltext}</td>\r\n`
+				}
 			}
 
 		}

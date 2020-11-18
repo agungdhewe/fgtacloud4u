@@ -5,9 +5,11 @@ if (!defined('FGTA4')) {
 }
 
 require_once __ROOT_DIR.'/core/webexception.php';
+require_once __ROOT_DIR.'/core/webmodulesetting.php';
 
 
 use FGTA4\WebModuleConfig;
+use FGTA4\WebModuleSetting;
 use FGTA4\exceptions\WebException;
 
 class Route {
@@ -42,7 +44,10 @@ class Route {
 			}
 	
 			$reqinfo->moduleconfig =  new WebModuleConfig($reqinfo->moduleconfigpath);
-	
+
+			$modulesettingpath = __LOCALDB_DIR . "/settings/" . str_replace("/", "#", $reqinfo->modulefullname) . ".json";
+			$reqinfo->modulesetting =  new WebModuleSetting($modulesettingpath);
+
 		} else {
 
 		}
