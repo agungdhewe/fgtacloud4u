@@ -458,7 +458,7 @@ function setValue(self, obj, value, display) {
 		}
 		obj.combobox('setValue', value)
 	} else if (obj.objecttypeclass=='easyui-numberbox') {
-		obj.textbox('setValue', value)
+		obj.numberbox('setValue', value)
 	} else {
 		obj.textbox('setValue', value)
 		if (display!==undefined) {

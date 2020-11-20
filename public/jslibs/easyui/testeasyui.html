@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="../jquery.min.js"></script>
+	<script src="jquery.easyui-1.9.9.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="themes-1.9.9/material-blue/easyui.css"  />
+</head>
+<body>
+	<input id="test" class="easyui-numberbox" data-options="precision: 0, decimalSeparator:'.', groupSeparator:','">
+</body>
+</html>
+<script>
+	$( document ).ready(function() {
+	// Handler for .ready() called.
+		$('#test').numberbox('setValue', '20000');
+	});
+</script>
