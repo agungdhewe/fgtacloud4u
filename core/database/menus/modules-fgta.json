@@ -7,7 +7,7 @@
 		{
 			"title" : "finance accounting",
 			"icon" : "icon-finact-white.svg",
-			"backcolor" : "#ca6583",
+			"backcolor" : "#3f497c",
 			"disabled" : false,
 			"file" : "modules-fgta-finact.json"
 		},
