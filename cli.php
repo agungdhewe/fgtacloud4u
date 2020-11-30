@@ -1,4 +1,5 @@
-<?php
+<?php 
+define('FGTA4', 1);
 
 date_default_timezone_set('Asia/Jakarta');
 define('__ROOT_DIR', dirname(__FILE__));
@@ -166,6 +167,7 @@ class cli {
 class htaccess {
 	public static function ReadEnvirontment() {
 		$htaccess_path = getenv('PWD') . "/.htaccess";
+
 		if (!is_file($htaccess_path)) return;
 		
 

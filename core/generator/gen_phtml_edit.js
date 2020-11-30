@@ -96,11 +96,16 @@ module.exports = async (fsd, genconfig) => {
 					throw `Component ${fieldname} pada ${headertable_name} bertipe combo, harus didefinisikan: table, field_value, field_display`
 				}
 
+				var validType = '';
+				if (dataoptions.required===true) {
+					validType = ` validType="requiredcombo['pnl_edit-${prefix}${fieldname}']" `;
+				} 
+
 				formcomp_script += `
 		<div class="form_row">
 			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-${prefix}${fieldname}" class="easyui-combo" style="width: 400px" mapping="${fieldname}" display="${options.field_display}" data-options="editable:false, valueField:'id', textField:'text' ${stroptions}">
+				<input id="pnl_edit-${prefix}${fieldname}" class="easyui-combo" style="width: 400px" mapping="${fieldname}" display="${options.field_display}" data-options="editable:false, valueField:'id', textField:'text' ${stroptions}"  ${validType}>
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`

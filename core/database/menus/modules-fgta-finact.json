@@ -2,6 +2,8 @@
 	"title": "Finance Accounting",
 	"disabled": false,
 	"modules": [
+		"finact/dashboards/dash01",
+
 		{
 			"title": "Master Data",
 			"backcolor" : "#248e91",

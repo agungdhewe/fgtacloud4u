@@ -176,6 +176,20 @@ if (!defined('FGTA4')) {
 				}
 			};
 
+
+			$.extend($.fn.validatebox.defaults.rules, {
+				requiredcombo: {
+					validator: function(value, param) {
+						var cbo_value = $('#'+param[0]).combo('getValue');
+						if (cbo_value==='0' || cbo_value===0 || cbo_value==='')
+							return false;
+						else
+							return true;
+					},
+					message: 'Harus dipilih'
+				}
+			});
+
 		</script>		
 
 		<style>

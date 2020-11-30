@@ -5,10 +5,10 @@ if (!defined('FGTA4')) {
 }
 
 require_once __ROOT_DIR.'/core/sqlutil.php';
-
+//require_once __ROOT_DIR . "/core/sequencer.php";
 
 use \FGTA4\exceptions\WebException;
-
+//use \FGTA4\utils\Sequencer;
 
 
 class DataSave extends WebAPI {
@@ -121,6 +121,12 @@ class DataSave extends WebAPI {
 	}
 
 	public function NewId($param) {
+		//$dt = new \DateTime();	
+		//$ye = $dt->format("y");
+		//$mo = $dt->format("m");
+		//$seq = new Sequencer($this->db, 'seq_generalmonthly', 'TF', ['ye', 'mo']);
+		//$id = $seq->get(['ye'=>$ye, 'mo'=>$mo]);
+		//return $id;
 		return uniqid();
 	}
 

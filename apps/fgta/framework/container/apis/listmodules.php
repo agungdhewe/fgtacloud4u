@@ -24,6 +24,19 @@ class ListModules extends WebAPI {
 		// 		WebModuleConfig::$DefaultShortcutBackgroundColor = "#3F4756"; // "#9d6da9";
 		// 		WebModuleConfig::$DefaultModulegroupBackgroundColor = "#3F4756"; //"#9d6da9";ssss
 		// }
+
+		try {
+			$DB_CONFIG = DB_CONFIG[$GLOBALS['MAINDB']];
+			$DB_CONFIG['param'] = DB_CONFIG_PARAM[$GLOBALS['MAINDBTYPE']];
+			$this->db = new \PDO(
+						$DB_CONFIG['DSN'], 
+						'aa', //$DB_CONFIG['user'], 
+						$DB_CONFIG['pass'], 
+						$DB_CONFIG['param']
+			);
+		} catch (\Exception $ex) {
+		}
+
 		WebModuleConfig::$DefaultShortcutBackgroundColor = '';
 		WebModuleConfig::$DefaultModulegroupBackgroundColor = '';
 
@@ -133,6 +146,10 @@ class ListModules extends WebAPI {
 				$modulefullname = $moduleitem;
 				$mdl = new ModuleShorcut($modulefullname, $userdata);
 			}
+
+			if (\property_exists($this, 'db')) {
+				$mdl->db = $this->db;
+			}
 			array_push($USERMODULES, $mdl);
 		}
 
@@ -208,6 +225,11 @@ class ModuleShorcut extends ModuleIcon {
 			$moduleconfig = (object) array_merge((array)$moduleconfig, (array)$mcovr);
 		}
 
+
+		
+
+
+
 		$this->title = $moduleconfig->title;
 		$this->icon = $moduleconfig->icon;
 		$this->forecolor = $moduleconfig->forecolor;
@@ -242,6 +264,11 @@ class ModuleShorcut extends ModuleIcon {
 			}			
 
 		}
+
+		if (\property_exists($this, 'db')) {
+			// TODO: Ambil info program dari database
+		}
+
 
 		foreach ($this->allowedgroups as $allowed_group) {
 			if (in_array($allowed_group, $this->userdata->groups)) {
