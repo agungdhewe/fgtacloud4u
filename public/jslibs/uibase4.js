@@ -306,7 +306,7 @@ async function getOtp(apipath) {
 
 
 
-export async function download(url, args) {
+export async function download(url, args, fn_handler) {
 
 
 	fgta_output_content.html('')	
@@ -383,12 +383,18 @@ export async function download(url, args) {
 		var otp = await getOtp(url);
 		var res = await ajax(downloadurl, postparams, otp)
 
-		var link = document.createElement('a');
-		link.href = window.URL.createObjectURL(res.data);
-		link.download = res.filename;
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
+
+		if (typeof(fn_handler)==='function') {
+			fn_handler(res);
+		} else {
+			var link = document.createElement('a');
+			link.href = window.URL.createObjectURL(res.data);
+			link.download = res.filename;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		}
+
 
 	} catch (err) {
 		if (typeof err == 'string') {

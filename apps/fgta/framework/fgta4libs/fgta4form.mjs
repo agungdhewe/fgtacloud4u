@@ -23,6 +23,7 @@ export function fgta4form(frm, opt) {
 	self.isnewdata = false
 	self.primary = opt.primary
 	self.errordiv = frm[0].id + '-' + 'fgta4errordiv'
+	self.eventsuspended = false;
 
 
 	self.OnNewDataCanceled = () => {}
@@ -98,7 +99,9 @@ export function fgta4form(frm, opt) {
 		dataload: (fn_dataopening, fn_dataopened, fn_dataopenerror) => { dataload(self, fn_dataopening, fn_dataopened, fn_dataopenerror) },
 		CreateRecordStatusPage: (panelname) => {CreateRecordStatusPage(self, panelname) },
 		CreateLogPage: (panelname) => {CreateLogPage(self, panelname) },
-		btn_save_click: () => { btn_save_click(self) }
+		btn_save_click: () => { btn_save_click(self) },
+		SuspendEvent: (suspend) => { return suspendevent(self, suspend)},
+		isEventSuspended: () => { return iseventsuspended(self) }
 	}
 
 	init(self)
@@ -1153,4 +1156,13 @@ async function dataload(self, fn_dataopening, fn_dataopened, fn_dataopenerror) {
 		}
 	}
 
+}
+
+function suspendevent(self, suspend) {
+	self.eventsuspended = suspend;
+	return self.fgta4form
+}
+
+function iseventsuspended(self) {
+	return self.eventsuspended;
 }

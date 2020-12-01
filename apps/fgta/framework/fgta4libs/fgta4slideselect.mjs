@@ -8,21 +8,6 @@ export function fgta4slideselect(obj, options) {
 	}
 
 
-	// if (typeof obj.form.setValue !== 'function') {
-	// 	obj.colorbase = obj.css('color')
-	// 	if (obj.hasClass('easyui-combo')) {
-	// 		console.log('test test test')
-	// 		// // obj.combo('readonly', true)
-	// 		// obj.combo({})
-	// 		obj.colorbase = obj.css('color')
-	// 		var textbox = obj.textbox('textbox')
-	// 		$(textbox).attr('disabled', true)
-	// 		textbox.css('color', obj.colorbase)
-	// 	}
-	// }
-
-	
-
 	self.options = Object.assign({
 		form: obj.form,
 		title: 'Slide Select',
@@ -37,7 +22,8 @@ export function fgta4slideselect(obj, options) {
 		OnCreated: () => {},
 		OnDataLoading: (criteria) => {},
 		OnDataLoaded : (result, options) => {},
-		OnSelected: (value, display, record) => {},
+		OnSelecting: (value, display, record, arg) => {},
+		OnSelected: (value, display, record, arg) => {},
 	}, options)
 
 	CreatePanel(self)
@@ -215,6 +201,20 @@ function grd_list_rowclick(self, tr, ev) {
 	$ui.getPages().show(self.options.returnpage)
 	$ui.ResumeScroll(()=>{})
 
+	var SelectingArgument = {
+		Cancel: false
+	}
+	
+	var SelectedArgument = {
+		PreviousValue: self.obj.combo('getValue'),
+		PreviousText: self.obj.combo('getText')
+	}
+
+	self.options.OnSelecting(record[self.options.fieldValue], record[self.options.fieldDisplay], record, SelectingArgument)
+	if (SelectingArgument.Cancel===true) {
+		return;
+	}
+
 	if (typeof self.options.form.setValue === 'function') {
 		self.options.form.setValue(self.obj, record[self.options.fieldValueMap], record[self.options.fieldDisplay])
 	} else {
@@ -222,7 +222,7 @@ function grd_list_rowclick(self, tr, ev) {
 		self.obj.combo('setText', record[self.options.fieldDisplay])
 	}
 
-	self.options.OnSelected(record[self.options.fieldValue], record[self.options.fieldDisplay], record)
+	self.options.OnSelected(record[self.options.fieldValue], record[self.options.fieldDisplay], record, SelectedArgument)
 
 }
 

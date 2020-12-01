@@ -400,11 +400,16 @@ h1 {
 .fgtable-head-drow {
 	color: #3F4756;
 	border-bottom: 1px dashed #3F4756;
+	display: flex;
+	flex-direction: row;
+
 }
 
 .fgtable-head-drow:hover {
 	background-color: #d0d0d0ff;
 	cursor: pointer;
+	display: flex;
+	flex-direction: row;	
 }
 
 
