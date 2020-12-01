@@ -87,7 +87,8 @@ export function fgta4grid(tbl, opt) {
 		removerow: (trid) => { removerow(self, trid) },
 		getLastId: () => { return getLastId(self) },
 		dataload: (records) => { return dataload(self, records) }, 
-		listload: (fn_listloading, fn_listloaded) => { listload(self, fn_listloading, fn_listloaded) }
+		listload: (fn_listloading, fn_listloaded) => { listload(self, fn_listloading, fn_listloaded) },
+		nextpageload: () => ( nextpageload(self) )
 
 	}
 }
@@ -660,8 +661,8 @@ async function listload(self, fn_listloading, fn_listloaded) {
 			result.records = []
 		}
 
+		$ui.unmask();
 		if (typeof self.datastate.fn_listloaded === 'function') {
-			$ui.unmask()
 			self.datastate.fn_listloaded(result, options)
 		}		
 
@@ -706,5 +707,12 @@ function clearactiverow(self) {
 		var tds = $(`#${trid}`).find('td')
 		tds.removeClass('fgtable-row-cellactive')
 
+	}
+}
+
+
+function nextpageload(self) {
+	if (self.btnNext.isEnabled()) {
+		btnNext_click(self);
 	}
 }
