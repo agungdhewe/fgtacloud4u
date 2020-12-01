@@ -121,6 +121,7 @@ function init(self) {
 		var mapping = el.attr('mapping');
 		var onclick = el.attr('onclick');
 		var type = el.attr('type');
+		var style = el.attr('style');
 		var elclasses = el.attr('class');
 		if (mapping===undefined) {
 			mapping = '__CHECKBOX__'
@@ -133,6 +134,7 @@ function init(self) {
 			mapping: mapping,
 			onclick: onclick,
 			type: type,
+			style: style,
 			elclasses: elclasses	
 		})
 	}
@@ -230,14 +232,16 @@ function RenderRow(self, row) {
 		var mapping = col.mapping;
 		var type = col.type;
 		var elclasses = col.elclasses;
+		var style = col.style;
 		var td = document.createElement('td')
 
 		let tdid = `${trid}-col-${mapid}`
 
-		td.setAttribute('id', tdid)
-		td.setAttribute('trid', trid)
-		td.setAttribute('dataid', self.rowcount)
-		td.setAttribute('mapping', mapping)
+		td.setAttribute('id', tdid);
+		td.setAttribute('trid', trid);
+		td.setAttribute('dataid', self.rowcount);
+		td.setAttribute('mapping', mapping);
+		td.setAttribute('style', style);
 		
 		if (elclasses!=null) {
 			var classes = elclasses.split(' ');
