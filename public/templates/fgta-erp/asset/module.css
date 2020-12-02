@@ -209,12 +209,14 @@ h1 {
 .list-search-item {
 	margin-right: 5px;
 	align-items: center;
-
-}
-
-.list-search-item {
 	width: 150px
 }
+
+.list-search-param {
+	display: flex;
+	flex-direction: row;
+}
+
 
 .list-buttonbaru {
 	padding-bottom: 0px;
@@ -229,9 +231,17 @@ h1 {
 		
 	}
 
+	.list-search-param {
+		margin-top: 10px;
+		display: flex;
+		flex-direction: column;
+		width: 100%  !important;
+	}
+
 	.list-search-item {
 		margin-bottom: 5px;
-		width: 100%;
+		width: 100% !important;
+		text-align: left !important;
 	}
 
 	.list-buttonbaru {
