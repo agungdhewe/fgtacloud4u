@@ -106,6 +106,13 @@ if (!defined('FGTA4')) {
 	<?php } ?>
 
 	<script>
+		global.window_fn_readytoprint = null;
+		function onreadytoprint(fn_ready) {
+			console.log('readytoprint');
+			global.window_fn_readytoprint = fn_ready; 
+		}
+
+
 		window.preparemodule = async (fn_callback) => {
 			if (window.$ui!==undefined) {
 				var variancename = document.querySelector('meta[name="variancename"]').content
@@ -115,16 +122,19 @@ if (!defined('FGTA4')) {
 					});
 				}
 			}
-			fn_callback()
+			
+			if (typeof fn_callback  === 'function') {
+				fn_callback();
+			}
 		}
 
-		$(document).ready(function(){
-			window.preparemodule(() => {});
-			// var wrapper = document.getElementById('wrapper');
-			// var rect = wrapper.getBoundingClientRect();
+		// $(document).ready(function(){
+		// 	window.preparemodule(() => {});
+		// 	// var wrapper = document.getElementById('wrapper');
+		// 	// var rect = wrapper.getBoundingClientRect();
 
-			// console.log($('#wrapper').height());
-		});
+		// 	// console.log($('#wrapper').height());
+		// });
 
 	</script>
 
