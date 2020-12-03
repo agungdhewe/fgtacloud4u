@@ -17,7 +17,7 @@ if (!defined('FGTA4')) {
 		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
 		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
 
-
+		<link rel="stylesheet" type="text/css" href="templates/fgta-printout/asset/format-01-a4.css" />
 
 		<?php if (property_exists($this, 'preloadsstyles')) { ?>
 		<?php if (is_array($this->preloadsstyles)) { 
@@ -70,6 +70,75 @@ if (!defined('FGTA4')) {
 				return check;
 			};
 
+
+
+			function adjustPage() {
+				
+				var pageheight_mm = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--page-height'));
+				var margintop_mm = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--margin-top'));
+				var marginbottom_mm = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--margin-bottom'));
+				var pageheaderheight_mm = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--pageheader-height'));
+				var top_gap_mm = margintop_mm + pageheaderheight_mm;
+				var bottom_gab_mm = marginbottom_mm;
+
+
+				// var pointer = document.getElementById('pointer');
+				var pagemeasure = document.getElementById('pagemeasure');
+				var wrapperfooter = document.getElementById('wrapperfooter');
+
+				var pageheight_px = pagemeasure.offsetHeight
+				var mmpx =  pageheight_mm / pageheight_px;
+
+
+				var cheight_px = wrapperfooter.offsetTop + wrapperfooter.offsetHeight;
+				var cheight_mm = Math.ceil(mmpx * cheight_px);
+				
+
+				var pcount = getPageCount(cheight_mm, pageheight_mm, top_gap_mm, bottom_gab_mm);
+				var reporttotalpage = document.getElementById('reporttotalpage');
+				reporttotalpage.innerHTML = pcount;
+
+
+
+				// tambahkan nomor halaman
+				var top = 0
+				var height = 0;
+				pageheight_px = pageheight_px + 3;
+				for (var i=1; i<=pcount; i++) {
+					var ph = document.createElement('div');
+					var pagenumber = document.createElement('div');
+					pagenumber.classList.add('pagenumber');
+					pagenumber.classList.add('fullwidth');
+					if (i>1) {
+						pagenumber.appendChild(document.createTextNode(`Page ${i} of ${pcount}`));
+					}
+
+					top = (i*pageheight_px) - pageheight_px;
+					height = pageheight_px-2;
+
+					ph.appendChild(pagenumber)
+					ph.classList.add('paging');
+					ph.style.top = `${(i*pageheight_px) - pageheight_px}px`;
+					ph.style.height = `${pageheight_px-2}px`
+					document.body.appendChild(ph);
+				}
+				document.body.style.height = `${top + height}px`;
+				document.body.style.justifyContent = "space-between";
+
+			}
+
+
+
+			function getPageCount(height_mm, pageheight_mm, top_gap_mm, bottom_gab_mm) {
+				if (height_mm <= pageheight_mm) {
+					return 1;
+				} else {
+					var cwidth_mm = (height_mm - pageheight_mm) + top_gap_mm + bottom_gab_mm + 14;
+					return 1 + getPageCount(cwidth_mm, pageheight_mm, top_gap_mm, bottom_gab_mm);
+				}
+			}
+
+
 		</script>
 
 
@@ -106,12 +175,12 @@ if (!defined('FGTA4')) {
 	<?php } ?>
 
 	<script>
-		global.window_fn_readytoprint = null;
-		function onreadytoprint(fn_ready) {
-			console.log('readytoprint');
-			global.window_fn_readytoprint = fn_ready; 
+		 
+		global.window_fn_print = null;
+		function OnPrintCommand(fn_print) {
+			console.log('prepare print command');
+			global.window_fn_print = fn_print; 
 		}
-
 
 		window.preparemodule = async (fn_callback) => {
 			if (window.$ui!==undefined) {
@@ -128,13 +197,12 @@ if (!defined('FGTA4')) {
 			}
 		}
 
-		// $(document).ready(function(){
-		// 	window.preparemodule(() => {});
-		// 	// var wrapper = document.getElementById('wrapper');
-		// 	// var rect = wrapper.getBoundingClientRect();
-
-		// 	// console.log($('#wrapper').height());
-		// });
+		<?php $iframe = array_key_exists('iframe', $_GET) ? $_GET['iframe'] : "0" ?> 
+		$(document).ready(function(){
+			<?php if ($iframe!=="1") { ?>
+			window.preparemodule(() => {});
+			<?php } ?>
+		});
 
 	</script>
 
