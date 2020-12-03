@@ -288,16 +288,14 @@ function RenderRow(self, row) {
 				}
 			}
 		}
-		
-		row.OnCellRender(td)
+	
 
 		td.classList.add('fgtable-row')
 		tr.appendChild(td)
 
-		
+		row.OnCellRender(td)
 	}
 
-	row.OnRender(tr)
 
 	tr.onmouseover = () => {
 		// console.log(`over ${trid} `)
@@ -346,6 +344,8 @@ function RenderRow(self, row) {
 
 
 	$(tr).appendTo(tbl.body)
+	// console.log('@@@@@@@@@@');
+	row.OnRender(tr)
 
 
 	return tr

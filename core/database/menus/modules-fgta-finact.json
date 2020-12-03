@@ -10,6 +10,7 @@
 			"icon" : "icon-masterdata.svg",
 			"disabled": false,
 			"modules": [
+				"finact/master/coareport",
 				"finact/master/coatype",
 				"finact/master/coamodel",
 				"finact/master/coagroup",
