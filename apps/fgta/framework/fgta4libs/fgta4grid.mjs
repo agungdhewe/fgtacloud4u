@@ -444,12 +444,20 @@ function fill(self, data) {
 
 function clear(self) {
 
-
+	var tbody = null;
 	for (var dataid in self.DATA) {
 		var trid = self.DATA[dataid]._trid
 		var tr = document.getElementById(trid)
+		if (tbody==null) {
+			tbody = tr.parentNode;
+		}
 		delete self.DATA[dataid]
 		$(tr).remove()
+	}
+
+	// console.log(tbody);
+	if (tbody!=null) {
+		tbody.innerHTML = "";
 	}
 
 	self.datastate.total = 0
