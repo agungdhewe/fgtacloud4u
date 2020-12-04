@@ -192,7 +192,11 @@ export function open(data, rowid, hdata) {
 		}		
 	}
 
-	form.dataload(fn_dataopening, fn_dataopened)	
+	var fn_dataopenerror = (err) => {
+		$ui.ShowMessage('[ERROR]'+err.errormessage);
+	}
+
+	form.dataload(fn_dataopening, fn_dataopened, fn_dataopenerror)	
 }
 
 export function createnew(hdata) {

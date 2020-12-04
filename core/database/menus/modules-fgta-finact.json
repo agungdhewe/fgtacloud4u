@@ -99,7 +99,15 @@
 				},
 				{
 					"program": "finact/budget/projbudget",
+					"variancename": "uncommit"
+				},				
+				{
+					"program": "finact/budget/projbudget",
 					"variancename": "approve"
+				},
+				{
+					"program": "finact/budget/projbudget",
+					"variancename": "revisi"
 				},
 				"finact/budget/deptbudget",
 				"finact/budget/corpbudget",
@@ -110,7 +118,7 @@
 				{
 					"program": "finact/budget/corpbudget",
 					"variancename": "approve"
-				}
+				}			
 			]
 		},
 		{

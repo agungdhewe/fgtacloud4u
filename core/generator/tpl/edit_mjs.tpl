@@ -146,7 +146,7 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 	}
 
 	var fn_dataopenerror = (err) => {
-		$ui.ShowMessage(err.errormessage);
+		$ui.ShowMessage('[ERROR]'+err.errormessage);
 	}
 
 	form.dataload(fn_dataopening, fn_dataopened, fn_dataopenerror)

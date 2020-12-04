@@ -3,8 +3,20 @@ const delay_create_panel = 300
 
 export function fgta4slideselect(obj, options) {
 	let self = {
+		disabled: obj.combo('options').disabled,
 		obj: obj,
 		grd_list: {}
+	}
+
+	
+
+	obj.setDisabled = (disable) => {
+		self.disabled = disable;
+		if (disable) {
+			self.obj.combo('disable')
+		} else {
+			self.obj.combo('enable');
+		}
 	}
 
 
@@ -71,8 +83,10 @@ function CreatePanel(self) {
 		self.obj.combo({
 			panelHeight: '0px',
 			onShowPanel: () => { 
-				$ui.KeepScroll()
 				self.obj.combo('hidePanel'); 
+				if (self.disabled) return;
+
+				$ui.KeepScroll()
 				$ui.getPages().show(self.options.panelname)
 				$ui.getPages().ITEMS[self.options.panelname].handler.retrieveData()							
 			}
