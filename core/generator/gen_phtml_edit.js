@@ -184,9 +184,15 @@ module.exports = async (fsd, genconfig) => {
 				var detil = genconfig.schema.detils[detilname]
 				var detiltitle = detil.title!=null ? detil.title : detilname;
 				if (detil.form===true) {
-					detilrow += `\t\t\t\t<div class="fgtable-head-drow" style="height: 25px; padding: 5px 0px 0px 5px" onclick="$ui.getPages().ITEMS['pnl_edit'].handler.detil_open('pnl_edit${detilname}grid')">${detiltitle}</div>\r\n`
+					detilrow += `\t\t\t\t<div class="fgtable-head-drow" style="height: 25px; padding: 5px 5px 0px 5px" onclick="$ui.getPages().ITEMS['pnl_edit'].handler.detil_open('pnl_edit${detilname}grid')">\r\n`;
+					detilrow += `\t\t\t\t\t<div id="pnl_edit-txt_${detilname}_title" class="detilgrid-text">${detiltitle}</div>\r\n`;
+					detilrow += `\t\t\t\t\t<div id="pnl_edit-txt_${detilname}_value" class="detilgrid-value">&nbsp;</div>\r\n`;
+					detilrow += `\t\t\t\t</div>\r\n`;
 				} else {
-					detilrow += `\t\t\t\t<div class="fgtable-head-drow" style="height: 25px; padding: 5px 0px 0px 5px" onclick="$ui.getPages().ITEMS['pnl_edit'].handler.detil_open('pnl_edit${detilname}')">${detiltitle}</div>\r\n`
+					detilrow += `\t\t\t\t<div class="fgtable-head-drow" style="height: 25px; padding: 5px 5px 0px 5px" onclick="$ui.getPages().ITEMS['pnl_edit'].handler.detil_open('pnl_edit${detilname}')">\r\n`;
+					detilrow += `\t\t\t\t\t<div id="pnl_edit-txt_${detilname}_title" class="detilgrid-text">${detiltitle}</div>\r\n`;
+					detilrow += `\t\t\t\t\t<div id="pnl_edit-txt_${detilname}_value" class="detilgrid-value">&nbsp;</div>\r\n`;
+					detilrow += `\t\t\t\t</div>\r\n`;
 				}
 			}
 
@@ -212,11 +218,21 @@ ${detilrow}
 		}
 
 
+
+		// print button
+		var add_printfunction = genconfig.printing;
+		var printbutton = '';
+		if (add_printfunction) {
+			printbutton = `<a id="pnl_edit-btn_print" href="javascript:void(0)" class="easyui-linkbutton c8" style="float:right; margin-left:10px;" data-options="iconCls:'icon-print'">print</a>`;
+		}
+
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'edit_phtml.tpl')
 		var tplscript = fs.readFileSync(phtmltpl).toString()
 		tplscript = tplscript.replace('<!--__FORMCOMP__-->', formcomp_script)
 		tplscript = tplscript.replace('<!--__DETILPANEL__-->', detilpanel_script)
 		tplscript = tplscript.replace('<!--__PAGETITLE__-->', pagetitle)
+		tplscript = tplscript.replace('	<!--__PRINTBUTTON__-->', printbutton)
+
 
 		fsd.script = tplscript		
 

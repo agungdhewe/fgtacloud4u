@@ -1,18 +1,18 @@
 var this_page_id;
 var this_page_options;
 
-const tbl_list = $('#<!--__PANELNAME__-->-tbl_list')
-const txt_title = $('#<!--__PANELNAME__-->-title')
-const pnl_control = $('#<!--__PANELNAME__-->-control')
-const btn_removechecked  = $('#<!--__PANELNAME__-->-removechecked')
-const btn_addrow = $('#<!--__PANELNAME__-->-addrow')
+const tbl_list = $('#<!--__PANELNAME__-->-tbl_list');
+const txt_title = $('#<!--__PANELNAME__-->-title');
+const pnl_control = $('#<!--__PANELNAME__-->-control');
+const btn_removechecked  = $('#<!--__PANELNAME__-->-removechecked');
+const btn_addrow = $('#<!--__PANELNAME__-->-addrow');
 
-let grd_list = {}
-let header_data = {}
-let last_scrolltop = 0
+let grd_list = {};
+let header_data = {};
+let last_scrolltop = 0;
 
 export async function init(opt) {
-	this_page_id = opt.id
+	this_page_id = opt.id;
 	this_page_options = opt;
 	
 	
@@ -22,32 +22,32 @@ export async function init(opt) {
 		OnCellClick: (td, ev) => { grd_list_cellclick(td, ev) },
 		OnCellRender: (td) => { grd_list_cellrender(td) },
 		OnRowRender: (tr) => { grd_list_rowrender(tr) }
-	})	
+	});	
 
 	btn_removechecked.linkbutton({
 		onClick: () => { btn_removechecked_click() }
-	})
+	});
 
 	btn_addrow.linkbutton({
 		onClick: () => { btn_addrow_click() }
-	})
+	});
 
 	document.addEventListener('OnButtonBack', (ev) => {
 		if ($ui.getPages().getCurrentPage()==this_page_id) {
 			ev.detail.cancel = true;
 			$ui.getPages().show('pnl_edit')
 		}
-	})
+	});
 
 	document.addEventListener('OnButtonHome', (ev) => {
 		if ($ui.getPages().getCurrentPage()==this_page_id) {
 			ev.detail.cancel = true;
 		}
-	})
+	});
 
 	document.addEventListener('OnSizeRecalculated', (ev) => {
 		OnSizeRecalculated(ev.detail.width, ev.detail.height)
-	})	
+	});	
 
 	document.addEventListener('OnViewModeChanged', (ev) => {
 		if (ev.detail.viewmode===true) {
@@ -55,7 +55,15 @@ export async function init(opt) {
 		} else {
 			pnl_control.show()
 		}
-	})	
+	});
+
+	document.addEventListener('scroll', (ev) => {
+		if ($ui.getPages().getCurrentPage()==this_page_id) {
+			if($(window).scrollTop() + $(window).height() == $(document).height()) {
+				grd_list.nextpageload();
+			}			
+		}
+	});			
 }
 
 
@@ -66,17 +74,17 @@ export function OnSizeRecalculated(width, height) {
 
 export function createnew(data, options) {
 	// pada saat membuat data baru di header
-	grd_list.clear()
+	grd_list.clear();
 	txt_title.html(data.<--__HEADERVIEWKEY__-->)
-	header_data = data
+	header_data = data;
 }
 
 export function OpenDetil(data) {
 	// saat di klik di edit utama, pada detil information
 
-	grd_list.clear()
+	grd_list.clear();
 	txt_title.html(data.<--__HEADERVIEWKEY__-->)
-	header_data = data
+	header_data = data;
 
 	var fn_listloading = async (options) => {
 		options.api = `${global.modulefullname}/<!--__DETILNAME__-->-list`

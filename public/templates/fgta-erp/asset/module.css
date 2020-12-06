@@ -357,11 +357,15 @@ h1 {
 
 
 
+
+
 .fgtable-row {
 	background: white;
 	border-bottom: 1px solid gainsboro;
-	height: 35px;
-	margin-top: 3px;
+	height: 30px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	vertical-align: top;
 }
 
 .fgtable-row-over {
@@ -461,3 +465,15 @@ h1 {
 	background: #ffe095;
 }
 
+
+
+.detilgrid-value {
+	width: 200px; 
+	text-align: right; 
+	font-weight: bold; 
+	font-size: 1.3em; color: #000
+}
+
+.detilgrid-text {
+	flex: 1
+}

@@ -151,6 +151,18 @@ module.exports = async (fsd, genconfig) => {
 		}
 
 
+		var basename = genconfig.basename
+		var add_printfunction = genconfig.printing;
+		var printbutton = '';
+		var printfunction = '';
+		var printhandlerassignment = '';
+		if (add_printfunction) {
+			printbutton = `const btn_print = $('#pnl_edit-btn_print');`;
+			printfunction = get_print_fn(basename, primarykey);
+			printhandlerassignment = get_print_handlerassignment();
+		} 
+
+
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'edit_mjs.tpl')
 		var tplscript = fs.readFileSync(phtmltpl).toString()
 		tplscript = tplscript.replace('/*--__FORMCOMP__--*/', formcomp.join(`,\r\n`))
@@ -172,7 +184,12 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*--__SLIDESELECS__--*/', slideselects)
 		tplscript = tplscript.replace('/*--__LOGVIEW__--*/', headertable_name)
 
+		tplscript = tplscript.replace('/*--__PRINTBUTTON__--*/', printbutton)
+		tplscript = tplscript.replace('/*--__PRINTFUNCTION__--*/', printfunction)
+		tplscript = tplscript.replace('/*--__PRINTHANDLERASSIGNMENT__--*/', printhandlerassignment)
+
 		
+
 		
 
 		fsd.script = tplscript		
@@ -180,4 +197,78 @@ module.exports = async (fsd, genconfig) => {
 	} catch (err) {
 		throw err
 	}
+}
+
+
+
+function get_print_handlerassignment() {
+	return `
+
+	btn_print.linkbutton({
+		onClick: () => {
+			btn_print_click();
+		}
+	});	
+	
+	`
+}
+
+
+
+
+function get_print_fn(basename, primarykey) {
+	return `
+
+function btn_print_click() {
+
+	if (form.isDataChanged() || !form.isInViewMode()) {
+		$ui.ShowMessage('Simpan dulu perubahan datanya.');
+		return;
+	}
+
+	var id = obj.txt_${primarykey}.textbox('getValue');
+	var printurl = 'index.php/printout/' + window.global.modulefullname + '/${basename}.xprint?id=' + id;
+
+	var debug = false;
+	if (debug) {
+		var w = window.open(printurl);
+		w.onload = () => {
+			window.onreadytoprint(() => {
+				iframe.contentWindow.print();
+			});
+		}
+	} else {
+		$ui.mask('wait...');
+		var iframe_id = 'fgta_printelement';
+		var iframe = document.getElementById(iframe_id);
+		if (iframe) {
+			iframe.parentNode.removeChild(iframe);
+			iframe = null;
+		}
+
+		if (!iframe) {
+			iframe = document.createElement('iframe');
+			iframe.id = iframe_id;
+			iframe.style.visibility = 'hidden';
+			iframe.style.height = '10px';
+			iframe.style.widows = '10px';
+			document.body.appendChild(iframe);
+
+			iframe.onload = () => {
+				$ui.unmask();
+				iframe.contentWindow.OnPrintCommand(() => {
+					console.log('start print');
+					iframe.contentWindow.print();
+				});
+				iframe.contentWindow.preparemodule();
+			}
+		}
+		iframe.src = printurl + '&iframe=1';
+
+	}
+
+}	
+
+
+`;
 }

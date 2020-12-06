@@ -101,6 +101,17 @@ if (!defined('FGTA4')) {
 				return check;
 			};
 
+
+			window.row_format_number = (value, tr) => {
+				var val = parseFloat(value);
+				if (!isNaN(val)) {
+					return val.toLocaleString('en-US');	
+				} else {
+					return value;
+				}
+			}
+
+
 		</script>
 
 

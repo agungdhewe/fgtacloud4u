@@ -122,11 +122,19 @@ function init(self) {
 		var onclick = el.attr('onclick');
 		var type = el.attr('type');
 		var style = el.attr('style');
+		var formatter_name = el.attr('formatter');
 		var elclasses = el.attr('class');
 		if (mapping===undefined) {
 			mapping = '__CHECKBOX__'
 			self.view_checkbox_column = true
 		}		
+
+		var fn_formatter = null;
+		if (formatter_name!=null) {
+			if (eval(`typeof ${formatter_name} === 'function'`)) {
+				fn_formatter = eval(formatter_name)
+			}
+		}
 
 		++mapid
 		self.maps.push({
@@ -135,7 +143,9 @@ function init(self) {
 			onclick: onclick,
 			type: type,
 			style: style,
-			elclasses: elclasses	
+			elclasses: elclasses,
+			formatter_name: formatter_name,
+			fn_formatter: fn_formatter	
 		})
 	}
 
@@ -233,6 +243,7 @@ function RenderRow(self, row) {
 		var type = col.type;
 		var elclasses = col.elclasses;
 		var style = col.style;
+		var fn_formatter = col.fn_formatter;
 		var td = document.createElement('td')
 
 		let tdid = `${trid}-col-${mapid}`
@@ -261,6 +272,7 @@ function RenderRow(self, row) {
 			})
 
 			td.style.textAlign = 'center'
+			td.style.paddingTop = '5px';
 			td.addEventListener('click', (ev)=>{
 				var el = document.getElementById(chkid)
 				el.checked = !el.checked;
@@ -269,17 +281,26 @@ function RenderRow(self, row) {
 			})
 			td.appendChild(chk)
 		} else if (mapping==='') {
-			td.innerHTML = '';
+			var td_value = '';
+			if (typeof fn_formatter === 'function') {
+				td_value = fn_formatter('', tr);
+			}
+			td.innerHTML = td_value;
 		} else {
 			if (type==='checkbox') {
-				td.setAttribute("style", "text-align: center");
+				td.setAttribute("style", "text-align: center;");
 				if (record[mapping]===true || record[mapping]===1 || record[mapping]==='1') {
 					td.innerHTML = '<input class="fgta-grid-checkbox" type="checkbox" checked style="pointer-events: none"><label></label> ';
 				} else {
 					td.innerHTML = '<input class="fgta-grid-checkbox" type="checkbox" style="pointer-events: none"><label></label>';
 				}
 			} else {
-				td.innerHTML = record[mapping]
+				var td_value = record[mapping];
+				if (typeof fn_formatter === 'function') {
+					td_value = fn_formatter(record[mapping], tr);
+				}
+
+				td.innerHTML = td_value
 				if (row.hasCellClickEvent) {
 					td.addEventListener('click', (ev) => {
 						var el = document.getElementById(tdid)

@@ -24,6 +24,7 @@
 	<div style="margin-top: 30px; margin-left:-5px; margin-right: -5px; background-color: #cccccc; height: 40px; display: flex; justify-content: space-between; padding: 5px 2px 2px 2px ">
 		<div>
 			<!-- letakkan tombol yang lin disini -->
+			<!--__PRINTBUTTON__-->
 		</div>
 		<div>
 			<a id="pnl_edit-btn_delete" class="easyui-linkbutton c5" style="width">Hapus</a>

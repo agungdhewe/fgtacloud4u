@@ -128,7 +128,19 @@
 			"disabled": false,
 			"modules": [
 				"finact/acct/jurnal",
-				"finact/acct/billin"
+				"finact/acct/billin",
+				{
+					"program": "finact/acct/billin",
+					"variancename": "advance"
+				},
+				{
+					"program": "finact/acct/billin",
+					"variancename": "reimburse"
+				},
+				{
+					"program": "finact/acct/billin",
+					"variancename": "uncommit"
+				}												
 			]
 		}
 	]

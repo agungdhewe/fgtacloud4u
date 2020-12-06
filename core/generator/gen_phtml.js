@@ -100,6 +100,7 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('<!--__BASENAME__-->', basename)
 
 
+
 		fsd.script = tplscript
 	} catch (err) {
 		throw err

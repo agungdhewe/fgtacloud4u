@@ -6,6 +6,7 @@ var this_page_options;
 const btn_edit = $('#pnl_edit-btn_edit')
 const btn_save = $('#pnl_edit-btn_save')
 const btn_delete = $('#pnl_edit-btn_delete')
+/*--__PRINTBUTTON__--*/
 
 const pnl_form = $('#pnl_edit-form')
 const obj = {
@@ -52,6 +53,7 @@ export async function init(opt) {
 /*--__SLIDESELECS__--*/
 
 
+/*--__PRINTHANDLERASSIGNMENT__--*/
 
 	document.addEventListener('keydown', (ev)=>{
 		if ($ui.getPages().getCurrentPage()==this_page_id) {
@@ -120,6 +122,7 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 
 /*--__NULLRESULTLOADED__--*/
 
+		form.SuspendEvent(true);
 		form
 			.fill(result.record)/*--__LOOKUPSETVALUE__--*/
 			.commit()
@@ -129,6 +132,7 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 
 		// tampilkan form untuk data editor
 		fn_callback()
+		form.SuspendEvent(false);
 
 
 		// fill data, bisa dilakukan secara manual dengan cara berikut:	
@@ -269,3 +273,4 @@ async function form_deleted(result, options) {
 
 }
 
+/*--__PRINTFUNCTION__--*/

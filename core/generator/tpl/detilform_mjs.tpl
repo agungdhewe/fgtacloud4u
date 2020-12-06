@@ -148,11 +148,14 @@ export function open(data, rowid, hdata) {
 
 /*--__NULLRESULTLOADED__--*/
 
+		form.SuspendEvent(true);
 		form
 			.fill(result.record)/*--__LOOKUPSETVALUE__--*/
 			.commit()
 			.setViewMode()
 			.rowid = rowid
+
+		form.SuspendEvent(false);
 
 
 		// Editable

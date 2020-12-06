@@ -54,6 +54,13 @@ async function PrepareFs(genconfig) {
 	]
 
 
+	if (genconfig.printing===true) {
+		fsdata.push({program:'gen_xprint_css', name: `${basename}.xprint.css`});
+		fsdata.push({program:'gen_xprint_mjs', name: `${basename}.xprint.mjs`});
+		fsdata.push({program:'gen_xprint_php', name: `${basename}.xprint.php`});
+		fsdata.push({program:'gen_xprint_phtml', name: `${basename}.xprint.phtml`});
+	}
+
 	for (var pagename in genconfig.pages) {
 		var p = genconfig.pages[pagename]
 		if (p.api===true) {

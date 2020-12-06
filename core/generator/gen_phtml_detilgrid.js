@@ -51,6 +51,9 @@ module.exports = async (fsd, genconfig) => {
 			if (compclass=='easyui-checkbox') {
 				headermap_script += `\t\t\t\t\t<th mapping="${fieldname}" type="checkbox">${fieldname}</th>\r\n`
 				headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000; text-align: center">${labeltext}</td>\r\n`
+			} else if (compclass=='easyui-numberbox') {
+				headermap_script += `\t\t\t\t\t<th mapping="${fieldname}" style="text-align: right" formatter="row_format_number">${fieldname}</th>\r\n`
+				headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; text-align: right; border-bottom: 1px solid #000000">${labeltext}</td>\r\n`
 			} else {
 				headermap_script += `\t\t\t\t\t<th mapping="${fieldname}">${fieldname}</th>\r\n`
 				headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">${labeltext}</td>\r\n`
