@@ -259,6 +259,10 @@ class ModuleShorcut extends ModuleIcon {
 				$this->icon = $variancedata->icon;
 			}
 
+			if (property_exists($variancedata, 'backcolor')) {
+				$this->backcolor = $variancedata->backcolor;
+			}
+
 			if (property_exists($variancedata, 'allowedgroups')) {
 				$this->allowedgroups = $variancedata->allowedgroups;
 			}			
