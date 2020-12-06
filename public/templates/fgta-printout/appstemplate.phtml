@@ -17,7 +17,20 @@ if (!defined('FGTA4')) {
 		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
 		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
 
-		<link rel="stylesheet" type="text/css" href="templates/fgta-printout/asset/format-01-a4.css" />
+		<?php 
+		$fmt = array_key_exists('template', $_GET) ? $_GET['template'] : "";
+		switch ($fmt) {
+			case "format-01-a4-landscape" :
+				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/fgta-printout/asset/format-01-a4-landscape.css\" />";
+				break;
+
+			default:
+				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/fgta-printout/asset/format-01-a4.css\" />";
+				break;
+		}
+		?>
+		 
+		<!-- <link rel="stylesheet" type="text/css" href="templates/fgta-printout/asset/format-01-a4.css" /> -->
 
 		<?php if (property_exists($this, 'preloadsstyles')) { ?>
 		<?php if (is_array($this->preloadsstyles)) { 
@@ -72,8 +85,13 @@ if (!defined('FGTA4')) {
 
 
 
-			function adjustPage() {
-				
+			function adjustPage(param) {
+				// default value
+				param = Object.assign({
+					adjust_height_report: 3,
+					adjust_height_page: -2
+				}, param==null?{}:param);
+
 				var pageheight_mm = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--page-height'));
 				var margintop_mm = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--margin-top'));
 				var marginbottom_mm = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--margin-bottom'));
@@ -100,10 +118,11 @@ if (!defined('FGTA4')) {
 
 
 
-				// tambahkan nomor halaman
+
+				
 				var top = 0
 				var height = 0;
-				pageheight_px = pageheight_px + 3;
+				pageheight_px = pageheight_px + param.adjust_height_report ;
 				for (var i=1; i<=pcount; i++) {
 					var ph = document.createElement('div');
 					var pagenumber = document.createElement('div');
@@ -114,7 +133,7 @@ if (!defined('FGTA4')) {
 					}
 
 					top = (i*pageheight_px) - pageheight_px;
-					height = pageheight_px-2;
+					height = pageheight_px + param.adjust_height_page;
 
 					ph.appendChild(pagenumber)
 					ph.classList.add('paging');
@@ -133,7 +152,7 @@ if (!defined('FGTA4')) {
 				if (height_mm <= pageheight_mm) {
 					return 1;
 				} else {
-					var cwidth_mm = (height_mm - pageheight_mm) + top_gap_mm + bottom_gab_mm + 14;
+					var cwidth_mm = (height_mm - pageheight_mm) + top_gap_mm + bottom_gab_mm + 14;  //14
 					return 1 + getPageCount(cwidth_mm, pageheight_mm, top_gap_mm, bottom_gab_mm);
 				}
 			}

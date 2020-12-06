@@ -49,7 +49,7 @@
 	</div>
 
 	<div class="fullwidth" style="position: relative; margin-top: 2mm; display: flex; justify-content: space-between; background-color: #fff">
-		<div id="reporthead-col-dochead-1">
+		<div id="reporthead-col-dochead-1" style="flex: 1; margin-right: 1mm">
 			<table width="100%" cellpadding="0" cellspacing="0">
 				<!--
 				<tr>
@@ -85,7 +85,7 @@
 				</tr>
 			</table>
 		</div>
-		<div id="reporthead-col-qrcode" style="text-align: right; margin-left: 5mm">
+		<div id="reporthead-col-qrcode" style="text-align: right; margin-left: 4mm">
 			<div style="text-align: center;"><img id="elqrcode" value="<?=$doc_id?>" size="250"></div>
 			<div style="text-align: center; font-size: 7pt; margin-top: 2mm">Print Date</div>
 			<div style="text-align: center; font-size: 7pt"><?=$report_printdate?></div>

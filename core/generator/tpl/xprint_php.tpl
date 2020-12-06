@@ -30,17 +30,21 @@ class PrintForm extends WebModule {
 		$tablename = '{__TABLENAME__}';
 		$primarykey = '{__PRIMARYID__}';
 
+		try {
 
-		// header
-		$sql = $this->getSqlHeader();
-		$stmt = $this->db->prepare($sql);
-		$stmt->execute([':{__PRIMARYID__}' => $id]);
-		$rows  = $stmt->fetchall(\PDO::FETCH_ASSOC);
-		$row = $rows[0];
+			// header
+			$sql = $this->getSqlHeader();
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute([':{__PRIMARYID__}' => $id]);
+			$rows  = $stmt->fetchall(\PDO::FETCH_ASSOC);
+			$row = $rows[0];
 
-		$this->{__PRIMARYID__} = $row['{__PRIMARYID__}'];
-		$this->empl_name = $row['empl_name'];
+			$this->{__PRIMARYID__} = $row['{__PRIMARYID__}'];
+			$this->empl_name = $row['empl_name'];
 
+		} catch (\Exception $ex) {
+			throw $ex;
+		}
 	}
 
 
