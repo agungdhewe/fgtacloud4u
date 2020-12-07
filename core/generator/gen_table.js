@@ -120,6 +120,7 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 			options.keys[key] = options.data[key] 
 		}
 
+		var fks = [];
 
 		var ddl_keys = ''
 		var ddl_constraint = ''
@@ -158,10 +159,19 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 			var comptype = comp.comptype
 			if (comptype=='combo') {
 				var opt = comp.options
+				var fkname = "fk_" + tablename + "_" + opt.table ;
+				var usefkname = fkname;
 				//console.log(options)
 				// 	// ${options.table}', '${options.field_value}', '${options.field_display}
+				if (fks[fkname]==null) {
+					fks[fkname] = 1
+				} else {
+					fks[fkname]++;
+					usefkname = fkname + '_' + fks[fkname];
+				}
+
 				ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY `"+fieldname+"` (`"+fieldname+"`);\r\n"
-				ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `fk_" + tablename + "_" + opt.table + "` FOREIGN KEY (`"+fieldname+"`) REFERENCES `" + opt.table + "` (`" + opt.field_value + "`);\r\n"
+				ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `"+ usefkname +"` FOREIGN KEY (`"+fieldname+"`) REFERENCES `" + opt.table + "` (`" + opt.field_value + "`);\r\n"
 			}
 
 

@@ -223,7 +223,7 @@ ${detilrow}
 		var add_printfunction = genconfig.printing;
 		var printbutton = '';
 		if (add_printfunction) {
-			printbutton = `<a id="pnl_edit-btn_print" href="javascript:void(0)" class="easyui-linkbutton c8" style="float:right; margin-left:10px;" data-options="iconCls:'icon-print'">print</a>`;
+			printbutton = `<a id="pnl_edit-btn_print" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="iconCls:'icon-print'">print</a>`;
 		}
 
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'edit_phtml.tpl')

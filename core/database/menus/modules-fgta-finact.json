@@ -29,7 +29,8 @@
 				"finact/master/taxmodel",
 				"finact/master/taxtype",
 				"finact/master/trxmodel",
-				"finact/master/depremodel"
+				"finact/master/depremodel",
+				"finact/master/paymtype"
 			]
 		},
 		{
@@ -139,8 +140,14 @@
 				},
 				{
 					"program": "finact/acct/billin",
+					"variancename": "approve"
+				},				
+				{
+					"program": "finact/acct/billin",
 					"variancename": "uncommit"
-				}												
+				},
+				
+				"finact/acct/paym"
 			]
 		}
 	]

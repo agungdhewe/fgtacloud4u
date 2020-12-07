@@ -111,6 +111,16 @@ if (!defined('FGTA4')) {
 				}
 			}
 
+			window.get_date_value = (datestring_id_format) => {
+				var strDt = datestring_id_format.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+				return new Date(strDt[3], strDt[2]-1, strDt[1]);
+			}
+
+
+			window.isChecked = (objchk) => {
+				var chk = objchk.checkbox('options');
+				return chk.checked
+			}
 
 		</script>
 

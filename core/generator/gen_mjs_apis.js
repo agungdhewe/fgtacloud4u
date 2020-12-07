@@ -19,6 +19,7 @@ module.exports = async (fsd, genconfig) => {
 		console.log(`-----------------------------------------------`)
 		console.log(`Generate API Config MJS...`)
 
+		var apivar = [];
 
 		var apis = ''
 		var headertable_name = genconfig.schema.header
@@ -29,16 +30,19 @@ module.exports = async (fsd, genconfig) => {
 			var comptype = datahead[fieldname].comp.comptype
 			if (comptype=='combo') {
 				var options = datahead[fieldname].comp.options
-				if (options.api!==undefined) {
-					apis += `export const load_${fieldname} = '${options.api}'\r\n`
-				} else {
-					apis += `export const load_${fieldname} = ''\r\n`
+				if (!apivar.includes(fieldname)) {
+					apivar.push(fieldname);
+					if (options.api!==undefined) {
+						apis += `export const load_${fieldname} = '${options.api}'\r\n`
+					} else {
+						apis += `export const load_${fieldname} = ''\r\n`
+					}
 				}
-				
 			}
 		}
 
 
+		
 		for (var detilname in  genconfig.schema.detils) {
 			var detil = genconfig.schema.detils[detilname]
 			var tablename = detil.table
@@ -49,11 +53,15 @@ module.exports = async (fsd, genconfig) => {
 				var comptype = datadetil[fieldname].comp.comptype
 				if (comptype=='combo') {
 					var options = datadetil[fieldname].comp.options
-					if (options.api!==undefined) {
-						apis += `export const load_${fieldname} = '${options.api}'\r\n`
-					} else {
-						apis += `export const load_${fieldname} = ''\r\n`
+					if (!apivar.includes(fieldname)) {
+						apivar.push(fieldname);
+						if (options.api!==undefined) {
+							apis += `export const load_${fieldname} = '${options.api}'\r\n`
+						} else {
+							apis += `export const load_${fieldname} = ''\r\n`
+						}
 					}
+
 				}
 			}
 	
