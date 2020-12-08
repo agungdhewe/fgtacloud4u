@@ -36,6 +36,7 @@ export function fgta4form(frm, opt) {
 	self.OnViewModeChanged = typeof self.options.OnViewModeChanged === 'function' ? self.options.OnViewModeChanged : async ()=>{}
 	self.OnFormInit = typeof self.options.OnFormInit === 'function' ? self.options.OnFormInit : ()=>{}
 	self.OnRecordStatusCreated = typeof self.options.OnRecordStatusCreated === 'function' ? self.options.OnRecordStatusCreated : ()=>{}
+	self.OnAboutCreated = typeof self.options.OnAboutCreated === 'function' ? self.options.OnAboutCreated : ()=>{}
 	
 	self.recordstatus = {
 		_createby: '',
@@ -65,7 +66,7 @@ export function fgta4form(frm, opt) {
 	})
 
 
-
+	self.customaboutinfo = [];
 
 	// DEFINISI PUBLIC OBJECT //
 	self.fgta4form = {
@@ -101,7 +102,9 @@ export function fgta4form(frm, opt) {
 		CreateLogPage: (panelname) => {CreateLogPage(self, panelname) },
 		btn_save_click: () => { btn_save_click(self) },
 		SuspendEvent: (suspend) => { return suspendevent(self, suspend)},
-		isEventSuspended: () => { return iseventsuspended(self) }
+		isEventSuspended: () => { return iseventsuspended(self) },
+
+		addAboutInfo: (name, descr) => {  self.customaboutinfo.push({name: name, descr: descr}); }
 	}
 
 	init(self)
@@ -177,6 +180,7 @@ function init(self) {
 
 	CreateRecordStatusPage(self, 'pnl_edit')
 	CreateLogPage(self, 'pnl_edit')
+	CreateAboutPage(self, 'pnl_edit')
 
 
 	// re parse
@@ -440,6 +444,92 @@ function CreateRecordStatusPage(self, panelname) {
 	}	
 }
 
+
+
+function CreateAboutPage(self, panelname) {
+	var pnl_edit = document.getElementById(panelname)
+	if (pnl_edit!=null) {
+
+		setTimeout(()=>{
+			var page_about = panelname + "_about"
+			
+			if ($ui.getPages().ITEMS[page_about]===undefined) {
+
+				$ui[`show_${page_about}`] = () => {
+					$ui.getPages().show(page_about)
+				}
+
+				var about = [];
+				about.push({name:'Base Title', descr: document.getElementsByName('basetitle')[0].getAttribute('content') });
+				about.push({name:'Program Name', descr:document.title });
+				about.push({name:'Modul Fullname', descr: document.getElementsByName('modulefullname')[0].getAttribute('content')});
+				about.push({name:'Variance', descr: document.getElementsByName('variancename')[0].getAttribute('content') });
+				about.push({name:'Author', descr: $("meta[name='author']").attr('content') });
+				about.push({name:'Program Create Date', descr: $("meta[name='createdate']").attr('content') });
+				
+
+
+				var t = '';
+				for (var a of about) {
+					var descr = a.descr.replace('https://www.fgta.net', '<a href="https://www.fgta.net/">https://www.fgta.net</a>')
+					t += `<div name="default" class="pabout-line" style="display: flex">
+						<div class="pabout-line-title" >${a.name}</div>
+						<div class="pabout-line-descr">${descr}</div>
+					</div>`;
+				}
+
+				for (var b of self.customaboutinfo) {
+					t += `<div name="custom" class="pabout-line" style="display: flex; margin-top: 25px">
+						<div class="pabout-line-title" >${b.name}</div>
+						<div class="pabout-line-descr">${b.descr}</div>
+					</div>`;
+				}
+
+
+				$(`#${panelname}`).append(`<div name="fgta-record-about" class="fgta-recordstatus-button" style="margin-top: 5px; margin-right: 0px; margin-left: 0px; padding-left: 5px; padding-right: 5px; border-left: 1px solid #999; border-right: 0px solid #333;  display: inline-block">
+						<a href="javascript:void(0)" onclick="$ui['show_${page_about}']()">About</a>
+					</div>`);
+	
+		
+				$(`<div id="${page_about}">
+					<div class="fgta-page-title" style="display: flex; align-items: center ">
+						About
+					</div>
+					<div class="pabout-box" style="margin-bottom: 30px">
+						${t}		
+					</div>
+			
+				</div>`).insertAfter(`#${panelname}`)
+		
+
+				var pnl_about = $(`#${page_about}`)
+				var pRecord = {
+					init: async (opt) => {}
+				}
+
+				pnl_about.hide()
+
+				var page = {panel: pnl_about, handler: pRecord}
+				page.panel.id = page_about
+				page.panel.pagenum = Object.keys($ui.getPages().ITEMS).length + 1
+				page.panel.handler = page.handler
+				$ui.getPages().ITEMS[page_about] = page.panel
+	
+				document.addEventListener('OnButtonBack', (ev) => {
+					if ($ui.getPages().getCurrentPage()==page_about) {
+						ev.detail.cancel = true;
+						$ui.getPages().show(panelname)
+					}
+				})
+			}
+
+			self.OnRecordStatusCreated();
+
+		}, 1000)
+
+
+	}	
+}
 
 
 function setValue(self, obj, value, display) {

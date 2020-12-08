@@ -477,3 +477,15 @@ h1 {
 .detilgrid-text {
 	flex: 1
 }
+
+
+.pabout-line-title {
+	text-align: right;
+	margin-right: 7px;
+	font-weight: bold;
+	width: 150px;
+}
+
+.pabout-line {
+	margin-bottom: 10px;
+}
