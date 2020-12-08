@@ -30,7 +30,8 @@
 				"finact/master/taxtype",
 				"finact/master/trxmodel",
 				"finact/master/depremodel",
-				"finact/master/paymtype"
+				"finact/master/paymtype",
+				"finact/master/billtype"
 			]
 		},
 		{
