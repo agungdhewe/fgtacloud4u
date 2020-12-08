@@ -472,14 +472,15 @@ function CreateAboutPage(self, panelname) {
 				var t = '';
 				for (var a of about) {
 					var descr = a.descr.replace('https://www.fgta.net', '<a href="https://www.fgta.net/">https://www.fgta.net</a>')
-					t += `<div name="default" class="pabout-line" style="display: flex">
+					t += `<div  class="pabout-line" style="display: flex">
 						<div class="pabout-line-title" >${a.name}</div>
 						<div class="pabout-line-descr">${descr}</div>
 					</div>`;
 				}
 
+				var u = ''
 				for (var b of self.customaboutinfo) {
-					t += `<div name="custom" class="pabout-line" style="display: flex; margin-top: 25px">
+					u += `<div class="pabout-line" style="display: flex;">
 						<div class="pabout-line-title" >${b.name}</div>
 						<div class="pabout-line-descr">${b.descr}</div>
 					</div>`;
@@ -495,10 +496,13 @@ function CreateAboutPage(self, panelname) {
 					<div class="fgta-page-title" style="display: flex; align-items: center ">
 						About
 					</div>
-					<div class="pabout-box" style="margin-bottom: 30px">
+					<div name="default" class="pabout-box" style="margin-bottom: 30px">
 						${t}		
 					</div>
-			
+					<div name="custom"  class="pabout-box" style="margin-bottom: 30px">
+						${u}		
+					</div>
+					
 				</div>`).insertAfter(`#${panelname}`)
 		
 

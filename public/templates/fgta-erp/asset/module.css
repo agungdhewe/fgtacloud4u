@@ -489,3 +489,16 @@ h1 {
 .pabout-line {
 	margin-bottom: 10px;
 }
+
+@media screen and (max-width: 520px) {
+	.pabout-line {
+		flex-direction: column;
+		margin-bottom: 20px;
+	}
+
+	.pabout-line-title {
+		text-align: left;
+	}
+
+
+}
