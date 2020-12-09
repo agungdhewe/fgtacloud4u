@@ -449,6 +449,18 @@ h1 {
 }
 
 
+.fgform-grouping {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+@media screen and (max-width: 520px) {
+	.fgform-grouping {
+		margin-top:3px;
+		padding-top: 1px;
+		padding-bottom: 1px;
+	}
+}
 
 
 .buttonprogramicon {

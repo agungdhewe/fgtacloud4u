@@ -31,7 +31,8 @@
 				"finact/master/trxmodel",
 				"finact/master/depremodel",
 				"finact/master/paymtype",
-				"finact/master/billtype"
+				"finact/master/billtype",
+				"finact/master/accfin"
 			]
 		},
 		{
@@ -147,8 +148,18 @@
 					"program": "finact/acct/billin",
 					"variancename": "uncommit"
 				},
+
+				"finact/acct/rpttrialbal"
 				
-				"finact/acct/paym"
+
+			]
+		},
+		{
+			"title": "Finance",
+			"disabled": false,
+			"modules": [
+				"finact/fin/bankbook",
+				"finact/fin/paym"
 			]
 		}
 	]

@@ -121,13 +121,7 @@ class DataSave extends WebAPI {
 	}
 
 	public function NewId($param) {
-		//$dt = new \DateTime();	
-		//$ye = $dt->format("y");
-		//$mo = $dt->format("m");
-		//$seq = new Sequencer($this->db, 'seq_generalmonthly', 'TF', ['ye', 'mo']);
-		//$id = $seq->get(['ye'=>$ye, 'mo'=>$mo]);
-		//return $id;
-		return uniqid();
+		/*{__IDGENERATPR__}*/
 	}
 
 }

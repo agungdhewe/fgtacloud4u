@@ -14,7 +14,7 @@ module.exports = async (fsd, genconfig) => {
 		console.log(`-----------------------------------------------`)
 		console.log(`Generate API Save...`)
 
-
+		var idprefix = genconfig.idprefix;
 		var headertable_name = genconfig.schema.header
 		var headertable = genconfig.persistent[headertable_name]
 		var data = headertable.data
@@ -82,6 +82,22 @@ module.exports = async (fsd, genconfig) => {
 		var fieldresturnsel = "'" + fieldreturn.join("', '") + "'"
 
 
+		var idgenerator = "\t\t\treturn uniqid();";
+		if (idprefix!=null) {
+			idgenerator = `
+			$seqname = '${idprefix}';
+
+			$dt = new \DateTime();	
+			$ye = $dt->format("y");
+			$mo = $dt->format("m");
+			$seq = new Sequencer($this->db, 'seq_generalmonthly', $seqname, ['ye', 'mo']);
+			$raw = $seq->getraw(['ye'=>$ye, 'mo'=> $mo]);
+	
+			$id = $seqname;
+			return $id;		
+			`
+		}
+
 
 		// $obj->tanggal = (\DateTime::createFromFormat('d/m/Y',$obj->tanggal))->format('Y-m-d');
 		var primarykey = headertable.primarykeys[0]
@@ -97,6 +113,7 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*{__LOOKUPFIELD__}*/', lookupfields)
 		tplscript = tplscript.replace('/*{__SETNULLFIELD__}*/', setnullfields)
 		tplscript = tplscript.replace('/*{__UNSETFIELD__}*/', unsetfields)
+		tplscript = tplscript.replace('/*{__IDGENERATPR__}*/', idgenerator)
 
 
 		

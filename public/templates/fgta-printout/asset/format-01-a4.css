@@ -180,9 +180,14 @@ tfoot:after {
 	text-align: right;
 	/* background-color: dimgray; */
 	border: 0px;
+	display: none;
 }
 
-
+@media print {
+	.pagenumber {
+		display: block;
+	}
+}
 
 
 .fullwidth {
