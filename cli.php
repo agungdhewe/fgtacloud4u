@@ -1,6 +1,9 @@
 <?php 
 define('FGTA4', 1);
 
+define('__LOCAL_CURR',  'IDR');
+
+
 date_default_timezone_set('Asia/Jakarta');
 define('__ROOT_DIR', dirname(__FILE__));
 define('DB_CONFIG_PARAM', [

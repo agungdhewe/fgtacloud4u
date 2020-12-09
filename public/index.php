@@ -1,5 +1,8 @@
 <?php namespace FGTA4;
 
+define('__LOCAL_CURR',  'IDR');
+
+
 
 ini_set("session.gc_maxlifetime", "65535");
 ini_set('display_errors', 1);

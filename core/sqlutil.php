@@ -52,6 +52,8 @@ class SqlUtility {
 
 			if (is_bool($value)) {
 				$value = $value ? 1 : 0;
+			} else if (is_numeric($value)) {
+				$value = $value ? $value : 0;
 			} else if ($value=='--NULL--') {
 				$value = null;
 			}

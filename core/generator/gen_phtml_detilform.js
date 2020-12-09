@@ -83,6 +83,8 @@ module.exports = async (fsd, genconfig) => {
 			settouppercase = 'lowercase="true"'
 		}		
 
+
+		console.log(compclass + '####################')
 			if (compclass=='easyui-checkbox') {
 				formcomp_script += `
 		<div class="form_row">
@@ -100,9 +102,12 @@ module.exports = async (fsd, genconfig) => {
 					throw `Component ${fieldname} pada ${tablename} bertipe combo, harus didefinisikan: table, field_value, field_display`
 				}
 
+				console.log('**********************')
+				console.log(dataoptions)
 				var validType = '';
-				if (dataoptions.required===true) {
+				if (fdataoptions.required===true) {
 					validType = ` validType="requiredcombo['${fsd.panel}-${prefix}${fieldname}']" `;
+					console.log('===================================')
 				} 
 
 				formcomp_script += `
