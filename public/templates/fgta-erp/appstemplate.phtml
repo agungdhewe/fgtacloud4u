@@ -214,6 +214,15 @@ if (!defined('FGTA4')) {
 				}
 			});
 
+
+			window.to_sql_date = (ststr) => {
+				var date = $.fn.datebox.defaults.parser(ststr);
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				var d = date.getDate();
+				return y + '-' + (m < 10 ? '0' + m : m) + '-' +  (d < 10 ? '0' + d : d);		 
+			}
+
 		</script>		
 
 		<style>

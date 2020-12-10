@@ -86,13 +86,48 @@ class ModuleRoute extends Route {
 			throw new \FGTA4\exceptions\WebException("Method 'Render' pada MODULE '$reqinfo->modulecontrollerpath' tidak ditemukan", 500);		
 		}
 
+
+
+
+
+		//$API->execute();
+		$classname = get_class($MODULE);
+		$apimethod = new \ReflectionMethod($classname, 'LoadPage');
+		$params = $apimethod->getParameters();
+		$executingparameters = [];
+		foreach ($params as $param) {
+			// echo $param->getName();
+			$paramname = $param->getName();
+			if (array_key_exists($paramname, $_POST)) {
+				$paramvalue = json_decode($_POST[$paramname]);
+				if (json_last_error()===JSON_ERROR_NONE) {
+					$executingparameters[$paramname] = $paramvalue;
+				} else {
+					$executingparameters[$paramname] = $_POST[$paramname];
+				}
+
+				
+			} else {
+				$executingparameters[$paramname] = null;
+				throw new \FGTA4\exceptions\WebException("Eksekusi Module membutuhkan POST parameter '$paramname' !", 500);
+			}
+		}
+
+		if (count($params)>0) {
+			if ($_SERVER['REQUEST_METHOD']!='POST') {
+				throw new \FGTA4\exceptions\WebException("Module ini hanya bisa diakses via POST!", 405);
+			}
+		}
+
+
 		$this->MODULE = $MODULE;
 		$this->MODULE->configuration = $this->configuration;
 		$this->MODULE->reqinfo = $reqinfo;
 		$this->MODULE->title = $reqinfo->moduleconfig->title;
 
 		$this->MODULE->auth = $this->auth;
-		$this->MODULE->LoadPage();
+		// $this->MODULE->LoadPage($executingparameters);
+		$apimethod->invokeArgs($this->MODULE, $executingparameters);
 		
 	}
 
