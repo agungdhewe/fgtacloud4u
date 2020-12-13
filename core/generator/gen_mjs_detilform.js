@@ -54,6 +54,7 @@ module.exports = async (fsd, genconfig) => {
 		var prefix = data[fieldname].comp.prefix
 		var comptype = data[fieldname].comp.comptype
 		var recursivetable = false;
+		var initialvalue =  data[fieldname].initialvalue;
 
 		if (data[fieldname].comp.options!==undefined) {
 			recursivetable = data[fieldname].comp.options.table===tablename ? true : false;
@@ -64,6 +65,12 @@ module.exports = async (fsd, genconfig) => {
 
 		if (comptype=='datebox') {
 			setdefaultnow += `\t\t\tdata.${fieldname} = global.now()\r\n`
+		}  else if (comptype=='numberbox') {
+			setdefaultnow += `\t\t\tdata.${fieldname} = 0\r\n`
+		} else if (comptype=='textbox') {
+			if (typeof initialvalue === 'string') {
+				setdefaultnow += `\t\t\tdata.${fieldname} = '${initialvalue}'\r\n`
+			}
 		}
 
 		if (comptype=='combo') {
@@ -86,9 +93,31 @@ module.exports = async (fsd, genconfig) => {
 				setdefaultcombo += `\t\t\tdata.${field_display_name} = '-- PILIH --'\r\n`
 			}				
 
+			// if (recursivetable) {
+			// 	skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
+			// 	updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
+			// }
+
+
+			hapuspilihansama = '';
 			if (recursivetable) {
 				skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
-				updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
+				updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--' ? result.dataresponse.${fieldname} : '--NULL--', result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
+				hapuspilihansama = `
+		// hapus pilihan yang sama dengan data saat ini
+		var id = obj.${primarycomppreix}${primarykey}.textbox('getText')
+		var i = 0; var idx = -1;
+		for (var d of result.records) {
+			if (d.${primarykey}==id) { idx = i; }
+			i++;
+		}
+		if (idx>=0) { result.records.splice(idx, 1); }					
+		
+		`;	
+
+			} else if (allownull) {
+				skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
+				updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--' ? result.dataresponse.${fieldname} : '--NULL--', result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
 			}
 
 

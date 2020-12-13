@@ -82,26 +82,29 @@ module.exports = async (fsd, genconfig) => {
 		var fieldresturnsel = "'" + fieldreturn.join("', '") + "'"
 
 
+		var seq_require = "// require_once __ROOT_DIR . \"/core/sequencer.php\";";
+		var seq_use = "// use \\FGTA4\\utils\\Sequencer;";
 		var idgenerator = "\t\t\treturn uniqid();";
 		if (idprefix!=null) {
 			idgenerator = `
 			$seqname = '${idprefix}';
 
-			$dt = new \DateTime();	
+			$dt = new \\DateTime();	
 			$ye = $dt->format("y");
 			$mo = $dt->format("m");
 			$seq = new Sequencer($this->db, 'seq_generalmonthly', $seqname, ['ye', 'mo']);
 			$raw = $seq->getraw(['ye'=>$ye, 'mo'=> $mo]);
-	
-			$id = $seqname;
+			$id = $seqname . $raw['ye'] . $raw['mo'] . \str_pad($raw['lastnum'], 4, '0', STR_PAD_LEFT);
 			return $id;		
 			`
+			seq_require = "require_once __ROOT_DIR . \"/core/sequencer.php\";";
+			seq_use = "use \\FGTA4\\utils\\Sequencer;";
 		}
 
 
 		// $obj->tanggal = (\DateTime::createFromFormat('d/m/Y',$obj->tanggal))->format('Y-m-d');
 		var primarykey = headertable.primarykeys[0]
-	
+		var basename = genconfig.basename
 
 		var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'save_api.tpl')
 		var tplscript = fs.readFileSync(mjstpl).toString()
@@ -114,7 +117,9 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*{__SETNULLFIELD__}*/', setnullfields)
 		tplscript = tplscript.replace('/*{__UNSETFIELD__}*/', unsetfields)
 		tplscript = tplscript.replace('/*{__IDGENERATPR__}*/', idgenerator)
-
+		tplscript = tplscript.replace('/*{__SEQREQUIRE__}*/', seq_require)
+		tplscript = tplscript.replace('/*{__SEQUSE__}*/', seq_use)
+		tplscript = tplscript.replace('/*{__BASENAME__}*/', basename)
 
 		
 

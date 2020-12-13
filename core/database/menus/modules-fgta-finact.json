@@ -131,25 +131,11 @@
 			"disabled": false,
 			"modules": [
 				"finact/acct/jurnal",
-				"finact/acct/billin",
-				{
-					"program": "finact/acct/billin",
-					"variancename": "advance"
-				},
-				{
-					"program": "finact/acct/billin",
-					"variancename": "reimburse"
-				},
-				{
-					"program": "finact/acct/billin",
-					"variancename": "approve"
-				},				
-				{
-					"program": "finact/acct/billin",
-					"variancename": "uncommit"
-				},
+				"finact/acct/payable",
 
-				"finact/acct/rpttrialbal"
+				"finact/acct/rpttrialbal",
+				"finact/acct/rptneraca",
+				"finact/acct/rptlabarugi"
 				
 
 			]
@@ -159,7 +145,30 @@
 			"disabled": false,
 			"modules": [
 				"finact/fin/bankbook",
-				"finact/fin/paym"
+				"finact/fin/banklink",
+				"finact/fin/paym",
+				"finact/fin/paymschedule",
+				"finact/fin/settl",
+				"finact/fin/recvschedule",
+				"finact/fin/ofrecv",
+
+				"finact/fin/billin",
+				{
+					"program": "finact/fin/billin",
+					"variancename": "advance"
+				},
+				{
+					"program": "finact/fin/billin",
+					"variancename": "reimburse"
+				},
+				{
+					"program": "finact/fin/billin",
+					"variancename": "approve"
+				},				
+				{
+					"program": "finact/fin/billin",
+					"variancename": "uncommit"
+				}	
 			]
 		}
 	]

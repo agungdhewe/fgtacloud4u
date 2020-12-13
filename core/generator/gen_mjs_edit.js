@@ -44,6 +44,9 @@ module.exports = async (fsd, genconfig) => {
 			var prefix = data[fieldname].comp.prefix
 			var comptype = data[fieldname].comp.comptype
 			var recursivetable = false;
+			var initialvalue =  data[fieldname].initialvalue;
+
+			
 
 			if (data[fieldname].comp.options!==undefined) {
 				recursivetable = data[fieldname].comp.options.table===headertable_name ? true : false;
@@ -56,9 +59,14 @@ module.exports = async (fsd, genconfig) => {
 				setdefaultnow += `\t\t\tdata.${fieldname} = global.now()\r\n`
 			} else if (comptype=='numberbox') {
 				setdefaultnow += `\t\t\tdata.${fieldname} = 0\r\n`
+			} else if (comptype=='textbox') {
+				if (typeof initialvalue === 'string') {
+					setdefaultnow += `\t\t\tdata.${fieldname} = '${initialvalue}'\r\n`
+				}
 			}
 
 			if (comptype=='combo') {
+				
 				var options = data[fieldname].comp.options
 				var field_display_name = options.field_display;
 				if (options.field_display_name!=null) {
@@ -74,8 +82,13 @@ module.exports = async (fsd, genconfig) => {
 					nullresultloaded += `\t\tif (result.record.${fieldname}==null) { result.record.${fieldname}='--NULL--'; result.record.${field_display_name}='NONE'; }\r\n`;
 					pilihnone = `result.records.unshift({${options.field_value}:'--NULL--', ${options.field_display}:'NONE'});`	
 				} else {
-					setdefaultcombo += `\t\t\tdata.${fieldname} = '0'\r\n`
-					setdefaultcombo += `\t\t\tdata.${field_display_name} = '-- PILIH --'\r\n`
+					if (initialvalue!=null) {
+						setdefaultcombo += `\t\t\tdata.${fieldname} = '${initialvalue.id}'\r\n`
+						setdefaultcombo += `\t\t\tdata.${field_display_name} = '${initialvalue.display}'\r\n`
+					} else {
+						setdefaultcombo += `\t\t\tdata.${fieldname} = '0'\r\n`
+						setdefaultcombo += `\t\t\tdata.${field_display_name} = '-- PILIH --'\r\n`
+					}
 				}				
 
 				hapuspilihansama = '';

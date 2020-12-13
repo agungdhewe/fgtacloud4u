@@ -5,14 +5,24 @@ if (!defined('FGTA4')) {
 }
 
 require_once __ROOT_DIR.'/core/sqlutil.php';
-//require_once __ROOT_DIR . "/core/sequencer.php";
+/*{__SEQREQUIRE__}*/
 
 use \FGTA4\exceptions\WebException;
-//use \FGTA4\utils\Sequencer;
+/*{__SEQUSE__}*/
+
+
+
+// /* Enable Debugging */
+// require_once __ROOT_DIR.'/core/debug.php';
+// use \FGTA4\debug;
 
 
 class DataSave extends WebAPI {
 	function __construct() {
+		$logfilepath = __LOCALDB_DIR . "/output//*{__BASENAME__}*/-save.txt";
+		// debug::disable();
+		// debug::start($logfilepath, "w");
+
 		$this->debugoutput = true;
 		$DB_CONFIG = DB_CONFIG[$GLOBALS['MAINDB']];
 		$DB_CONFIG['param'] = DB_CONFIG_PARAM[$GLOBALS['MAINDBTYPE']];
