@@ -23,7 +23,9 @@ if (!defined('FGTA4')) {
 			case "format-01-a4-landscape" :
 				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/fgta-printout/asset/format-01-a4-landscape.css\" />";
 				break;
-
+			case "format-01-a5-landscape" :
+				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/fgta-printout/asset/format-01-a5-landscape.css\" />";
+				break;
 			default:
 				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/fgta-printout/asset/format-01-a4.css\" />";
 				break;
@@ -175,8 +177,16 @@ if (!defined('FGTA4')) {
 				
 	</head>
 	<body>
-		<?php require_once $this->reqinfo->moduleviewpath ?>
-
+		<?php
+		$view = $this->reqinfo->moduleviewpath;
+		if (array_key_exists('view', $_GET)) {
+			$userview = dirname($this->reqinfo->moduleviewpath).'/'.$_GET['view'].'.phtml';
+			if (is_file($userview)) {
+				$view = $userview;
+			} 
+		}
+		require_once $view; 
+		?>
 	</body>
 
 

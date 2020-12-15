@@ -32,7 +32,7 @@ export function fgta4slideselect(obj, options) {
 		fields: [],
 		data: null,
 		OnCreated: () => {},
-		OnDataLoading: (criteria) => {},
+		OnDataLoading: (criteria, options) => {},
 		OnDataLoaded : (result, options) => {},
 		OnSelecting: (value, display, record, arg) => {},
 		OnSelected: (value, display, record, arg) => {},
@@ -254,7 +254,8 @@ function retrieveData(self) {
 				options.criteria['search'] = search
 			}
 	
-			self.options.OnDataLoading(options.criteria)
+			self.options.OnDataLoading(options.criteria, options)
+
 		}
 		
 		var fn_listloaded = async (result, options) => {

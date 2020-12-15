@@ -121,7 +121,8 @@
 				{
 					"program": "finact/budget/corpbudget",
 					"variancename": "approve"
-				}			
+				},
+				"finact/budget/rptcorpbudget"			
 			]
 		},
 		{
@@ -131,12 +132,12 @@
 			"disabled": false,
 			"modules": [
 				"finact/acct/jurnal",
+				"finact/acct/jurnalsaldo",
 				"finact/acct/payable",
-
+				"finact/acct/receivable",
 				"finact/acct/rpttrialbal",
 				"finact/acct/rptneraca",
 				"finact/acct/rptlabarugi"
-				
 
 			]
 		},

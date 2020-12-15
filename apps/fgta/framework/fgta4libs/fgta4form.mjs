@@ -614,7 +614,7 @@ function isInViewMode(self) {
 	return self.inviewmode
 }
 
-function setViewMode(self, viewonly) {
+function setViewMode(self, viewonly) {	
 	viewonly = (viewonly===false) ? false : true
 	if (viewonly) {
 		self.buttons.edit.linkbutton('unselect')
@@ -848,8 +848,6 @@ function set_state_checkbox(self, obj, viewonly) {
 function set_state_textbox(self, obj, viewonly) {
 	var value = obj.textbox('getValue')
 	var text = obj.textbox('getText')
-
-	// console.log(obj.textbox('getText'))
 
 	var iscombo = obj.hasClass('easyui-combo') ? true : false;
 	var opt = obj.textbox('options')
