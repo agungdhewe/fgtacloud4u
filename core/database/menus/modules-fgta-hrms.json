@@ -18,9 +18,9 @@
 			]					
 		},
 		{
-			"title" : "HRD",
+			"title" : "Payroll",
 			"modules" : [
-				
+				"hrms/payroll/consol01"
 			]
 		}
 

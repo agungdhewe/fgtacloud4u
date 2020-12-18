@@ -92,6 +92,11 @@ function CreatePanel(self) {
 			}
 		})		
 
+		if (self.options.initialvalue!=null) {
+			self.obj.combo('setValue', self.options.initialvalue.id);
+			self.obj.combo('setText', self.options.initialvalue.text);
+		}
+
 		if (typeof self.obj.form.setValue !== 'function') {
 			self.obj.bgcolorbase = self.obj.css('background-color')
 			self.obj.colorbase = self.obj.css('color')

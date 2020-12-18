@@ -91,6 +91,12 @@ function CreatePanel(self) {
 			}
 		})		
 
+
+		if (self.options.initialvalue!=null) {
+			self.obj.combo('setValue', self.options.initialvalue.id);
+			self.obj.combo('setText', self.options.initialvalue.text);
+		}
+
 		if (typeof self.obj.form.setValue !== 'function') {
 			self.obj.bgcolorbase = self.obj.css('background-color')
 			self.obj.colorbase = self.obj.css('color')
@@ -228,7 +234,7 @@ function grd_list_rowclick(self, tr, ev) {
 async function retrieveData(self) {
 	self.grd_list.clear();
 
-	if (self.options.data!=null) {
+	if (self.options.api==null) {
 		var data = await self.options.OnDataLoading()
 		if (data==null) {
 			data = self.options.data;
@@ -250,7 +256,7 @@ async function retrieveData(self) {
 				options.criteria['search'] = search
 			}
 	
-			await self.options.OnDataLoading(options.criteria)
+			await self.options.OnDataLoading(options.criteria, options)
 		}
 		
 		var fn_listloaded = async (result, options) => {

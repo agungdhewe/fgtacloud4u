@@ -37,7 +37,7 @@ export async function SlidePanelRight(pnl_prev, pnl_next, pnl_prev_remove=false,
 	await show_pnl_next()	
 
 	if (typeof fn_callback === 'function') {
-		fn_callback()
+		fn_callback(pnl_next);
 	}
 
 }
@@ -81,7 +81,7 @@ export async function SlidePanelLeft(pnl_prev, pnl_next, pnl_prev_remove=false, 
 	await show_pnl_next();
 
 	if (typeof fn_callback === 'function') {
-		fn_callback()
+		fn_callback(pnl_next);
 	}
 
 }
