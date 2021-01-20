@@ -346,6 +346,9 @@ export async function download(url, args, fn_handler) {
 						filename: filename,
 						data: blob
 					})
+				} else if (xhr.status === 404) {
+					var errormessage = xhr.getResponseHeader('fgta4-errormessage');
+					reject(new Error(errormessage));
 				}
 			};		
 
@@ -399,6 +402,10 @@ export async function download(url, args, fn_handler) {
 	} catch (err) {
 		if (typeof err == 'string') {
 			err = {errormessage: err}
+		}
+
+		if (typeof(fn_handler)==='function') {
+			fn_handler(null, err);
 		}
 
 		// fgta_output_content.html('')

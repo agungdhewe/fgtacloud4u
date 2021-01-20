@@ -1,0 +1,7 @@
+{
+	"title": "home",
+	"modules": [
+		"etap/client/config",
+		"etap/client/manual"
+	]
+}

@@ -1,0 +1,24 @@
+{
+	"title": "home",
+	"modules": [
+		"etap/client/config",
+		"etap/client/supvisit",
+		"ent/location/site",
+		"ent/general/config",
+		"etap/client/manual",
+		{
+			"title" : "Administrator",
+			"icon" : "icon-admin-white.png",
+			"backcolor" : "#8ab0c5",
+			"disabled" : false,
+			"file" : "modules-fgta-administrator.json"
+		},
+		{
+			"title" : "Enterprise",
+			"icon" : "icon-enterprise-white.png",
+			"backcolor" : "#d7895b",
+			"disabled" : false,
+			"file" : "modules-fgta-ent.json"
+		}						
+	]
+}

@@ -1,5 +1,7 @@
 {
 	"title" : "__PROGRAM_TITLE__",
+	__PROGRAM_ICON__
+	__PROGRAM_BACKCOLOR__
 	"variance" : {},
 	"allowanonymous" : true,
 	"allowedgroups" : ["public"],

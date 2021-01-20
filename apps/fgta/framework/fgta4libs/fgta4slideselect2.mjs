@@ -95,6 +95,7 @@ function CreatePanel(self) {
 		if (self.options.initialvalue!=null) {
 			self.obj.combo('setValue', self.options.initialvalue.id);
 			self.obj.combo('setText', self.options.initialvalue.text);
+			console.log('set init value');
 		}
 
 		if (typeof self.obj.form.setValue !== 'function') {

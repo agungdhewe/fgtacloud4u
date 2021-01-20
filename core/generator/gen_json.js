@@ -15,10 +15,28 @@ module.exports = async (fsd, genconfig) => {
 		console.log(`Generate JSON Config...`)
 
 		var title = genconfig.title
+		var icon = genconfig.icon;
+		var backcolor = genconfig.backcolor;
+
+		var config_icon = "";
+		if (icon!=null) {
+			config_icon = `"icon": "${icon}",`;
+		}
+
+		var config_backcolor = "";
+		if (backcolor!=null) {
+			config_backcolor = `"backcolor": "${backcolor}",`
+		}
+
 
 		var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'json.tpl')
 		var tplscript = fs.readFileSync(mjstpl).toString()
 		tplscript = tplscript.replace('__PROGRAM_TITLE__', title)
+		tplscript = tplscript.replace('__PROGRAM_ICON__', config_icon)
+		tplscript = tplscript.replace('__PROGRAM_BACKCOLOR__', config_backcolor)
+
+
+
 
 		// console.log(tplscript)		
 		fsd.script = tplscript

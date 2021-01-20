@@ -133,11 +133,11 @@ class ApiRoute extends Route {
 		// $res->output = $content;
 		// $res->debugoutput = $this->debugoutput;
 		// echo json_encode($res);
-		debug::log($content);
+		// debug::log($content);
 		if ($this->result!=null) {
 			echo $this->result;
 		}
-		debug::close();
+		// debug::close();
 		
 	}
 

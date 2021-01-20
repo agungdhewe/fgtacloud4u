@@ -59,9 +59,27 @@ export function getCurrentPage() {
 
 
 
-export function show(page_id, fn_callback) {
-	if (ITEMS[page_id]==null)
+export function show(objpage, fn_callback) {
+	var page_id;
+	if (typeof objpage !== 'string') {
+		if (objpage!=null) {
+			if (objpage.id != null) {
+				page_id = objpage.id
+			} else {
+				console.error('parameter page pada show() salah');
+			}
+		} else {
+			console.error('parameter page pada show() salah');
+		}
+	} else {
+		page_id = objpage;
+	}
+
+
+	if (ITEMS[page_id]==null) {
+		console.error(`${page_id} tidak ditemukan!`)
 		return
+	}
 
 	if (page_id==CurrentPage)
 		return

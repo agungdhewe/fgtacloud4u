@@ -5,6 +5,7 @@
 		{
 			"title" : "General",
 			"icon" : "icon-general-white.png",
+			"backcolor" : "#d3c77d",
 			"disabled" : false,
 			"modules" : [
 				"ent/general/curr",
@@ -22,8 +23,11 @@
 		{
 			"title" : "Affiliation",
 			"icon" : "icon-affiliation-white.png", 
+			"backcolor" : "#737174",
 			"disabled" : false,
 			"modules" : [
+				"ent/affiliation/brandtype",
+				"ent/affiliation/brand",
 				"ent/affiliation/contacttype",
 				"ent/affiliation/partnertype",
 				"ent/affiliation/partnerorg",
@@ -34,6 +38,7 @@
 		{
 			"title" : "Organisation",
 			"icon" : "icon-organiszation-white.png",
+			"backcolor" : "#7d81b1",
 			"disabled" : false,
 			"modules" : [
 				"ent/organisation/authlevel",
@@ -51,6 +56,7 @@
 		{
 			"title" : "Location",
 			"icon" : "icon-location-white.png",
+			"backcolor" : "#af5962",
 			"disabled":false,
 			"modules" : [
 				"ent/location/area",

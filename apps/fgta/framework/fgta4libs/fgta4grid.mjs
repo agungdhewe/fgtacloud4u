@@ -88,8 +88,9 @@ export function fgta4grid(tbl, opt) {
 		getLastId: () => { return getLastId(self) },
 		dataload: (records) => { return dataload(self, records) }, 
 		listload: (fn_listloading, fn_listloaded) => { listload(self, fn_listloading, fn_listloaded) },
-		nextpageload: () => ( nextpageload(self) )
+		nextpageload: () => ( nextpageload(self) ),
 
+		getdata: () => { return getdata(self) }
 	}
 }
 
@@ -748,4 +749,9 @@ function nextpageload(self) {
 	if (self.btnNext.isEnabled()) {
 		btnNext_click(self);
 	}
+}
+
+
+function getdata(self) {
+	return self.DATA;
 }

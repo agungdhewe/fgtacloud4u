@@ -32,7 +32,8 @@
 				"finact/master/depremodel",
 				"finact/master/paymtype",
 				"finact/master/billtype",
-				"finact/master/accfin"
+				"finact/master/accfin",
+				"finact/master/salesordertype"
 			]
 		},
 		{
@@ -143,6 +144,8 @@
 		},
 		{
 			"title": "Finance",
+			"icon" : "icon-finance-white.svg",
+			"backcolor": "#7db89c",
 			"disabled": false,
 			"modules": [
 				"finact/fin/bankbook",
@@ -169,8 +172,32 @@
 				{
 					"program": "finact/fin/billin",
 					"variancename": "uncommit"
-				}	
+				},
+
+
+				"finact/fin/billout"
+				
+				
 			]
+		},
+		{
+			"title": "Sales",
+			"icon" : "icon-sales-white.svg",
+			"backcolor" : "#82263f",
+			"disabled": false,
+			"modules": [
+				"finact/sales/order"
+			]			
+		},
+		{
+			"title": "Collection",
+			"icon" : "icon-collection-white.svg",
+			"backcolor" : "#6a6a68",
+			"disabled": false,
+			"modules": [
+				"finact/collection/colltarget",
+				"finact/collection/temprecv"
+			]			
 		}
 	]
 }

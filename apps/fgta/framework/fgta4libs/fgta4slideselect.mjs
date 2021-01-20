@@ -170,8 +170,20 @@ function CreatePanelContent(self) {
 	var th = ''
 	var trhead = ''
 	for (var t of self.options.fields) {
-		th += `<th mapping="${t.mapping}">${t.text}</th>`
-		trhead += `<td class="fgtable-head-alt1" style="width: 100px; border-bottom: 1px solid #000000">${t.text}</td>`
+		var formatter = '';
+		if (t.formatter!=null) {
+			formatter = `formatter="${t.formatter}"`;
+		}
+
+		var style= '';
+		var addstyle = '';
+		if (t.style!=null) {
+			style = `style="${t.style}"`;
+			addstyle = `; ${t.style}`;
+		}
+
+		th += `<th mapping="${t.mapping}" ${formatter} ${style}>${t.text}</th>`
+		trhead += `<td class="fgtable-head-alt1" style="border-bottom: 1px solid #000000; ${addstyle}">${t.text}</td>`
 	}
 	
 
@@ -196,9 +208,11 @@ function CreatePanelContent(self) {
 					<thead>
 						<tr>
 							${th}
+							<th mapping=""></th>
 						</tr>
 						<tr style="background-color: #cccccc; height: 30px">
 							${trhead}
+							<td style="border-bottom: 1px solid #000000;">&nbsp;</td>
 						</tr>
 					</thead>
 				</table>

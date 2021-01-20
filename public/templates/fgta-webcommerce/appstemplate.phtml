@@ -1,0 +1,175 @@
+<?php namespace FGTA4\module; 
+if (!defined('FGTA4')) {
+	die('Forbiden');
+}
+?><!DOCTYPE HTML>
+<html>
+	<head>
+		
+		<title><?=$this->title?></title>
+		<!-- <base href="<?=__BASEADDRESS?>"> -->
+		<base href="<?php echo $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']); ?> ">
+
+		<link rel="shortcut icon" href="favicon.ico">
+		<!-- <link rel="manifest" href="manifest.json"> -->
+
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="application-name" content="<?=__APPDISPLAYNAME?>">
+		<meta name="apple-mobile-web-app-title" content="<?=__APPDISPLAYNAME?>">
+		<meta name="theme-color" content="#9c6ea7">
+		<meta name="msapplication-navbutton-color" content="#9c6ea7">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="msapplication-starturl" content="/">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="-1" />
+		<meta name="modulefullname" content="<?=$this->reqinfo->modulefullname?>" />
+		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
+		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
+		<meta name="home" content="<?=__STARTMODULE?>" />
+
+		<style>
+
+			@font-face {
+				font-family: "Karla";
+				font-style: normal;
+				font-weight: 400;	
+				src: url('index.php/public/assets/karla-v13-latin-regular.woff2') format("woff2")
+			}
+
+			* {
+				font-family: "Karla"; 
+				font-size: 14px;
+			}
+
+			html, body {
+				width: 100%;
+				padding: 0px;
+				margin: 0 auto;
+			}
+		</style>
+
+
+		<link rel="stylesheet" type="text/css" href="index.php/public/assets/styles/style-default.css" />
+			<?php if (is_file($this->reqinfo->modulecsspath)) { ?>		
+	<!-- CSS Module <?php //echo($this->reqinfo->modulecsspath) ?> -->	
+		<link rel="stylesheet" type="text/css" href="<?=$this->reqinfo->modulecssurl?>" />
+		<?php } ?>
+
+
+
+		<script src="index.php/jslibs/cookie.js"></script>
+		<script>
+			function getWidth() {
+				return Math.max(
+					document.body.scrollWidth,
+					document.documentElement.scrollWidth,
+					document.body.offsetWidth,
+					document.documentElement.offsetWidth,
+					document.documentElement.clientWidth
+				);
+			}
+
+			function getHeight() {
+				return Math.max(
+					document.body.scrollHeight,
+					document.documentElement.scrollHeight,
+					document.body.offsetHeight,
+					document.documentElement.offsetHeight,
+					document.documentElement.clientHeight
+				);
+			}
+		</script>
+
+
+</head>
+
+	
+	<body>
+		<?php
+		$tp_header_path = __LOCAL_PUBLIC_DIR . "/page-header.phtml";
+		if (\is_file($tp_header_path)) {
+			require_once $tp_header_path;
+		} else { ?>
+		<header id="page-header">
+			blank header
+		</header>
+		<?php } ?>
+
+
+		<?php
+		$tp_content_path = __LOCAL_PUBLIC_DIR . "/page-content.phtml";
+		if (\is_file($tp_content_path)) {
+			require_once $tp_content_path;
+		} else { ?>
+		<main id="page-content" >
+			content
+		</main>
+		<?php } ?>
+
+
+		<?php
+		$tp_footer_path = __LOCAL_PUBLIC_DIR . "/page-footer.phtml";
+		if (\is_file($tp_footer_path)) {
+			require_once $tp_footer_path;
+		} else { ?>
+		<footer id="page-footer">
+			blank footer
+		</footer>
+		<?php } ?>		
+	</body>
+</html>	
+
+
+
+<?php if (property_exists($this, 'preloadscripts')) { ?>
+<!-- Preaload Scripts -->
+<?php if (is_array($this->preloadscripts)) { 
+		foreach ($this->preloadscripts as $script) {	
+?><script src="<?=$script?>"></script>			
+<?php }}} ?>		
+
+
+
+<?php if (property_exists($this, 'preloadsstyles')) { ?>
+<!-- Preaload Styles -->
+<?php if (is_array($this->preloadsstyles)) { 
+		foreach ($this->preloadsstyles as $style) {	
+?><link rel="stylesheet" type="text/css" href="<?=$style?>" />		
+<?php }}} ?>	
+
+
+<!-- Script Module <?php //echo($this->reqinfo->modulejspath) ?> -->	
+<?php if (is_file($this->reqinfo->modulejspath)) { ?>
+
+<script type="module">
+	var fgtabaseclass = (() => {
+		return {
+			ready: () => {},
+			init: async (param) => {}
+		}
+	})();
+
+
+	import * as fgta from '<?=$this->reqinfo->modulejsurl?>';
+	var fgtabase = Object.assign({}, fgtabaseclass);
+	if (window.$fgta===undefined) { window.$fgta = {} }
+	Object.assign(window.$fgta, fgtabase, fgta);
+</script>
+<?php } else { ?>
+<script>console.log('script untuk module (<?=$this->reqinfo->modulejsurl?>) belum tersedia');</script>	
+<?php } ?>
+<script>
+	window.addEventListener("load", async function() {
+		if (window.$fgta!==undefined) {
+			if (typeof window.$fgta.ready === 'function') {
+				var param = {};
+				await window.$fgta.ready();
+				await window.$fgta.init(param);					
+			} 
+		}
+	});
+</script>

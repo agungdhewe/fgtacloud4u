@@ -1,0 +1,30 @@
+{
+	"title": "Media",
+	"disabled": false,
+	"modules": [
+		{
+			"title": "Master Data",
+			"backcolor" : "#248e91",
+			"icon" : "icon-masterdata.svg",
+			"disabled": false,
+			"modules": [
+				"media/master/channel",
+				"media/master/mediaordertype",
+				"media/master/mediaprog",
+				"media/master/mediasch",
+				"media/master/adslot",
+				"media/master/mediapackage"
+			]
+		},
+		{
+			"title": "Sales",
+			"icon" : "icon-sales-white.svg",
+			"backcolor" : "#f1972b",
+			"disabled": false,
+			"modules": [
+				"media/sales/mediaorder",
+				"media/sales/logproof"
+			]			
+		}
+	]
+}
