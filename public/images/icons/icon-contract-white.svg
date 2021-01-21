@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666667 8.4666667"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
+   sodipodi:docname="icon-contract-white.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#7a7a7a"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.9999998"
+     inkscape:cx="12.763517"
+     inkscape:cy="26.952033"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1874"
+     inkscape:window-height="1016"
+     inkscape:window-x="46"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     units="px"
+     inkscape:snap-global="false" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ffffff;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 2.5871238,3.6691129 2.927654,4.3703031 3.7672457,1.201119 7.1976193,1.8713168 c 0,0 -0.8246789,2.8100324 -1.3066062,4.0800335 C 5.7822453,6.2379811 5.5972739,6.9106808 5.5972739,6.9106808 5.1404901,7.9111548 3.7907952,7.7258045 4.1444206,6.2710584 L 1.3484596,4.9336703 c 0,0 -0.2089832,0.9213895 0.1115638,1.342967 0.088755,0.1167294 0.1984803,0.2550057 0.3613851,0.3431475 1.1312751,0.6120914 2.5012104,1.1663276 2.5012104,1.1663276 0.7523229,0.2306514 1.299283,0.056269 1.6224945,-0.5594104 L 7.7930209,1.5169014 3.4708417,0.60098591 Z"
+       id="path846"
+       sodipodi:nodetypes="ccccssccssccccc" />
+    <path
+       style="fill:#ffffff;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 0.6006262,1.3959029 1.0296736,1.0435387 2.7927351,4.7460813 C 2.7131597,4.9017046 2.5594408,4.965643 2.3481248,4.9583574 Z"
+       id="path848"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#ffffff;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 2.480104,5.2194909 C 2.6588507,5.2135927 2.8266996,5.1901034 2.8970732,5.009271 L 2.955096,5.5301574 Z"
+       id="path850"
+       sodipodi:nodetypes="cccc" />
+    <ellipse
+       style="fill:#ffffff;stroke:none;stroke-width:0.600001;stroke-linecap:round;stroke-linejoin:round"
+       id="path852"
+       cx="4.0706549"
+       cy="2.5678101"
+       rx="0.28864056"
+       ry="0.30273411" />
+    <ellipse
+       style="fill:#ffffff;stroke:none;stroke-width:0.600001;stroke-linecap:round;stroke-linejoin:round"
+       id="path852-3"
+       cx="3.7884958"
+       cy="3.3797598"
+       rx="0.28864056"
+       ry="0.30273411" />
+    <ellipse
+       style="fill:#ffffff;stroke:none;stroke-width:0.600001;stroke-linecap:round;stroke-linejoin:round"
+       id="path852-6"
+       cx="3.4399698"
+       cy="4.3486371"
+       rx="0.28864056"
+       ry="0.30273411" />
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.600001;stroke-linecap:round;stroke-linejoin:round"
+       id="rect875"
+       width="1.7626383"
+       height="0.3436676"
+       x="5.0654936"
+       y="1.2227874"
+       transform="rotate(15.59139)" />
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.600001;stroke-linecap:round;stroke-linejoin:round"
+       id="rect875-7"
+       width="1.7626383"
+       height="0.3436676"
+       x="4.9969535"
+       y="2.050669"
+       transform="rotate(15.591389)" />
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.600001;stroke-linecap:round;stroke-linejoin:round"
+       id="rect875-5"
+       width="1.7626383"
+       height="0.3436676"
+       x="4.9098759"
+       y="3.1096396"
+       transform="rotate(15.591389)" />
+  </g>
+</svg>
