@@ -66,9 +66,13 @@ export async function init() {
 
 		let meta_el_variancename  = pnl_iframe.contents().find("meta[name=variancename]"); 
 		let variancename = meta_el_variancename.attr("content")
+		
+		let meta_el_urlparam = pnl_iframe.contents().find("meta[name=url_param]"); 
+		let url_param = meta_el_urlparam.attr("content")
 
 		Cookies.set('last_opened_module', modulefullname, {SameSite: "Strict"})
 		Cookies.set('last_opened_module_variance', variancename, {SameSite: "Strict"})
+		Cookies.set('last_opened_module_urlparam', url_param, {SameSite: "Strict"})
 		if (typeof pnl_iframe.frameloaded === 'function') {
 			pnl_iframe.frameloaded()
 		}
@@ -182,13 +186,15 @@ function init_pnl_iframe() {
 }
 
 function open_last_module() {
-	let last_opened_module = Cookies.get('last_opened_module')
-	let last_opened_module_variance = Cookies.get('last_opened_module_variance')
+	let last_opened_module = Cookies.get('last_opened_module');
+	let last_opened_module_variance = Cookies.get('last_opened_module_variance');
+	let last_opened_module_urlparam = Cookies.get('last_opened_module_urlparam');
 	if (last_opened_module!=null) {
 		if (last_opened_module_variance!=null) {
 			OpenModule({
-				modulefullname: last_opened_module,
-				variancename: last_opened_module_variance
+				modulefullname:last_opened_module,
+				variancename:last_opened_module_variance,
+				url_param:last_opened_module_urlparam
 			}, ()=>{})
 		} else {
 			OpenModule({
@@ -223,8 +229,13 @@ export function OpenModule(module, fn_loaded) {
 		}		
 	}, 5*1000)
 
+	var module_url = './index.php/module/' + module.modulefullname + '?variancename=' + (module.variancename===undefined ? '' : module.variancename);
+	if (module.url_param!=undefined) {
+		module_url += '&' + module.url_param;
+	}
+	
 	pnl_iframe.contents().find("body").html("");
-	pnl_iframe.attr('src', './index.php/module/' + module.modulefullname + '?variancename=' + (module.variancename===undefined ? '' : module.variancename))
+	pnl_iframe.attr('src', module_url)
 	pnl_iframe.frameloaded = () => { 
 		if (typeof fn_loaded === 'function') {
 			fn_loaded();
@@ -235,6 +246,8 @@ export function OpenModule(module, fn_loaded) {
 	pnl_iframe.frameunloaded = () => {
 		Cookies.remove('last_opened_module');
 		Cookies.remove('last_opened_module_variance');
+		Cookies.remove('last_opened_module_urlparam');
+
 		var event = new CustomEvent('OnUnload', {})
 		pnl_iframe[0].contentWindow.document.dispatchEvent(event)
 

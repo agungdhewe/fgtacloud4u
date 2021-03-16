@@ -2,8 +2,11 @@
 if (!defined('FGTA4')) {
 	die('Forbiden');
 }
-?><!DOCTYPE HTML>
-<html>
+?><!DOCTYPE HTML><?php
+$tp_datamodel_path = __LOCAL_PUBLIC_DIR . "/template-datamodel.php";
+if (\is_file($tp_datamodel_path)) {
+	require_once $tp_datamodel_path;
+} ?><html>
 	<head>
 		
 		<title><?=$this->title?></title>
@@ -52,8 +55,9 @@ if (!defined('FGTA4')) {
 			}
 		</style>
 
-
+		<link rel="stylesheet" type="text/css" href="index.php/public/assets/styles/fonts.css" />
 		<link rel="stylesheet" type="text/css" href="index.php/public/assets/styles/style-default.css" />
+		<link rel="stylesheet" type="text/css" href="index.php/public/assets/styles/style-content.css" />
 			<?php if (is_file($this->reqinfo->modulecsspath)) { ?>		
 	<!-- CSS Module <?php //echo($this->reqinfo->modulecsspath) ?> -->	
 		<link rel="stylesheet" type="text/css" href="<?=$this->reqinfo->modulecssurl?>" />
@@ -85,20 +89,38 @@ if (!defined('FGTA4')) {
 		</script>
 
 
-</head>
+	</head>
 
 	
 	<body>
-		<?php
-		$tp_header_path = __LOCAL_PUBLIC_DIR . "/page-header.phtml";
-		if (\is_file($tp_header_path)) {
-			require_once $tp_header_path;
-		} else { ?>
-		<header id="page-header">
-			blank header
-		</header>
-		<?php } ?>
 
+		<?php try { ?>	
+
+		<?php
+			$tplobject = $this;
+			$TPL = (new class($tplobject) extends TemplateDataModel {
+
+				function GenerateHeader() {
+					$tp_header_path = __LOCAL_PUBLIC_DIR . "/page-header.phtml";
+					if (\is_file($tp_header_path)) {
+						require_once $tp_header_path;
+					} else {
+						echo "<header id=\"page-header\">blank header</header>";
+					}
+				}
+
+				function GenerateFooter() {
+					$tp_footer_path = __LOCAL_PUBLIC_DIR . "/page-footer.phtml";
+					if (\is_file($tp_footer_path)) {
+						require_once $tp_footer_path;
+					} else {
+						echo "<footer id=\"page-footer\">blank footer</footer>";
+					}
+				}
+			});
+			$TPL->LoadTemplate();
+			$TPL->GenerateHeader();
+		?>
 
 		<?php
 		$tp_content_path = __LOCAL_PUBLIC_DIR . "/page-content.phtml";
@@ -110,16 +132,18 @@ if (!defined('FGTA4')) {
 		</main>
 		<?php } ?>
 
+		<?php $TPL->GenerateFooter(); ?>
 
-		<?php
-		$tp_footer_path = __LOCAL_PUBLIC_DIR . "/page-footer.phtml";
-		if (\is_file($tp_footer_path)) {
-			require_once $tp_footer_path;
-		} else { ?>
-		<footer id="page-footer">
-			blank footer
-		</footer>
-		<?php } ?>		
+
+		<?php } catch (\Exception $ex) { ?>	
+			<div style="margin: 50px; padding: 50px; border: 2px solid red; background: #FFCABF">
+				<div style="font-weight: bold">ERROR</div>
+				<div>
+					<?=$ex->getMessage()?>
+				</div>
+			</div>	
+		<?php } ?>
+
 	</body>
 </html>	
 

@@ -23,6 +23,7 @@ export function fgta4slideselect(obj, options) {
 	self.options = Object.assign({
 		form: obj.form,
 		title: 'Slide Select',
+		information : '',
 		returnpage: 'pnl_edit',
 		panelname: 'pnl_' + self.obj.name + '_select',
 		api: null,
@@ -186,6 +187,10 @@ function CreatePanelContent(self) {
 		trhead += `<td class="fgtable-head-alt1" style="border-bottom: 1px solid #000000; ${addstyle}">${t.text}</td>`
 	}
 	
+	var elinfo = '';
+	if (self.options.information!='') {
+		elinfo = `<div class="list-info infobox">${self.options.information}</div>`
+	}
 
 	return `
 		<div id="${self.options.panelname}">
@@ -202,7 +207,7 @@ function CreatePanelContent(self) {
 					<a href="javascript:void(0)" id="${self.options.panelname}-btn_load" class="easyui-linkbutton c8" style="width: 45px">Load</a>
 				</div>
 			</div>
-
+			${elinfo}
 			<div style="margin-top: 10px">
 				<table id="${self.options.panelname}-tbl_list" paging="true" cellspacing="0" width="100%">
 					<thead>

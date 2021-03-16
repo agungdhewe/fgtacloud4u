@@ -6,7 +6,18 @@ if (!defined('FGTA4')) {
 
 require_once __ROOT_DIR.'/core/webapi.php';
 
-
+/**
+ * Class untuk memproses request-request dari browser via POST
+ * dan megembalikan hasil berupa JSON.
+ * class ini digunakan untuk keperluan ajax dari browser.
+ * 
+ * @category Routing
+ * @author Panji Tengkorak <panjitengkorak@null.net>
+ * @copyright 2020 Panji Tengkorak
+ * @license https://opensource.org/licenses/BSD-3-Clause BSD
+ * @link https://www.fgta.net
+ * 
+ */
 class ApiRoute extends Route {
 
 	public $debugoutput = false;

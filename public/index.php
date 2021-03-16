@@ -1,8 +1,7 @@
 <?php namespace FGTA4;
+define('FGTA4', 1);
 
 define('__LOCAL_CURR',  'IDR');
-
-
 
 ini_set("session.gc_maxlifetime", "65535");
 ini_set('display_errors', 1);
@@ -10,8 +9,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
 date_default_timezone_set('Asia/Jakarta');
 
-
-define('FGTA4', 1);
 define('__ROOT_DIR', realpath(dirname(__FILE__).'/..'));
 define('__BASEADDRESS', $_SERVER['REQUEST_SCHEME'] ."://".  $_SERVER['SERVER_NAME'] . rtrim($_SERVER['SCRIPT_NAME'], '/index.php') .'/');
 define('API_LOGIN_URL', 'fgta/framework/login/dologin');
@@ -50,8 +47,6 @@ define('DB_CONFIG_PARAM', [
 
 ob_start();
 
-
-
 // Saat pertama site di load tampa parameter, 
 // yang akan ditampilkan pertama
 $FGTA_STARTMODULE = 'fgta/framework/container';
@@ -60,7 +55,6 @@ if ($ENV_FGTA_STARTMODULE != '') {
 	$FGTA_STARTMODULE = $ENV_FGTA_STARTMODULE;	
 } 
 define('__STARTMODULE', $FGTA_STARTMODULE);	
-
 
 
 // Default menu yang muncul saat pembuatan group
@@ -168,6 +162,8 @@ require_once __ROOT_DIR.'/core/routes/route.php';
 $ROUTER = null;
 
 try {
+
+	$GLOBALS['ERR_HANDLER'] = null;
 
 	$configuration = new \stdClass;
 
@@ -310,7 +306,7 @@ try {
 
 	} catch (\Exception $ex) {
 		throw $ex;
-	}	
+	}
 } catch (\Exception $ex) {
 	if (method_exists($ROUTER, 'ShowError')) {
 		$ROUTER->ShowError($ex);

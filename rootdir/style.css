@@ -1,0 +1,274 @@
+@font-face {
+	font-family: "Tahoma";
+	font-style: normal;
+	font-weight: 300;	
+    src: url('../../templates/fgta-erp/asset/tahoma.woff2') format("woff2")
+}
+
+
+
+/* module.css */
+* {
+    font-family: "Tahoma"; 
+}
+
+
+body {
+	font-family: "Tahoma";
+	font-size: 12px;
+	background: #efefef url('../../index.php/public/assets/bg-map.jpg') fixed ;
+}
+
+
+
+
+/*
+.container-bar {
+	background-color:#850012 !important;  
+	color: #efefef !important
+}
+*/
+/*
+.buttonprogramicon {
+	background-color: #62000D;
+}
+
+
+.c8,.c8:hover,.c8>.panel-header{
+	color: #fff;
+	border-color: #3A0008;
+	background: #3A0008;
+	background: -webkit-linear-gradient(top,#62000D 0, #3A0008 100%);
+	background: -moz-linear-gradient(top,#62000D 0,#3A0008 100%);
+	background: -o-linear-gradient(top,#62000D 0,#3A0008 100%);
+	background: linear-gradient(to bottom,#62000D 0,#3A0008 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#62000D,endColorstr=#3A0008,GradientType=0);
+}
+a.c8:hover{
+	background: #3A0008;
+	filter: none;
+}
+.c8>.panel-body{
+	border-color: #3A0008;
+}
+.c8>.dialog-toolbar,.c8>.dialog-button{
+	border-left-color: #3A0008;
+	border-right-color: #3A0008;
+}
+.c8>.dialog-button{
+	border-bottom-color: #3A0008;
+}
+*/
+
+
+.fgtable-head {
+	border-bottom: 1px solid #e890b3 !important;
+	color: #460066ff;
+	font-weight: bold;
+	background-color: #ffde00ff;
+	background: -webkit-linear-gradient(top,#ffde00ff 0, #efad0a 100%);
+	background: -moz-linear-gradient(top,#ffde00ff 0,#efad0a 100%);
+	background: -o-linear-gradient(top,#ffde00ff 0,#efad0a 100%);
+	background: linear-gradient(to bottom,#ffde00ff 0,#efad0a 100%);	
+}
+
+.fgtable-head-drow {
+	color: #460066ff;
+	border-bottom: 1px dashed #460066ff;
+}
+
+.fgtable-head-drow:hover {
+	background-color: #d0d0d0ff;
+	cursor: pointer;
+}
+
+
+
+.main-bgmenu {
+	background: rgb(127,117,128);
+	background: linear-gradient(90deg, rgba(127,117,128,1) 0%, rgba(188,159,163,1) 69%, rgba(223,201,204,1) 100%);
+}
+
+
+
+.icon-noselect {
+	-webkit-box-shadow: 1px 1px 2px 0px rgb(87, 87, 87);
+	-moz-box-shadow: 1px 1px 2px 0px rgb(87, 87, 87);
+	box-shadow: 1px 1px 2px 0px  rgb(87, 87, 87);
+	border-top: 1px solid rgba(255, 255, 255, 0.5);
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.menubutton {
+	font-family: Tahoma;
+	font-weight: normal !important;
+}
+
+
+.form_label_col {
+	font-weight: bold;
+	color: #687b8a;
+}
+
+
+@media only screen and (max-width: 768px) {
+	.icon-noselect {
+		margin-right: 10px;
+		margin-bottom: 10px;
+	}
+
+	.form_row {
+		margin-top: 20px;
+	}
+
+	.form_input_col .textbox {
+		width: 100% !important;
+	}
+
+}
+
+
+.textbox-focused {
+  border-color: #027387;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  -moz-box-shadow: 0 0 3px 0 transparent;
+  -webkit-box-shadow: 0 0 3px 0 transparent;
+  box-shadow: 0 0 3px 0 transparent;
+		
+}
+
+
+.textbox {
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+
+
+
+
+#pnl_edit-detil .fgtable-head {
+	height: 35px !important;
+	padding-top: 10px !important;
+	padding-left: 10px !important;
+	color:  #e0e0e0;  /*#687b8a*/
+	background: #027387 !important;
+	border-bottom: 1px solid #024450 !important;
+}
+
+
+
+
+.panel-header, .panel-body {
+	border-style: none !important;
+}
+
+
+
+
+
+/* togle edit */
+.checkbox-checked {
+	background: #a8c9cf !important
+}
+
+.input-modeedit {
+	background: #a8c9cf;
+}
+
+.input-modeview {
+	background: #fff;
+} 
+
+
+
+
+.fgta-page-title {
+	color: #002f4e;
+	font-size: 16px !important;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 1px;
+}
+
+.fgta-page-title > div {
+	color: #027387;
+
+}
+
+.fgta-page-title span.l-btn-text {
+	font-size: 11px;
+
+}
+
+
+.fgta-grid-checkbox  {
+	display: none;
+}
+
+.fgta-grid-checkbox  + label:before {
+	border: 1px solid rgb(196, 196, 196);
+	content: "\00a0";
+	display: inline-block;
+	font: 16px/1em sans-serif;
+	height: 13px;
+	margin-left: 3px;
+	padding: 0;
+	vertical-align: top;
+	width: 13px;
+}
+.fgta-grid-checkbox:checked + label:before {
+	border: 1px solid rgb(136, 136, 136);
+	background: rgb(163, 163, 163);
+	color: #fff;
+	content: "\2713";
+	text-align: center;
+}
+.fgta-grid-checkbox:checked + label:after {
+	font-weight: bold;
+}
+
+.fgta-grid-checkbox:focus + label::before {
+	outline: rgb(16, 25, 34) auto 5px;
+}
+
+
+
+.form_input_col  .textbox-label {
+	font-weight: bold;
+	color: #687b8a;
+}
+
+
+
+.fgta-recordstatus-button {
+	margin-top: 20px !important;
+	margin-bottom: 50px !important;
+	font-weight: bold;
+}
+
+
+.fgta-recordstatus-button[name="fgta-record-status"]  {
+	padding-left: 5px !important;
+	padding-right: 8px !important;
+}
+
+.fgta-recordstatus-button[name="fgta-record-log"]  {
+	padding-left: 8px !important;
+	padding-right: 8px !important;
+}
+
+.fgta-recordstatus-button[name="fgta-record-about"]  {
+	padding-left: 8px !important;
+	padding-right: 8px !important;
+}
+
+
+.fgta-recordstatus-button > a {
+	color: #687b8a !important;
+}

@@ -204,6 +204,11 @@ h1 {
 }
 
 
+.infobox {
+	border: 1px solid #bbb;
+	background-color: #ffe095;
+}
+
 
 /* CSS untuk keperluan crud: halaman list */
 .list-search-item {
@@ -221,6 +226,13 @@ h1 {
 .list-buttonbaru {
 	padding-bottom: 0px;
 }
+
+.list-info {
+	margin-top: 15px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
 
 @media screen and (max-width: 450px) {
 
@@ -514,3 +526,58 @@ h1 {
 
 
 }
+
+
+.inrow-id-block {
+	display: inline-block;
+	margin-bottom: 5px;
+	margin-right: 3px;
+}
+
+.inrow-id-block .draft {
+	width: 34px;
+	background: url(rdraft.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .commit {
+	width: 34px;
+	background: url(rcommit.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .submit {
+	width: 34px;
+	background: url(rsubmit.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .approval {
+	width: 34px;
+	background: url(rapproval.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .approved {
+	width: 34px;
+	background: url(rapproved.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .rejected {
+	width: 34px;
+	background: url(rrejected.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .posted {
+	width: 34px;
+	background: url(rposted.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .verified {
+	width: 34px;
+	background: url(rverified.png) no-repeat center center; background-size: 34px 14px;
+}
+
+.inrow-id-block .closed {
+	width: 34px;
+	background: url(rclosed.png) no-repeat center center; background-size: 34px 14px;
+}
+
+
+

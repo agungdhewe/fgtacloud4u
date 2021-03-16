@@ -33,17 +33,9 @@ htaccess::ReadEnvirontment();
 
 
 require_once __DBCONF_PATH;
+
+global $argc, $argv;
 console::execute($argv);
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -58,7 +50,7 @@ class color {
 
 }
 
-class cli {
+class clibase {
 	public function execute() {
 	}	
 
@@ -169,27 +161,33 @@ class cli {
 
 class htaccess {
 	public static function ReadEnvirontment() {
-		$htaccess_path = getenv('PWD') . "/.htaccess";
 
-		if (!is_file($htaccess_path)) return;
-		
+		$working_dir = getenv('PWD');
 
-		$content = file_get_contents($htaccess_path);
-		$pattern = '@SetEnv (?P<env>[^ ]*) (?P<value>[^ \n]*)@';
-		$matches = array();
-		preg_match_all($pattern, $content, $matches, PREG_SET_ORDER);
+		$htaccess_path = $working_dir . "/.htaccess";
 
-		foreach ($matches as $match) {
-			$_SERVER[$match['env']] =  trim(str_replace("\"","", $match['value'])) ;
-		}
-
-
+		$_SERVER = array();
 		$FGTA_DBCONF_PATH = "";
+
+		if (!is_file($htaccess_path)) {
+			$FGTA_DBCONF_PATH = $working_dir . "/public/dbconfig.php";
+		} else {
+			$content = file_get_contents($htaccess_path);
+			$pattern = '@SetEnv (?P<env>[^ ]*) (?P<value>[^ \n]*)@';
+			$matches = array();
+			preg_match_all($pattern, $content, $matches, PREG_SET_ORDER);
+	
+			foreach ($matches as $match) {
+				$_SERVER[$match['env']] =  trim(str_replace("\"","", $match['value'])) ;
+			}
+		}
+		
 		if (array_key_exists('FGTA_DBCONF_PATH', $_SERVER)) {
 			define('__DBCONF_PATH', $_SERVER['FGTA_DBCONF_PATH']);
 		} else {
 			define('__DBCONF_PATH', $FGTA_DBCONF_PATH);
 		}
+
 
 		$FGTA_LOCALDB_DIR = __ROOT_DIR.'/core/database';
 		if (array_key_exists('FGTA_LOCALDB_DIR', $_SERVER)) {
@@ -221,11 +219,15 @@ class console {
 
 	public static function execute($argv) {
 		try {
+
+			if (strpos($argv[0], 'phpunit') !== false) {
+				// potong array ke 0
+				// unset($argv[0]);
+				array_splice($argv, 0, 1);
+			}
+
 			$args = self::getcommandparameter($argv);
 			$cmd = self::loadcommand($args->command, $args);
-
-
-			
 
 		} catch (Exception $ex) {
 			echo "\r\n";

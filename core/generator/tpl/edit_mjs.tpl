@@ -46,7 +46,11 @@ export async function init(opt) {
 		OnDataDeleting: async (data, options) => { await form_deleting(data, options) },
 		OnDataDeleted: async (result, options) => { await form_deleted(result, options) },
 		OnIdSetup : (options) => { form_idsetup(options) },
-		OnViewModeChanged : (viewonly) => { form_viewmodechanged(viewonly) }
+		OnViewModeChanged : (viewonly) => { form_viewmodechanged(viewonly) },
+		OnRecordStatusCreated: () => {
+		//	$('#pnl_edit_record_custom').detach().appendTo("#pnl_edit_record");
+		//	$('#pnl_edit_record_custom').show();
+		}		
 	})
 
 

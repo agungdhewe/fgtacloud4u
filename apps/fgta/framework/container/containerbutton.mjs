@@ -9,7 +9,7 @@ export async function CreateModuleShortcut(mdlico, elpnl, OpenModule) {
 	btn.setImage('index.php/images/icons/' + mdlico.icon)
 	btn.setClick(() => { 
 		btn.setLoading(true)
-		OpenModule({modulefullname: mdlico.modulefullname, variancename: mdlico.variancename}, ()=>{
+		OpenModule({modulefullname:mdlico.modulefullname, variancename:mdlico.variancename, url_param:mdlico.url_param}, ()=>{
 			btn.setLoading(false)
 		})
 	})
@@ -34,7 +34,8 @@ export async function CreateModuleGroup(mdlico, elpnl, CreateModuleList) {
 }
 
 
-function CreateButton() {
+function CreateButton(mdlico) {
+	// console.log(mdlico);
 	let buttoncontainer = document.createElement('div')
 	// buttoncontainer.style.marginRight = '10px'
 	// buttoncontainer.style.marginBottom = '10px'

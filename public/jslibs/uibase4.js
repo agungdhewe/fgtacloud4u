@@ -847,6 +847,8 @@ export function ShowMessage(message, buttons) {
 		progresswaitmask.appendChild(progresswrap)
 		document.body.appendChild(progressmask)
 		document.body.appendChild(progresswaitmask)
+		$.parser.parse('#__dialogmessage-waiting__');
+		// console.log('test');
 		let fadein = setInterval(() => {
 			if (opacity < 7) {
 				opacity += 1;
@@ -860,6 +862,8 @@ export function ShowMessage(message, buttons) {
 			}
 		}, 20)
 	}
+
+	
 
 }
 

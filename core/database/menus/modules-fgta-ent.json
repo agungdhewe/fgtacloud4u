@@ -16,7 +16,7 @@
 				"ent/general/unitmeasurement",
 				"ent/general/week",
 				"ent/general/config",
-				"ent/general/taxtype"
+				"ent/general/interface"
 			]
 		},
 

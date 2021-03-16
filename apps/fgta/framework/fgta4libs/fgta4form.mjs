@@ -82,6 +82,8 @@ export function fgta4form(frm, opt) {
 			return self.options.autoid
 		},
 
+
+		getCurrentId: () => { return getCurrentId(self) },
 		setValue: (obj, value, display) => { return setValue(self, obj, value, display) },
 		getValue: (obj) => { return getValue(self, obj) },
 		lock: (locked) => { return lock(self, locked) },
@@ -1257,4 +1259,8 @@ function suspendevent(self, suspend) {
 
 function iseventsuspended(self) {
 	return self.eventsuspended;
+}
+
+function  getCurrentId(self) {
+	return self.primary.textbox('getValue');
 }

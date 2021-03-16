@@ -7,6 +7,8 @@ if (!defined('FGTA4')) {
 require_once __ROOT_DIR.'/core/webmodule.php';
 
 
+use \FGTA4\debug;
+
 class ModuleRoute extends Route {
 
 	public function ProcessRequest($reqinfo) {
@@ -17,6 +19,7 @@ class ModuleRoute extends Route {
 		$reqinfo->modulejsurl = $reqinfo->modulerequestinfo == '' ? "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulename.mjs" : "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulerequestinfo.mjs";
 		$reqinfo->modulecsspath = $reqinfo->modulerequestinfo == '' ? "$reqinfo->moduledir/$reqinfo->modulename.css" : "$reqinfo->moduledir/$reqinfo->modulerequestinfo.css";
 		$reqinfo->modulecssurl = $reqinfo->modulerequestinfo == '' ? "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulename.css" : "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulerequestinfo.css";
+
 
 		
 		if (array_key_exists('variancename', $_GET)) {

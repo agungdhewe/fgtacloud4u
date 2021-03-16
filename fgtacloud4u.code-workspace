@@ -9,7 +9,9 @@
 	],
 	"settings": {
 		"files.watcherExclude": {
-			"/public_*": true
+			"/public_*": true,
+			"/apps/content": true,
+			
 		},
 		"files.exclude": {
 			".sync.ffs_db": true,

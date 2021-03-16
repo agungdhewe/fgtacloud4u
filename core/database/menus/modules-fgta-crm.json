@@ -7,7 +7,9 @@
 			"icon" : "icon-crmdata-white.png",
 			"disabled" : false,
 			"modules" : [
-				"crm/master/crmsource"
+				"crm/master/crmmsgsource",
+				"crm/master/crmmsgsentiment",
+				"crm/master/crmmsgclass"
 			]					
 		},
 
@@ -20,7 +22,14 @@
 				{"program":"crm/engage/crmevent",  "variancename":"commit"},
 				{"program":"crm/engage/crmevent",  "variancename":"uncommit"}
 			]					
-		}		
+		},
+		
+		{
+			"title" : "Customer Service",	
+			"modules" : [
+				"crm/cs/crmmsgcs"
+			]
+		}
 
 		
 	]

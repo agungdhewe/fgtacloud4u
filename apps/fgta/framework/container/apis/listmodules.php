@@ -30,7 +30,7 @@ class ListModules extends WebAPI {
 			$DB_CONFIG['param'] = DB_CONFIG_PARAM[$GLOBALS['MAINDBTYPE']];
 			$this->db = new \PDO(
 						$DB_CONFIG['DSN'], 
-						'aa', //$DB_CONFIG['user'], 
+						$DB_CONFIG['user'], 
 						$DB_CONFIG['pass'], 
 						$DB_CONFIG['param']
 			);
@@ -191,12 +191,21 @@ class ModuleShorcut extends ModuleIcon {
 	function __construct($modulefullname, $userdata, $variancename=null) {
 		$this->userdata = $userdata;
 		$this->modulefullname = $modulefullname;
+		$this->url_param = '';
+		
+		/* patch module name: add parameter */
+		$modpar = explode('?', $this->modulefullname);
+		if (count($modpar)>1) {
+			$this->modulefullname = $modpar[0];
+			$this->url_param = $modpar[1];
+		}
 
-		$moduleinfo = $this->get_module_info($modulefullname, $variancename);
+		$moduleinfo = $this->get_module_info($this->modulefullname, $variancename);
 
 	}
 
 	function get_module_info($modulefullname, $variancename=null) {
+
 		$modulepath = __ROOT_DIR."/apps/$modulefullname";
 		$modulename = basename($modulepath);
 
@@ -224,10 +233,6 @@ class ModuleShorcut extends ModuleIcon {
 			$mcovr = new WebModuleConfig($moduleconfigpath, true); 
 			$moduleconfig = (object) array_merge((array)$moduleconfig, (array)$mcovr);
 		}
-
-
-		
-
 
 
 		$this->title = $moduleconfig->title;

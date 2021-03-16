@@ -26,7 +26,7 @@ class Currency {
 	}
 
 	public function getConvertion($foreign, $local, $curr_id) {
-		$local_curr_id = defined('__LOCAL_CURR') ? __LOCAL_CURR : 'IDR'; 
+		$local_curr_id = $this->getLocalCurrency();
 		$rate = $this->getRate($curr_id);
 		if ($curr_id==$local_curr_id) {
 			return (object)[
@@ -42,5 +42,10 @@ class Currency {
 			];
 		}	 
 		
+	}
+
+
+	public function getLocalCurrency() {
+		return defined('__LOCAL_CURR') ? __LOCAL_CURR : 'IDR';
 	}
 }

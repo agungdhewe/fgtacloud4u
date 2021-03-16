@@ -20,6 +20,7 @@
 				"finact/master/projecttask",
 				"finact/master/jurnalmodel",
 				"finact/master/jurnaltype",
+				"finact/master/jurnalsource",
 				"finact/master/periode",
 				"finact/master/accbudgetmodel",
 				"finact/master/accbudgettype",
@@ -48,8 +49,16 @@
 				"finact/items/itemspec",
 				"finact/items/itemgroup",
 				"finact/items/itemclass",
+				{
+					"program": "finact/items/itemclass",
+					"variancename": "manualid"
+				},
+
+
 				"finact/items/itemasset",
 				"finact/items/itemstock",
+				"finact/items/inquiryselect",
+				"finact/items/inquirymodel",
 				"finact/items/inquirytype",
 				"finact/items/inquiry",
 				{
@@ -68,7 +77,25 @@
 			"icon" : "icon-procurement.svg",
 			"disabled": false,
 			"modules": [
-				"finact/procurement/request",
+				{
+					"program": "finact/procurement/request",
+					"variancename": "purchase"
+				},
+				{
+					"program": "finact/procurement/request",
+					"variancename": "rental"
+				},
+				{
+					"program": "finact/procurement/request",
+					"variancename": "service"
+				},
+				{
+					"program": "finact/procurement/request",
+					"variancename": "talent"
+				},
+
+
+
 				{
 					"program": "finact/procurement/request",
 					"variancename": "commit"
@@ -87,6 +114,9 @@
 					"program": "finact/procurement/order",
 					"variancename": "approve"
 				},
+
+
+
 				"finact/procurement/receive"
 			]
 		},
@@ -195,8 +225,11 @@
 			"backcolor" : "#6a6a68",
 			"disabled": false,
 			"modules": [
+				"finact/collection/collector",
 				"finact/collection/colltarget",
-				"finact/collection/temprecv"
+				{"program":"finact/fin/billout", "variancename": "view"},
+				"finact/collection/temprecv",
+				"finact/collection/cashdiscount"
 			]			
 		}
 	]

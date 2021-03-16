@@ -13,7 +13,9 @@ class SqlUtility {
 			foreach ($criteriaparams as $rulekey => $value) {
 				$where_params[':'.$rulekey] = $value;
 				if (array_key_exists($rulekey, $rules)) {
-					$where_fields[] = $rules[$rulekey];
+					if ($rules[$rulekey]!='') {
+						$where_fields[] = $rules[$rulekey];
+					}
 				} else {
 					throw new \Exception("Criteria untuk '$rulekey' belum didefinisikan. Cek API.");
 				}
@@ -35,7 +37,15 @@ class SqlUtility {
 	}
 
 	public static function Select($tablename, $fields, $where_sql) {
-		$fieldssql = implode(', ', $fields);
+		$arrfields = array();
+		foreach ($fields as $f) {
+			if (\is_string($f)) {
+				$arrfields[] = '`'.$f.'`';
+			} else if (\is_array($f)) {
+				$arrfields[] = $f[0];
+			}
+		}
+		$fieldssql = implode(', ', $arrfields);
 		return "SELECT $fieldssql FROM $tablename $where_sql ";
 	}
 	

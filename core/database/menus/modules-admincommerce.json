@@ -1,0 +1,20 @@
+{
+	"title" : "ROOT",
+	"icon" : "icon-admin-white.png",
+	"disabled" : false,
+	"modules" : [
+		"fgta/framework/fggroup",
+		"fgta/framework/fguser",
+		"retail/webcommerce/webbrand",
+		"retail/webcommerce/webcity",
+		"retail/webcommerce/webcluster",
+		"retail/webcommerce/webfeedback",
+		"retail/webcommerce/webmenufoot",
+		"retail/webcommerce/webmenuhead",
+		"retail/webcommerce/webmenuvisibility",
+		"retail/webcommerce/website",
+		"retail/webcommerce/webfeedback",
+		"retail/webcommerce/webpreftype",
+		"retail/webcommerce/webaction"
+	]
+}

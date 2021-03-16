@@ -36,6 +36,24 @@ if (!defined('FGTA4')) {
 		<meta http-equiv="Expires" content="-1" />
 		<meta name="modulefullname" content="<?=$this->reqinfo->modulefullname?>" />
 		<meta name="variancename" content="<?=$this->reqinfo->variancename?>" />
+
+
+		<?php
+			$url_param = '';
+			if (is_array($_GET)) {
+				$qsstring = array();
+				foreach ($_GET as $vname => $vdata) {
+					if ($vname=='variancename') {
+						continue;
+					}
+					$qsstring[] = "$vname=$vdata";
+				}
+				$url_param = implode('&', $qsstring);
+			}
+		?>
+		<meta name="url_param" content="<?=$url_param?>" />
+
+
 		<meta name="basetitle" content="<?=$this->configuration->basetitle?>" />
 		<meta name="author" content="<?=$this->author?>" />
 		<meta name="createdate" content="<?=$this->createdate?>" />
@@ -78,8 +96,19 @@ if (!defined('FGTA4')) {
 		<script>
 			window.global = {
 				modulefullname: "<?=$this->reqinfo->modulefullname?>",
-				now: () => {
+				now: (date, add_days_from_now) => {
+
 					var today = new Date(); 
+					if (date!=null) {
+						today = new Date(date);
+					}
+
+
+					if (add_days_from_now!=null) {
+						today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+						today.setDate(today.getDate() + add_days_from_now)
+					}
+
 					var dd = today.getDate(); 
 					var mm = today.getMonth() + 1; 
 					var yyyy = today.getFullYear(); 
@@ -124,6 +153,15 @@ if (!defined('FGTA4')) {
 				var chk = objchk.checkbox('options');
 				return chk.checked
 			}
+
+			global.setup = {
+				<?php if (property_exists($this, 'setup')) { 
+						if (is_object($this->setup)) {
+							foreach ($this->setup as $key=>$value) { ?>
+				<?=$key?>: <?= is_bool($value) ? $value ? 'true' : 'false' :  (is_numeric($value) ? $value : "'" . $value . "'") ?>,
+				<?php }}} ?>	
+			} 
+
 
 		</script>
 

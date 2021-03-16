@@ -18,6 +18,7 @@ if (array_key_exists('tokenid', $_COOKIE)) {
 } else if (array_key_exists('HTTP_TOKENID', $_SERVER)) {
 	// via header
 	$tokenid = $_SERVER['HTTP_TOKENID'];
+	
 }
 
 
@@ -32,6 +33,7 @@ if ($tokenid!='') {
 	// sudah login
 	$otp->value = uniqid();
 	$otp->success = true;
+
 } else {
 	// belum login
 	$apiinfo = dirname(__FILE__)."/../apps/$api";
