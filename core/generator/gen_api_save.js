@@ -61,7 +61,9 @@ module.exports = async (fsd, genconfig) => {
 				if (options.field_display_name!=null) {
 					field_display_name = options.field_display_name;
 				}				
-				lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($data->${fieldname}, $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
+				lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
+			}  else if  (data[fieldname].lookup==='user') {
+				lookupfields += `\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
 			}
 
 			// * Field yang tidak ikut di save */
@@ -120,7 +122,10 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*{__SEQREQUIRE__}*/', seq_require)
 		tplscript = tplscript.replace('/*{__SEQUSE__}*/', seq_use)
 		tplscript = tplscript.replace('/*{__BASENAME__}*/', basename)
-
+		tplscript = tplscript.replace(/{__BASENAME__}/g, genconfig.basename);
+		tplscript = tplscript.replace(/{__TABLENAME__}/g, headertable_name)
+		tplscript = tplscript.replace(/{__MODULEPROG__}/g, genconfig.modulename + '/apis/save.php');
+		tplscript = tplscript.replace(/{__GENDATE__}/g, ((date)=>{var year = date.getFullYear();var month=(1+date.getMonth()).toString();month=month.length>1 ? month:'0'+month;var day = date.getDate().toString();day = day.length > 1 ? day:'0'+day;return day+'/'+month+'/'+year;})(new Date()));
 		
 
 		fsd.script = tplscript

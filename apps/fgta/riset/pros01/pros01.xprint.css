@@ -1,0 +1,14 @@
+/* CSS For printing purpose*/
+
+.rptdata-col-no {
+	width: 10mm
+}
+
+.rptdata-col-descr {
+	font-style: italic;
+}
+
+.rowfoot {
+	font-weight: bold;
+}				
+		

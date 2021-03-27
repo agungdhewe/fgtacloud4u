@@ -80,6 +80,7 @@ class MPCProtocol {
 			$headerdata =  $header->getFormattedData();
 			$bodydata = $body->getFormattedData();
 
+			// header
 			$ch = \curl_init(); 
 			\curl_setopt($ch, CURLOPT_URL, $url); 
 			\curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
@@ -87,10 +88,8 @@ class MPCProtocol {
 			\curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::ConnectTimeout);
 			\curl_setopt($ch, CURLOPT_TIMEOUT, self::ExecuteTimemout);
 			
-			// dst
-			// dst
-			//	
-			//
+			// body
+            \curl_setopt($ch, CURLOPT_POSTFIELDS, $bodydata);
 
 
 			$output = \curl_exec($ch);
@@ -125,8 +124,5 @@ class MPCProtocol {
 	}
 
 }
-
-
-
 
 

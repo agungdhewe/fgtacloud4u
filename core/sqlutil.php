@@ -11,9 +11,9 @@ class SqlUtility {
 			$where_fields = [];
 			$where_params = [];
 			foreach ($criteriaparams as $rulekey => $value) {
-				$where_params[':'.$rulekey] = $value;
 				if (array_key_exists($rulekey, $rules)) {
 					if ($rules[$rulekey]!='') {
+						$where_params[':'.$rulekey] = $value;
 						$where_fields[] = $rules[$rulekey];
 					}
 				} else {
@@ -244,6 +244,13 @@ class SqlUtility {
 		//  `rowid` varchar(13) NOT NULL, 
 		// 	KEY `idx_xlog_tablename_id` (`tablename`,`id`)
 		// ) ENGINE=InnoDB DEFAULT CHARSET=latin1		
+	}
+
+
+	public static function setDefaultCriteria(&$criteria, $name, $defaultvalue) {
+		if (!\property_exists($criteria, $name)) {
+			$criteria->{$name} = $defaultvalue;
+		}
 	}
 
 }

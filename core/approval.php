@@ -10,8 +10,19 @@ class StandartApproval {
 	const AUTHLEVEL_BUDGETOWNER = 'BUDOWN';
 
 
-	static function remove($db, $currentdata, $tablename, $keys, $doc_id) {
+	static function remove($db, $currentdata, $tablename, $keys, $doc_id, $args) {
+
+
+
 		try {
+
+			$tablename_head = $args->tablename_head;
+			$flag_head_isapprovalprogress = $args->flag_head_isapprovalprogress;
+			$flag_head_decline = $args->flag_head_decline;
+			$flag_head_declineby = $args->flag_head_declineby;
+			$flag_head_declinedate = $args->flag_head_declinedate;
+			
+
 			$keydata = array();
 			foreach ($keys as $keyname=>$value) {
 				$keydata[] = (object)[
@@ -25,11 +36,27 @@ class StandartApproval {
 			$sql = "
 				delete from $tablename where $field_id = :$field_id
 			";
-
 			$stmt = $db->prepare($sql);
 			$stmt->execute([
 				':' . $field_id => $keydata[0]->value
 			]);
+
+
+			$sql = "
+				update $tablename_head
+				set
+				$flag_head_isapprovalprogress = 0,
+				$flag_head_decline = 0,
+				$flag_head_declineby = null,
+				$flag_head_declineby = null
+				where
+				$field_id = :$field_id
+			";
+			$stmt = $db->prepare($sql);
+			$stmt->execute([
+				':' . $field_id => $keydata[0]->value
+			]);
+
 
 		} catch (\Exception $ex) {
 			throw $ex;	
@@ -270,6 +297,8 @@ class StandartApproval {
 				)
 			";
 
+
+		
 			$sqlparam = [
 				':field_id' => $id,
 				':user_id' => $userdata->username
@@ -309,6 +338,7 @@ class StandartApproval {
 				where
 					$field_id = :field_id
 				and ($flag_appr=1 or $flag_decl=1)	
+				and auth_id not in (select auth_id from mst_auth where empl_id = (select empl_id from mst_empluser where user_id = :user_id))
 				and docauth_order > (
 									
 					select
@@ -342,8 +372,6 @@ class StandartApproval {
 				)
 			";
 
-
-			// echo $sql;
 
 			$sqlparam = [
 				':field_id' => $id,
@@ -457,19 +485,20 @@ class StandartApproval {
 			$sql = "
 				update $tablename_appr
 				set
-				$flag_appr = 0,
-				$appr_by = null,
-				$appr_date = null,
-				$flag_decl = 1,
-				$decl_by = :user_id,
-				$decl_date = :date,
-				$notes = :notes
+					$flag_appr = 0,
+					$appr_by = null,
+					$appr_date = null,
+					$flag_decl = 1,
+					$decl_by = :user_id,
+					$decl_date = :date,
+					$notes = :notes
 				where
 				$field_id_detil = :id	
 			";
 			$stmt = $db->prepare($sql);
 
 			// debug::log('decline');
+			
 			$rows = self::getUserApprovalData($db, $param);
 			try {
 				$db->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
@@ -483,7 +512,8 @@ class StandartApproval {
 					]);
 				}
 
-				self::DoFinalApproval($db, $param);
+				$decline = true;
+				self::DoFinalApproval($db, $param, $decline);
 				$db->commit();
 			} catch (\Exception $ex) {
 				$db->rollBack();
@@ -498,14 +528,21 @@ class StandartApproval {
 	}
 
 
-	static function DoFinalApproval($db, $param) {
+	static function DoFinalApproval($db, $param, $decline=false) {
 		$id = $param->approvalsource['id'];
 		$userdata = $param->approvalsource['userdata'];
+		$date = $param->approvalsource['date'];
 		$tablename_head = $param->approvalsource['tablename_head'];
 		$tablename_appr = $param->approvalsource['tablename_appr'];
 		$field_id = $param->approvalsource['field_id'];
 		$field_id_detil = $param->approvalsource['field_id_detil'];
-		$flag_head = $param->approvalsource['flag_head'];
+		$flag_head_isapprovalprogress = $param->approvalsource['flag_head_isapprovalprogress'];
+		$flag_head_approve = $param->approvalsource['flag_head_approve'];
+		$flag_head_approveby = $param->approvalsource['flag_head_approveby'];
+		$flag_head_approvedate = $param->approvalsource['flag_head_approvedate'];
+		$flag_head_decline = $param->approvalsource['flag_head_decline'];
+		$flag_head_declineby = $param->approvalsource['flag_head_declineby'];
+		$flag_head_declinedate = $param->approvalsource['flag_head_declinedate'];
 		$flag_appr = $param->approvalsource['flag_appr'];
 		$flag_decl = $param->approvalsource['flag_decl'];
 
@@ -532,25 +569,65 @@ class StandartApproval {
 
 			$task = $rows[0]['task'];
 			$completed = $rows[0]['completed'];
-			$sql = "
-				update $tablename_head
-				set
-				$flag_head = :approved
-				where
-				$field_id = :field_id
-			";
-			$stmt = $db->prepare($sql);
 			if ($completed==$task) {
+				$sql = "
+					update $tablename_head
+					set
+					$flag_head_isapprovalprogress = 1,
+					$flag_head_approve = 1,
+					$flag_head_approveby = :username,
+					$flag_head_approvedate = :date, 
+					$flag_head_decline = 0,
+					$flag_head_declineby = null,
+					$flag_head_declinedate = null
+					where
+					$field_id = :field_id
+				";
+				$stmt = $db->prepare($sql);				
 				$stmt->execute([
 					':field_id' => $id,
-					':approved' => 1
+					':username' => $userdata->username,
+					':date' => $date
 				]);
 				return true;
 			} else {
-				$stmt->execute([
-					':field_id' => $id,
-					':approved' => 0
-				]);
+				if ($decline) {
+					$sql = "
+						update $tablename_head
+						set
+							$flag_head_isapprovalprogress = 1,
+							$flag_head_approve = 0,
+							$flag_head_approveby = null,
+							$flag_head_approvedate = null,
+							$flag_head_decline = 1,
+							$flag_head_declineby = :username,
+							$flag_head_declinedate = :date 							
+						where
+						$field_id = :field_id
+					";
+
+					$stmt = $db->prepare($sql);					
+					$stmt->execute([
+						':field_id' => $id,
+						':username' => $userdata->username,
+						':date' => $date						
+					]);
+				} else {
+					$sql = "
+						update $tablename_head
+						set
+							$flag_head_isapprovalprogress = 1,
+							$flag_head_approve = 0,
+							$flag_head_approveby = null,
+							$flag_head_approvedate = null
+						where
+						$field_id = :field_id
+					";
+					$stmt = $db->prepare($sql);					
+					$stmt->execute([
+						':field_id' => $id
+					]);
+				}
 				return false;
 			}
 
@@ -616,7 +693,7 @@ class StandartApproval {
 		$tablename_appr = $options->approvalsource['tablename_appr'];
 		$field_id = $options->approvalsource['field_id'];
 		$field_id_detil = $options->approvalsource['field_id_detil'];
-		$flag_head = $options->approvalsource['flag_head'];
+		$flag_head_approve = $options->approvalsource['flag_head_approve'];
 		$flag_appr = $options->approvalsource['flag_appr'];
 		$flag_decl = $options->approvalsource['flag_decl'];
 		$id = $row[$field_id];
@@ -629,7 +706,7 @@ class StandartApproval {
 			'tablename_appr' => $tablename_appr,
 			'field_id' => $field_id,
 			'field_id_detil' => $field_id_detil,
-			'flag_head' => $flag_head,
+			'flag_head_approve' => $flag_head_approve,
 			'flag_appr' =>  $flag_appr,
 			'flag_decl' =>  $flag_decl,
 		];

@@ -15,37 +15,8 @@ module.exports = async (fsd, genconfig) => {
 		console.log(`Generate Main HTML...`)
 		
 
-		// genconfig.pages = {
-		// 	// list: {
-		// 	// 	mjs: {program: 'gen_mjs_list.js', handler: 'pList', filename: `${genconfig.basename}-list.js`},
-		// 	// 	phtml: {program: 'gen_phtml_list.js', panel: 'pnl_list', filename: `${genconfig.basename}-list.phtml` }
-		// 	// },
-		// 	// edit: {
-		// 	// 	mjs: {program: 'gen_mjs_edit.js', handler: 'pEdit', filename: `${genconfig.basename}-edit.js`},
-		// 	// 	phtml: {program: 'gen_phtml_edit.js', panel: 'pnl_edit', filename: `${genconfig.basename}-edit.phtml`}
-		// 	// }
-		// }
-
-		// for (var detilname in  genconfig.schema.detils) {
-		// 	var detil = genconfig.schema.detils[detilname]
-		// 	if (detil.form===true) {
-		// 		genconfig.pages[`${detilname}grid`] = {
-		// 			mjs: {program: 'gen_mjs_detilgrid', handler: `pEdit${CapFL(detilname)}grid`, filename: `${genconfig.basename}-${detilname}grid.js`},
-		// 			phtml: {program: 'gen_phtml_detilgrid', panel: `pnl_edit${detilname}grid`, filename: `${genconfig.basename}-${detilname}grid.phtml`}
-		// 		}
-		// 		genconfig.pages[`${detilname}form`] = {
-		// 			mjs: {program: 'gen_mjs_detilform', handler: `pEdit${CapFL(detilname)}form`, filename: `${genconfig.basename}-${detilname}form.js`},
-		// 			phtml: {program: 'gen_phtml_detilform',  panel: `pnl_edit${detilname}form`, filename: `${genconfig.basename}-${detilname}form.phtml`}
-		// 		}
-			
-		// 	} else {
-		// 		genconfig.pages[detilname] = {
-		// 			mjs: {program: 'gen_mjs_blank', handler: `pEdit${CapFL(detilname)}`, filename: `${genconfig.basename}-${detilname}.js`},
-		// 			phtml: {program: 'gen_phtml_blank', panel: `pnl_edit${detilname}`, filename: `${genconfig.basename}-${detilname}.phtml`}					
-		// 		}
-		// 	}
-		// }
-
+		var add_approval = genconfig.approval===true;
+		var add_commiter = add_approval===true ? true : (genconfig.committer===true);
 
 		// pageselector = {}
 		for (var tablename in genconfig.persistent) {
@@ -55,29 +26,10 @@ module.exports = async (fsd, genconfig) => {
 				if (data[fieldname].comp===undefined) {
 					data[fieldname].comp = defcomp
 				}
-
-				// var comp = data[fieldname].comp
-				// if (comp.comptype=='pageselector') {
-				// 	var page = comp.options.page
-				// 	if (pageselector[page]===undefined) {
-				// 		pageselector[page] = page
-				// 	}
-				// }
-
 			}
 		}
 
 		
-		// for (var pagename in pageselector) {
-		// 	genconfig.pages[pagename] = {
-		// 		mjs: {program: 'gen_mjs_pageselector.js', handler: `pSel${CapFL(pagename)}`, filename: `${genconfig.basename}-${pagename}.js`},
-		// 		phtml: {program: 'gen_phtml_pageselector.js', panel: `pnl_sel${pagename}`, filename: `${genconfig.basename}-${pagename}.phtml`}				
-		// 	}
-		// }
-
-		// console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-		// console.log(genconfig.pages)
-		// console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 		
 		var phtmlrequired = ''
 		for (var pagename in genconfig.pages) {
@@ -91,6 +43,7 @@ module.exports = async (fsd, genconfig) => {
 
 
 		var basename = genconfig.basename
+		var recordstatus = get_recordstatus(add_commiter, add_approval, genconfig);
 
 
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'main_phtml.tpl')
@@ -98,6 +51,7 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('<!--__PHTML_REQUIRED__-->', phtmlrequired)
 		tplscript = tplscript.replace('<!--__BASENAME__-->', basename)
 		tplscript = tplscript.replace('<!--__BASENAME__-->', basename)
+		tplscript = tplscript.replace('<!--__RECORDSTATUS__-->', recordstatus)
 
 
 
@@ -111,4 +65,84 @@ module.exports = async (fsd, genconfig) => {
 
 function CapFL(string) {
 	return string[0].toUpperCase() +  string.slice(1);
+}
+
+
+function get_recordstatus(add_commiter, add_approval, genconfig) {
+	if (!add_commiter && !add_approval) {
+		return '';
+	}
+
+	var recordstatus = "";
+	if (add_commiter) {
+		recordstatus = `
+<div id="pnl_edit_record_custom" style="display: none">
+	<div class="form_row">
+		<div class="form_label_col">Commit By</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-commitby"></span>
+		</div>
+	</div>	
+
+	<div class="form_row">
+		<div class="form_label_col">Commit Date</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-commitdate"></span>
+		</div>
+	</div> 
+</div>		
+		`;
+
+		if (add_approval) {
+			recordstatus = `
+<div id="pnl_edit_record_custom" style="display: none">
+	<div class="form_row">
+		<div class="form_label_col">Commit By</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-commitby"></span>
+		</div>
+	</div>	
+
+	<div class="form_row">
+		<div class="form_label_col">Commit Date</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-commitdate"></span>
+		</div>
+	</div> 
+
+	<div class="form_row" style="margin-top: 30px;">
+		<div class="form_label_col">Approve By</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-approveby"></span>
+		</div>
+	</div>	
+
+	<div class="form_row">
+		<div class="form_label_col">Approve Date</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-approvedate"></span>
+		</div>
+	</div>	
+
+	<div class="form_row" style="margin-top: 30px;">
+		<div class="form_label_col">Decline By</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-declineby"></span>
+		</div>
+	</div>	
+
+	<div class="form_row">
+		<div class="form_label_col">Decline Date</div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<span id="pnl_edit_record-declinedate"></span>
+		</div>
+	</div>	
+
+</div>	
+			`;
+		}
+	}
+
+
+	return recordstatus;
 }

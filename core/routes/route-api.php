@@ -28,6 +28,7 @@ class ApiRoute extends Route {
 	}
 
 	public function ProcessRequest($reqinfo) {
+		global $_POST;
 
 		$API = null;
 		$reqinfo->apipath = "$reqinfo->moduledir/apis/$reqinfo->modulerequestinfo.php";

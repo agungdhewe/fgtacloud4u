@@ -20,7 +20,7 @@ function init(self) {
 		console.log('test');
 		self.iframe.contentWindow.document.body.style.backgroundColor = '#fff';
 		if (typeof self.OnReportLoaded === 'function') {
-			self.OnReportLoaded();
+			self.OnReportLoaded(self.iframe);
 		}
 	}
 
@@ -37,6 +37,9 @@ async function rpt_load(self, module, args) {
 
 		var data_url = URL.createObjectURL(new Blob(binaryData, {type: "text/html"}));
 		self.iframe.src = data_url;
+
+
+		
 	} catch (err) {
 		$ui.ShowMessage('[ERROR]'.err.message);
 	}
@@ -60,6 +63,9 @@ async function openpage(self, api, args) {
 		}
 		
 	}
+
+	console.log(postparams);
+
 
 	let apiurl = `index.php/printout/${api}`
 	let ajax = async (apiurl, postparams, otp) => {

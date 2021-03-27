@@ -7,11 +7,15 @@ const btn_edit = $('#pnl_edit-btn_edit')
 const btn_save = $('#pnl_edit-btn_save')
 const btn_delete = $('#pnl_edit-btn_delete')
 /*--__PRINTBUTTON__--*/
+/*--__COMMITBUTTON__--*/
+/*--__APPROVEBUTTON__--*/
 
 const pnl_form = $('#pnl_edit-form')
 const obj = {
 /*--__FORMCOMP__--*/
 }
+
+/*--__RECORDSTATUS__--*/
 
 
 let form = {}
@@ -48,16 +52,20 @@ export async function init(opt) {
 		OnIdSetup : (options) => { form_idsetup(options) },
 		OnViewModeChanged : (viewonly) => { form_viewmodechanged(viewonly) },
 		OnRecordStatusCreated: () => {
-		//	$('#pnl_edit_record_custom').detach().appendTo("#pnl_edit_record");
-		//	$('#pnl_edit_record_custom').show();
+			/*--__STATUSCREATED__--*/			
 		}		
 	})
+
+/*--__PRINTHANDLERASSIGNMENT__--*/
+/*--__COMMITHANDLERASSIGNMENT__--*/
+/*--__APPROVEHANDLERASSIGNMENT__--*/
+
 
 
 /*--__SLIDESELECS__--*/
 
 
-/*--__PRINTHANDLERASSIGNMENT__--*/
+
 
 	document.addEventListener('keydown', (ev)=>{
 		if ($ui.getPages().getCurrentPage()==this_page_id) {
@@ -125,6 +133,7 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 	var fn_dataopened = async (result, options) => {
 
 /*--__NULLRESULTLOADED__--*/
+  		updaterecordstatus(result.record)
 
 		form.SuspendEvent(true);
 		form
@@ -138,6 +147,8 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 		fn_callback()
 		form.SuspendEvent(false);
 
+		updatebuttonstate(result.record)
+		
 
 		// fill data, bisa dilakukan secara manual dengan cara berikut:	
 		// form
@@ -171,6 +182,9 @@ export function createnew() {
 		// set nilai-nilai default untuk form
 /*--__SETDEFAULTNOW__--*/
 /*--__SETDEFAULTCOMBO__--*/
+/*--__RECORDSTATUSNEW__--*/
+
+/*--__ACTIONBUTTONINITSTATE__--*/
 
 
 		options.OnCanceled = () => {
@@ -195,6 +209,20 @@ export function detil_open(pnlname) {
 	})	
 }
 
+function updaterecordstatus(record) {
+	// apabila ada keperluan untuk update status record di sini
+/*--__RECORDSTATUSDATAOPEN__--*/
+}
+
+function updatebuttonstate(record) {
+	// apabila ada keperluan untuk update state action button di sini
+/*--__ACTIONBUTTONSTATE__--*/	
+}
+
+function updategridstate(record) {
+	// apabila ada keperluan untuk update state grid list di sini
+/*--__ACTIONUPDATEGRID__--*/	
+}
 
 function form_viewmodechanged(viewmode) {
 	var OnViewModeChangedEvent = new CustomEvent('OnViewModeChanged', {detail: {}})
@@ -278,3 +306,6 @@ async function form_deleted(result, options) {
 }
 
 /*--__PRINTFUNCTION__--*/
+
+
+/*--__ACTIONFUNCTION__--*/

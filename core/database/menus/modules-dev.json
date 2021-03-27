@@ -1,25 +1,11 @@
 {
 	"title": "home *****",
 	"modules": [
-		"ent/organisation/docs",
-
-
-		{
-			"title" : "Administrator",
-			"disabled" : false,
-			"modules" : [
-				"fgta/framework/fggroup",
-				"fgta/framework/fguser"				
-			]
-		},
-
-		{
-			"title" : "Enterprise",
-			"icon" : "icon-enterprise-white.png",
-			"disabled" : false,
-			"file" : "modules-fgta-ent.json"
-		}		
-
-		
+		"finact/budget/deptbudget",
+		"finact/budget/corpbudget",
+		"finact/budget/projbudget",
+		"hrms/master/empluser",
+		"fgta/riset/pros01",
+		"fgta/riset/pros02"
 	]
 }

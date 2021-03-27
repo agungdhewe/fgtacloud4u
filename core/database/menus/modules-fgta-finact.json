@@ -2,7 +2,6 @@
 	"title": "Finance Accounting",
 	"disabled": false,
 	"modules": [
-		"finact/dashboards/dash01",
 
 		{
 			"title": "Master Data",
@@ -61,6 +60,7 @@
 				"finact/items/inquirymodel",
 				"finact/items/inquirytype",
 				"finact/items/inquiry",
+				"finact/items/inquiryrecv",
 				{
 					"program": "finact/items/inquiry",
 					"variancename": "commit"
@@ -71,6 +71,20 @@
 				}
 			]
 		},
+
+		{
+			"title": "Budget",
+			"backcolor" : "#d5895b",
+			"icon" : "icon-budget.svg",
+			"disabled": false,
+			"modules": [
+				"finact/budget/corpbudget",
+				"finact/budget/deptbudget",
+				"finact/budget/projbudget"
+			]
+		},
+
+
 		{
 			"title": "Procurement",
 			"backcolor" : "#73779d",
@@ -120,42 +134,7 @@
 				"finact/procurement/receive"
 			]
 		},
-		{
-			"title": "Budget",
-			"backcolor" : "#d5895b",
-			"icon" : "icon-budget.svg",
-			"disabled": false,
-			"modules": [
-				"finact/budget/projbudget",
-				{
-					"program": "finact/budget/projbudget",
-					"variancename": "commit"
-				},
-				{
-					"program": "finact/budget/projbudget",
-					"variancename": "uncommit"
-				},				
-				{
-					"program": "finact/budget/projbudget",
-					"variancename": "approve"
-				},
-				{
-					"program": "finact/budget/projbudget",
-					"variancename": "revisi"
-				},
-				"finact/budget/deptbudget",
-				"finact/budget/corpbudget",
-				{
-					"program": "finact/budget/corpbudget",
-					"variancename": "commit"
-				},
-				{
-					"program": "finact/budget/corpbudget",
-					"variancename": "approve"
-				},
-				"finact/budget/rptcorpbudget"			
-			]
-		},
+
 		{
 			"title": "Accounting",
 			"backcolor" : "#cb6987",
@@ -168,7 +147,9 @@
 				"finact/acct/receivable",
 				"finact/acct/rpttrialbal",
 				"finact/acct/rptneraca",
-				"finact/acct/rptlabarugi"
+				"finact/acct/rptlabarugi",
+				"finact/acct/rptagingar",
+				"finact/acct/rptagingap"
 
 			]
 		},

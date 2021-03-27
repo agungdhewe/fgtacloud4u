@@ -558,6 +558,9 @@ function setValue(self, obj, value, display) {
 		obj.combobox('setValue', value)
 	} else if (obj.objecttypeclass=='easyui-numberbox') {
 		obj.numberbox('setValue', value)
+	} else if (obj.objecttypeclass=='easyui-filebox') {
+		var textbox = obj.filebox('textbox');
+		textbox[0].value = value;
 	} else {
 		obj.textbox('setValue', value)
 		if (display!==undefined) {
@@ -577,7 +580,10 @@ function getValue(self, obj) {
 		return options.checked
 	} else if (obj.objecttypeclass=='easyui-combobox') {
 		return obj.combobox('getValue')
-	} else {
+	} else if (obj.objecttypeclass=='easyui-filebox') {
+		var textbox = obj.filebox('textbox');
+		return textbox[0].value;
+	} else {	
 		return obj.textbox('getValue')
 	}
 }
@@ -593,6 +599,8 @@ function getEasyuiClass(self, obj) {
 		return 'easyui-numberbox'
 	} else if (obj.hasClass('easyui-combobox')) {
 		return 'easyui-combobox'
+	} else if (obj.hasClass('easyui-filebox')) {
+		return 'easyui-filebox'
 	}
 }
 
@@ -726,7 +734,7 @@ function btn_save_click(self) {
 				} else {
 					if (!obj.textbox('isValid')) {
 						var opt = obj.textbox('options')
-						$ui.ShowMessage(opt.invalidMessage, {
+						$ui.ShowMessage('[WARNING]' + opt.invalidMessage, {
 							"OK" : () => {
 								var textbox =  obj.textbox('textbox')
 								textbox.focus()
@@ -774,7 +782,7 @@ function btn_save_click(self) {
 
 					markNewData(self, false)
 					if (options.suppressdialog!==true) {
-						$ui.ShowMessage(options.savedmessage, {
+						$ui.ShowMessage('[INFO]' + options.savedmessage, {
 							'Ok' : ()=> {
 								if (self.focustextbox!=null) {
 									self.focustextbox.textbox('textbox').focus()
@@ -851,10 +859,14 @@ function set_state_textbox(self, obj, viewonly) {
 	var value = obj.textbox('getValue')
 	var text = obj.textbox('getText')
 
+
+
 	var iscombo = obj.hasClass('easyui-combo') ? true : false;
+	var isfilebox = obj.hasClass('easyui-filebox') ? true : false;
 	var opt = obj.textbox('options')
 	if (obj.object_isdisabled || opt.disabled) {
 		obj.textbox('textbox').css('background-color', '');
+
 	} else {
 		if (viewonly) {
 			obj.textbox('readonly', true)
@@ -864,6 +876,11 @@ function set_state_textbox(self, obj, viewonly) {
 
 			if (obj.hasClass('easyui-numberbox')) {
 				obj.numberbox('fix')
+			} else if (isfilebox) {
+				var textbox = obj.filebox('textbox')
+				$(textbox).attr('disabled', true)
+				var btn = obj.filebox('button');
+				btn.hide();
 			}
 		} else {
 			obj.textbox('readonly', false)
@@ -871,6 +888,9 @@ function set_state_textbox(self, obj, viewonly) {
 				var textbox = obj.combo('textbox')
 				$(textbox).attr('disabled', true)
 				textbox.css('color', obj.colorbase)
+			} else if (isfilebox) {
+				var btn = obj.filebox('button');
+				btn.show();
 			}
 			obj.textbox('textbox').addClass('input-modeedit');
 			obj.textbox('textbox').removeClass('input-modeview');
@@ -893,8 +913,14 @@ function set_state_textbox(self, obj, viewonly) {
 	});
 
 	if (text!=value) {
-		obj.textbox('setValue', value)
-		obj.textbox('setText', text)
+		if (isfilebox) {
+			var textbox = obj.combo('textbox');
+			console.log(text, value);
+		} else {
+			obj.textbox('setValue', value)
+			obj.textbox('setText', text)
+		}
+
 	}
 }
 
@@ -948,10 +974,17 @@ function reset(self) {
 
 function getData(self) {
 	var data = {}
+	var FILES = {};
 	for (var c in self.ITEMS) {
-		var obj = self.ITEMS[c]
+		var obj = self.ITEMS[c];
+		if (obj.objecttypeclass=='easyui-filebox'){
+			var files = obj.filebox('files');
+			FILES[obj.mapping] = files[0];
+		} 
 		data[obj.mapping] = getValue(self, obj)
 	}
+
+	data.FILES = FILES;
 	return data
 }
 
@@ -963,7 +996,10 @@ async function save(self, opt, fn_callback) {
 		autoid: self.fgta4form.autoid
 	}, opt)
 
-	var data = self.fgta4form.getData()
+	var data = self.fgta4form.getData();
+	var files = data.FILES;
+	delete(data.FILES);
+	
 	await self.OnDataSaving(data, options)
 	if (options.cancel==true) {
 		console.log('save canceled')
@@ -980,13 +1016,13 @@ async function save(self, opt, fn_callback) {
 
 	var args = {
 		data: data,
-		options: options
+		options: options,
 	}
 
 
 	var apiurl = options.api
 	try {
-		let result = await $ui.apicall(apiurl, args)
+		let result = await $ui.apicall(apiurl, args, files);
 		
 		/* isi feedback dari server */
 		if (result.dataresponse!==undefined) {

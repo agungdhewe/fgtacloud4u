@@ -9,6 +9,7 @@ const colFgBlack = "\x1b[30m"
 const colBright = "\x1b[1m"
 const BgYellow = "\x1b[43m"
 
+
 const DATESERIAL = (new Date()).getTime();
 
 module.exports = async(genconfig) => {
@@ -23,6 +24,10 @@ module.exports = async(genconfig) => {
 }
 
 async function PrepareFs(genconfig) {
+	const dbtype = global.dbtype;
+	const comp = global.comp;
+
+
 	var programpath = genconfig.programpath
 	var basename = path.basename(programpath)
 
@@ -32,12 +37,52 @@ async function PrepareFs(genconfig) {
 		throw 'Program sudah di lock, tidak bisa digenerate.\r\n' + genlockfilecontent;
 	}
 
+	if (genconfig.approval===true) {
+		var tbl_header = genconfig.schema.header;
+		var tbl_approval = genconfig.schema.header + 'appr';
+		var primarykeys = genconfig.persistent[tbl_header].primarykeys;
+		genconfig.schema.detils['approval'] = {title: 'Approval', table: tbl_approval, form: true, headerview: primarykeys}; 
+		genconfig.persistent[tbl_approval] = {
+			primarykeys: [genconfig.basename + 'appr_id'],
+			comment: 'Approval ' + genconfig.schema.title,
+		}
+
+		var data = {}
+		data[genconfig.basename + 'appr_id'] = {text:'ID', type: dbtype.varchar(14), null:false}
+		data[genconfig.basename + 'appr_isapproved'] = {text:'Approved', type: dbtype.boolean, null:false, default:'0', options:{disabled:true}}
+		data[genconfig.basename + 'appr_by'] = {text:'Approved By', type: dbtype.varchar(14), options:{disabled:true}}
+		data[genconfig.basename + 'appr_date'] = {text:'Approved Date', type: dbtype.datetime, suppresslist: true, comp:comp.Textbox(), options:{disabled:true}}
+		data[genconfig.basename + '_version'] = {text:'Version', type: dbtype.int(4), null:false, default:'0', suppresslist: true, options:{disabled:true}}
+		data[genconfig.basename + 'appr_isdeclined'] = {text:'Declined', type: dbtype.boolean, null:false, default:'0', options:{disabled:true}}
+		data[genconfig.basename + 'appr_declinedby'] = {text:'Declined By', type: dbtype.varchar(14), suppresslist: true, options:{disabled:true}}
+		data[genconfig.basename + 'appr_declineddate'] = {text:'Declined Date', type: dbtype.datetime, suppresslist: true, comp:comp.Textbox(), options:{disabled:true}}
+		data[genconfig.basename + 'appr_notes'] = {text:'Notes', type: dbtype.varchar(255), suppresslist: true}
+		data[genconfig.basename + '_id'] = {text:'BudgetID', type: dbtype.varchar(30), null:false}
+		data['docauth_descr'] = {text:'Descr', type: dbtype.varchar(90), null:true, uppercase: false, suppresslist: true, options:{disabled: true}}
+		data['docauth_order'] = {text:'Order', type: dbtype.int(4), null:false, default:0, suppresslist: true, options:{disabled: true}}
+		data['docauth_value'] = {text:'Value', type: dbtype.int(4), null:false, default:100, suppresslist: true, options:{disabled: true}}
+		data['docauth_min'] = {text:'Min', type: dbtype.int(4), null:false, default:0, suppresslist: true, options:{disabled: true}}
+		data['authlevel_id'] = {text:'LevelId', type: dbtype.varchar(10), null:false, suppresslist: true, options:{disabled: true}}
+		data['authlevel_name'] = {text:'Level', type: dbtype.varchar(60), null:false, options:{disabled: true}}
+		data['auth_id'] = {text:'AuthorisasiId', type: dbtype.varchar(10), null:true, suppresslist: true, options:{disabled: true}}
+		data['auth_name'] = {text:'Authorisasi', type: dbtype.varchar(60), null:false, options:{disabled: true}}
+		
+		var uniques = {}
+		uniques[genconfig.basename + '_auth_id'] = [genconfig.basename + '_id', 'auth_id'] ;
+
+		genconfig.persistent[tbl_approval].data = data;
+		genconfig.persistent[tbl_approval].uniques = uniques;
+	}
+
+
 
 	InitDetilPages(genconfig)
 
 	var fsdata = [
 		{name: 'apis', type:'dir'},
 		{program:'gen_table', name: `${basename}.sql`},
+		{program:'gen_mainphp', name: `${basename}.php`},
+		{program:'gen_phtml', name: `${basename}.phtml`},
 		{program:'gen_phtml', name: `${basename}.phtml`},
 		{program:'gen_mjs', name: `${basename}.mjs`},
 		{program:'gen_phtml_list', name: `${basename}-list.phtml`},
@@ -46,6 +91,7 @@ async function PrepareFs(genconfig) {
 		{program:'gen_mjs_edit', name: `${basename}-edit.mjs`},
 		{program:'gen_mjs_apis', name: `${basename}.apis.mjs`},
 		{program:'gen_json', name: `${basename}.json`},
+		{program:'gen_api_base', name: path.join('apis', 'xapi.base.php')},
 		{program:'gen_api_list', name: path.join('apis', 'list.php')},
 		{program:'gen_api_save', name: path.join('apis', 'save.php')},
 		{program:'gen_api_open', name: path.join('apis', 'open.php')},
@@ -60,6 +106,17 @@ async function PrepareFs(genconfig) {
 		fsdata.push({program:'gen_xprint_php', name: `${basename}.xprint.php`});
 		fsdata.push({program:'gen_xprint_phtml', name: `${basename}.xprint.phtml`});
 	}
+
+	var add_approval = genconfig.approval===true;
+	var add_commiter = add_approval===true ? true : (genconfig.committer===true);
+	if (add_commiter) {
+		fsdata.push({program:'gen_xtion_commit', name: path.join('apis', 'xtion-commit.php')});
+		fsdata.push({program:'gen_xtion_uncommit', name: path.join('apis', 'xtion-uncommit.php')});
+		if (add_approval) {
+			fsdata.push({program:'gen_xtion_approve', name: path.join('apis', 'xtion-approve.php')});
+		}
+	}
+
 
 	for (var pagename in genconfig.pages) {
 		var p = genconfig.pages[pagename]

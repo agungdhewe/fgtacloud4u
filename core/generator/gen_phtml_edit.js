@@ -22,6 +22,8 @@ module.exports = async (fsd, genconfig) => {
 		var headertable = genconfig.persistent[headertable_name]
 		var data = headertable.data
 
+		var add_approval = genconfig.approval===true;
+		var add_commiter = add_approval===true ? true : (genconfig.committer===true);
 
 		// console.log(data)
 		var formcomp_script = ''
@@ -205,7 +207,7 @@ module.exports = async (fsd, genconfig) => {
 			detilpanel_script = `
 		<div id="pnl_edit-detil" class="form_row" style="margin-top: 30px">
 			<div class="form_label_col"></div>
-			<div class="form_input_col" style="border: 0px solid black">
+			<div class="form_input_col detilbox" style="border: 0px solid black">
 				<div class="fgtable-head" style="height: 25px; padding: 5px 0px 0px 5px">Detil Informations</div>
 ${detilrow}
 			</div>		
@@ -231,12 +233,30 @@ ${detilrow}
 			printbutton = `<a id="pnl_edit-btn_print" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="iconCls:'icon-print'">print</a>`;
 		}
 
+
+		var commitbutton = '';
+		var approvebutton = '';
+		if (add_commiter) {
+			commitbutton = `
+			<a id="pnl_edit-btn_commit" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="iconCls:'fgta-icon-commit'">Commit</a>			
+			<a id="pnl_edit-btn_uncommit" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="iconCls:'fgta-icon-uncommit'">UnCommit</a>
+			`;
+			if (add_approval) {
+				approvebutton = `
+				<a id="pnl_edit-btn_approve" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="plain:true,iconCls:'fgta-icon-posting'">Approve</a>
+				<a id="pnl_edit-btn_decline" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="plain:true,iconCls:'fgta-icon-unposting'">Decline</a>
+				`;
+			}
+		}		
+
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'edit_phtml.tpl')
 		var tplscript = fs.readFileSync(phtmltpl).toString()
 		tplscript = tplscript.replace('<!--__FORMCOMP__-->', formcomp_script)
 		tplscript = tplscript.replace('<!--__DETILPANEL__-->', detilpanel_script)
 		tplscript = tplscript.replace('<!--__PAGETITLE__-->', pagetitle)
 		tplscript = tplscript.replace('	<!--__PRINTBUTTON__-->', printbutton)
+		tplscript = tplscript.replace('	<!--__COMMITBUTTON__-->', commitbutton)
+		tplscript = tplscript.replace('	<!--__APPROVEBUTTON__-->', approvebutton)
 
 
 		fsd.script = tplscript		

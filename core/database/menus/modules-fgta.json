@@ -1,17 +1,6 @@
 {
 	"title": "home *****",
 	"modules": [
-
-
-
-		{
-			"title" : "finance accounting",
-			"icon" : "icon-finact-white.svg",
-			"backcolor" : "#3f497c",
-			"disabled" : false,
-			"file" : "modules-fgta-finact.json"
-		},
-
 		{
 			"title" : "Administrator",
 			"icon" : "icon-admin-white.png",
@@ -29,35 +18,32 @@
 		},
 
 		{
-			"title" : "Retail",
-			"icon" : "icon-retail-white.png",
-			"backcolor" : "#73779c",
-			"disabled" : false,
-			"file" : "modules-fgta-retail.json"
-		},
-
-		{
 			"title" : "hrms",
 			"icon" : "icon-hrms-white.png",
 			"backcolor" : "#a25656",
 			"disabled" : false,
 			"file" : "modules-fgta-hrms.json"
 		},
-		
-		{
-			"title" : "crm",
-			"icon" : "icon-cs-white.png",
-			"backcolor" : "#249093",
-			"disabled" : false,
-			"file" : "modules-fgta-crm.json"
-			
-		},
 
-		{
-			"title" : "Etap",
-			"backcolor" : "#c5bd75",
-			"disabled" : false,
-			"file" : "modules-fgta-etap.json"
-		}		
+        {
+            "title" : "Fin & Act",
+			"icon" : "icon-finact-white.svg",
+			"backcolor" : "#3f497c",                
+            "disabled" : false,
+            "file" : "modules-fgta-finact.json"
+        },
+        
+        {
+			"title" : "Media",
+			"icon" : "icon-media-white.svg",
+            "disabled" : false,
+            "file" : "modules-fgta-media.json"
+        }
+        
+
+
+
+		
 	]
 }
+

@@ -78,44 +78,6 @@ genconfig.dirname = __dirname
 			await fn_prog(fsd, genconfig)
 		}
 
-		// // Siapkan Script Detil
-		// console.log('********************************')
-		// for (var detilname in genconfig.schema.detils) {
-		// 	var detil = genconfig.schema.detils[detilname]
-		// 	var pages = []
-		// 	if (detil.form==true) {
-		// 		pages.push({pagename: `${detilname}grid`})
-		// 		pages.push({pagename: `${detilname}form`})
-		// 		pages.push({pagename: `${detilname}-list`})
-		// 		pages.push({pagename: `${detilname}-save`})
-		// 		pages.push({pagename: `${detilname}-open`})
-		// 		pages.push({pagename: `${detilname}-delete`})
-		// 	} else {
-		// 		pages.push({pagename: `${detilname}`})
-		// 	}
-
-		// 	// console.log(pages)
-		// 	for (var p of pages) {
-		// 		var pagename = p.pagename
-		// 		var fsd = genconfig.pages[pagename]
-		// 		if (fsd.api===true) {
-		// 			var fn_prog_path = path.join(GENLIBDIR, `${fsd.program}.js`)
-		// 			var fn_prog = require(fn_prog_path)	
-		// 			await fn_prog(fsd, genconfig)
-		// 			console.log(fsd)
-		// 			// fsdata.push(fsd)
-		// 		} else {
-		// 			// fsdata.push(part.mjs)
-		// 			// fsdata.push(part.phtml)
-		// 		}
-
-		// 	}
-		// }
-		
-		// console.log(fsdata)
-
-		// console.log('********************************')
-			
 		
 
 		// Tulis Script ke file

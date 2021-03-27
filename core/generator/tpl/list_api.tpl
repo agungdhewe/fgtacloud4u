@@ -5,25 +5,27 @@ if (!defined('FGTA4')) {
 }
 
 require_once __ROOT_DIR.'/core/sqlutil.php';
-
+require_once __DIR__ . '/xapi.base.php';
 
 
 use \FGTA4\exceptions\WebException;
 
-
-class DataList extends WebAPI {
-	function __construct() {
-		$this->debugoutput = true;
-		$DB_CONFIG = DB_CONFIG[$GLOBALS['MAINDB']];
-		$DB_CONFIG['param'] = DB_CONFIG_PARAM[$GLOBALS['MAINDBTYPE']];
-		$this->db = new \PDO(
-					$DB_CONFIG['DSN'], 
-					$DB_CONFIG['user'], 
-					$DB_CONFIG['pass'], 
-					$DB_CONFIG['param']
-		);
-
-	}
+/**
+ * {__MODULEPROG__}
+ *
+ * ========
+ * DataList
+ * ========
+ * Menampilkan data-data pada tabel header {__BASENAME__} ({__TABLENAME__})
+ * sesuai dengan parameter yang dikirimkan melalui variable $option->criteria
+ *
+ * Agung Nugroho <agung@fgta.net> http://www.fgta.net
+ * Tangerang, 26 Maret 2021
+ *
+ * digenerate dengan FGTA4 generator
+ * tanggal {__GENDATE__}
+ */
+$API = new class extends {__BASENAME__}Base {
 
 	public function execute($options) {
 
@@ -88,6 +90,4 @@ class DataList extends WebAPI {
 		}
 	}
 
-}
-
-$API = new DataList();
+};

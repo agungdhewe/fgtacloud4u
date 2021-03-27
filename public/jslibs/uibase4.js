@@ -419,6 +419,21 @@ export async function download(url, args, fn_handler) {
 }
 
 
+async function readfile(file) {
+	return new Promise((resolve, reject) => {
+		var reader = new FileReader();
+		reader.onload = function(evt) {
+			if(evt.target.readyState != 2) return;
+			if(evt.target.error) {
+				reject('Error while reading file')
+			}
+
+			var filecontent = evt.target.result;
+			resolve(filecontent);
+		};
+		reader.readAsDataURL(file);
+	})
+}
 
 
 
@@ -429,10 +444,12 @@ export async function download(url, args, fn_handler) {
  * @param api url dari api
  * @param args argumen yang akan dikirimkan ke api
  */
-export async function apicall(api, args) {
+export async function apicall(api, args, files) {
 
 	fgta_output_content.html('')	
 	fgta_output_error.html('')
+
+
 
 	let postparams = {}
 	for (let paramname in args) {
@@ -442,8 +459,19 @@ export async function apicall(api, args) {
 		} else {
 			postparams[paramname] = args[paramname]
 		}
-		
 	}
+
+	// get file
+	var filedata = {}
+	for (var fli in files) {
+		if (files[fli]===undefined) continue;
+		var file = files[fli];
+		var filecontent = await readfile(file);
+		filedata[fli] = filecontent;
+	}
+	postparams['files'] = JSON.stringify(filedata);
+
+	
 
 	let apiurl = `index.php/api/${api}`
 	let ajax = async (apiurl, postparams, otp) => {
@@ -452,7 +480,12 @@ export async function apicall(api, args) {
 			urlEncodedDataPairs.push(encodeURIComponent(postparamname) + '=' + encodeURIComponent(postparams[postparamname]));
 		}
 		let urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
-		
+
+		// let postdata = new FormData();
+		// for (let postparamname in postparams) {
+		// 	console.log(postparamname);
+		// 	postdata.append(postparamname, postparams[postparamname]);
+		// }
 
 		return new Promise(function(resolve, reject) {
 			let xhr = new XMLHttpRequest();
@@ -539,6 +572,7 @@ export async function apicall(api, args) {
 
 			xhr.open("POST", apiurl, true);
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			// xhr.setRequestHeader('Content-Type', 'multipart/form-data');
 			xhr.setRequestHeader('cache-control', 'no-cache, must-revalidate, post-check=0, pre-check=0');
 			xhr.setRequestHeader('cache-control', 'max-age=0');
 			xhr.setRequestHeader('expires', '0');
@@ -555,6 +589,7 @@ export async function apicall(api, args) {
 				urlEncodedData = $ui.Crypto.encrypt(urlEncodedData, otp.password);
 			} else {
 				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');	
+				// xhr.setRequestHeader('Content-Type', 'multipart/form-data');
 			}
 
 
@@ -562,7 +597,11 @@ export async function apicall(api, args) {
 				xhr.setRequestHeader("tokenid", Cookies.get('tokenid'));
 			}
 			
-			xhr.send(urlEncodedData);			
+			xhr.send(urlEncodedData);
+			// for(let [name, value] of postdata) {
+			// 	alert(`${name} = ${value}`); // key1 = value1, then key2 = value2
+			// }
+			// xhr.send(postdata);	
 		})
 	}
 
@@ -682,7 +721,7 @@ export function IsMessageShowing() {
 }
 
 
-export function ShowMessage(message, buttons) {
+export function ShowMessage(message, buttons, fn_callback) {
 	var top = $(window).scrollTop()
 
 	let progressmask = document.createElement('div')
@@ -848,6 +887,11 @@ export function ShowMessage(message, buttons) {
 		document.body.appendChild(progressmask)
 		document.body.appendChild(progresswaitmask)
 		$.parser.parse('#__dialogmessage-waiting__');
+
+		if (typeof fn_callback === 'function') {
+			fn_callback();
+		}
+
 		// console.log('test');
 		let fadein = setInterval(() => {
 			if (opacity < 7) {

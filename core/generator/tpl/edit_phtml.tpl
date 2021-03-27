@@ -25,6 +25,8 @@
 		<div>
 			<!-- letakkan tombol yang lin disini -->
 			<!--__PRINTBUTTON__-->
+			<!--__COMMITBUTTON__-->
+			<!--__APPROVEBUTTON__-->
 		</div>
 		<div>
 			<a id="pnl_edit-btn_delete" class="easyui-linkbutton c5" style="width">Hapus</a>

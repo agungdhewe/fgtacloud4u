@@ -439,6 +439,14 @@ h1 {
 }
 
 
+.fgtable-head-drow-info {
+	color: #3F4756;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	flex-direction: row;
+
+}
+
 
 .fgpaging-link {
 	/* text-decoration: underline; */
@@ -528,6 +536,16 @@ h1 {
 }
 
 
+.detilbox {
+	border: 0px solid black; background-color: #ffffff; box-shadow: 0px 0px 20px -3px rgba(0,0,0,0.64);
+}
+
+.detilbox div:last-child {
+	border-bottom: 0px;
+}
+
+
+
 .inrow-id-block {
 	display: inline-block;
 	margin-bottom: 5px;
@@ -580,4 +598,18 @@ h1 {
 }
 
 
+.deftable td[class="fgtable-head"]:first-child {
+	padding-right: 10px;
+}
 
+.deftable td[mapping="__CHECKBOX__"] {
+	padding-right: 10px;
+}
+
+.deftable tr td:first-child {
+	padding-left: 10px;
+}
+
+.deftable tr td:last-child {
+	padding-right: 10px;
+}

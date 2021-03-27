@@ -13,11 +13,16 @@ class MPCRequestBody {
 
 	}
 
-	function getFormattedData() {
+	function getData() {
 		return (object)[
 			"transactionNo" => 	$this->_transactionNo,
 			"requestData" => $this->_data
 		];
+	}
+
+	function getFormattedData() {
+		$data = $this->getData();
+		return json_encode($data);
 	}
 
 }

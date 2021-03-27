@@ -6,24 +6,27 @@ if (!defined('FGTA4')) {
 
 
 require_once __ROOT_DIR.'/core/sqlutil.php';
-
+require_once __DIR__ . '/xapi.base.php';
 
 use \FGTA4\exceptions\WebException;
 
 
-
-class DataSave extends WebAPI {
-	function __construct() {
-		$this->debugoutput = true;
-		$DB_CONFIG = DB_CONFIG[$GLOBALS['MAINDB']];
-		$DB_CONFIG['param'] = DB_CONFIG_PARAM[$GLOBALS['MAINDBTYPE']];
-		$this->db = new \PDO(
-					$DB_CONFIG['DSN'], 
-					$DB_CONFIG['user'], 
-					$DB_CONFIG['pass'], 
-					$DB_CONFIG['param']
-		);	
-	}
+/**
+ * {__MODULEPROG__}
+ *
+ * ============
+ * Detil-Delete
+ * ============
+ * Menghapus satu baris data/record berdasarkan PrimaryKey
+ * pada tabel {__DETILNAME__} {__BASENAME__} ({__TABLENAME__})
+ *
+ * Agung Nugroho <agung@fgta.net> http://www.fgta.net
+ * Tangerang, 26 Maret 2021
+ *
+ * digenerate dengan FGTA4 generator
+ * tanggal {__GENDATE__}
+ */
+$API = new class extends {__BASENAME__}Base {
 	
 	public function execute($data, $options) {
 		$tablename = '/*{__TABLENAME__}*/';
@@ -75,6 +78,4 @@ class DataSave extends WebAPI {
 		}
 	}
 
-}
-
-$API = new DataSave();
+};

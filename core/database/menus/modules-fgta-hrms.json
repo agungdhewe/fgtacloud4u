@@ -22,7 +22,9 @@
 			"modules" : [
 				"hrms/payroll/consol01"
 			]
-		}
+		},
+
+		"hrms/hrd/locchangereq"
 
 		
 	]

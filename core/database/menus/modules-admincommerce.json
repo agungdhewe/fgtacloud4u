@@ -15,6 +15,7 @@
 		"retail/webcommerce/website",
 		"retail/webcommerce/webfeedback",
 		"retail/webcommerce/webpreftype",
-		"retail/webcommerce/webaction"
+		"retail/webcommerce/webaction",
+		"retail/webcommerce/webfile"
 	]
 }

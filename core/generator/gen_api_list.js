@@ -73,6 +73,10 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 		tplscript = tplscript.replace('/*{__LOOKUPFIELDS__}*/', lookupfields)
 		tplscript = tplscript.replace('/*{__SEARCHSQLLINE__}*/', scrsqlline)
+		tplscript = tplscript.replace(/{__BASENAME__}/g, genconfig.basename);
+		tplscript = tplscript.replace(/{__TABLENAME__}/g, headertable_name)
+		tplscript = tplscript.replace(/{__MODULEPROG__}/g, genconfig.modulename + '/apis/list.php');
+		tplscript = tplscript.replace(/{__GENDATE__}/g, ((date)=>{var year = date.getFullYear();var month=(1+date.getMonth()).toString();month=month.length>1 ? month:'0'+month;var day = date.getDate().toString();day = day.length > 1 ? day:'0'+day;return day+'/'+month+'/'+year;})(new Date()));
 
 		fsd.script = tplscript
 

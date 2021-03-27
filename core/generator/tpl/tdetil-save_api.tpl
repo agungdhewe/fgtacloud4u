@@ -5,25 +5,30 @@ if (!defined('FGTA4')) {
 }
 
 require_once __ROOT_DIR.'/core/sqlutil.php';
+require_once __DIR__ . '/xapi.base.php';
 //require_once __ROOT_DIR . "/core/sequencer.php";
 
 use \FGTA4\exceptions\WebException;
 //use \FGTA4\utils\Sequencer;
 
 
-class DataSave extends WebAPI {
-	function __construct() {
-		$this->debugoutput = true;
-		$DB_CONFIG = DB_CONFIG[$GLOBALS['MAINDB']];
-		$DB_CONFIG['param'] = DB_CONFIG_PARAM[$GLOBALS['MAINDBTYPE']];
-		$this->db = new \PDO(
-					$DB_CONFIG['DSN'], 
-					$DB_CONFIG['user'], 
-					$DB_CONFIG['pass'], 
-					$DB_CONFIG['param']
-		);	
 
-	}
+/**
+ * {__MODULEPROG__}
+ *
+ * ==========
+ * Detil-Save
+ * ==========
+ * Menampilkan satu baris data/record sesuai PrimaryKey,
+ * dari tabel {__DETILNAME__} {__BASENAME__} ({__TABLENAME__})
+ *
+ * Agung Nugroho <agung@fgta.net> http://www.fgta.net
+ * Tangerang, 26 Maret 2021
+ *
+ * digenerate dengan FGTA4 generator
+ * tanggal {__GENDATE__}
+ */
+$API = new class extends {__BASENAME__}Base {
 	
 	public function execute($data, $options) {
 		$tablename = '/*{__TABLENAME__}*/';
@@ -105,19 +110,22 @@ class DataSave extends WebAPI {
 
 			$where = \FGTA4\utils\SqlUtility::BuildCriteria((object)[$primarykey=>$obj->{$primarykey}], [$primarykey=>"$primarykey=:$primarykey"]);
 			$sql = \FGTA4\utils\SqlUtility::Select($tablename , [
-				$primarykey,  /*{__FIELDRETSEL__}*/
+				$primarykey
+				, /*{__FIELDRETSEL__}*/
 			], $where->sql);
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute($where->params);
 			$row  = $stmt->fetch(\PDO::FETCH_ASSOC);			
 
-			$dataresponse = [];
+			$record = [];
 			foreach ($row as $key => $value) {
-				$dataresponse[$key] = $value;
+				$record[$key] = $value;
 			}
-			$result->dataresponse = (object) array_merge($dataresponse, [
+			$result->dataresponse = (object) array_merge($record, [
 				// untuk lookup atau modify response ditaruh disini
-/*{__LOOKUPFIELD__}*/				
+/*{__LOOKUPFIELD__}*/
+				'_createby' => \FGTA4\utils\SqlUtility::Lookup($record['_createby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'_modifyby' => \FGTA4\utils\SqlUtility::Lookup($record['_modifyby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 			]);
 
 			return $result;
@@ -136,6 +144,4 @@ class DataSave extends WebAPI {
 		return uniqid();
 	}
 
-}
-
-$API = new DataSave();
+};

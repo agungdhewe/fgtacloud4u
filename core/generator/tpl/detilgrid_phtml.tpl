@@ -17,7 +17,7 @@
 	//-->
 
 	<div style="margin-top: 10px; margin-bottom: 15px">
-		<table id="<!--__PANELNAME__-->-tbl_list" paging="true" cellspacing="0" width="100%">
+		<table id="<!--__PANELNAME__-->-tbl_list" paging="true" cellspacing="0" width="100%" class="deftable">
 			<thead>
 				<tr>
 					<th type="check">chk</th>

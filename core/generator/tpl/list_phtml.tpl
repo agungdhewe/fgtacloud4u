@@ -19,7 +19,7 @@
 
 
 	<div style="margin-top: 10px">
-		<table id="pnl_list-tbl_list" paging="true" cellspacing="0" width="100%">
+		<table id="pnl_list-tbl_list" paging="true" cellspacing="0" width="100%" class="deftable">
 			<thead>
 				<tr>
 <!--__HEADERMAP__-->
