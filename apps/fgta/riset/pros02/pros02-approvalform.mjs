@@ -14,16 +14,16 @@ const chk_autoadd = $('#pnl_editapprovalform-autoadd')
 
 const pnl_form = $('#pnl_editapprovalform-form')
 const obj = {
-	txt_pros02appr_id: $('#pnl_editapprovalform-txt_pros02appr_id'),
-	chk_pros02appr_isapproved: $('#pnl_editapprovalform-chk_pros02appr_isapproved'),
-	txt_pros02appr_by: $('#pnl_editapprovalform-txt_pros02appr_by'),
-	txt_pros02appr_date: $('#pnl_editapprovalform-txt_pros02appr_date'),
-	txt_pros02_version: $('#pnl_editapprovalform-txt_pros02_version'),
-	chk_pros02appr_isdeclined: $('#pnl_editapprovalform-chk_pros02appr_isdeclined'),
-	txt_pros02appr_declinedby: $('#pnl_editapprovalform-txt_pros02appr_declinedby'),
-	txt_pros02appr_declineddate: $('#pnl_editapprovalform-txt_pros02appr_declineddate'),
-	txt_pros02appr_notes: $('#pnl_editapprovalform-txt_pros02appr_notes'),
-	txt_pros02_id: $('#pnl_editapprovalform-txt_pros02_id'),
+	txt_prosappr_id: $('#pnl_editapprovalform-txt_prosappr_id'),
+	chk_prosappr_isapproved: $('#pnl_editapprovalform-chk_prosappr_isapproved'),
+	txt_prosappr_by: $('#pnl_editapprovalform-txt_prosappr_by'),
+	txt_prosappr_date: $('#pnl_editapprovalform-txt_prosappr_date'),
+	txt_pros_version: $('#pnl_editapprovalform-txt_pros_version'),
+	chk_prosappr_isdeclined: $('#pnl_editapprovalform-chk_prosappr_isdeclined'),
+	txt_prosappr_declinedby: $('#pnl_editapprovalform-txt_prosappr_declinedby'),
+	txt_prosappr_declineddate: $('#pnl_editapprovalform-txt_prosappr_declineddate'),
+	txt_prosappr_notes: $('#pnl_editapprovalform-txt_prosappr_notes'),
+	txt_pros_id: $('#pnl_editapprovalform-txt_pros_id'),
 	txt_docauth_descr: $('#pnl_editapprovalform-txt_docauth_descr'),
 	txt_docauth_order: $('#pnl_editapprovalform-txt_docauth_order'),
 	txt_docauth_value: $('#pnl_editapprovalform-txt_docauth_value'),
@@ -46,9 +46,9 @@ export async function init(opt) {
 
 	
 	form = new global.fgta4form(pnl_form, {
-		primary: obj.txt_pros02appr_id,
+		primary: obj.txt_prosappr_id,
 		autoid: true,
-		logview: 'mst_pros02appr',
+		logview: 'mst_prosappr',
 		btn_edit: btn_edit,
 		btn_save: btn_save,
 		btn_delete: btn_delete,		
@@ -61,9 +61,9 @@ export async function init(opt) {
 		OnViewModeChanged : (viewonly) => { form_viewmodechanged(viewonly) }
 	})	
 
-	form.AllowAddRecord = true
-	form.AllowRemoveRecord = true
-	form.AllowEditRecord = true
+	form.AllowAddRecord = false
+	form.AllowRemoveRecord = false
+	form.AllowEditRecord = false
 	form.CreateRecordStatusPage(this_page_id)
 	form.CreateLogPage(this_page_id)
 
@@ -153,7 +153,7 @@ export function getForm() {
 
 export function open(data, rowid, hdata) {
 	// console.log(header_data)
-	txt_title.html(hdata.pros02_id)
+	txt_title.html(hdata.pros_id)
 	header_data = hdata
 
 	var fn_dataopening = async (options) => {
@@ -224,13 +224,13 @@ export function createnew(hdata) {
 
 	txt_title.html('Create New Row')
 	form.createnew(async (data, options)=>{
-		data.pros02_id= hdata.pros02_id
+		data.pros_id= hdata.pros_id
 		data.approval_value = 0
 
-			data.pros02_version = 0
-			data.docauth_order = 0
-			data.docauth_value = 0
-			data.docauth_min = 0
+		data.pros_version = 0
+		data.docauth_order = 0
+		data.docauth_value = 0
+		data.docauth_min = 0
 
 
 
@@ -295,7 +295,7 @@ function form_viewmodechanged(viewonly) {
 
 
 function form_idsetup(options) {
-	var objid = obj.txt_pros02appr_id
+	var objid = obj.txt_prosappr_id
 	switch (options.action) {
 		case 'fill' :
 			objid.textbox('disable') 

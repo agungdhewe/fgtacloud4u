@@ -19,19 +19,19 @@ use \FGTA4\exceptions\WebException;
  * Delete
  * ======
  * Menghapus satu baris data/record berdasarkan PrimaryKey
- * pada tabel header pros02 (mst_pros02)
+ * pada tabel header pros02 (mst_pros)
  *
  * Agung Nugroho <agung@fgta.net> http://www.fgta.net
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $API = new class extends pros02Base {
 	
 	public function execute($data, $options) {
-		$tablename = 'mst_pros02';
-		$primarykey = 'pros02_id';
+		$tablename = 'mst_pros';
+		$primarykey = 'pros_id';
 
 		$userdata = $this->auth->session_get_user();
 

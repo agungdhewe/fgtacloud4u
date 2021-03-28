@@ -613,3 +613,8 @@ h1 {
 .deftable tr td:last-child {
 	padding-right: 10px;
 }
+
+
+.declinereasonbox {
+	background-color: #ffe095;
+}

@@ -17,7 +17,7 @@ const colBright = "\x1b[1m"
 const BgYellow = "\x1b[43m"
 
 const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'lowercase', 'text', 'suppresslist', 'options', 'unset', 'tips', 'tipstype', 'initialvalue', 'hidden', 'lookup']
-const detil_props = ['table', 'form', 'headerview', 'title']
+const detil_props = ['table', 'form', 'headerview', 'title', 'isapprovalform']
 
 
 module.exports = async (fsd, genconfig) => {

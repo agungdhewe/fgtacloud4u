@@ -36,6 +36,8 @@ module.exports = async (fsd, genconfig) => {
 				field_display_name = options.field_display_name;
 			}			
 			lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
+		} else if  (data[fieldname].lookup==='user') {
+			lookupfields += `\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
 		}		
 	}	
 	

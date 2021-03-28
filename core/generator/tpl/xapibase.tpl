@@ -32,7 +32,7 @@ class {__BASENAME__}Base extends WebAPI {
 
 	protected $main_tablename = "{__TABLENAME__}";
 	protected $main_primarykey = "{__PRIMARYID__}";
-	protected $main_field_version = "{__BASENAME__}_version";	
+	protected $main_field_version = "{__BASETABLEENTITY__}_version";	
 	/*{__FIELDSCOMMIT__}*/
 	/*{__FIELDSAPPROVE__}*/
 

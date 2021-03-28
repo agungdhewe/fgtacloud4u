@@ -29,7 +29,8 @@ async function PrepareFs(genconfig) {
 
 
 	var programpath = genconfig.programpath
-	var basename = path.basename(programpath)
+	var basename = path.basename(programpath);
+	var basetableentity = genconfig.basetableentity;
 
 	if (fs.existsSync(path.join(programpath, `${basename}.genlock`))) {
 		var genlockfile = path.join(programpath, `${basename}.genlock`);
@@ -41,34 +42,34 @@ async function PrepareFs(genconfig) {
 		var tbl_header = genconfig.schema.header;
 		var tbl_approval = genconfig.schema.header + 'appr';
 		var primarykeys = genconfig.persistent[tbl_header].primarykeys;
-		genconfig.schema.detils['approval'] = {title: 'Approval', table: tbl_approval, form: true, headerview: primarykeys}; 
+		genconfig.schema.detils['approval'] = {title: 'Approval', table: tbl_approval, form: true, headerview: primarykeys, isapprovalform: true}; 
 		genconfig.persistent[tbl_approval] = {
-			primarykeys: [genconfig.basename + 'appr_id'],
+			primarykeys: [basetableentity + 'appr_id'],
 			comment: 'Approval ' + genconfig.schema.title,
 		}
 
 		var data = {}
-		data[genconfig.basename + 'appr_id'] = {text:'ID', type: dbtype.varchar(14), null:false}
-		data[genconfig.basename + 'appr_isapproved'] = {text:'Approved', type: dbtype.boolean, null:false, default:'0', options:{disabled:true}}
-		data[genconfig.basename + 'appr_by'] = {text:'Approved By', type: dbtype.varchar(14), options:{disabled:true}}
-		data[genconfig.basename + 'appr_date'] = {text:'Approved Date', type: dbtype.datetime, suppresslist: true, comp:comp.Textbox(), options:{disabled:true}}
-		data[genconfig.basename + '_version'] = {text:'Version', type: dbtype.int(4), null:false, default:'0', suppresslist: true, options:{disabled:true}}
-		data[genconfig.basename + 'appr_isdeclined'] = {text:'Declined', type: dbtype.boolean, null:false, default:'0', options:{disabled:true}}
-		data[genconfig.basename + 'appr_declinedby'] = {text:'Declined By', type: dbtype.varchar(14), suppresslist: true, options:{disabled:true}}
-		data[genconfig.basename + 'appr_declineddate'] = {text:'Declined Date', type: dbtype.datetime, suppresslist: true, comp:comp.Textbox(), options:{disabled:true}}
-		data[genconfig.basename + 'appr_notes'] = {text:'Notes', type: dbtype.varchar(255), suppresslist: true}
-		data[genconfig.basename + '_id'] = {text:'BudgetID', type: dbtype.varchar(30), null:false}
-		data['docauth_descr'] = {text:'Descr', type: dbtype.varchar(90), null:true, uppercase: false, suppresslist: true, options:{disabled: true}}
+		data[basetableentity + 'appr_id'] = {text:'ID', type: dbtype.varchar(14), suppresslist: true, null:false}
+		data[basetableentity + 'appr_isapproved'] = {text:'Approved', type: dbtype.boolean, null:false, default:'0', suppresslist: true, options:{disabled:true}}
+		data[basetableentity + 'appr_by'] = {text:'Approved By', type: dbtype.varchar(14), suppresslist: true, options:{disabled:true}, lookup:'user'}
+		data[basetableentity + 'appr_date'] = {text:'Approved Date', type: dbtype.datetime, suppresslist: true, comp:comp.Textbox(), options:{disabled:true}}
+		data[basetableentity + '_version'] = {text:'Version', type: dbtype.int(4), null:false, default:'0', suppresslist: true, options:{disabled:true}}
+		data[basetableentity + 'appr_isdeclined'] = {text:'Declined', type: dbtype.boolean, null:false, default:'0', suppresslist: true, options:{disabled:true}}
+		data[basetableentity + 'appr_declinedby'] = {text:'Declined By', type: dbtype.varchar(14), suppresslist: true, options:{disabled:true}, lookup:'user'}
+		data[basetableentity + 'appr_declineddate'] = {text:'Declined Date', type: dbtype.datetime, suppresslist: true, comp:comp.Textbox(), options:{disabled:true}}
+		data[basetableentity + 'appr_notes'] = {text:'Notes', type: dbtype.varchar(255), suppresslist: true}
+		data[basetableentity + '_id'] = {text:'ID', type: dbtype.varchar(30), null:false, suppresslist: true,}
+		data['docauth_descr'] = {text:'Approval', type: dbtype.varchar(90), null:true, uppercase: false, suppresslist: false, options:{disabled: true}}
 		data['docauth_order'] = {text:'Order', type: dbtype.int(4), null:false, default:0, suppresslist: true, options:{disabled: true}}
 		data['docauth_value'] = {text:'Value', type: dbtype.int(4), null:false, default:100, suppresslist: true, options:{disabled: true}}
 		data['docauth_min'] = {text:'Min', type: dbtype.int(4), null:false, default:0, suppresslist: true, options:{disabled: true}}
 		data['authlevel_id'] = {text:'LevelId', type: dbtype.varchar(10), null:false, suppresslist: true, options:{disabled: true}}
-		data['authlevel_name'] = {text:'Level', type: dbtype.varchar(60), null:false, options:{disabled: true}}
+		data['authlevel_name'] = {text:'Level', type: dbtype.varchar(60), null:false, suppresslist: true, options:{disabled: true}}
 		data['auth_id'] = {text:'AuthorisasiId', type: dbtype.varchar(10), null:true, suppresslist: true, options:{disabled: true}}
-		data['auth_name'] = {text:'Authorisasi', type: dbtype.varchar(60), null:false, options:{disabled: true}}
+		data['auth_name'] = {text:'Authorisasi', type: dbtype.varchar(60), null:false, suppresslist: true, options:{disabled: true}}
 		
 		var uniques = {}
-		uniques[genconfig.basename + '_auth_id'] = [genconfig.basename + '_id', 'auth_id'] ;
+		uniques[basetableentity + '_auth_id'] = [basetableentity + '_id', 'auth_id'] ;
 
 		genconfig.persistent[tbl_approval].data = data;
 		genconfig.persistent[tbl_approval].uniques = uniques;

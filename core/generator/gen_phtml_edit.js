@@ -63,6 +63,16 @@ module.exports = async (fsd, genconfig) => {
 
 			var stroptions = ''
 			var dataoptions = data[fieldname].options
+
+			if (add_approval) {
+				if (fieldname=='doc_id') {
+					dataoptions['disabled']=true;
+				}
+			}
+
+			// console.log(fieldname);
+			// console.log(dataoptions);
+
 			for (var opt_name in dataoptions) {
 				var opt_value;
 				if (typeof dataoptions[opt_name] == 'boolean') {

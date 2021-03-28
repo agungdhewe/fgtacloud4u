@@ -59,12 +59,12 @@ module.exports = async (fsd, genconfig) => {
 			formcomp.push(`\t${prefix}${fieldname}: $('#pnl_edit-${prefix}${fieldname}')`)
 
 			if (comptype=='datebox') {
-				setdefaultnow += `\t\t\tdata.${fieldname} = global.now()\r\n`
+				setdefaultnow += `\t\tdata.${fieldname} = global.now()\r\n`
 			} else if (comptype=='numberbox') {
-				setdefaultnow += `\t\t\tdata.${fieldname} = 0\r\n`
+				setdefaultnow += `\t\tdata.${fieldname} = 0\r\n`
 			} else if (comptype=='textbox') {
 				if (typeof initialvalue === 'string') {
-					setdefaultnow += `\t\t\tdata.${fieldname} = '${initialvalue}'\r\n`
+					setdefaultnow += `\t\tdata.${fieldname} = '${initialvalue}'\r\n`
 				}
 			}
 
@@ -80,17 +80,20 @@ module.exports = async (fsd, genconfig) => {
 				var pilihnone = '';
 				var allownull = data[fieldname].null;
 				if (allownull) {
-					setdefaultcombo += `\t\t\tdata.${fieldname} = '--NULL--'\r\n`
-					setdefaultcombo += `\t\t\tdata.${field_display_name} = 'NONE'\r\n`
+					setdefaultcombo += `\t\tdata.${fieldname} = '--NULL--'\r\n`
+					setdefaultcombo += `\t\tdata.${field_display_name} = 'NONE'\r\n`
 					nullresultloaded += `\t\tif (result.record.${fieldname}==null) { result.record.${fieldname}='--NULL--'; result.record.${field_display_name}='NONE'; }\r\n`;
 					pilihnone = `result.records.unshift({${options.field_value}:'--NULL--', ${options.field_display}:'NONE'});`	
 				} else {
-					if (initialvalue!=null) {
-						setdefaultcombo += `\t\t\tdata.${fieldname} = '${initialvalue.id}'\r\n`
-						setdefaultcombo += `\t\t\tdata.${field_display_name} = '${initialvalue.display}'\r\n`
+					if (add_approval && fieldname=='doc_id') {
+						setdefaultcombo += `\t\tdata.${fieldname} = global.setup.doc_id\r\n`
+						setdefaultcombo += `\t\tdata.${field_display_name} = global.setup.doc_id\r\n`
+					} else if (initialvalue!=null) {
+						setdefaultcombo += `\t\tdata.${fieldname} = '${initialvalue.id}'\r\n`
+						setdefaultcombo += `\t\tdata.${field_display_name} = '${initialvalue.display}'\r\n`
 					} else {
-						setdefaultcombo += `\t\t\tdata.${fieldname} = '0'\r\n`
-						setdefaultcombo += `\t\t\tdata.${field_display_name} = '-- PILIH --'\r\n`
+						setdefaultcombo += `\t\tdata.${fieldname} = '0'\r\n`
+						setdefaultcombo += `\t\tdata.${field_display_name} = '-- PILIH --'\r\n`
 					}
 				}				
 
@@ -199,24 +202,38 @@ const btn_uncommit = $('#pnl_edit-btn_uncommit')
 const btn_approve = $('#pnl_edit-btn_approve')
 const btn_decline = $('#pnl_edit-btn_decline')			
 				`;
-				approvehandlerassignment = `
-				btn_approve.linkbutton({ onClick: () => { btn_action_click({ action: 'approve' }); } });
-				btn_decline.linkbutton({ onClick: () => { 
-					$ui.ShowMessage(\`
-						<div style="display: block">
-							<div style="font-weight: bold">Reason</div>
-							<div>
-								<input class="easyui-textbox" style="width: 300px">
-							</div>
-						</div>
-					\`, {
-						'Decline': () => {
-							btn_action_click({ action: 'decline' }); 
-						},
-						'Cancel': () => {
-						} 
-					})
-				}});				
+	approvehandlerassignment = `
+	btn_approve.linkbutton({ onClick: () => { btn_action_click({ action: 'approve' }); } });
+	btn_decline.linkbutton({ onClick: () => {
+		var id = 'pnl_edit-reason_' + Date.now().toString();
+		$ui.ShowMessage(\`
+			<div style="display: block;  margin-bottom: 10px">
+				<div style="font-weight: bold; margin-bottom: 10px">Reason</div>
+				<div">
+					<input id="\${id}" class="easyui-textbox" style="width: 300px; height: 60px;" data-options="multiline: true">
+				</div>
+			</div>
+		\`, {
+			'Decline': () => {
+				var reason = $(\`#\${id}\`).textbox('getValue');
+				btn_action_click({ action: 'decline', reason: reason }); 
+			},
+			'Cancel': () => {
+			} 
+		}, ()=>{
+			var obj_reason = $(\`#\${id}\`);
+			var txt = obj_reason.textbox('textbox');
+			txt[0].maxLength = 255;
+			txt[0].classList.add('declinereasonbox');
+			txt[0].addEventListener('keyup', (ev)=>{
+				if (ev.key=='Enter') {
+					ev.stopPropagation();
+				}
+			});
+			txt.css('text-align', 'center');
+			txt.focus();
+		})
+	}});				
 				`;
 			}
 		}
@@ -365,12 +382,13 @@ function cek_commiter(genconfig) {
 	var headertable_name = genconfig.schema.header
 	var headertable = genconfig.persistent[headertable_name]
 	var data = headertable.data
+	var basetableentity = genconfig.basetableentity;
 
 	try {
-		var iscommit = genconfig.basename + '_iscommit';
-		var commitby = genconfig.basename + '_commitby';
-		var commitdate = genconfig.basename + '_commitdate';
-		var version = genconfig.basename + '_version';
+		var iscommit = basetableentity + '_iscommit';
+		var commitby = basetableentity + '_commitby';
+		var commitdate = basetableentity + '_commitdate';
+		var version = basetableentity + '_version';
 		if (data[iscommit]==null) { throw `Belum ada field '${iscommit}' di table header`; }
 		if (data[commitby]==null) { throw `Belum ada field '${commitby}' di table header`; }
 		if (data[commitdate]==null) { throw `Belum ada field '${commitdate}' di table header`; }
@@ -387,19 +405,20 @@ function cek_approval(genconfig) {
 	var headertable_name = genconfig.schema.header
 	var headertable = genconfig.persistent[headertable_name]
 	var data = headertable.data
+	var basetableentity = genconfig.basetableentity;
 
 	try {
 		if (genconfig.doc_id=== undefined) {
 			throw 'doc_id belum didefinisikan di genconfig';
 		}
 
-		var isapproved = genconfig.basename + '_isapproved';
-		var approveby = genconfig.basename + '_approveby';
-		var approvedate = genconfig.basename + '_approvedate';
-		var isapprovalprogress = genconfig.basename + '_isapprovalprogress';
-		var isdeclined = genconfig.basename + '_isdeclined';
-		var declineby = genconfig.basename + '_declineby';
-		var declinedate = genconfig.basename + '_declinedate';
+		var isapproved = basetableentity + '_isapproved';
+		var approveby = basetableentity + '_approveby';
+		var approvedate = basetableentity + '_approvedate';
+		var isapprovalprogress = basetableentity + '_isapprovalprogress';
+		var isdeclined = basetableentity + '_isdeclined';
+		var declineby = basetableentity + '_declineby';
+		var declinedate = basetableentity + '_declinedate';
 		if (data[isapproved]==null) { throw `Belum ada field '${isapproved}' di table header`; }
 		if (data[approveby]==null) { throw `Belum ada field '${approveby}' di table header`; }
 		if (data[approvedate]==null) { throw `Belum ada field '${approvedate}' di table header`; }
@@ -421,14 +440,16 @@ function get_action_function(add_commiter, add_approval, genconfig) {
 		return '';
 	}
 
+	var varapprove = '';
+	var basetableentity = genconfig.basetableentity;
 	var resultcommit_appr = '';
 	var resultuncommit_appr = '';
 	var optioncaseapproval = '';
 	if (add_approval) {
 		varapprove = `
-	var chk_isapprovalprogress = obj.chk_${genconfig.basename}_isapprovalprogress;	
-	var chk_isapprove = obj.chk_${genconfig.basename}_isapproved;
-	var chk_isdeclined = obj.chk_${genconfig.basename}_isdeclined;
+	var chk_isapprovalprogress = obj.chk_${basetableentity}_isapprovalprogress;	
+	var chk_isapprove = obj.chk_${basetableentity}_isapproved;
+	var chk_isdeclined = obj.chk_${basetableentity}_isdeclined;
 		`;
 		resultcommit_appr = `
 			chk_isapprove.checkbox('uncheck');
@@ -465,7 +486,7 @@ function get_action_function(add_commiter, add_approval, genconfig) {
 			args.otp_title = 'Decline Code';
 			args.param = {
 				approve: false,
-				approval_note: ''
+				approval_note: args.reason
 			}
 			args.act_do = (result) => {
 				chk_iscommit.checkbox('check');
@@ -487,8 +508,8 @@ async function btn_action_click(args) {
 
 
 	var docname = '${genconfig.schema.title}'
-	var txt_version = obj.txt_${genconfig.basename}_version;
-	var chk_iscommit = obj.chk_${genconfig.basename}_iscommit;
+	var txt_version = obj.txt_${basetableentity}_version;
+	var chk_iscommit = obj.chk_${basetableentity}_iscommit;
 	${varapprove}
 	
 	var id = form.getCurrentId();
@@ -542,6 +563,7 @@ async function btn_action_click(args) {
 				args.act_do(result);
 				updatebuttonstate(result.dataresponse);
 				updategridstate(result.dataresponse);
+				if (args.act_msg_result!=='') $ui.ShowMessage('[INFO]' + args.act_msg_result);	
 			}
 		});
 	} catch (err) {
@@ -563,6 +585,7 @@ function get_action_buttonstate (add_commiter, add_approval, genconfig) {
 		return '';
 	}
 
+	var basetableentity = genconfig.basetableentity;
 	var buttonstate = "";
 	if (add_commiter) {
 		buttonstate = `
@@ -570,7 +593,7 @@ function get_action_buttonstate (add_commiter, add_approval, genconfig) {
 		var button_commit_on = false;
 		var button_uncommit_on = false;	
 		
-		if (record.${genconfig.basename}_iscommit=="1") {
+		if (record.${basetableentity}_iscommit=="1") {
 			button_commit_on = false;
 			button_uncommit_on = true;
 			form.lock(true);		
@@ -591,31 +614,38 @@ function get_action_buttonstate (add_commiter, add_approval, genconfig) {
 		var button_uncommit_on = false;
 		var button_approve_on = false;
 		var button_decline_on = false;
-	
-		if (record.${genconfig.basename}_isdeclined=="1") {
+
+		
+		if (record.${basetableentity}_isfirm=="1") {
+			button_commit_on = false;
+			button_uncommit_on = false;
+			button_approve_on = false;
+			button_decline_on = false;
+			form.lock(true);	
+		} else if (record.${basetableentity}_isdeclined=="1" || record.${basetableentity}_isuseralreadydeclined=="1") {
 			button_commit_on = false;
 			button_uncommit_on = true;
 			button_approve_on = true;
 			button_decline_on = false;
 			form.lock(true);	
-		} else if (record.${genconfig.basename}_isapprovalprogress=="1") {
-			button_commit_on = false;
-			button_uncommit_on = false;
-			button_approve_on = true;
-			button_decline_on = true;
-			form.lock(true);	
-		} else if (record.${genconfig.basename}_isapproved=="1") {
+		} else if (record.${basetableentity}_isapproved=="1" || record.${basetableentity}_isuseralreadyapproved=="1") {
 			button_commit_on = false;
 			button_uncommit_on = false;
 			button_approve_on = false;
 			button_decline_on = true;	
 			form.lock(true);	
-		} else if (record.${genconfig.basename}_iscommit=="1") {
+		} else if (record.${basetableentity}_isapprovalprogress=="1") {
+			button_commit_on = false;
+			button_uncommit_on = false;
+			button_approve_on = true;
+			button_decline_on = true;
+			form.lock(true);	
+		} else if (record.${basetableentity}_iscommit=="1") {
 			button_commit_on = false;
 			button_uncommit_on = true;
 			button_approve_on = true;
 			button_decline_on = true;
-			form.lock(false);		
+			form.lock(true);		
 		} else {
 			button_commit_on = true;
 			button_uncommit_on = false;
@@ -641,6 +671,7 @@ function get_action_buttoninitstate (add_commiter, add_approval, genconfig) {
 		return '';
 	}
 
+	var basetableentity = genconfig.basetableentity;
 	var buttonstate = "";
 	if (add_commiter) {
 		buttonstate = `
@@ -702,18 +733,19 @@ const rec_declinedate = $('#pnl_edit_record-declinedate');
 
 
 function get_recordstatusdataopen(add_commiter, add_approval, genconfig) {
+	var basetableentity = genconfig.basetableentity;
 	var recordstatus = "";
 	if (add_commiter) {
 		recordstatus = `
-		rec_commitby.html(record.${genconfig.basename}_commitby);
-		rec_commitdate.html(record.${genconfig.basename}_commitdate);
+		rec_commitby.html(record.${basetableentity}_commitby);
+		rec_commitdate.html(record.${basetableentity}_commitdate);
 		`;
 		if (add_approval) {
 			recordstatus += `
-		rec_approveby.html(record.${genconfig.basename}_approveby);
-		rec_approvedate.html(record.${genconfig.basename}_approvedate);
-		rec_declineby.html(record.${genconfig.basename}_declineby);
-		rec_declinedate.html(record.${genconfig.basename}_declinedate);
+		rec_approveby.html(record.${basetableentity}_approveby);
+		rec_approvedate.html(record.${basetableentity}_approvedate);
+		rec_declineby.html(record.${basetableentity}_declineby);
+		rec_declinedate.html(record.${basetableentity}_declinedate);
 			`
 		}
 	}
@@ -722,6 +754,7 @@ function get_recordstatusdataopen(add_commiter, add_approval, genconfig) {
 
 
 function get_recordstatusnew(add_commiter, add_approval, genconfig) {
+	var basetableentity = genconfig.basetableentity
 	var recordstatus = "";
 	if (add_commiter) {
 		recordstatus = `
@@ -742,6 +775,7 @@ function get_recordstatusnew(add_commiter, add_approval, genconfig) {
 
 
 function get_action_updategrid(add_commiter, add_approval, genconfig) {
+	var basetableentity = genconfig.basetableentity;
 	var gridupdatersyn = "";
 	if (add_commiter) {
 		gridupdatersyn += `
@@ -749,18 +783,18 @@ function get_action_updategrid(add_commiter, add_approval, genconfig) {
 
 	var updategriddata = {}
 
-	var col_commit = '${genconfig.basename}_iscommit';
-	updategriddata[col_commit] = record.${genconfig.basename}_iscommit;	
+	var col_commit = '${basetableentity}_iscommit';
+	updategriddata[col_commit] = record.${basetableentity}_iscommit;	
 	`;
 
 		if (add_approval) {
 			gridupdatersyn += `
-	var col_approveprogress = '${genconfig.basename}_isapprovalprogress';
-	var col_approve = '${genconfig.basename}_isapprove'
-	var col_decline = "${genconfig.basename}_isdeclined"
-	updategriddata[col_approveprogress] = record.${genconfig.basename}_isapprovalprogress;
-	updategriddata[col_approve] = record.${genconfig.basename}_isapproved;
-	updategriddata[col_decline] = record.${genconfig.basename}_isdeclined;				
+	var col_approveprogress = '${basetableentity}_isapprovalprogress';
+	var col_approve = '${basetableentity}_isapprove'
+	var col_decline = "${basetableentity}_isdeclined"
+	updategriddata[col_approveprogress] = record.${basetableentity}_isapprovalprogress;
+	updategriddata[col_approve] = record.${basetableentity}_isapproved;
+	updategriddata[col_decline] = record.${basetableentity}_isdeclined;				
 			`;
 		}
 

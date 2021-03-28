@@ -1,6 +1,7 @@
 {
 	"title": "home *****",
 	"modules": [
+		"fgta/riset/pros02",
 		{
 			"title" : "Administrator",
 			"icon" : "icon-admin-white.png",

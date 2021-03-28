@@ -44,9 +44,9 @@ export async function init(opt) {
 		OnViewModeChanged : (viewonly) => { form_viewmodechanged(viewonly) }
 	})	
 
-	form.AllowAddRecord = true
-	form.AllowRemoveRecord = true
-	form.AllowEditRecord = true
+	form.AllowAddRecord = <--__ALLOWADDRECORD__-->
+	form.AllowRemoveRecord = <--__ALLOWREMOVERECORD__-->
+	form.AllowEditRecord = <--__ALLOWEDITRECORD__-->
 	form.CreateRecordStatusPage(this_page_id)
 	form.CreateLogPage(this_page_id)
 

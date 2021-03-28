@@ -19,8 +19,6 @@ module.exports = async (fsd, genconfig) => {
 		var headertable = genconfig.persistent[headertable_name]
 		var data = headertable.data;
 
-		console.log(data);
-
 		var lookupfields = ''
 		var tojsdate = ''
 		var fields = []

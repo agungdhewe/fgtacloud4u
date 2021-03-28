@@ -21,19 +21,19 @@ use \FGTA4\utils\Sequencer;
  * Save
  * ====
  * Menampilkan satu baris data/record sesuai PrimaryKey,
- * dari tabel header pros02 (mst_pros02)
+ * dari tabel header pros02 (mst_pros)
  *
  * Agung Nugroho <agung@fgta.net> http://www.fgta.net
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $API = new class extends pros02Base {
 	
 	public function execute($data, $options) {
-		$tablename = 'mst_pros02';
-		$primarykey = 'pros02_id';
+		$tablename = 'mst_pros';
+		$primarykey = 'pros_id';
 		$autoid = $options->autoid;
 		$datastate = $data->_state;
 
@@ -61,23 +61,23 @@ $API = new class extends pros02Base {
 			// apabila ada tanggal, ubah ke format sql sbb:
 			// $obj->tanggal = (\DateTime::createFromFormat('d/m/Y',$obj->tanggal))->format('Y-m-d');
 
-			$obj->pros02_id = strtoupper($obj->pros02_id);
-			$obj->pros02_name = strtoupper($obj->pros02_name);
+			$obj->pros_id = strtoupper($obj->pros_id);
+			$obj->pros_name = strtoupper($obj->pros_name);
 			$obj->doc_id = strtoupper($obj->doc_id);
 
 
 
 
-			unset($obj->pros02_iscommit);
-			unset($obj->pros02_commitby);
-			unset($obj->pros02_commitdate);
-			unset($obj->pros02_isapprovalprogress);
-			unset($obj->pros02_isapproved);
-			unset($obj->pros02_approveby);
-			unset($obj->pros02_approvedate);
-			unset($obj->pros02_isdeclined);
-			unset($obj->pros02_declineby);
-			unset($obj->pros02_declinedate);
+			unset($obj->pros_iscommit);
+			unset($obj->pros_commitby);
+			unset($obj->pros_commitdate);
+			unset($obj->pros_isapprovalprogress);
+			unset($obj->pros_isapproved);
+			unset($obj->pros_approveby);
+			unset($obj->pros_approvedate);
+			unset($obj->pros_isdeclined);
+			unset($obj->pros_declineby);
+			unset($obj->pros_declinedate);
 
 
 
@@ -119,7 +119,7 @@ $API = new class extends pros02Base {
 			$where = \FGTA4\utils\SqlUtility::BuildCriteria((object)[$primarykey=>$obj->{$primarykey}], [$primarykey=>"$primarykey=:$primarykey"]);
 			$sql = \FGTA4\utils\SqlUtility::Select($tablename , [
 				$primarykey
-				, 'pros02_id', 'pros02_name', 'pros02_iscommit', 'pros02_commitby', 'pros02_commitdate', 'pros02_version', 'pros02_isapprovalprogress', 'pros02_isapproved', 'pros02_approveby', 'pros02_approvedate', 'pros02_isdeclined', 'pros02_declineby', 'pros02_declinedate', 'doc_id', 'dept_id', '_createby', '_createdate', '_modifyby', '_modifydate', '_createby', '_createdate', '_modifyby', '_modifydate'
+				, 'pros_id', 'pros_name', 'pros_iscommit', 'pros_commitby', 'pros_commitdate', 'pros_version', 'pros_isapprovalprogress', 'pros_isapproved', 'pros_approveby', 'pros_approvedate', 'pros_isdeclined', 'pros_declineby', 'pros_declinedate', 'doc_id', 'dept_id', '_createby', '_createdate', '_modifyby', '_modifydate', '_createby', '_createdate', '_modifyby', '_modifydate'
 			], $where->sql);
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute($where->params);
@@ -131,9 +131,9 @@ $API = new class extends pros02Base {
 			}
 			$result->dataresponse = (object) array_merge($record, [
 				//  untuk lookup atau modify response ditaruh disini
-				'pros02_commitby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_commitby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'pros02_approveby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_approveby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'pros02_declineby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_declineby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_commitby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_commitby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_approveby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_approveby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_declineby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_declineby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 				'doc_name' => \FGTA4\utils\SqlUtility::Lookup($record['doc_id'], $this->db, 'mst_doc', 'doc_id', 'doc_name'),
 				'dept_name' => \FGTA4\utils\SqlUtility::Lookup($record['dept_id'], $this->db, 'mst_dept', 'dept_id', 'dept_name'),
 

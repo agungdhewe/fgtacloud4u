@@ -26,39 +26,38 @@ use \FGTA4\exceptions\WebException;
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 class pros02Base extends WebAPI {
 
-	protected $main_tablename = "mst_pros02";
-	protected $main_primarykey = "pros02_id";
-	protected $main_field_version = "pros02_version";	
+	protected $main_tablename = "mst_pros";
+	protected $main_primarykey = "pros_id";
+	protected $main_field_version = "pros_version";	
 	
-	protected $field_iscommit = "pros02_iscommit";
-	protected $field_commitby = "pros02_commitby";
-	protected $field_commitdate = "pros02_commitdate";		
+	protected $field_iscommit = "pros_iscommit";
+	protected $field_commitby = "pros_commitby";
+	protected $field_commitdate = "pros_commitdate";		
 			
 	
-	protected $fields_isapprovalprogress = "pros02_isapprovalprogress";			
-	protected $field_isapprove = "pros02_isapproved";
-	protected $field_approveby = "pros02_approveby";
-	protected $field_approvedate = "pros02_approvedate";
-	protected $field_isdecline = "pros02_isdeclined";
-	protected $field_declineby = "pros02_declineby";
-	protected $field_declinedate = "pros02_declinedate";
+	protected $fields_isapprovalprogress = "pros_isapprovalprogress";			
+	protected $field_isapprove = "pros_isapproved";
+	protected $field_approveby = "pros_approveby";
+	protected $field_approvedate = "pros_approvedate";
+	protected $field_isdecline = "pros_isdeclined";
+	protected $field_declineby = "pros_declineby";
+	protected $field_declinedate = "pros_declinedate";
 
-	protected $approval_tablename = "mst_pros02appr";
-	protected $approval_primarykey = "pros02appr_id";
-	protected $approval_field_approve = "pros02appr_isapproved";
-	protected $approval_field_approveby = "	pros02appr_by";
-	protected $approval_field_approvedate = "pros02appr_date";
-	protected $approval_field_decline = "pros02appr_isdeclined";
-	protected $approval_field_declineby = "pros02appr_declinedby";
-	protected $approval_field_declinedate = "pros02appr_declineddate";
-	protected $approval_field_notes = "pros02appr_notes";
-	protected $approval_field_version = "pros02_version";
+	protected $approval_tablename = "mst_prosappr";
+	protected $approval_primarykey = "prosappr_id";
+	protected $approval_field_approve = "prosappr_isapproved";
+	protected $approval_field_approveby = "	prosappr_by";
+	protected $approval_field_approvedate = "prosappr_date";
+	protected $approval_field_decline = "prosappr_isdeclined";
+	protected $approval_field_declineby = "prosappr_declinedby";
+	protected $approval_field_declinedate = "prosappr_declineddate";
+	protected $approval_field_notes = "prosappr_notes";
+	protected $approval_field_version = "pros_version";
 
-	protected $doc_id = "COBA";
 			
 
 

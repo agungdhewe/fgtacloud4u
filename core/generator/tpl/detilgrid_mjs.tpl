@@ -167,7 +167,7 @@ function grd_list_cellrender(td) {
 }
 
 function grd_list_rowrender(tr) {
-
+<!--__RENDERROW__-->
 }
 
 

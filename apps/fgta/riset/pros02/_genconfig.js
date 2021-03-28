@@ -13,24 +13,24 @@ module.exports = {
 	doc_id: 'COBA',
 
 	persistent: {
-		'mst_pros02' : {
-			primarykeys: ['pros02_id'],
+		'mst_pros' : {
+			primarykeys: ['pros_id'],
 			comment: 'Daftar Dokumen',
 			data: {
-				pros02_id: {text:'ID', type: dbtype.varchar(16), null:false, uppercase: true, options:{required:true,invalidMessage:'ID harus diisi'}},	
-				pros02_name: {text:'Name', type: dbtype.varchar(60), null:false, uppercase: true, suppresslist: false, options:{required:true,invalidMessage:'Nama harus diisi'}},	
-				pros02_iscommit: {text:'Commit', type: dbtype.boolean, null:false, default:'0', unset:true, options:{disabled:true}},
-				pros02_commitby: {text:'CommitBy', type: dbtype.varchar(14), suppresslist: true, unset:true, options:{disabled:true}, hidden: true, lookup:'user'},
-				pros02_commitdate: {text:'CommitDate', type: dbtype.datetime, suppresslist: true, unset:true, comp:comp.Textbox(), options:{disabled:true}, hidden: true},	
-				pros02_version: {text:'Version', type: dbtype.int(4), null:false, default:'0', suppresslist: true, options:{disabled:true}},
+				pros_id: {text:'ID', type: dbtype.varchar(16), null:false, uppercase: true, options:{required:true,invalidMessage:'ID harus diisi'}},	
+				pros_name: {text:'Name', type: dbtype.varchar(60), null:false, uppercase: true, suppresslist: false, options:{required:true,invalidMessage:'Nama harus diisi'}},	
+				pros_iscommit: {text:'Commit', type: dbtype.boolean, null:false, default:'0', unset:true, options:{disabled:true}},
+				pros_commitby: {text:'CommitBy', type: dbtype.varchar(14), suppresslist: true, unset:true, options:{disabled:true}, hidden: true, lookup:'user'},
+				pros_commitdate: {text:'CommitDate', type: dbtype.datetime, suppresslist: true, unset:true, comp:comp.Textbox(), options:{disabled:true}, hidden: true},	
+				pros_version: {text:'Version', type: dbtype.int(4), null:false, default:'0', suppresslist: true, options:{disabled:true}},
 
-				pros02_isapprovalprogress: {text:'Progress', type: dbtype.boolean, null:false, default:'0', unset:true, options:{disabled:true}, hidden: true},
-				pros02_isapproved: { text: 'Approved', type: dbtype.boolean, null: false, default: '0', unset:true, options: { disabled: true } },
-				pros02_approveby: { text: 'Approve By', type: dbtype.varchar(14), suppresslist: true, unset:true, options: { disabled: true }, hidden: true, lookup:'user' },
-				pros02_approvedate: { text: 'Approve Date', type: dbtype.datetime, suppresslist: true, unset:true, comp: comp.Textbox(), options: { disabled: true }, hidden: true },
-				pros02_isdeclined: { text: 'Declined', type: dbtype.boolean, null: false, default: '0', unset:true, options: { disabled: true } },
-				pros02_declineby: { text: 'Decline By', type: dbtype.varchar(14), suppresslist: true, unset:true, options: { disabled: true }, hidden: true, lookup:'user' },
-				pros02_declinedate: { text: 'Decline Date', type: dbtype.datetime, suppresslist: true, unset:true, comp: comp.Textbox(), options: { disabled: true }, hidden: true },
+				pros_isapprovalprogress: {text:'Progress', type: dbtype.boolean, null:false, default:'0', unset:true, options:{disabled:true}, hidden: true},
+				pros_isapproved: { text: 'Approved', type: dbtype.boolean, null: false, default: '0', unset:true, options: { disabled: true } },
+				pros_approveby: { text: 'Approve By', type: dbtype.varchar(14), suppresslist: true, unset:true, options: { disabled: true }, hidden: true, lookup:'user' },
+				pros_approvedate: { text: 'Approve Date', type: dbtype.datetime, suppresslist: true, unset:true, comp: comp.Textbox(), options: { disabled: true }, hidden: true },
+				pros_isdeclined: { text: 'Declined', type: dbtype.boolean, null: false, default: '0', unset:true, options: { disabled: true } },
+				pros_declineby: { text: 'Decline By', type: dbtype.varchar(14), suppresslist: true, unset:true, options: { disabled: true }, hidden: true, lookup:'user' },
+				pros_declinedate: { text: 'Decline Date', type: dbtype.datetime, suppresslist: true, unset:true, comp: comp.Textbox(), options: { disabled: true }, hidden: true },
 
 				doc_id: {
 					text:'Order Doc', type: dbtype.varchar(30), null:false, uppercase: true, 
@@ -53,9 +53,9 @@ module.exports = {
 					})
 				},				
 			},
-			defaultsearch: ['pros02_id', 'pros02_name'],
+			defaultsearch: ['pros_id', 'pros_name'],
 			uniques: {
-				'pros02_name' : ['pros02_name']
+				'pros_name' : ['pros_name']
 			}
 		}
 
@@ -63,7 +63,7 @@ module.exports = {
 
 	schema: {
 		title: 'Proses 02',
-		header: 'mst_pros02',
+		header: 'mst_pros',
 		detils: {
         }
 	}	

@@ -18,19 +18,19 @@ use \FGTA4\exceptions\WebException;
  * Detil-Delete
  * ============
  * Menghapus satu baris data/record berdasarkan PrimaryKey
- * pada tabel approval pros02 (mst_pros02)
+ * pada tabel approval pros02 (mst_pros)
  *
  * Agung Nugroho <agung@fgta.net> http://www.fgta.net
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $API = new class extends pros02Base {
 	
 	public function execute($data, $options) {
-		$tablename = 'mst_pros02appr';
-		$primarykey = 'pros02appr_id';
+		$tablename = 'mst_prosappr';
+		$primarykey = 'prosappr_id';
 
 		$userdata = $this->auth->session_get_user();
 
@@ -49,8 +49,8 @@ $API = new class extends pros02Base {
 				$stmt->execute($cmd->params);
 
 
-				$header_table = 'mst_pros02';
-				$header_primarykey = 'pros02_id';
+				$header_table = 'mst_pros';
+				$header_primarykey = 'pros_id';
 				$sqlrec = "update $header_table set _modifyby = :user_id, _modifydate=NOW() where $header_primarykey = :$header_primarykey";
 				$stmt = $this->db->prepare($sqlrec);
 				$stmt->execute([

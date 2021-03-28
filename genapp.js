@@ -68,6 +68,14 @@ genconfig.dirname = __dirname
 
 ;(async (genconfig) => {
 	try {
+
+		var headertable = genconfig.schema.header;
+		var tableprefix = headertable.split('_', 1)[0]+'_';
+		var basetableentity = headertable.replace(tableprefix, '');
+		genconfig.headertable = headertable;
+		genconfig.basetableentity = basetableentity; 
+
+
 		var fsdata = await gen_fs(genconfig)
 
 		// Siapkan Script Utama

@@ -18,19 +18,19 @@ const btn_decline = $('#pnl_edit-btn_decline')
 
 const pnl_form = $('#pnl_edit-form')
 const obj = {
-	txt_pros02_id: $('#pnl_edit-txt_pros02_id'),
-	txt_pros02_name: $('#pnl_edit-txt_pros02_name'),
-	chk_pros02_iscommit: $('#pnl_edit-chk_pros02_iscommit'),
-	txt_pros02_commitby: $('#pnl_edit-txt_pros02_commitby'),
-	txt_pros02_commitdate: $('#pnl_edit-txt_pros02_commitdate'),
-	txt_pros02_version: $('#pnl_edit-txt_pros02_version'),
-	chk_pros02_isapprovalprogress: $('#pnl_edit-chk_pros02_isapprovalprogress'),
-	chk_pros02_isapproved: $('#pnl_edit-chk_pros02_isapproved'),
-	txt_pros02_approveby: $('#pnl_edit-txt_pros02_approveby'),
-	txt_pros02_approvedate: $('#pnl_edit-txt_pros02_approvedate'),
-	chk_pros02_isdeclined: $('#pnl_edit-chk_pros02_isdeclined'),
-	txt_pros02_declineby: $('#pnl_edit-txt_pros02_declineby'),
-	txt_pros02_declinedate: $('#pnl_edit-txt_pros02_declinedate'),
+	txt_pros_id: $('#pnl_edit-txt_pros_id'),
+	txt_pros_name: $('#pnl_edit-txt_pros_name'),
+	chk_pros_iscommit: $('#pnl_edit-chk_pros_iscommit'),
+	txt_pros_commitby: $('#pnl_edit-txt_pros_commitby'),
+	txt_pros_commitdate: $('#pnl_edit-txt_pros_commitdate'),
+	txt_pros_version: $('#pnl_edit-txt_pros_version'),
+	chk_pros_isapprovalprogress: $('#pnl_edit-chk_pros_isapprovalprogress'),
+	chk_pros_isapproved: $('#pnl_edit-chk_pros_isapproved'),
+	txt_pros_approveby: $('#pnl_edit-txt_pros_approveby'),
+	txt_pros_approvedate: $('#pnl_edit-txt_pros_approvedate'),
+	chk_pros_isdeclined: $('#pnl_edit-chk_pros_isdeclined'),
+	txt_pros_declineby: $('#pnl_edit-txt_pros_declineby'),
+	txt_pros_declinedate: $('#pnl_edit-txt_pros_declinedate'),
 	cbo_doc_id: $('#pnl_edit-cbo_doc_id'),
 	cbo_dept_id: $('#pnl_edit-cbo_dept_id')
 }
@@ -65,9 +65,9 @@ export async function init(opt) {
 
 
 	form = new global.fgta4form(pnl_form, {
-		primary: obj.txt_pros02_id,
+		primary: obj.txt_pros_id,
 		autoid: true,
-		logview: 'mst_pros02',
+		logview: 'mst_pros',
 		btn_edit: disableedit==true? $('<a>edit</a>') : btn_edit,
 		btn_save: disableedit==true? $('<a>save</a>') : btn_save,
 		btn_delete: disableedit==true? $('<a>delete</a>') : btn_delete,		
@@ -101,23 +101,37 @@ export async function init(opt) {
 	btn_uncommit.linkbutton({ onClick: () => { btn_action_click({ action: 'uncommit' }); } });			
 			
 
-				btn_approve.linkbutton({ onClick: () => { btn_action_click({ action: 'approve' }); } });
-				btn_decline.linkbutton({ onClick: () => { 
-					$ui.ShowMessage(`
-						<div style="display: block">
-							<div style="font-weight: bold">Reason</div>
-							<div>
-								<input class="easyui-textbox" style="width: 300px">
-							</div>
-						</div>
-					`, {
-						'Decline': () => {
-							btn_action_click({ action: 'decline' }); 
-						},
-						'Cancel': () => {
-						} 
-					})
-				}});				
+	btn_approve.linkbutton({ onClick: () => { btn_action_click({ action: 'approve' }); } });
+	btn_decline.linkbutton({ onClick: () => {
+		var id = 'pnl_edit-reason_' + Date.now().toString();
+		$ui.ShowMessage(`
+			<div style="display: block;  margin-bottom: 10px">
+				<div style="font-weight: bold; margin-bottom: 10px">Reason</div>
+				<div">
+					<input id="${id}" class="easyui-textbox" style="width: 300px; height: 60px;" data-options="multiline: true">
+				</div>
+			</div>
+		`, {
+			'Decline': () => {
+				var reason = $(`#${id}`).textbox('getValue');
+				btn_action_click({ action: 'decline', reason: reason }); 
+			},
+			'Cancel': () => {
+			} 
+		}, ()=>{
+			var obj_reason = $(`#${id}`);
+			var txt = obj_reason.textbox('textbox');
+			txt[0].maxLength = 255;
+			txt[0].classList.add('declinereasonbox');
+			txt[0].addEventListener('keyup', (ev)=>{
+				if (ev.key=='Enter') {
+					ev.stopPropagation();
+				}
+			});
+			txt.css('text-align', 'center');
+			txt.focus();
+		})
+	}});				
 				
 
 
@@ -278,12 +292,12 @@ export function createnew() {
 		form.rowid = null
 
 		// set nilai-nilai default untuk form
-			data.pros02_version = 0
+		data.pros_version = 0
 
-			data.doc_id = '0'
-			data.doc_name = '-- PILIH --'
-			data.dept_id = '0'
-			data.dept_name = '-- PILIH --'
+		data.doc_id = global.setup.doc_id
+		data.doc_name = global.setup.doc_id
+		data.dept_id = '0'
+		data.dept_name = '-- PILIH --'
 
 
 		rec_commitby.html('');
@@ -333,13 +347,13 @@ export function detil_open(pnlname) {
 function updaterecordstatus(record) {
 	// apabila ada keperluan untuk update status record di sini
 
-		rec_commitby.html(record.pros02_commitby);
-		rec_commitdate.html(record.pros02_commitdate);
+		rec_commitby.html(record.pros_commitby);
+		rec_commitdate.html(record.pros_commitdate);
 		
-		rec_approveby.html(record.pros02_approveby);
-		rec_approvedate.html(record.pros02_approvedate);
-		rec_declineby.html(record.pros02_declineby);
-		rec_declinedate.html(record.pros02_declinedate);
+		rec_approveby.html(record.pros_approveby);
+		rec_approvedate.html(record.pros_approvedate);
+		rec_declineby.html(record.pros_declineby);
+		rec_declinedate.html(record.pros_declinedate);
 			
 }
 
@@ -351,31 +365,38 @@ function updatebuttonstate(record) {
 		var button_uncommit_on = false;
 		var button_approve_on = false;
 		var button_decline_on = false;
-	
-		if (record.pros02_isdeclined=="1") {
+
+		
+		if (record.pros_isfirm=="1") {
+			button_commit_on = false;
+			button_uncommit_on = false;
+			button_approve_on = false;
+			button_decline_on = false;
+			form.lock(true);	
+		} else if (record.pros_isdeclined=="1" || record.pros_isuseralreadydeclined=="1") {
 			button_commit_on = false;
 			button_uncommit_on = true;
 			button_approve_on = true;
 			button_decline_on = false;
 			form.lock(true);	
-		} else if (record.pros02_isapprovalprogress=="1") {
-			button_commit_on = false;
-			button_uncommit_on = false;
-			button_approve_on = true;
-			button_decline_on = true;
-			form.lock(true);	
-		} else if (record.pros02_isapproved=="1") {
+		} else if (record.pros_isapproved=="1" || record.pros_isuseralreadyapproved=="1") {
 			button_commit_on = false;
 			button_uncommit_on = false;
 			button_approve_on = false;
 			button_decline_on = true;	
 			form.lock(true);	
-		} else if (record.pros02_iscommit=="1") {
+		} else if (record.pros_isapprovalprogress=="1") {
+			button_commit_on = false;
+			button_uncommit_on = false;
+			button_approve_on = true;
+			button_decline_on = true;
+			form.lock(true);	
+		} else if (record.pros_iscommit=="1") {
 			button_commit_on = false;
 			button_uncommit_on = true;
 			button_approve_on = true;
 			button_decline_on = true;
-			form.lock(false);		
+			form.lock(true);		
 		} else {
 			button_commit_on = true;
 			button_uncommit_on = false;
@@ -398,15 +419,15 @@ function updategridstate(record) {
 
 	var updategriddata = {}
 
-	var col_commit = 'pros02_iscommit';
-	updategriddata[col_commit] = record.pros02_iscommit;	
+	var col_commit = 'pros_iscommit';
+	updategriddata[col_commit] = record.pros_iscommit;	
 	
-	var col_approveprogress = 'pros02_isapprovalprogress';
-	var col_approve = 'pros02_isapprove'
-	var col_decline = "pros02_isdeclined"
-	updategriddata[col_approveprogress] = record.pros02_isapprovalprogress;
-	updategriddata[col_approve] = record.pros02_isapproved;
-	updategriddata[col_decline] = record.pros02_isdeclined;				
+	var col_approveprogress = 'pros_isapprovalprogress';
+	var col_approve = 'pros_isapprove'
+	var col_decline = "pros_isdeclined"
+	updategriddata[col_approveprogress] = record.pros_isapprovalprogress;
+	updategriddata[col_approve] = record.pros_isapproved;
+	updategriddata[col_decline] = record.pros_isdeclined;				
 			
 	$ui.getPages().ITEMS['pnl_list'].handler.updategrid(updategriddata, form.rowid);
 			
@@ -420,7 +441,7 @@ function form_viewmodechanged(viewmode) {
 }
 
 function form_idsetup(options) {
-	var objid = obj.txt_pros02_id
+	var objid = obj.txt_pros_id
 	switch (options.action) {
 		case 'fill' :
 			objid.textbox('disable') 
@@ -502,7 +523,7 @@ function btn_print_click() {
 		return;
 	}
 
-	var id = obj.txt_pros02_id.textbox('getValue');
+	var id = obj.txt_pros_id.textbox('getValue');
 	var printurl = 'index.php/printout/' + window.global.modulefullname + '/pros02.xprint?id=' + id;
 
 	var print_to_new_window = global.setup.print_to_new_window;
@@ -560,12 +581,12 @@ async function btn_action_click(args) {
 
 
 	var docname = 'Proses 02'
-	var txt_version = obj.txt_pros02_version;
-	var chk_iscommit = obj.chk_pros02_iscommit;
+	var txt_version = obj.txt_pros_version;
+	var chk_iscommit = obj.chk_pros_iscommit;
 	
-	var chk_isapprovalprogress = obj.chk_pros02_isapprovalprogress;	
-	var chk_isapprove = obj.chk_pros02_isapproved;
-	var chk_isdeclined = obj.chk_pros02_isdeclined;
+	var chk_isapprovalprogress = obj.chk_pros_isapprovalprogress;	
+	var chk_isapprove = obj.chk_pros_isapproved;
+	var chk_isdeclined = obj.chk_pros_isdeclined;
 		
 	
 	var id = form.getCurrentId();
@@ -637,7 +658,7 @@ async function btn_action_click(args) {
 			args.otp_title = 'Decline Code';
 			args.param = {
 				approve: false,
-				approval_note: ''
+				approval_note: args.reason
 			}
 			args.act_do = (result) => {
 				chk_iscommit.checkbox('check');
@@ -661,6 +682,7 @@ async function btn_action_click(args) {
 				args.act_do(result);
 				updatebuttonstate(result.dataresponse);
 				updategridstate(result.dataresponse);
+				if (args.act_msg_result!=='') $ui.ShowMessage('[INFO]' + args.act_msg_result);	
 			}
 		});
 	} catch (err) {

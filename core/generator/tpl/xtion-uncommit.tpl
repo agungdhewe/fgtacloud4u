@@ -44,24 +44,43 @@ $API = new class extends {__BASENAME__}Base {
 			];
 
 			$this->pre_action_check($currentdata, 'uncommit');
-/*--__APPROVALEXECUTE__--*/
-			$this->save_and_set_uncommit_flag($id, $currentdata);
 
 
-			$record = []; $row = $this->get_header_row($id);
-			foreach ($row as $key => $value) { $record[$key] = $value; }
-			$dataresponse = (object) array_merge($record, [
-				//  untuk lookup atau modify response ditaruh disini
+			$this->db->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
+			$this->db->beginTransaction();
+			
+			try {
+
+	/*--__APPROVALEXECUTE__--*/
+				$this->save_and_set_uncommit_flag($id, $currentdata);
+
+
+				$record = []; $row = $this->get_header_row($id);
+				foreach ($row as $key => $value) { $record[$key] = $value; }
+				$dataresponse = (object) array_merge($record, [
+					//  untuk lookup atau modify response ditaruh disini
 /*{__LOOKUPFIELD__}*/
-				'_createby' => \FGTA4\utils\SqlUtility::Lookup($record['_createby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'_modifyby' => \FGTA4\utils\SqlUtility::Lookup($record['_modifyby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-			]);
+					'_createby' => \FGTA4\utils\SqlUtility::Lookup($record['_createby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+					'_modifyby' => \FGTA4\utils\SqlUtility::Lookup($record['_modifyby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				]);
 
-			return (object)[
-				'success' => true,
-				'version' => $currentdata->header->{$this->main_field_version},
-				'dataresponse' => $dataresponse
-			];
+
+				\FGTA4\utils\SqlUtility::WriteLog($this->db, $this->reqinfo->modulefullname, $tablename, $id, 'UNCOMMIT', $userdata->username, (object)[]);
+
+				$this->db->commit();
+				return (object)[
+					'success' => true,
+					'version' => $currentdata->header->{$this->main_field_version},
+					'dataresponse' => $dataresponse
+				];
+				
+			} catch (\Exception $ex) {
+				$this->db->rollBack();
+				throw $ex;
+			} finally {
+				$this->db->setAttribute(\PDO::ATTR_AUTOCOMMIT,1);
+			}
+
 		} catch (\Exception $ex) {
 			throw $ex;
 		}

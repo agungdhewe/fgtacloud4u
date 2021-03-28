@@ -10,7 +10,7 @@
 		<div class="form_row" >
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">ID</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_id" class="easyui-textbox" mapping="pros02_id" uppercase="true" maxlength="16" style="width: 400px" data-options="multiline: false , required: true, invalidMessage: 'ID harus diisi' ">
+				<input id="pnl_edit-txt_pros_id" class="easyui-textbox" mapping="pros_id" uppercase="true" maxlength="16" style="width: 400px" data-options="multiline: false , required: true, invalidMessage: 'ID harus diisi' ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -18,7 +18,7 @@
 		<div class="form_row" >
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Name</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_name" class="easyui-textbox" mapping="pros02_name" uppercase="true" maxlength="60" style="width: 400px" data-options="multiline: false , required: true, invalidMessage: 'Nama harus diisi' ">
+				<input id="pnl_edit-txt_pros_name" class="easyui-textbox" mapping="pros_name" uppercase="true" maxlength="60" style="width: 400px" data-options="multiline: false , required: true, invalidMessage: 'Nama harus diisi' ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -26,14 +26,14 @@
 		<div class="form_row" >
 			<div class="form_label_col"></div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-chk_pros02_iscommit" class="easyui-checkbox c1" mapping="pros02_iscommit" data-options="label: 'Commit', labelPosition: 'after', checked: false , disabled: true">
+				<input id="pnl_edit-chk_pros_iscommit" class="easyui-checkbox c1" mapping="pros_iscommit" data-options="label: 'Commit', labelPosition: 'after', checked: false , disabled: true">
 			</div>
 		</div>
 
 		<div class="form_row" style="display: none">
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">CommitBy</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_commitby" class="easyui-textbox" mapping="pros02_commitby"  maxlength="14" style="width: 400px" data-options="multiline: false , disabled: true ">
+				<input id="pnl_edit-txt_pros_commitby" class="easyui-textbox" mapping="pros_commitby"  maxlength="14" style="width: 400px" data-options="multiline: false , disabled: true ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 		<div class="form_row" style="display: none">
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">CommitDate</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_commitdate" class="easyui-textbox" mapping="pros02_commitdate"   style="width: 400px" data-options="multiline: false , disabled: true ">
+				<input id="pnl_edit-txt_pros_commitdate" class="easyui-textbox" mapping="pros_commitdate"   style="width: 400px" data-options="multiline: false , disabled: true ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 		<div class="form_row" >
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Version</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_version" class="easyui-numberbox" mapping="pros02_version" style="width: 400px; text-align:right" data-options="precision: 0, decimalSeparator:'.', groupSeparator:','  , disabled: true">
+				<input id="pnl_edit-txt_pros_version" class="easyui-numberbox" mapping="pros_version" style="width: 400px; text-align:right" data-options="precision: 0, decimalSeparator:'.', groupSeparator:','  , disabled: true">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -57,21 +57,21 @@
 		<div class="form_row" style="display: none">
 			<div class="form_label_col"></div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-chk_pros02_isapprovalprogress" class="easyui-checkbox c1" mapping="pros02_isapprovalprogress" data-options="label: 'Progress', labelPosition: 'after', checked: false , disabled: true">
+				<input id="pnl_edit-chk_pros_isapprovalprogress" class="easyui-checkbox c1" mapping="pros_isapprovalprogress" data-options="label: 'Progress', labelPosition: 'after', checked: false , disabled: true">
 			</div>
 		</div>
 
 		<div class="form_row" >
 			<div class="form_label_col"></div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-chk_pros02_isapproved" class="easyui-checkbox c1" mapping="pros02_isapproved" data-options="label: 'Approved', labelPosition: 'after', checked: false , disabled: true">
+				<input id="pnl_edit-chk_pros_isapproved" class="easyui-checkbox c1" mapping="pros_isapproved" data-options="label: 'Approved', labelPosition: 'after', checked: false , disabled: true">
 			</div>
 		</div>
 
 		<div class="form_row" style="display: none">
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Approve By</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_approveby" class="easyui-textbox" mapping="pros02_approveby"  maxlength="14" style="width: 400px" data-options="multiline: false , disabled: true ">
+				<input id="pnl_edit-txt_pros_approveby" class="easyui-textbox" mapping="pros_approveby"  maxlength="14" style="width: 400px" data-options="multiline: false , disabled: true ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -79,7 +79,7 @@
 		<div class="form_row" style="display: none">
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Approve Date</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_approvedate" class="easyui-textbox" mapping="pros02_approvedate"   style="width: 400px" data-options="multiline: false , disabled: true ">
+				<input id="pnl_edit-txt_pros_approvedate" class="easyui-textbox" mapping="pros_approvedate"   style="width: 400px" data-options="multiline: false , disabled: true ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -87,14 +87,14 @@
 		<div class="form_row" >
 			<div class="form_label_col"></div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-chk_pros02_isdeclined" class="easyui-checkbox c1" mapping="pros02_isdeclined" data-options="label: 'Declined', labelPosition: 'after', checked: false , disabled: true">
+				<input id="pnl_edit-chk_pros_isdeclined" class="easyui-checkbox c1" mapping="pros_isdeclined" data-options="label: 'Declined', labelPosition: 'after', checked: false , disabled: true">
 			</div>
 		</div>
 
 		<div class="form_row" style="display: none">
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Decline By</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_declineby" class="easyui-textbox" mapping="pros02_declineby"  maxlength="14" style="width: 400px" data-options="multiline: false , disabled: true ">
+				<input id="pnl_edit-txt_pros_declineby" class="easyui-textbox" mapping="pros_declineby"  maxlength="14" style="width: 400px" data-options="multiline: false , disabled: true ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 		<div class="form_row" style="display: none">
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Decline Date</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-txt_pros02_declinedate" class="easyui-textbox" mapping="pros02_declinedate"   style="width: 400px" data-options="multiline: false , disabled: true ">
+				<input id="pnl_edit-txt_pros_declinedate" class="easyui-textbox" mapping="pros_declinedate"   style="width: 400px" data-options="multiline: false , disabled: true ">
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>
@@ -110,7 +110,7 @@
 		<div class="form_row" >
 			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Order Doc</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-cbo_doc_id" class="easyui-combo" style="width: 400px" mapping="doc_id" display="doc_name" data-options="editable:false, valueField:'id', textField:'text' , required: true, invalidMessage: 'ID harus diisi'"   validType="requiredcombo['pnl_edit-cbo_doc_id']" >
+				<input id="pnl_edit-cbo_doc_id" class="easyui-combo" style="width: 400px" mapping="doc_id" display="doc_name" data-options="editable:false, valueField:'id', textField:'text' , required: true, invalidMessage: 'ID harus diisi', disabled: true"   validType="requiredcombo['pnl_edit-cbo_doc_id']" >
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
 			</div>
 		</div>

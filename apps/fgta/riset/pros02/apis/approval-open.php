@@ -18,13 +18,13 @@ use \FGTA4\exceptions\WebException;
  * Detil-Open
  * ==========
  * Menampilkan satu baris data/record sesuai PrimaryKey,
- * dari tabel approval} pros02 (mst_pros02)
+ * dari tabel approval} pros02 (mst_pros)
  *
  * Agung Nugroho <agung@fgta.net> http://www.fgta.net
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $API = new class extends pros02Base {
 
@@ -38,12 +38,12 @@ $API = new class extends pros02Base {
 			$where = \FGTA4\utils\SqlUtility::BuildCriteria(
 				$options->criteria,
 				[
-					"pros02appr_id" => " pros02appr_id = :pros02appr_id "
+					"prosappr_id" => " prosappr_id = :prosappr_id "
 				]
 			);
 
-			$sql = \FGTA4\utils\SqlUtility::Select('mst_pros02appr A', [
-				'pros02appr_id', 'pros02appr_isapproved', 'pros02appr_by', 'pros02appr_date', 'pros02_version', 'pros02appr_isdeclined', 'pros02appr_declinedby', 'pros02appr_declineddate', 'pros02appr_notes', 'pros02_id', 'docauth_descr', 'docauth_order', 'docauth_value', 'docauth_min', 'authlevel_id', 'authlevel_name', 'auth_id', 'auth_name', '_createby', '_createdate', '_modifyby', '_modifydate' 
+			$sql = \FGTA4\utils\SqlUtility::Select('mst_prosappr A', [
+				'prosappr_id', 'prosappr_isapproved', 'prosappr_by', 'prosappr_date', 'pros_version', 'prosappr_isdeclined', 'prosappr_declinedby', 'prosappr_declineddate', 'prosappr_notes', 'pros_id', 'docauth_descr', 'docauth_order', 'docauth_value', 'docauth_min', 'authlevel_id', 'authlevel_name', 'auth_id', 'auth_name', '_createby', '_createdate', '_modifyby', '_modifydate' 
 				, '_createby', '_createdate', '_modifyby', '_modifydate' 
 			], $where->sql);
 

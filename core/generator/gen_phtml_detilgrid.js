@@ -25,6 +25,7 @@ module.exports = async (fsd, genconfig) => {
 	var header_primarykey = headertable.primarykeys[0]
 
 	var detil = genconfig.schema.detils[fsd.detilname]
+	var isapprovalform = detil.isapprovalform;
 	var tablename = detil.table
 	var detiltable = genconfig.persistent[tablename]
 	var data = detiltable.data
@@ -74,6 +75,15 @@ module.exports = async (fsd, genconfig) => {
 	tplscript = tplscript.replace('<!--__PAGETITLE__-->', pagetitle)
 	tplscript = tplscript.replace('<!--__HEADERMAP__-->', headermap_script)
 	tplscript = tplscript.replace('<!--__HEADERROW__-->', headerrow_script)
+
+
+	if (isapprovalform===true) {
+		tplscript = tplscript.replace('<!--__HEADERMAPCHK__-->', '')
+		tplscript = tplscript.replace('<!--__HEADERROWCHK__-->', '')
+	} else {
+		tplscript = tplscript.replace('<!--__HEADERMAPCHK__-->', '<th type="check">chk</th>')
+		tplscript = tplscript.replace('<!--__HEADERROWCHK__-->', '<td class="fgtable-head" style="width: 30px; border-bottom: 1px solid #000000; text-align: center">*</td>')
+	}
 
 	
 	fsd.script = tplscript

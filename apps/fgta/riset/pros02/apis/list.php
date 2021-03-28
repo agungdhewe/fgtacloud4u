@@ -16,14 +16,14 @@ use \FGTA4\exceptions\WebException;
  * ========
  * DataList
  * ========
- * Menampilkan data-data pada tabel header pros02 (mst_pros02)
+ * Menampilkan data-data pada tabel header pros02 (mst_pros)
  * sesuai dengan parameter yang dikirimkan melalui variable $option->criteria
  *
  * Agung Nugroho <agung@fgta.net> http://www.fgta.net
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $API = new class extends pros02Base {
 
@@ -42,7 +42,7 @@ $API = new class extends pros02Base {
 			$where = \FGTA4\utils\SqlUtility::BuildCriteria(
 				$options->criteria,
 				[
-					"search" => " A.pros02_id LIKE CONCAT('%', :search, '%') OR A.pros02_name LIKE CONCAT('%', :search, '%') "
+					"search" => " A.pros_id LIKE CONCAT('%', :search, '%') OR A.pros_name LIKE CONCAT('%', :search, '%') "
 				]
 			);
 
@@ -50,7 +50,7 @@ $API = new class extends pros02Base {
 			$maxrow = 30;
 			$offset = (property_exists($options, 'offset')) ? $options->offset : 0;
 
-			$stmt = $this->db->prepare("select count(*) as n from mst_pros02 A" . $where->sql);
+			$stmt = $this->db->prepare("select count(*) as n from mst_pros A" . $where->sql);
 			$stmt->execute($where->params);
 			$row  = $stmt->fetch(\PDO::FETCH_ASSOC);
 			$total = (float) $row['n'];
@@ -58,8 +58,8 @@ $API = new class extends pros02Base {
 			$limit = " LIMIT $maxrow OFFSET $offset ";
 			$stmt = $this->db->prepare("
 				select 
-				pros02_id, pros02_name, pros02_iscommit, pros02_commitby, pros02_commitdate, pros02_version, pros02_isapprovalprogress, pros02_isapproved, pros02_approveby, pros02_approvedate, pros02_isdeclined, pros02_declineby, pros02_declinedate, doc_id, dept_id, _createby, _createdate, _modifyby, _modifydate 
-				from mst_pros02 A
+				pros_id, pros_name, pros_iscommit, pros_commitby, pros_commitdate, pros_version, pros_isapprovalprogress, pros_isapproved, pros_approveby, pros_approvedate, pros_isdeclined, pros_declineby, pros_declinedate, doc_id, dept_id, _createby, _createdate, _modifyby, _modifydate 
+				from mst_pros A
 			" . $where->sql . $limit);
 			$stmt->execute($where->params);
 			$rows  = $stmt->fetchall(\PDO::FETCH_ASSOC);
@@ -75,6 +75,9 @@ $API = new class extends pros02Base {
 					// // jikalau ingin menambah atau edit field di result record, dapat dilakukan sesuai contoh sbb: 
 					//'tanggal' => date("d/m/y", strtotime($record['tanggal'])),
 				 	//'tambahan' => 'dta'
+				'pros_commitby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_commitby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_approveby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_approveby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_declineby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_declineby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 					'doc_name' => \FGTA4\utils\SqlUtility::Lookup($record['doc_id'], $this->db, 'mst_doc', 'doc_id', 'doc_name'),
 					'dept_name' => \FGTA4\utils\SqlUtility::Lookup($record['dept_id'], $this->db, 'mst_dept', 'dept_id', 'dept_name'),
 					 

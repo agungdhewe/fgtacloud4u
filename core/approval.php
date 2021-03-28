@@ -432,8 +432,7 @@ class StandartApproval {
 			// debug::log('approve');
 			$rows = self::getUserApprovalData($db, $param);
 			try {
-				$db->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
-				$db->beginTransaction();
+
 				foreach ($rows as $row) {
 					$stmt->execute([
 						':id' => $row[$field_id_detil],
@@ -444,20 +443,13 @@ class StandartApproval {
 				}
 
 				$isfinalapproval = self::DoFinalApproval($db, $param);
-				$db->commit();
-
-
 				$ret = (object)['isfinalapproval'=>false];
 				if ($isfinalapproval) {
 					$ret->isfinalapproval = true;
 				}
-
 				return $ret;
 			} catch (\Exception $ex) {
-				$db->rollBack();
 				throw $ex;
-			} finally {
-				$db->setAttribute(\PDO::ATTR_AUTOCOMMIT,1);
 			}
 
 		} catch (\Exception $ex) {
@@ -501,8 +493,7 @@ class StandartApproval {
 			
 			$rows = self::getUserApprovalData($db, $param);
 			try {
-				$db->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
-				$db->beginTransaction();
+
 				foreach ($rows as $row) {
 					$stmt->execute([
 						':id' => $row[$field_id_detil],
@@ -514,14 +505,9 @@ class StandartApproval {
 
 				$decline = true;
 				self::DoFinalApproval($db, $param, $decline);
-				$db->commit();
 			} catch (\Exception $ex) {
-				$db->rollBack();
 				throw $ex;
-			} finally {
-				$db->setAttribute(\PDO::ATTR_AUTOCOMMIT,1);
 			}
-
 		} catch (\Exception $ex) {
 			throw $ex;
 		}

@@ -18,13 +18,13 @@ use \FGTA4\exceptions\WebException;
  * Open
  * ====
  * Menampilkan satu baris data/record sesuai PrimaryKey,
- * dari tabel header pros02 (mst_pros02)
+ * dari tabel header pros02 (mst_pros)
  *
  * Agung Nugroho <agung@fgta.net> http://www.fgta.net
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $API = new class extends pros02Base {
 	
@@ -44,12 +44,12 @@ $API = new class extends pros02Base {
 			$where = \FGTA4\utils\SqlUtility::BuildCriteria(
 				$options->criteria,
 				[
-					"pros02_id" => " pros02_id = :pros02_id "
+					"pros_id" => " pros_id = :pros_id "
 				]
 			);
 
-			$sql = \FGTA4\utils\SqlUtility::Select('mst_pros02 A', [
-				'pros02_id', 'pros02_name', 'pros02_iscommit', 'pros02_commitby', 'pros02_commitdate', 'pros02_version', 'pros02_isapprovalprogress', 'pros02_isapproved', 'pros02_approveby', 'pros02_approvedate', 'pros02_isdeclined', 'pros02_declineby', 'pros02_declinedate', 'doc_id', 'dept_id', '_createby', '_createdate', '_modifyby', '_modifydate'
+			$sql = \FGTA4\utils\SqlUtility::Select('mst_pros A', [
+				'pros_id', 'pros_name', 'pros_iscommit', 'pros_commitby', 'pros_commitdate', 'pros_version', 'pros_isapprovalprogress', 'pros_isapproved', 'pros_approveby', 'pros_approvedate', 'pros_isdeclined', 'pros_declineby', 'pros_declinedate', 'doc_id', 'dept_id', '_createby', '_createdate', '_modifyby', '_modifydate'
 				, '_createby', '_createdate', '_modifyby', '_modifydate' 
 			], $where->sql);
 
@@ -69,9 +69,9 @@ $API = new class extends pros02Base {
 				//'tanggal' => date("d/m/Y", strtotime($record['tanggal'])),
 				//'gendername' => $record['gender']
 				
-				'pros02_commitby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_commitby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'pros02_approveby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_approveby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'pros02_declineby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_declineby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_commitby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_commitby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_approveby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_approveby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				'pros_declineby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_declineby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 				'doc_name' => \FGTA4\utils\SqlUtility::Lookup($record['doc_id'], $this->db, 'mst_doc', 'doc_id', 'doc_name'),
 				'dept_name' => \FGTA4\utils\SqlUtility::Lookup($record['dept_id'], $this->db, 'mst_dept', 'dept_id', 'dept_name'),
 

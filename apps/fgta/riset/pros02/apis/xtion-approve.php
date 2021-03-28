@@ -29,13 +29,13 @@ use FGTA4\utils\Currency;
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $API = new class extends pros02Base {
 
 	public function execute($id, $param) {
-		$tablename = 'mst_pros02';
-		$primarykey = 'pros02_id';		
+		$tablename = 'mst_pros';
+		$primarykey = 'pros_id';		
 		$userdata = $this->auth->session_get_user();
 
 		$param->approvalsource = [
@@ -72,7 +72,11 @@ $API = new class extends pros02Base {
 			if ($useotp) {
 				$otp = \property_exists($param, 'otp') ?	$param->otp : '';
 				$otpcode = \property_exists($param, 'otpcode') ? $param->otpcode : ''; 		
-				OTP::Verify($this->db, $otp, $otpcode);
+				try {
+					OTP::Verify($this->db, $otp, $otpcode);
+				} catch (\Exception $ex) {
+					throw new WebException('OTP yang anda masukkan salah', 403);
+				}
 			}
 
 			// $this->CURR = new Currency($this->db);
@@ -82,29 +86,54 @@ $API = new class extends pros02Base {
 			];
 
 			$this->pre_action_check($currentdata, $param->approve ? 'approve' : 'decline');
-			$ret = $this->approve($currentdata, $param);
 
 
+			$this->db->setAttribute(\PDO::ATTR_AUTOCOMMIT,0);
+			$this->db->beginTransaction();
 
-			$record = []; $row = $this->get_header_row($id);
-			foreach ($row as $key => $value) { $record[$key] = $value; }
-			$dataresponse = (object) array_merge($record, [
-				//  untuk lookup atau modify response ditaruh disini
-				'pros02_commitby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_commitby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'pros02_approveby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_approveby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'pros02_declineby' => \FGTA4\utils\SqlUtility::Lookup($record['pros02_declineby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'doc_name' => \FGTA4\utils\SqlUtility::Lookup($record['doc_id'], $this->db, 'mst_doc', 'doc_id', 'doc_name'),
-				'dept_name' => \FGTA4\utils\SqlUtility::Lookup($record['dept_id'], $this->db, 'mst_dept', 'dept_id', 'dept_name'),
+			try {
 
-				'_createby' => \FGTA4\utils\SqlUtility::Lookup($record['_createby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-				'_modifyby' => \FGTA4\utils\SqlUtility::Lookup($record['_modifyby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
-			]);
+				$ret = $this->approve($currentdata, $param);
 
-			return (object)[
-				'success' => true,
-				'isfinalapproval' => $ret->isfinalapproval,
-				'dataresponse' => $dataresponse
-			];
+				$record = []; $row = $this->get_header_row($id);
+				foreach ($row as $key => $value) { $record[$key] = $value; }
+				$dataresponse = (object) array_merge($record, [
+					//  untuk lookup atau modify response ditaruh disini
+					'pros_commitby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_commitby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+					'pros_approveby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_approveby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+					'pros_declineby' => \FGTA4\utils\SqlUtility::Lookup($record['pros_declineby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+					'doc_name' => \FGTA4\utils\SqlUtility::Lookup($record['doc_id'], $this->db, 'mst_doc', 'doc_id', 'doc_name'),
+					'dept_name' => \FGTA4\utils\SqlUtility::Lookup($record['dept_id'], $this->db, 'mst_dept', 'dept_id', 'dept_name'),
+
+					'_createby' => \FGTA4\utils\SqlUtility::Lookup($record['_createby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+					'_modifyby' => \FGTA4\utils\SqlUtility::Lookup($record['_modifyby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
+				]);
+
+
+				if ( $param->approve) {
+					if ($ret->isfinalapproval) {
+						\FGTA4\utils\SqlUtility::WriteLog($this->db, $this->reqinfo->modulefullname, $tablename, $id, 'FINAL APPROVAL', $userdata->username, (object)[]);
+					} else {
+						\FGTA4\utils\SqlUtility::WriteLog($this->db, $this->reqinfo->modulefullname, $tablename, $id, 'APPROVE', $userdata->username, (object)[]);
+					}
+				} else {
+					\FGTA4\utils\SqlUtility::WriteLog($this->db, $this->reqinfo->modulefullname, $tablename, $id, 'DECLINE', $userdata->username, (object)[]);
+				}
+
+
+				$this->db->commit();
+				return (object)[
+					'success' => true,
+					'isfinalapproval' => $ret->isfinalapproval,
+					'dataresponse' => $dataresponse
+				];
+				
+			} catch (\Exception $ex) {
+				$this->db->rollBack();
+				throw $ex;
+			} finally {
+				$this->db->setAttribute(\PDO::ATTR_AUTOCOMMIT,1);
+			}	
 			
 		} catch (\Exception $ex) {
 			throw $ex;

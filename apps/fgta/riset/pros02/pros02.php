@@ -14,7 +14,7 @@
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal 27/03/2021
+ * tanggal 28/03/2021
  */
 $MODULE = new class extends WebModule {
 
@@ -26,6 +26,7 @@ $MODULE = new class extends WebModule {
 		$this->setup = (object)array(
 			'print_to_new_window' => false,
 			'username' => $userdata->username,
+			'doc_id' => 'COBA',
 		);
 
 		$variancename = $_GET['variancename'];

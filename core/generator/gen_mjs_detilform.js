@@ -18,10 +18,13 @@ module.exports = async (fsd, genconfig) => {
 	console.log(`-----------------------------------------------`)
 	console.log(`Generate Edit Detil PHTML...`)
 
+	
 	var headertable_name = genconfig.schema.header
 	var headertable = genconfig.persistent[headertable_name]
+	
 
 	var detil = genconfig.schema.detils[fsd.detilname]
+	var isapprovalform = detil.isapprovalform;
 	var tablename = detil.table
 	var detiltable = genconfig.persistent[tablename]
 	var data = detiltable.data
@@ -64,16 +67,14 @@ module.exports = async (fsd, genconfig) => {
 
 
 		if (comptype=='datebox') {
-			setdefaultnow += `\t\t\tdata.${fieldname} = global.now()\r\n`
+			setdefaultnow += `\t\tdata.${fieldname} = global.now()\r\n`
 		}  else if (comptype=='numberbox') {
-			setdefaultnow += `\t\t\tdata.${fieldname} = 0\r\n`
+			setdefaultnow += `\t\tdata.${fieldname} = 0\r\n`
 		} else if (comptype=='textbox') {
 			if (typeof initialvalue === 'string') {
-				setdefaultnow += `\t\t\tdata.${fieldname} = '${initialvalue}'\r\n`
+				setdefaultnow += `\t\tdata.${fieldname} = '${initialvalue}'\r\n`
 			}
-		}
-
-		if (comptype=='combo') {
+		} else if (comptype=='combo') {
 			var options = data[fieldname].comp.options
 			var field_display_name = options.field_display;
 			if (options.field_display_name!=null) {
@@ -183,6 +184,17 @@ module.exports = async (fsd, genconfig) => {
 	tplscript = tplscript.replace('/*--__SLIDESELECS__--*/', slideselects)
 	tplscript = tplscript.replace('/*--__LOGVIEW__--*/', tablename)
 	tplscript = tplscript.replace(/<--__HEADERVIEWKEY__-->/g, headerview_key)
+
+
+	if (isapprovalform===true) {
+		tplscript = tplscript.replace(/<--__ALLOWEDITRECORD__-->/g, 'false');
+		tplscript = tplscript.replace(/<--__ALLOWADDRECORD__-->/g, 'false');
+		tplscript = tplscript.replace(/<--__ALLOWREMOVERECORD__-->/g, 'false');
+	} else {
+		tplscript = tplscript.replace(/<--__ALLOWEDITRECORD__-->/g, 'true');
+		tplscript = tplscript.replace(/<--__ALLOWADDRECORD__-->/g, 'true');
+		tplscript = tplscript.replace(/<--__ALLOWREMOVERECORD__-->/g, 'true');
+	}
 
 
 	fsd.script = tplscript
