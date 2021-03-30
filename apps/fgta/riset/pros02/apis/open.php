@@ -62,6 +62,11 @@ $API = new class extends pros02Base {
 				$record[$key] = $value;
 			}
 
+
+			$approverow = \FGTA4\utils\SqlUtility::LookupRow((object)["$this->main_primarykey"=>$record[$this->main_primarykey], "$this->approval_field_approveby"=>$userdata->username, "$this->approval_field_approve"=>'1'], $this->db, $this->approval_tablename);
+			$declinerow = \FGTA4\utils\SqlUtility::LookupRow((object)["$this->main_primarykey"=>$record[$this->main_primarykey], "$this->approval_field_declineby"=>$userdata->username, "$this->approval_field_decline"=>'1'], $this->db, "$this->approval_tablename");
+			
+
 			$result->record = array_merge($record, [
 				
 				// // jikalau ingin menambah atau edit field di result record, dapat dilakukan sesuai contoh sbb: 
@@ -75,6 +80,10 @@ $API = new class extends pros02Base {
 				'doc_name' => \FGTA4\utils\SqlUtility::Lookup($record['doc_id'], $this->db, 'mst_doc', 'doc_id', 'doc_name'),
 				'dept_name' => \FGTA4\utils\SqlUtility::Lookup($record['dept_id'], $this->db, 'mst_dept', 'dept_id', 'dept_name'),
 
+
+				'pros_isuseralreadyapproved' => $approverow!=null ? '1' : '0',
+				'pros_isuseralreadydeclined' => $declinerow!=null ? '1' : '0',
+			
 				'_createby' => \FGTA4\utils\SqlUtility::Lookup($record['_createby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 				'_modifyby' => \FGTA4\utils\SqlUtility::Lookup($record['_modifyby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 

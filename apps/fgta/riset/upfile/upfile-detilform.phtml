@@ -1,0 +1,96 @@
+<div id="pnl_editdetilform">
+	<div class="fgta-page-title" style="display: flex; align-items: center ">
+		<div>Edit Detil</div>
+		<a id="pnl_editdetilform-btn_edit" href="javascript:void(0)" class="easyui-linkbutton" style="margin-left:10px;" data-options="plain:true,iconCls:'fgta-icon-edit'">edit</a>
+	</div>
+	<div id="pnl_editdetilform-title" style="margin-top: 0px; margin-bottom: 30px; font-weight: bold; font-size: 1.2em">XXXXXXX</div>
+
+
+	<form id="pnl_editdetilform-form">
+
+		<div class="form_row" >
+			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">ID</div>
+			<div class="form_input_col" style="border: 0px solid black">
+				<input id="pnl_editdetilform-txt_upfiledetil_id" class="easyui-textbox" mapping="upfiledetil_id"  maxlength="14"  style="width: 400px" data-options="multiline:false  ">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+			</div>
+		</div>
+
+		<div class="form_row" >
+			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Name</div>
+			<div class="form_input_col" style="border: 0px solid black">
+				<input id="pnl_editdetilform-txt_upfiledetil_name" class="easyui-textbox" mapping="upfiledetil_name"  maxlength="60"  style="width: 400px" data-options="multiline:false , required: true, invalidMessage: 'Text menu harus diisi' ">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+			</div>
+		</div>
+
+
+		<div class="form_row" >
+			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">File 1</div>
+			<div class="form_input_col" style="border: 0px solid black">
+				<input id="pnl_editdetilform-fl_upfiledetil_data01" class="easyui-filebox" mapping="upfiledetil_data01" style="width: 400px" data-options="multiline: false , accept: 'image/*' ">
+				<div style="display: flex;">
+					<a class="filedownloadlink" id="pnl_editdetilform-fl_upfiledetil_data01_link" style="cursor:pointer; margin-right: 10px; display: none">Download File</a>	
+					<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+				</div>
+				<img id="pnl_editdetilform-fl_upfiledetil_data01_img" style="width: 200px; width: 200px; border: 1px solid: #ccc; display:none">				
+			</div>
+		</div>
+
+
+		<div class="form_row" >
+			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">File 2</div>
+			<div class="form_input_col" style="border: 0px solid black">
+				<input id="pnl_editdetilform-fl_upfiledetil_data02" class="easyui-filebox" mapping="upfiledetil_data02" style="width: 400px" data-options="multiline: false  ">
+				<div style="display: flex;">
+					<a class="filedownloadlink" id="pnl_editdetilform-fl_upfiledetil_data02_link" style="cursor:pointer; margin-right: 10px; display: none">Download File</a>	
+					<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+				</div>
+				<img id="pnl_editdetilform-fl_upfiledetil_data02_img" style="width: 200px; width: 200px; border: 1px solid: #ccc; display:none">				
+			</div>
+		</div>
+
+		<div class="form_row" >
+			<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">ID</div>
+			<div class="form_input_col" style="border: 0px solid black">
+				<input id="pnl_editdetilform-txt_upfile_id" class="easyui-textbox" mapping="upfile_id"  maxlength="14"  style="width: 400px" data-options="multiline:false  , disabled: true">
+				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+			</div>
+		</div>
+
+	</form>
+
+
+	<div class="form_row" style="margin-top: 30px">
+		<div class="form_label_col"></div>
+		<div class="form_input_col" style="border: 0px solid black">
+			<div style="margin-bottom: 10px">
+				<input id="pnl_editdetilform-autoadd" type="checkbox"><label for="pnl_editdetilform-autoadd">Otomatis tambah baru setelah berhasil disimpan</label>
+			</div>
+			<div>
+				<a id="pnl_editdetilform-btn_save" class="easyui-linkbutton c1" style="width: 100px">Simpan</a>
+			</div>
+		</div>
+	</div>	
+
+
+
+	<div style="margin-top: 30px; margin-left:-5px; margin-right: -5px; background-color: #cccccc; height: 40px; display: flex; justify-content: space-between; padding: 5px 2px 2px 2px ">
+		<div>
+			<a id="pnl_editdetilform-btn_prev" class="easyui-linkbutton c8" style="width: 50px">Prev</a>
+			<a id="pnl_editdetilform-btn_next" class="easyui-linkbutton c8" style="width: 50px">Next</a>
+		</div>
+
+		<div>
+			<a id="pnl_editdetilform-btn_addnew" class="easyui-linkbutton c8" style="width: 100px">Tambah Baru</a>
+		</div>
+
+		<div>
+			<a id="pnl_editdetilform-btn_delete" class="easyui-linkbutton c5" style="width: 100px">Hapus</a>
+		</div>
+	</div>
+
+
+
+
+</div>	

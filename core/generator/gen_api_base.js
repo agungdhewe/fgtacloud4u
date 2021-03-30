@@ -16,7 +16,7 @@ module.exports = async (fsd, genconfig) => {
 
 		var headertable_name = genconfig.schema.header
 		var headertable = genconfig.persistent[headertable_name]
-		// var data = headertable.data
+		var data = headertable.data
 
 		var primarykey = headertable.primarykeys[0]
 		
@@ -49,7 +49,7 @@ module.exports = async (fsd, genconfig) => {
 	protected $approval_tablename = "mst_${basetableentity}appr";
 	protected $approval_primarykey = "${basetableentity}appr_id";
 	protected $approval_field_approve = "${basetableentity}appr_isapproved";
-	protected $approval_field_approveby = "	${basetableentity}appr_by";
+	protected $approval_field_approveby = "${basetableentity}appr_by";
 	protected $approval_field_approvedate = "${basetableentity}appr_date";
 	protected $approval_field_decline = "${basetableentity}appr_isdeclined";
 	protected $approval_field_declineby = "${basetableentity}appr_declinedby";
@@ -59,6 +59,24 @@ module.exports = async (fsd, genconfig) => {
 
 			`;
 			}
+		}
+
+
+		var usecdb = false;
+		for (var fieldname in data) {
+			var comptype = data[fieldname].comp.comptype;
+			if (comptype=='filebox') {
+				usecdb = true;
+			}
+		}
+
+		var cdbconnect = "";
+		var cdbrequire = "";
+		var cdblibuse = "";
+		if (usecdb) {
+			cdbconnect = "$this->cdb = new CouchDbClient((object)DB_CONFIG['FGTAFS']);"
+			cdbrequire = "require_once __ROOT_DIR.'/core/couchdbclient.php';"
+			cdblibuse = "use \\FGTA4\\CouchDbClient;";
 		}
 
 
@@ -75,7 +93,9 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*{__FIELDSCOMMIT__}*/', fields_commit)
 		tplscript = tplscript.replace('/*{__FIELDSAPPROVE__}*/', fields_approve)
 
-		tplscript = tplscript.replace('/*{__FIELDSAPPROVE__}*/', fields_approve)
+		tplscript = tplscript.replace('/*{__CDBCONNECT__}*/', cdbconnect)
+		tplscript = tplscript.replace('/*{__CDBREQUIRE__}*/', cdbrequire)
+		tplscript = tplscript.replace('/*{__CDBLIBUSE__}*/', cdblibuse)
 
 		
 

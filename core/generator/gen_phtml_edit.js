@@ -179,6 +179,22 @@ module.exports = async (fsd, genconfig) => {
 
 
 
+			} else if (compclass=='easyui-filebox') {
+				formcomp_script += `
+
+		<div class="form_row" ${formrowstyle}>
+			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
+			<div class="form_input_col" style="border: 0px solid black">
+				<input id="pnl_edit-${prefix}${fieldname}" class="${compclass}" mapping="${fieldname}" style="width: 400px" data-options="multiline: false ${stroptions} ">
+				<div style="display: flex;">
+					<a class="filedownloadlink" id="pnl_edit-${prefix}${fieldname}_link" style="cursor:pointer; margin-right: 10px; display: none">Download File</a>	
+					<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
+				</div>
+				<img id="pnl_edit-${prefix}${fieldname}_img" style="width: 200px; width: 200px; border: 1px solid: #ccc; display:none">				
+			</div>
+		</div>\r\n`					
+
+
 			} else {
 				formcomp_script += `
 		<div class="form_row" ${formrowstyle}>

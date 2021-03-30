@@ -420,6 +420,10 @@ export async function download(url, args, fn_handler) {
 
 
 async function readfile(file) {
+	console.log(file);
+
+
+
 	return new Promise((resolve, reject) => {
 		var reader = new FileReader();
 		reader.onload = function(evt) {
@@ -429,7 +433,25 @@ async function readfile(file) {
 			}
 
 			var filecontent = evt.target.result;
-			resolve(filecontent);
+			var f = {
+				name: file.name,
+				size: file.size,
+				type: file.type,
+				data: filecontent
+			};
+
+			if (file.type.startsWith('image')) {
+				var image = new Image();
+				image.src = evt.target.result;
+				image.onload = function() {
+					f.width = this.width;
+					f.height = this.height;
+					resolve(f);
+				}
+			} else {
+				resolve(f);
+			}
+	
 		};
 		reader.readAsDataURL(file);
 	})

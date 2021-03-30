@@ -20,6 +20,8 @@ module.exports = async (fsd, genconfig) => {
 	var detiltable = genconfig.persistent[tablename]
 	var data = detiltable.data
 
+	var usecdb = false;
+	var fileboxopen = '';
 	var lookupfields = ''
 	var tojsdate = ''
 	var fields = []
@@ -42,8 +44,20 @@ module.exports = async (fsd, genconfig) => {
 			lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
 		}
 
+		if (comptype=='filebox') {
+			usecdb = true;
+			var idsuffix = data[fieldname].idsuffix;
+			var fileid = idsuffix===undefined || idsuffix=='' ? '$result->record[$primarykey]' : `$result->record[$primarykey] . "|${idsuffix}"`;
+			fileboxopen += "\t\t\t" + `try { $result->record['${fieldname}_doc'] = $this->cdb->getAttachment(${fileid}, 'filedata'); } catch (\\Exception $ex) {}\r\n`;
+		}
+
 	}	
 
+
+	var openfromcouch = "";
+	if ( usecdb) {
+		openfromcouch = fileboxopen;
+	}
 
 
 	var primarykey = detiltable.primarykeys[0]
@@ -57,6 +71,8 @@ module.exports = async (fsd, genconfig) => {
 	var tplscript = fs.readFileSync(mjstpl).toString()
 	tplscript = tplscript.replace('/*{__FIELDS__}*/', fields.join(', '))
 	tplscript = tplscript.replace('/*{__TABLENAME__}*/', tablename)
+	tplscript = tplscript.replace('/*{__TABLENAME__}*/', tablename)
+	tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 	tplscript = tplscript.replace(/<!--__PRIMARYID__-->/g, primarykey)
 	tplscript = tplscript.replace('/*{__TOJSDATE__}*/', tojsdate)
 	tplscript = tplscript.replace('/*{__LOOKUPFIELDS__}*/', lookupfields)
@@ -65,6 +81,10 @@ module.exports = async (fsd, genconfig) => {
 	tplscript = tplscript.replace(/{__MODULEPROG__}/g, genconfig.modulename + '/' + fsd.name);
 	tplscript = tplscript.replace(/{__GENDATE__}/g, ((date)=>{var year = date.getFullYear();var month=(1+date.getMonth()).toString();month=month.length>1 ? month:'0'+month;var day = date.getDate().toString();day = day.length > 1 ? day:'0'+day;return day+'/'+month+'/'+year;})(new Date()));
 	tplscript = tplscript.replace(/{__DETILNAME__}/g, fsd.detilname);
+
+	tplscript = tplscript.replace('/*{__OPENFROMCOUCH__}*/', openfromcouch)
+
+
 
 	fsd.script = tplscript
 }

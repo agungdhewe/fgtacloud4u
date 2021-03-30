@@ -31,7 +31,7 @@ use \FGTA4\exceptions\WebException;
  */
 $API = new class extends {__BASENAME__}Base {
 	
-	public function execute($data, $options) {
+	public function execute($data, $options/*{__UPLOADFILEPARAM__}*/) {
 		$tablename = '/*{__TABLENAME__}*/';
 		$primarykey = '/*{__PRIMARYID__}*/';
 		$autoid = $options->autoid;
@@ -93,6 +93,8 @@ $API = new class extends {__BASENAME__}Base {
 				$stmt->execute($cmd->params);
 
 				\FGTA4\utils\SqlUtility::WriteLog($this->db, $this->reqinfo->modulefullname, $tablename, $obj->{$primarykey}, $action, $userdata->username, (object)[]);
+
+/*{__CDBSAVE__}*/
 
 				$this->db->commit();
 			} catch (\Exception $ex) {

@@ -41,7 +41,12 @@ module.exports = async (fsd, genconfig) => {
 		var skippedfield = '';
 		var updateskippedfield = '';
 		var nullresultloaded = '';
-		var formcomp = []
+		var formcomp = [];
+		var uploadconst = '';
+		var uploadevent = ''; 
+		var uploadopened = '';
+		var uploadcreatenew = '';
+
 		for (var fieldname in data) {
 			if (fieldexclude.includes(fieldname)) { continue }
 			var prefix = data[fieldname].comp.prefix
@@ -152,6 +157,87 @@ module.exports = async (fsd, genconfig) => {
 	})				
 				`;
 			}
+
+
+
+			if (comptype=='filebox') {
+
+				// start uploadconst
+				uploadconst += `
+const ${prefix}${fieldname}_img = $('#pnl_edit-${prefix}${fieldname}_img');
+const ${prefix}${fieldname}_lnk = $('#pnl_edit-${prefix}${fieldname}_link');				
+				`;
+				// end uploadconst
+
+
+				// start uploadevent
+				uploadevent += `
+	obj.${prefix}${fieldname}.filebox({
+		onChange: function(value) {
+			var files = obj.${prefix}${fieldname}.filebox('files');
+			var f = files[0];
+			var reader = new FileReader();
+			reader.onload = (function(loaded) {
+				return function(e) {
+					if (loaded.type.startsWith('image')) {
+						var image = new Image();
+						image.src = e.target.result;
+						image.onload = function() {
+							${prefix}${fieldname}_img.attr('src', e.target.result);
+							${prefix}${fieldname}_img.show();
+							${prefix}${fieldname}_lnk.hide();
+						}
+					} else {
+						${prefix}${fieldname}_img.hide();
+						${prefix}${fieldname}_lnk.hide();
+					}
+				}
+			})(f);
+			if (f!==undefined) { reader.readAsDataURL(f) }
+		}
+	})				
+				`;
+				// end uploadevent
+
+
+				// start uploadopened
+				uploadopened += `
+		obj.${prefix}${fieldname}.filebox('clear');			
+		if (record.${fieldname}_doc!=undefined) {
+			if (record.${fieldname}_doc.type.startsWith('image')) {
+				${prefix}${fieldname}_lnk.hide();
+				${prefix}${fieldname}_img.show();
+				${prefix}${fieldname}_img.attr('src', record.${fieldname}_doc.attachmentdata);
+			} else {
+				${prefix}${fieldname}_img.hide();
+				${prefix}${fieldname}_lnk.show();
+				${prefix}${fieldname}_lnk[0].onclick = () => {
+					${prefix}${fieldname}_lnk.attr('download', record.${fieldname}_doc.name);
+					${prefix}${fieldname}_lnk.attr('href', record.${fieldname}_doc.attachmentdata);
+				}
+			}	
+		} else {
+			${prefix}${fieldname}_img.hide();
+			${prefix}${fieldname}_lnk.hide();			
+		}				
+				`;
+				// end uploadopened
+				
+
+
+				// start uploadcreatenew
+				uploadcreatenew += `
+		${prefix}${fieldname}_img.hide();
+		${prefix}${fieldname}_lnk.hide();	
+		obj.${prefix}${fieldname}.filebox('clear');		
+				`;
+				// end uploadcreatenew
+
+
+				
+			}
+
+
 		} /// END LOOP
 
 
@@ -289,6 +375,15 @@ const btn_decline = $('#pnl_edit-btn_decline')
 		tplscript = tplscript.replace('/*--__RECORDSTATUSNEW__--*/', recordstatusnew);
 
 
+		tplscript = tplscript.replace('/*--__UPLOADCONST__--*/', uploadconst);
+		tplscript = tplscript.replace('/*--__UPLOADEVENT__--*/', uploadevent);
+
+		tplscript = tplscript.replace('/*--__UPLOADOPENED__--*/', uploadopened);
+		tplscript = tplscript.replace('/*--__UPLOADCREATENEW__--*/', uploadcreatenew);
+
+
+		 
+		
 		
 
 		 /*--__RECORDSTATUSDATAOPEN__--*/   /*--__RECORDSTATUSNEW__--*/

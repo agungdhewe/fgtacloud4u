@@ -33,7 +33,8 @@ global.comp = {
 	Datebox : (opt) => { return {class: 'easyui-datebox', comptype: 'datebox', options:opt, prefix:'dt_'} } ,
 	Combobox: (opt) => { return {class: 'easyui-combobox', comptype: 'combobox', options:opt, prefix:'cbo_'} },
 	Combo: (opt) => { return {class: 'easyui-combo', comptype: 'combo', options:opt, prefix:'cbo_'} },
-	Numberbox: (opt) => { return {class: 'easyui-numberbox', comptype: 'numberbox', options:opt, prefix:'txt_'} }
+	Numberbox: (opt) => { return {class: 'easyui-numberbox', comptype: 'numberbox', options:opt, prefix:'txt_'} },
+	Filebox: (opt) => { return {class: 'easyui-filebox', comptype: 'filebox', options:opt, prefix:'fl_'} } ,
 }
 
 

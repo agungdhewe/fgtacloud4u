@@ -9,6 +9,7 @@ const btn_delete = $('#pnl_edit-btn_delete')
 /*--__PRINTBUTTON__--*/
 /*--__COMMITBUTTON__--*/
 /*--__APPROVEBUTTON__--*/
+/*--__UPLOADCONST__--*/
 
 const pnl_form = $('#pnl_edit-form')
 const obj = {
@@ -60,12 +61,9 @@ export async function init(opt) {
 /*--__COMMITHANDLERASSIGNMENT__--*/
 /*--__APPROVEHANDLERASSIGNMENT__--*/
 
-
+/*--__UPLOADEVENT__--*/
 
 /*--__SLIDESELECS__--*/
-
-
-
 
 	document.addEventListener('keydown', (ev)=>{
 		if ($ui.getPages().getCurrentPage()==this_page_id) {
@@ -132,6 +130,8 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 
 	var fn_dataopened = async (result, options) => {
 
+		updatefilebox(result.record);
+
 /*--__NULLRESULTLOADED__--*/
   		updaterecordstatus(result.record)
 
@@ -149,6 +149,7 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 
 		updatebuttonstate(result.record)
 		
+
 
 		// fill data, bisa dilakukan secara manual dengan cara berikut:	
 		// form
@@ -184,7 +185,10 @@ export function createnew() {
 /*--__SETDEFAULTCOMBO__--*/
 /*--__RECORDSTATUSNEW__--*/
 
+/*--__UPLOADCREATENEW__--*/
+
 /*--__ACTIONBUTTONINITSTATE__--*/
+
 
 
 		options.OnCanceled = () => {
@@ -207,6 +211,12 @@ export function detil_open(pnlname) {
 	$ui.getPages().show(pnlname, () => {
 		$ui.getPages().ITEMS[pnlname].handler.OpenDetil(form.getData())
 	})	
+}
+
+
+function updatefilebox(record) {
+	// apabila ada keperluan untuk menampilkan data dari object storage
+/*--__UPLOADOPENED__--*/
 }
 
 function updaterecordstatus(record) {

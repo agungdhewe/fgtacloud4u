@@ -29,6 +29,9 @@ module.exports = async (fsd, genconfig) => {
 	var tosqldate = ''
 	var fields = []
 	var fieldreturn = []	
+	var cdbsave = '';
+	var withupload = false;
+	
 	for (var fieldname in data) {
 		fields.push(fieldname);
 		fieldreturn.push(fieldname);
@@ -63,6 +66,39 @@ module.exports = async (fsd, genconfig) => {
 			lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
 		}
 
+
+
+		if (comptype=='filebox') { 
+			withupload = true;
+			var idsuffix = data[fieldname].idsuffix;
+			var fileid = idsuffix===undefined || idsuffix=='' ? '$obj->{$primarykey}' : `$obj->{$primarykey} . "|${idsuffix}"`;
+			cdbsave += `
+				$fieldname = '${fieldname}';	
+				if (property_exists($files, $fieldname)) {
+
+					$file_id = ${fileid};
+					$doc = $files->{$fieldname};
+					$file_base64data = $doc->data;
+					unset($doc->data);
+
+					$overwrite = true;
+					$res = $this->cdb->addAttachment($file_id, $doc, 'filedata', $file_base64data, $overwrite);	
+					$rev = $res->asObject()->rev;
+
+					$key->{$primarykey} = $obj->{$primarykey};
+					
+					$obj = new \\stdClass;
+					$obj->{$primarykey} = $key->{$primarykey};
+					$obj->${fieldname} = $rev;
+					$cmd = \\FGTA4\\utils\\SqlUtility::CreateSQLUpdate($tablename, $obj, $key);
+					$stmt = $this->db->prepare($cmd->sql);
+					$stmt->execute($cmd->params);
+				}				
+			
+			`;
+			
+		}
+
 		// * Field yang tidak ikut di save */
 		var unset = data[fieldname].unset===true;
 		if (unset) {
@@ -81,6 +117,11 @@ module.exports = async (fsd, genconfig) => {
 	fieldreturn.push('_modifydate')
 	var fieldresturnsel = "'" + fieldreturn.join("', '") + "'"
 
+	if (withupload) {
+		uploadfileparam = ', $files';
+	}
+
+
 	var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'tdetil-save_api.tpl')
 	var tplscript = fs.readFileSync(mjstpl).toString()
 	tplscript = tplscript.replace('/*{__TABLENAME__}*/', tablename)
@@ -93,6 +134,11 @@ module.exports = async (fsd, genconfig) => {
 	tplscript = tplscript.replace('/*{__HEADERTABLE__}*/', headertable_name)
 	tplscript = tplscript.replace('/*{__HEADERPRIMARYKEY__}*/', header_primarykey)
 	tplscript = tplscript.replace('/*{__UNSETFIELD__}*/', unsetfields)
+
+	tplscript = tplscript.replace('/*{__CDBSAVE__}*/', cdbsave)
+	tplscript = tplscript.replace('/*{__UPLOADFILEPARAM__}*/', uploadfileparam)
+
+
 	tplscript = tplscript.replace(/{__BASENAME__}/g, genconfig.basename);
 	tplscript = tplscript.replace(/{__TABLENAME__}/g, headertable_name)
 	tplscript = tplscript.replace(/{__MODULEPROG__}/g, genconfig.modulename + '/' + fsd.name);

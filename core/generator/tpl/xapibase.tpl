@@ -5,13 +5,13 @@ if (!defined('FGTA4')) {
 }
 
 require_once __ROOT_DIR.'/core/sqlutil.php';
-
+/*{__CDBREQUIRE__}*/
 // /* Enable Debugging */
 // require_once __ROOT_DIR.'/core/debug.php';
 
 use \FGTA4\exceptions\WebException;
 // use \FGTA4\debug;
-
+/*{__CDBLIBUSE__}*/
 
 
 
@@ -52,6 +52,8 @@ class {__BASENAME__}Base extends WebAPI {
 					$DB_CONFIG['pass'], 
 					$DB_CONFIG['param']
 		);
+
+		/*{__CDBCONNECT__}*/
 	}
 
 	function pre_action_check($data, $action) {

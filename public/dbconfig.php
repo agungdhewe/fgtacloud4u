@@ -5,6 +5,15 @@ define('DB_CONFIG', [
 		'DSN' => "mysql:host=localhost;dbname=fgtadb",
 		'user' => "root",
 		'pass' => ""
+	],
+
+	'FGTAFS' => [
+		'host' => 'localhost',
+		'port' => '5984',
+		'protocol' => 'http',
+		'username' => null,
+		'password' => null,
+		'database' => 'fgtadb'		
 	]
 
 ]);

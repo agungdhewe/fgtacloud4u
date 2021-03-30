@@ -50,7 +50,7 @@ class pros02Base extends WebAPI {
 	protected $approval_tablename = "mst_prosappr";
 	protected $approval_primarykey = "prosappr_id";
 	protected $approval_field_approve = "prosappr_isapproved";
-	protected $approval_field_approveby = "	prosappr_by";
+	protected $approval_field_approveby = "prosappr_by";
 	protected $approval_field_approvedate = "prosappr_date";
 	protected $approval_field_decline = "prosappr_isdeclined";
 	protected $approval_field_declineby = "prosappr_declinedby";

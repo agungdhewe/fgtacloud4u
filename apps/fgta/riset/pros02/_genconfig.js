@@ -33,7 +33,7 @@ module.exports = {
 				pros_declinedate: { text: 'Decline Date', type: dbtype.datetime, suppresslist: true, unset:true, comp: comp.Textbox(), options: { disabled: true }, hidden: true },
 
 				doc_id: {
-					text:'Order Doc', type: dbtype.varchar(30), null:false, uppercase: true, 
+					text:'Doc', type: dbtype.varchar(30), null:false, uppercase: true, 
 					options: {required:true, invalidMessage:'ID harus diisi' },
 					comp: comp.Combo({
 						table: 'mst_doc',

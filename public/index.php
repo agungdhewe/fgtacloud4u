@@ -231,6 +231,11 @@ try {
 				require_once __ROOT_DIR.'/core/routes/route-images.php';
 				break;	
 
+			case 'cfs' :
+				$isapps = false;
+				require_once __ROOT_DIR.'/core/routes/route-cfs.php';
+				break;						
+
 
 			case 'favicon.ico' :
 				$isapps = false;
@@ -242,6 +247,8 @@ try {
 				$isapps = false;
 				require_once __ROOT_DIR.'/core/routes/route-manifest.php';
 				break;	
+
+
 
 
 			case 'info' :

@@ -11,6 +11,7 @@ const btn_prev = $('#<!--__PANELNAME__-->-btn_prev')
 const btn_next = $('#<!--__PANELNAME__-->-btn_next')
 const btn_addnew = $('#<!--__PANELNAME__-->-btn_addnew')
 const chk_autoadd = $('#<!--__PANELNAME__-->-autoadd')
+/*--__UPLOADCONST__--*/
 
 const pnl_form = $('#<!--__PANELNAME__-->-form')
 const obj = {
@@ -49,6 +50,8 @@ export async function init(opt) {
 	form.AllowEditRecord = <--__ALLOWEDITRECORD__-->
 	form.CreateRecordStatusPage(this_page_id)
 	form.CreateLogPage(this_page_id)
+
+/*--__UPLOADEVENT__--*/
 
 /*--__SLIDESELECS__--*/
 
@@ -146,6 +149,8 @@ export function open(data, rowid, hdata) {
 
 	var fn_dataopened = async (result, options) => {
 
+		updatefilebox(result.record);
+
 /*--__NULLRESULTLOADED__--*/
 
 		form.SuspendEvent(true);
@@ -213,6 +218,7 @@ export function createnew(hdata) {
 /*--__SETDEFAULTNOW__--*/
 /*--__SETDEFAULTCOMBO__--*/
 
+/*--__UPLOADCREATENEW__--*/
 
 		form.rowid = null
 		options.OnCanceled = () => {
@@ -254,6 +260,11 @@ async function form_deleted(result, options) {
 		$ui.getPages().ITEMS['pnl_edit<!--__DETILNAME__-->grid'].handler.removerow(form.rowid)
 	})
 	
+}
+
+function updatefilebox(record) {
+	// apabila ada keperluan untuk menampilkan data dari object storage
+/*--__UPLOADOPENED__--*/
 }
 
 function form_viewmodechanged(viewonly) {

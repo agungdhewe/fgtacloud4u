@@ -1180,6 +1180,10 @@ async function createnew(self, fn_callback) {
 			} else {
 				setValue(self, obj, data[obj.mapping])
 			}
+		} else if (obj.hasClass('easyui-filebox')) {
+			var textbox = obj.filebox('textbox')
+			$(textbox).attr('disabled', true)
+			setValue(self, obj, data[obj.mapping])
 		} else {
 			setValue(self, obj, data[obj.mapping])
 		}

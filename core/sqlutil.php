@@ -129,7 +129,6 @@ class SqlUtility {
 	public static function CreateSQLDelete($tablename, $keys) {
 		$keyfields = [];
 		$params = [];
-
 		foreach ($keys as $fieldname => $value) {
 			$paramname = ":".$fieldname;
 			array_push($keyfields, "$fieldname = $paramname");
@@ -151,17 +150,29 @@ class SqlUtility {
 	}
 
 
-	public static function LookupRow($value, $db, $tablename, $field_id) {
+	public static function LookupRow($value, $db, $tablename, $field_id=null) {
 		try {
-			$sql = "select * from $tablename where $field_id = :value ";
-			
-			$stmt = $db->prepare($sql);
-			$stmt->execute([
-				':value' => $value
-			]);
+			if (is_object($value)) {
+				$keyfields = [];
+				$params = [];
+				foreach ($value as $fieldparamname => $fieldvalue) {
+					$sqlparamname = ":".$fieldparamname;
+					array_push($keyfields, "$fieldparamname = $sqlparamname");
+					$params[$sqlparamname] = $fieldvalue;
+				}
+				$stringkeys    = implode(" AND ", $keyfields);
+				$sql = "select * from $tablename where $stringkeys";
+				$stmt = $db->prepare($sql);
+				$stmt->execute($params);
+			} else {
+				$sql = "select * from $tablename where $field_id = :value ";
+				$stmt = $db->prepare($sql);
+				$stmt->execute([
+					':value' => $value
+				]);
+			}
 			$row  = $stmt->fetch(\PDO::FETCH_ASSOC);
 			return $row;
-
 		} catch (\Exception $ex) {
 			throw $ex;
 		}		

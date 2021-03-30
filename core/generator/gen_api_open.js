@@ -19,6 +19,11 @@ module.exports = async (fsd, genconfig) => {
 		var headertable = genconfig.persistent[headertable_name]
 		var data = headertable.data;
 
+		var add_approval = genconfig.approval===true;
+		var add_commiter = add_approval===true ? true : (genconfig.committer===true);
+
+		var usecdb = false;
+		var fileboxopen = '';
 		var lookupfields = ''
 		var tojsdate = ''
 		var fields = []
@@ -42,22 +47,59 @@ module.exports = async (fsd, genconfig) => {
 				lookupfields += `\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
 			}
 			
-
+			if (comptype=='filebox') {
+				usecdb = true;
+				var idsuffix = data[fieldname].idsuffix;
+				var fileid = idsuffix===undefined || idsuffix=='' ? '$result->record[$primarykey]' : `$result->record[$primarykey] . "|${idsuffix}"`;
+				fileboxopen += "\t\t\t\t" + `try { $result->record['${fieldname}_doc'] = $this->cdb->getAttachment(${fileid}, 'filedata'); } catch (\\Exception $ex) {}\r\n`;
+			}
+			
 		}
 
 
 		var primarykey = headertable.primarykeys[0]
 	
+		var lookupuserapproval = "";
+		var lookupusermerge = "";
+		if (add_approval) {
+			lookupuserapproval = `
+			\$approverow = \\FGTA4\\utils\\SqlUtility::LookupRow((object)["$this->main_primarykey"=>$record[$this->main_primarykey], "$this->approval_field_approveby"=>$userdata->username, "$this->approval_field_approve"=>'1'], $this->db, $this->approval_tablename);
+			\$declinerow = \\FGTA4\\utils\\SqlUtility::LookupRow((object)["$this->main_primarykey"=>$record[$this->main_primarykey], "$this->approval_field_declineby"=>$userdata->username, "$this->approval_field_decline"=>'1'], $this->db, "$this->approval_tablename");
+			`;
+
+			lookupusermerge = `
+				'pros_isuseralreadyapproved' => $approverow!=null ? '1' : '0',
+				'pros_isuseralreadydeclined' => $declinerow!=null ? '1' : '0',
+			`;
+		}
+
+
+		var openfromcouch = "";
+		if ( usecdb) {
+			openfromcouch = fileboxopen;
+		}
 
 		var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'open_api.tpl')
 		var tplscript = fs.readFileSync(mjstpl).toString()
 		tplscript = tplscript.replace('/*{__FIELDS__}*/', fields.join(', '))
 		tplscript = tplscript.replace('/*{__TABLENAME__}*/', headertable_name)
+		tplscript = tplscript.replace('/*{__TABLENAME__}*/', headertable_name)
+		tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 		tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 		tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 		tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 		tplscript = tplscript.replace('/*{__TOJSDATE__}*/', tojsdate)
 		tplscript = tplscript.replace('/*{__LOOKUPFIELDS__}*/', lookupfields)
+
+		tplscript = tplscript.replace('/*{__LOOKUPUSERAPPROVAL__}*/', lookupuserapproval)
+		tplscript = tplscript.replace('/*{__LOOKUPUSERMERGE__}*/', lookupusermerge)
+		
+		
+		tplscript = tplscript.replace('/*{__OPENFROMCOUCH__}*/', openfromcouch)
+
+
+		
+
 		tplscript = tplscript.replace(/{__BASENAME__}/g, genconfig.basename);
 		tplscript = tplscript.replace(/{__TABLENAME__}/g, headertable_name)
 		tplscript = tplscript.replace(/{__MODULEPROG__}/g, genconfig.modulename + '/apis/open.php');

@@ -28,8 +28,9 @@ use \FGTA4\exceptions\WebException;
  */
 $API = new class extends {__BASENAME__}Base {
 
-	
 	public function execute($options) {
+		$tablename = '/*{__TABLENAME__}*/';
+		$primarykey = '/*{__PRIMARYID__}*/';
 		$userdata = $this->auth->session_get_user();
 		
 		try {
@@ -70,6 +71,8 @@ $API = new class extends {__BASENAME__}Base {
 
 			// $date = DateTime::createFromFormat('d/m/Y', "24/04/2012");
 			// echo $date->format('Y-m-d');
+
+/*{__OPENFROMCOUCH__}*/	
 
 			return $result;
 		} catch (\Exception $ex) {

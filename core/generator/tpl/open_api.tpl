@@ -29,7 +29,8 @@ use \FGTA4\exceptions\WebException;
 $API = new class extends {__BASENAME__}Base {
 	
 	public function execute($options) {
-
+		$tablename = '/*{__TABLENAME__}*/';
+		$primarykey = '/*{__PRIMARYID__}*/';
 		$userdata = $this->auth->session_get_user();
 
 		try {
@@ -62,6 +63,8 @@ $API = new class extends {__BASENAME__}Base {
 				$record[$key] = $value;
 			}
 
+/*{__LOOKUPUSERAPPROVAL__}*/
+
 			$result->record = array_merge($record, [
 /*{__TOJSDATE__}*/				
 				// // jikalau ingin menambah atau edit field di result record, dapat dilakukan sesuai contoh sbb: 
@@ -70,6 +73,7 @@ $API = new class extends {__BASENAME__}Base {
 				//'gendername' => $record['gender']
 				
 /*{__LOOKUPFIELDS__}*/
+/*{__LOOKUPUSERMERGE__}*/
 				'_createby' => \FGTA4\utils\SqlUtility::Lookup($record['_createby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 				'_modifyby' => \FGTA4\utils\SqlUtility::Lookup($record['_modifyby'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),
 
@@ -77,6 +81,8 @@ $API = new class extends {__BASENAME__}Base {
 
 			// $date = DateTime::createFromFormat('d/m/Y', "24/04/2012");
 			// echo $date->format('Y-m-d');
+
+/*{__OPENFROMCOUCH__}*/			
 
 			return $result;
 		} catch (\Exception $ex) {
