@@ -48,10 +48,7 @@
 				"finact/items/itemspec",
 				"finact/items/itemgroup",
 				"finact/items/itemclass",
-				{
-					"program": "finact/items/itemclass",
-					"variancename": "manualid"
-				},
+
 
 
 				"finact/items/itemasset",
@@ -60,6 +57,8 @@
 				"finact/items/inquirymodel",
 				"finact/items/inquirytype",
 				"finact/items/inquiry",
+				"finact/items/inquiryprocess",
+
 				"finact/items/inquiryrecv",
 				{
 					"program": "finact/items/inquiry",
@@ -197,7 +196,7 @@
 			"backcolor" : "#82263f",
 			"disabled": false,
 			"modules": [
-				"finact/sales/order"
+				"finact/sales/salesorder"
 			]			
 		},
 		{

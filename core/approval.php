@@ -65,7 +65,7 @@ class StandartApproval {
 	}
 
 
-	static function copy($db, $currentdata, $tablename, $keys, $doc_id) {
+	static function copy($db, $currentdata, $tablename, $keys, $doc_id, $dept_id_field=null) {
 		try {
 			$keydata = array();
 			foreach ($keys as $keyname=>$value) {
@@ -77,9 +77,13 @@ class StandartApproval {
 			$field_id = $keydata[0]->name;
 			$field_idline = $keydata[1]->name;
 
+			$dept_id = $currentdata->header->dept_id;
+			if ($dept_id_field!=null) {
+				$dept_id = $currentdata->header->{$dept_id_field};
+			}
 
 			$auths = array();
-			$rows = self::getDeptHiearchy($db, $currentdata->header->dept_id);
+			$rows = self::getDeptHiearchy($db, $dept_id);
 			foreach ($rows as $row) {
 				$authlevel_id = $row['authlevel_id'];
 				if (!\array_key_exists($authlevel_id, $auths)) {

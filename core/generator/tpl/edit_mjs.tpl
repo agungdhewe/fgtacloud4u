@@ -110,7 +110,7 @@ export async function init(opt) {
 		}
 	})
 
-
+/*--__BUTTONSTATE__--*/
 
 }
 

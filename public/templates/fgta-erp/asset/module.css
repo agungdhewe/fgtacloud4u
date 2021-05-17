@@ -497,6 +497,10 @@ h1 {
 	background: #ffe095;
 }
 
+.input-modeedit-force {
+	background: #ffe095 !important;
+}
+
 
 
 .detilgrid-value {
@@ -617,4 +621,15 @@ h1 {
 
 .declinereasonbox {
 	background-color: #ffe095;
+}
+
+
+.pastebox {
+	height: 32px;
+	width: 200px;
+	background-color: #00000033;
+	padding-top: 8px;
+	margin-left: 15px;
+	padding-left: 15px;
+	overflow: hidden;
 }

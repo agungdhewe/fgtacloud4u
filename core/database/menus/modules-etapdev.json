@@ -1,6 +1,10 @@
 {
 	"title": "home",
 	"modules": [
+
+		"etap/client/config",
+		"etap/client/manual",
+
 		"etap/tenant/bussinesstype",
 		"etap/tenant/brand",
 		"etap/tenant/prov",

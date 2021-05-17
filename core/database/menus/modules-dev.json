@@ -1,12 +1,31 @@
 {
 	"title": "home *****",
 	"modules": [
-		"fgta/riset/upfile",
-		"finact/budget/deptbudget",
+
+		"finact/acct/jurnal",	
+
+		"finact/fin/billout",	
+		"finact/collection/collaccmtn",	
+
+		"finact/items/itemgroup",	
+		"finact/items/itemmodel",	
+		"finact/items/itemclass",	
+		"finact/items/itemasset",	
+		
 		"finact/budget/corpbudget",
+		"finact/budget/deptbudget",
 		"finact/budget/projbudget",
-		"hrms/master/empluser",
-		"fgta/riset/pros01",
-		"fgta/riset/pros02"
+		
+		"finact/items/inquiryselect",
+		"finact/items/inquirymodel",
+		"finact/items/inquirytype",
+
+		"finact/items/inquiry",
+		"finact/items/inquiryprocess",
+		
+		"finact/items/itemstocksaldo",
+
+		"finact/procurement/request",
+		"finact/procurement/order"
 	]
 }

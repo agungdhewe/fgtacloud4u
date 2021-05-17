@@ -1,0 +1,40 @@
+{
+	"title": "home *****",
+	"modules": [
+
+
+		"finact/master/periode",
+		"ent/organisation/docs",
+		"ent/affiliation/partner",
+		"media/sales/logproof",
+		"finact/fin/billout",
+		"finact/fin/billoutupload",
+		"finact/master/coa",
+		"finact/collection/colltarget",
+		"finact/collection/cashdiscount",
+		"finact/collection/temprecv",
+		"finact/collection/colltemprecv",
+
+
+
+		
+		"finact/items/itemgroup",	
+		"finact/items/itemmodel",	
+		"finact/items/itemclass",	
+		"finact/items/itemasset",	
+		
+		"finact/budget/corpbudget",
+		"finact/budget/deptbudget",
+		"finact/budget/projbudget",
+		
+		"finact/items/inquirytype",
+
+		"finact/items/inquiry",
+		"finact/items/inquiryprocess",
+		
+		"finact/items/itemstocksaldo",
+
+		"finact/procurement/request",
+		"finact/procurement/order"
+	]
+}

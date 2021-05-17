@@ -3,19 +3,37 @@
 	"icon" : "icon-admin-white.png",
 	"disabled" : false,
 	"modules" : [
-		"fgta/framework/fggroup",
-		"fgta/framework/fguser",
-		"retail/webcommerce/webbrand",
-		"retail/webcommerce/webcity",
-		"retail/webcommerce/webcluster",
-		"retail/webcommerce/webfeedback",
-		"retail/webcommerce/webmenufoot",
-		"retail/webcommerce/webmenuhead",
-		"retail/webcommerce/webmenuvisibility",
+		{
+			"title" : "Administrator",
+			"modules": [
+				"fgta/framework/fggroup",
+				"fgta/framework/fguser",
+				"retail/webcommerce/webcluster",
+				"retail/webcommerce/webmenuhead",
+				"retail/webcommerce/webmenufoot",
+				"retail/webcommerce/webpreftype",
+				"retail/webcommerce/webaction",			
+				"retail/webcommerce/webmenuvisibility",
+				"retail/webcommerce/webgender",
+				"retail/webcommerce/webproptype",
+				"retail/webcommerce/webbrand",
+				"retail/webcommerce/webcity",
+				"retail/webcommerce/webeditorialtype"			
+			]
+		},
+
+		{
+			"title" : "User Data",
+			"modules": [
+				"retail/webcommerce/webfeedback"
+			]			
+		},
+
+
 		"retail/webcommerce/website",
-		"retail/webcommerce/webfeedback",
-		"retail/webcommerce/webpreftype",
-		"retail/webcommerce/webaction",
-		"retail/webcommerce/webfile"
+		"retail/webcommerce/webmerchitemgro",
+		"retail/webcommerce/webmerchitemcat",
+		"retail/webcommerce/webmerch",
+		"retail/webcommerce/webeditorial"
 	]
 }

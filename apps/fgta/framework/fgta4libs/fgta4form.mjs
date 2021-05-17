@@ -26,7 +26,7 @@ export function fgta4form(frm, opt) {
 	self.eventsuspended = false;
 
 
-	self.OnNewDataCanceled = () => {}
+	self.OnNewDataCanceled = typeof self.options.OnNewDataCanceled === 'function' ? self.options.OnNewDataCanceled : async ()=>{}
 	self.OnDataSaving = typeof self.options.OnDataSaving === 'function' ? self.options.OnDataSaving : async ()=>{}
 	self.OnDataSaveError = typeof self.options.OnDataSaveError === 'function' ? self.options.OnDataSaveError : async ()=>{}
 	self.OnDataSaved = typeof self.options.OnDataSaved === 'function' ? self.options.OnDataSaved : async ()=>{}
@@ -99,10 +99,12 @@ export function fgta4form(frm, opt) {
 		canceledit: (fn_callback) => { return canceledit(self, fn_callback) },
 		isNewData: () => { return isNewData(self) },
 		markNewData: (isnewdata) => { return markNewData(self, isnewdata) },
+		markDataChanged: () => { self.datachanged = true },
 		dataload: (fn_dataopening, fn_dataopened, fn_dataopenerror) => { dataload(self, fn_dataopening, fn_dataopened, fn_dataopenerror) },
 		CreateRecordStatusPage: (panelname) => {CreateRecordStatusPage(self, panelname) },
 		CreateLogPage: (panelname) => {CreateLogPage(self, panelname) },
 		btn_save_click: () => { btn_save_click(self) },
+		btn_edit_click: () => { btn_edit_click(self) },
 		SuspendEvent: (suspend) => { return suspendevent(self, suspend)},
 		isEventSuspended: () => { return iseventsuspended(self) },
 
@@ -126,6 +128,10 @@ function init(self) {
 	for (var obid in objects) {
 		var obj = objects[obid]
 
+		if (obid=='txt_editorial_content') {
+			console.log(obid);
+		}
+
 		obj.name = obid
 		obj.mapping = obj.attr('mapping')
 		obj.objecttypeclass = getEasyuiClass(self, obj)
@@ -135,6 +141,8 @@ function init(self) {
 			obj.originalbackground =  obj.parent().find('span.checkbox').css('background-color')
 			obj.parent().find('svg').find('path').attr('stroke', 'black')
 			obj.parent().find('span.checkbox-inner.checkbox-checked').removeClass('checkbox-checked')
+
+		} else if (obj.objecttypeclass=='easyui-texteditor') {
 
 		} else {
 			var opt = obj.textbox('options')
@@ -191,7 +199,12 @@ function init(self) {
 		var objects = self.options.objects
 		for (var obid in objects) {
 			var obj = objects[obid]
-			if (obj.objecttypeclass!=='easyui-checkbox') {
+
+			if (obj.objecttypeclass=='easyui-texteditor') {
+
+
+
+			} else if (obj.objecttypeclass!=='easyui-checkbox') {
 
 				var textbox = obj.textbox('textbox')
 				if (obj.attr('maxlength')!==undefined) {
@@ -601,6 +614,8 @@ function getEasyuiClass(self, obj) {
 		return 'easyui-combobox'
 	} else if (obj.hasClass('easyui-filebox')) {
 		return 'easyui-filebox'
+	} else if (obj.hasClass('easyui-texteditor')) {
+		return 'easyui-texteditor'
 	}
 }
 

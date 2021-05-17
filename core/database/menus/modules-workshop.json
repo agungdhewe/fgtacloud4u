@@ -1,0 +1,80 @@
+{
+	"title": "home",
+	"modules": [
+		{
+			"title": "Administrator",
+			"modules": [
+				"fgta/framework/fggroup",
+				"fgta/framework/fguser",
+				"hrms/master/empluser"
+			]
+		},
+		{
+			"title": "Setup Organisasi",
+			"modules": [
+				"ent/organisation/deptgroup",
+				"ent/organisation/dept",
+				"ent/organisation/authlevel",
+				"ent/organisation/auth",
+				"hrms/master/hrjob",
+				"hrms/master/empl",
+				"ent/organisation/docs"
+			]
+		},
+
+		{
+			"title": "Setup Kode Account",
+			"modules": [
+				"finact/master/coatype",
+				"finact/master/coagroup",
+				"finact/master/coa",
+				"finact/master/accbudgetgroup",
+				"finact/master/accbudget",
+				"finact/master/accfin",
+				"ent/general/bank",
+				"finact/master/bankrekening"
+			]
+		},
+
+		{
+			"title" : "Setup Project",
+			"modules" : [
+				"finact/master/projecttype",
+				"finact/master/project",
+				"finact/master/projecttask",
+				"fgta/framework/fgrole"
+			]
+		},
+
+		{
+			"title" : "Setup Items",
+			"modules" : [
+				"finact/items/itemmodel",
+				"finact/items/itemgroup",
+				"finact/items/itemclass",
+				"finact/items/itemasset",
+				"finact/items/itemstock",
+				"finact/items/inquirytype"				
+			]
+		},
+
+		{
+			"title" : "Setup Partner",
+			"modules": [
+				"ent/affiliation/partnertype",
+				"ent/affiliation/partner"
+			]
+		},
+
+		
+		"finact/budget/corpbudget",
+		"finact/budget/deptbudget",
+		"finact/budget/projbudget",
+		
+		"finact/items/inquiry",
+		"finact/items/inquiryprocess",
+
+		"finact/procurement/request",
+		"finact/procurement/order"
+	]
+}

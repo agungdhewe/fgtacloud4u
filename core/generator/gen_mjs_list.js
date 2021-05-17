@@ -14,10 +14,17 @@ module.exports = async (fsd, genconfig) => {
 		console.log(`-----------------------------------------------`)
 		console.log(`Generate MJS List...`)
 
+		var buttonstate = "\t" + '//button state';
+		if (genconfig.disablenewbutton===true) {
+			buttonstate += "\r\n\t" + "btn_new.hide();"
+		}
+		
 
 		var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'list_mjs.tpl')
 		var tplscript = fs.readFileSync(mjstpl).toString()
+		tplscript = tplscript.replace('/*--__BUTTONSTATE__--*/', buttonstate)
 
+		
 		// console.log(tplscript)		
 		fsd.script = tplscript
 	} catch (err) {

@@ -64,11 +64,16 @@ module.exports = async (fsd, genconfig) => {
 			pagetitle = genconfig.schema.title
 		}
 
+
+		
+
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'list_phtml.tpl')
 		var tplscript = fs.readFileSync(phtmltpl).toString()
 		tplscript = tplscript.replace('<!--__HEADERMAP__-->', headermap_script)
 		tplscript = tplscript.replace('<!--__HEADERROW__-->', headerrow_script)
 		tplscript = tplscript.replace('<!--__PAGETITLE__-->', pagetitle)
+		
+		
 
 
 		fsd.script = tplscript

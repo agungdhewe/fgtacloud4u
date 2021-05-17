@@ -54,6 +54,7 @@ export async function init(opt) {
 		}
 	})	
 	
+/*--__BUTTONSTATE__--*/
 
 	btn_load_click()
 }

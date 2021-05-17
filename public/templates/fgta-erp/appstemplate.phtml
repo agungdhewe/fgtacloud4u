@@ -133,6 +133,14 @@ if (!defined('FGTA4')) {
 				return check;
 			};
 
+			window.format_number = (value) => {
+				var val = parseFloat(value);
+				if (!isNaN(val)) {
+					return val.toLocaleString('en-US');	
+				} else {
+					return value;
+				}			
+			}
 
 			window.row_format_number = (value, tr) => {
 				var val = parseFloat(value);
@@ -252,7 +260,12 @@ if (!defined('FGTA4')) {
 				}
 			});
 
+		</script>	
 
+
+
+		<script>
+			// helper script
 			window.to_sql_date = (ststr) => {
 				var date = $.fn.datebox.defaults.parser(ststr);
 				var y = date.getFullYear();
@@ -261,7 +274,22 @@ if (!defined('FGTA4')) {
 				return y + '-' + (m < 10 ? '0' + m : m) + '-' +  (d < 10 ? '0' + d : d);		 
 			}
 
-		</script>		
+			window.togleview = (el) => {
+				// console.log(el);
+				var next = el.parentNode.nextElementSibling;
+				if (next.classList.contains('fgta_section_collapsible')) {
+					if ((window.getComputedStyle(next).display === "none")) {
+						// hidden
+						next.style.display = "block";
+						el.innerHTML = 'hide';
+					} else {
+						// visible
+						next.style.display = "none";
+						el.innerHTML = 'show';
+					}
+				}
+			}
+		</script>
 
 		<style>
 			.container-bar {
@@ -270,6 +298,9 @@ if (!defined('FGTA4')) {
 			
 			}
 
+			.fgta-toggle-link {
+				text-decoration: underline;
+			}
 
 		</style>
 
@@ -334,7 +365,7 @@ if (!defined('FGTA4')) {
 <!-- Preaload Styles -->
 	<?php if (is_array($this->preloadsstyles)) { 
 			foreach ($this->preloadsstyles as $style) {	
-	?><script src="<?=$script?>"></script>			
+	?><link rel="stylesheet" type="text/css" href="<?=$style?>">			
 	<?php }}} ?>	
 
 

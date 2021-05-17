@@ -118,11 +118,17 @@ module.exports = async (fsd, genconfig) => {
 					validType = ` validType="requiredcombo['pnl_edit-${prefix}${fieldname}']" `;
 				} 
 
+				var combodisplay = options.field_display;
+				var field_display_name = options.field_display_name;
+				if (field_display_name!=null) {
+					combodisplay = field_display_name
+				}
+
 				formcomp_script += `
 		<div class="form_row" ${formrowstyle}>
 			<div class="form_label_col${labeltipsclass}" ${tipshidden} style="border: 0px solid black; vertical-align: top; margin-top: 7px;">${labeltext}</div>
 			<div class="form_input_col" style="border: 0px solid black">
-				<input id="pnl_edit-${prefix}${fieldname}" class="easyui-combo" style="width: 400px" mapping="${fieldname}" display="${options.field_display}" data-options="editable:false, valueField:'id', textField:'text' ${stroptions}"  ${validType}>
+				<input id="pnl_edit-${prefix}${fieldname}" class="easyui-combo" style="width: 400px" mapping="${fieldname}" display="${combodisplay}" data-options="editable:false, valueField:'id', textField:'text' ${stroptions}"  ${validType}>
 				<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;">${tipsvisible}</div>
 			</div>
 		</div>\r\n`
@@ -256,7 +262,7 @@ ${detilrow}
 		var add_printfunction = genconfig.printing;
 		var printbutton = '';
 		if (add_printfunction) {
-			printbutton = `<a id="pnl_edit-btn_print" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="iconCls:'icon-print'">print</a>`;
+			printbutton = `<a id="pnl_edit-btn_print" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px; margin-bottom: 10px;" data-options="iconCls:'icon-print'">print</a>`;
 		}
 
 
@@ -264,13 +270,13 @@ ${detilrow}
 		var approvebutton = '';
 		if (add_commiter) {
 			commitbutton = `
-			<a id="pnl_edit-btn_commit" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="iconCls:'fgta-icon-commit'">Commit</a>			
-			<a id="pnl_edit-btn_uncommit" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="iconCls:'fgta-icon-uncommit'">UnCommit</a>
+			<a id="pnl_edit-btn_commit" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px; margin-bottom: 10px;" data-options="iconCls:'fgta-icon-commit'">Commit</a>			
+			<a id="pnl_edit-btn_uncommit" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px; margin-bottom: 10px;" data-options="iconCls:'fgta-icon-uncommit'">UnCommit</a>
 			`;
 			if (add_approval) {
 				approvebutton = `
-				<a id="pnl_edit-btn_approve" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="plain:true,iconCls:'fgta-icon-posting'">Approve</a>
-				<a id="pnl_edit-btn_decline" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px;" data-options="plain:true,iconCls:'fgta-icon-unposting'">Decline</a>
+				<a id="pnl_edit-btn_approve" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px; margin-bottom: 10px;" data-options="plain:true,iconCls:'fgta-icon-posting'">Approve</a>
+				<a id="pnl_edit-btn_decline" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px; margin-bottom: 10px;" data-options="plain:true,iconCls:'fgta-icon-unposting'">Decline</a>
 				`;
 			}
 		}		

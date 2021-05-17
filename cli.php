@@ -33,6 +33,7 @@ htaccess::ReadEnvirontment();
 
 
 require_once __DBCONF_PATH;
+require_once __ROOT_DIR.'/core/webexception.php';
 
 global $argc, $argv;
 console::execute($argv);

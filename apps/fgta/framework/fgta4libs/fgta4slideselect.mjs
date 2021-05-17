@@ -29,6 +29,7 @@ export function fgta4slideselect(obj, options) {
 		api: null,
 		fieldValue: 'id',
 		fieldDisplay: 'text',
+		fieldDisplayName: 'text',
 		fieldValueMap: options.fieldValue,
 		fields: [],
 		data: null,

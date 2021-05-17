@@ -179,15 +179,18 @@ class SqlUtility {
 	}
 
 	
-	public static function Lookup($value, $db, $tablename, $field_id, $field_display) {
+	public static function Lookup($value, $db, $tablename, $field_id, $field_display, $valueifnull='--NULL--') {
 		try {
 			$row = self::LookupRow($value, $db, $tablename, $field_id);
 			if (is_array($row)) {
 				if (array_key_exists($field_display, $row)) {
 					return $row[$field_display];
-				} 
+				} else {
+					throw new \Exception("kolom $field_display tidak ditemukan pada  $tablename");
+				}
+			} else {
+				return  $valueifnull;
 			}
-			return $value;
 			
 		} catch (\Exception $ex) {
 			throw $ex;
@@ -228,7 +231,7 @@ class SqlUtility {
 					'id' => $id,
 					'action' => $action,
 					'note' => property_exists($logparam, 'note') ? $logparam->note : '',
-					'remoteip' => $_SERVER['REMOTE_ADDR'],
+					'remoteip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '-',
 					'user_id' => $user_id,
 					'rowid' => uniqid()
 				];

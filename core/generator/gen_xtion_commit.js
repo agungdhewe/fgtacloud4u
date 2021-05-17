@@ -55,7 +55,7 @@ module.exports = async (fsd, genconfig) => {
 		for (var fieldname in data) {
 			var comptype = data[fieldname].comp.comptype
 			if (comptype=='datebox') {
-				lookupfields += `\t\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($row['${fieldname}'])),\r\n`;
+				lookupfields += `\t\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($record['${fieldname}'])),\r\n`;
 			} else if (comptype=='combo') {
 				var options = data[fieldname].comp.options
 				var field_display_name = options.field_display;

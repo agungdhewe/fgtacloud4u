@@ -26,6 +26,8 @@ module.exports = async (fsd, genconfig) => {
 	var header_primarykey = headertable.primarykeys[0]
 	var header_primarycomppreix = data[primarykey].comp.prefix
 
+	var basetableentity = genconfig.basetableentity;
+
 	var headerview_key = primarykey
 	if (detil.headerview!==undefined) {
 		headerview_key = detil.headerview 
@@ -50,14 +52,14 @@ module.exports = async (fsd, genconfig) => {
 			var gambar = "";
 			var authby = "";
 			var notes = "";			
-			if (record.prosappr_isdeclined=="1") {
+			if (record.${basetableentity}appr_isdeclined=="1") {
 				gambar = \`<img src="images/xtiondecl.png" width="20px" height="20px">\`;
-				authby = \`<div><span style="font-weight: bold">\${record.prosappr_declinedby}</span> (\${record.prosappr_declineddate})</div>\`
-				notes = record.prosappr_notes.replace(/(?:\\r\\n|\\r|\\n)/g, '<br>');
+				authby = \`<div><span style="font-weight: bold">\${record.${basetableentity}appr_declinedby}</span> (\${record.${basetableentity}appr_declineddate})</div>\`
+				notes = record.${basetableentity}appr_notes.replace(/(?:\\r\\n|\\r|\\n)/g, '<br>');
 				notes = \`<div style="margin-top: 5px; font-style: italic">\${notes}</div>\`
-			} else if (record.prosappr_isapproved=="1") {
+			} else if (record.${basetableentity}appr_isapproved=="1") {
 				gambar = \`<img src="images/xtionappr.png" width="20px" height="20px">\`;
-				authby = \`<div><span style="font-weight: bold">\${record.prosappr_by}</span> (\${record.prosappr_date})</div>\`
+				authby = \`<div><span style="font-weight: bold">\${record.${basetableentity}appr_by}</span> (\${record.${basetableentity}appr_date})</div>\`
 			} else {
 				gambar = \`<img src="images/xtionwait.png" width="20px" height="20px">\`;
 				authby = ""

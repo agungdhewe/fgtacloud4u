@@ -12,7 +12,7 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg8"
-   inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
+   inkscape:version="1.0.2 (394de47547, 2021-03-26)"
    sodipodi:docname="status.svg">
   <defs
      id="defs2" />
@@ -24,14 +24,19 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24748737"
-     inkscape:cx="120.12244"
-     inkscape:cy="540.25724"
+     inkscape:cx="-1201.6649"
+     inkscape:cy="2450.4308"
      inkscape:document-units="mm"
-     inkscape:current-layer="g941-3-3"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      showguides="true"
-     inkscape:guide-bbox="true">
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1864"
+     inkscape:window-height="1016"
+     inkscape:window-x="56"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1">
     <sodipodi:guide
        position="-409.19393,352.89118"
        orientation="1,0"
@@ -298,6 +303,124 @@
              x="-166.59587"
              y="-63.994595"
              style="font-weight:bold;fill:#ffffff;stroke-width:0.264583">closed</tspan></text>
+      </g>
+      <g
+         id="g900-3"
+         transform="translate(-0.61248434,91.848032)" />
+    </g>
+    <g
+       id="g946-3"
+       inkscape:export-filename="/home/agung/Development/fgtacloud4u/server_apps/finact/items/inquiry/images/srpreparing.png"
+       inkscape:export-xdpi="5.8342013"
+       inkscape:export-ydpi="5.8342013"
+       transform="translate(-244.96342,550.838)">
+      <rect
+         style="fill:#d45500;stroke-width:0.964992;stroke-linecap:round;stroke-linejoin:round"
+         id="rect833-3-5-5"
+         width="149.3176"
+         height="60.950897"
+         x="-164.23051"
+         y="-27.273954"
+         ry="9.4117889" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:42.1976px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="-142.62758"
+         y="14.969407"
+         id="text837-6-3-6"><tspan
+           sodipodi:role="line"
+           id="tspan835-7-5-2"
+           x="-142.62758"
+           y="14.969407"
+           style="font-weight:bold;fill:#ffffff;stroke-width:0.264583">prep</tspan></text>
+    </g>
+    <g
+       id="g941-36-9"
+       inkscape:export-filename="/home/agung/Development/fgtacloud4u/server_apps/finact/items/inquiry/images/sprocessed.png"
+       inkscape:export-xdpi="5.7836447"
+       inkscape:export-ydpi="5.7836447"
+       transform="translate(-245.61763,698.84484)">
+      <rect
+         style="fill:#008000;stroke-width:0.964996;stroke-linecap:round;stroke-linejoin:round"
+         id="rect833-7-1"
+         width="149.3176"
+         height="60.950897"
+         x="-163.57631"
+         y="-114.3299"
+         ry="9.4117889" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:44.4411px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.325256"
+         x="-140.0056"
+         y="-74.804604"
+         id="text837-5-2"
+         transform="scale(1.0531677,0.94951643)"><tspan
+           sodipodi:role="line"
+           id="tspan835-3-7"
+           x="-140.0056"
+           y="-74.804604"
+           style="font-weight:bold;fill:#ffffff;stroke-width:0.325256">proc</tspan></text>
+    </g>
+    <g
+       id="g941-3-3-0"
+       inkscape:export-filename="/home/agung/Development/fgtacloud4u/server_apps/finact/items/inquiry/images/srequested.png"
+       inkscape:export-xdpi="5.7600183"
+       inkscape:export-ydpi="5.7600183"
+       transform="translate(-246.23012,759.79574)">
+      <g
+         id="g900-9">
+        <rect
+           style="fill:#4d4d4d;stroke-width:0.964998;stroke-linecap:round;stroke-linejoin:round"
+           id="rect833-6-6-3"
+           width="149.93008"
+           height="60.950897"
+           x="-163.57631"
+           y="-114.3299"
+           ry="9.4117889" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:38.019px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="-137.49478"
+           y="-65.327301"
+           id="text837-7-7-6"
+           transform="scale(0.90097436,1.1099095)"><tspan
+             sodipodi:role="line"
+             id="tspan835-5-5-0"
+             x="-137.49478"
+             y="-65.327301"
+             style="font-weight:bold;fill:#ffffff;stroke-width:0.264583">req</tspan></text>
+      </g>
+      <g
+         id="g900-3-6"
+         transform="translate(-0.61248434,91.848032)" />
+    </g>
+    <g
+       id="g941-35-2"
+       inkscape:export-filename="/home/agung/Development/fgtacloud4u/server/public/templates/fgta-erp/asset/rpurchreq.png"
+       inkscape:export-xdpi="5.8342013"
+       inkscape:export-ydpi="5.8342013"
+       transform="translate(-245.61763,910.18568)">
+      <g
+         id="g905-6">
+        <rect
+           style="fill:#d4aa00;stroke-width:0.964996;stroke-linecap:round;stroke-linejoin:round"
+           id="rect833-62-1"
+           width="149.3176"
+           height="60.950897"
+           x="-163.57631"
+           y="-114.3299"
+           ry="9.4117889" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:42.1976px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+           x="-130.33186"
+           y="-71.028206"
+           id="text837-9-8"><tspan
+             sodipodi:role="line"
+             id="tspan835-1-7"
+             x="-130.33186"
+             y="-71.028206"
+             style="font-weight:bold;fill:#ffffff;stroke-width:0.264583">req</tspan></text>
       </g>
     </g>
   </g>

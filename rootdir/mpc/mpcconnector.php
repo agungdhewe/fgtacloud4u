@@ -20,13 +20,8 @@ class MPCConnector implements iMPC {
 	const api_reqauthpage = ['00000000000001', 'cas/auth-page/query'];
 	const api_verifytoken = ['00000000000002', 'cas/profile/query'];
 	const api_authorizetoken = ['00000000000003', 'cas/id-token/authorize'];
-	const api_generateotp = ['00000000000004', 'common/otp/generate'];
-	const api_validateotp = ['00000000000005', 'common/otp/validate'];
-	const api_isphonenumberexist = ['00000000000006', 'member/existence/check'];
-	const api_genuserprofile = ['00000000000007', 'member/profile/query'];
-	const api_pointadd = ['00000000000008', 'point/add'];
-	const api_pointgetbalance = ['00000000000009', 'point/balance/query'];
-	const api_pointlisthistory = ['00000000000010', 'point/history/query'];
+
+
 
 	private object $config;
 
@@ -42,16 +37,21 @@ class MPCConnector implements iMPC {
 
 
 
+
+
+
+
+
 	/**
      * Minta URL halaman login
      * @return string url yang berupa form halaman login
      */
 	public function RequestAuthenticationPage() : string {
-		$requestData = (object) [
-			"codeChallenge"=> MPCHelper::CreateChalangeCode(),
-			"osType" => "string",
-			"idfa" => "string",
-			"imei"=> "string",
+		$requestData = (object)[
+			"codeChallenge"=> $this->CreateChalangeCode(),
+			"osType" => "",
+			"idfa" => "",
+			"imei"=> "",
 		];
 
 		try {
@@ -78,27 +78,7 @@ class MPCConnector implements iMPC {
 	 * @return MPCProfile Profile user yang bersangkutan yang berhasil di verifikasi
 	 */
 	public function VerifyTokenId(string $tokenid) : MPCProfile {
-	    $requestData = (object) [
-	        "idToken" => $tokenid,
-            "nonceCode" => "string",
-            "codeVerifier" => MPCHelper::CreateVerifierCode(),
-            "equipmentId" => "string",
-            "osType" => "string",
-            "idfa" => "string",
-            "imei" => "string",
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProtocol->ApiExecute(self::api_verifytoken, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 	/**
@@ -107,25 +87,7 @@ class MPCConnector implements iMPC {
 	 * @return MPCProfile Profile user yang bersangkutan yang berhasil di verifikasi
 	 */	
 	public function AuthorizeTokenId(string $tokenid) : MPCProfile {
-	    $requestData = (object) [
-	        "idToken" => $tokenid,
-            "equipmentId" => "string",
-            "osType" => "string",
-            "idfa" => "string",
-            "imei" => "string"
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProtocol->ApiExecute(self::api_authorizetoken, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 
@@ -136,22 +98,7 @@ class MPCConnector implements iMPC {
 	 * @return string otpSeqNo sequnce otp untuk proses validasi 
 	 */
 	public function GenerateOTP(string $phonenumber, string $scene) : string {
-	    $requestData = (object) [
-	        "phoneNo" => $phonenumber,
-            "scene" => $scene,
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProtocol->ApiExecute(self::api_generateotp, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 	/**
@@ -163,24 +110,7 @@ class MPCConnector implements iMPC {
 	 * @return bool true apabila otp benar
 	 */
 	public function ValidateOTP(string $phonenumber, string $scene, $otpSeqNo, $otp) : bool {
-	    $requestData = (object) [
-	        "phoneNo" => $phonenumber,
-            "scene" => $scene,
-            "otpSeqNo" => $otpSeqNo,
-            "otp" => $otp,
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProtocol->ApiExecute(self::api_validateotp, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 
@@ -191,21 +121,7 @@ class MPCConnector implements iMPC {
 	 * @return bool true apabila otp benar
 	 */
 	public function isPhoneNumberExist(string $phonenumber) : bool {
-	    $requestData = (object) [
-	        "phoneNo" => $phonenumber,
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProtocol->ApiExecute(self::api_isphonenumberexist, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 
@@ -215,91 +131,30 @@ class MPCConnector implements iMPC {
 	 * @return MPCProfile Profile user yang bersangkutan
 	 */
 	public function getUserProfile(string $phonenumber) : MPCProfile {
-	    $requestData = (object) [
-	        "phoneNo" => $phonenumber,
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
 
-            $res = $mpcProtocol->ApiExecute(self::api_genuserprofile, $requestData);
-            $data = $res->getData();
 
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 
 
 	public function PointAdd(string $phonenumber, float $amount) {
-	    $requestData = (object) [
-	        "phoneNo" => $phonenumber,
-            "amount" => $amount,
-        ];
 
-        try {
-            $mpcProcotol = new MPCProtocol($this->config);
-            $mpcProcotol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProcotol->ApiExecute(self::api_pointadd, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 
 	public function PointGetBalance(string $phonenumber) : float {
-	    $requestData = (object) [
-	        "phoneNo" => $phonenumber,
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProtocol->ApiExecute(self::api_pointgetbalance, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 	
 	
 	
 	public function PointListHistory() {
-	    $requestData = (object) [
-	        "phoneNo" => "string",
-            "startTime" => "string",
-            "endTime" => "string",
-            "type" => "string",
-            "page" => [
-                "currentPage" => 0,
-                "pageSize" => 0
-            ]
-        ];
 
-        try {
-            $mpcProtocol = new MPCProtocol($this->config);
-            $mpcProtocol->AddEventHandler(_MPCPROTOCOL_ONDATASENT_, function ($args) { $this->onDataSent($args); });
-
-            $res = $mpcProtocol->ApiExecute(self::api_pointlisthistory, $requestData);
-            $data = $res->getData();
-
-            return $data;
-        } catch (\Exception $exception) {
-            throw $exception;
-        }
 	}
 
 
 
 }
+
 

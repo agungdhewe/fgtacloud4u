@@ -18,13 +18,15 @@ module.exports = async (fsd, genconfig) => {
 		var headertable = genconfig.persistent[headertable_name]
 		var data = headertable.data
 
+		var hdat = headertable_name.split('_')
+		var headertable_prefix = hdat[0];
+
 		var primarykey = headertable.primarykeys[0]
 		
 		var add_approval = genconfig.approval===true;
 		var add_commiter = add_approval===true ? true : (genconfig.committer===true);
 
 		var basetableentity = genconfig.basetableentity;
-	
 
 		var fields_commit = "";	
 		var fields_approve = "";
@@ -46,7 +48,7 @@ module.exports = async (fsd, genconfig) => {
 	protected $field_declineby = "${basetableentity}_declineby";
 	protected $field_declinedate = "${basetableentity}_declinedate";
 
-	protected $approval_tablename = "mst_${basetableentity}appr";
+	protected $approval_tablename = "${headertable_prefix}_${basetableentity}appr";
 	protected $approval_primarykey = "${basetableentity}appr_id";
 	protected $approval_field_approve = "${basetableentity}appr_isapproved";
 	protected $approval_field_approveby = "${basetableentity}appr_by";
@@ -63,12 +65,28 @@ module.exports = async (fsd, genconfig) => {
 
 
 		var usecdb = false;
+		// cek file upload di header
 		for (var fieldname in data) {
 			var comptype = data[fieldname].comp.comptype;
 			if (comptype=='filebox') {
 				usecdb = true;
 			}
 		}
+
+		// cek file upload di detil
+		for (var detilname in genconfig.schema.detils) {
+			var detil = genconfig.schema.detils[detilname];
+			var tablename = detil.table
+			var detiltable = genconfig.persistent[tablename]
+			var data = detiltable.data
+			for (var fieldname in data) {
+				var comptype = data[fieldname].comp.comptype;
+				if (comptype=='filebox') {
+					usecdb = true;
+				}
+			}
+		}
+
 
 		var cdbconnect = "";
 		var cdbrequire = "";

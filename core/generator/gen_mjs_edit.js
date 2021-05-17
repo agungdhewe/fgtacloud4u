@@ -71,6 +71,10 @@ module.exports = async (fsd, genconfig) => {
 				if (typeof initialvalue === 'string') {
 					setdefaultnow += `\t\tdata.${fieldname} = '${initialvalue}'\r\n`
 				}
+			} else if (comptype=='checkbox') {
+				if (data[fieldname].default!==undefined) {
+					setdefaultnow += `\t\tdata.${fieldname} = '${data[fieldname].default}'\r\n`
+				}
 			}
 
 			if (comptype=='combo') {
@@ -334,6 +338,14 @@ const btn_decline = $('#pnl_edit-btn_decline')
 		var recordstatusdataopen = get_recordstatusdataopen(add_commiter, add_approval, genconfig) 
 		var recordstatusnew =  get_recordstatusnew(add_commiter, add_approval, genconfig) 
 
+
+		var buttonstate = "\t" + '//button state';
+		if (genconfig.disablenewbutton===true) {
+			buttonstate += "\r\n\t" + "btn_edit.hide();"
+			buttonstate += "\r\n\t" + "btn_save.hide();"
+			buttonstate += "\r\n\t" + "btn_delete.hide();"
+		}
+
 		
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'edit_mjs.tpl')
 		var tplscript = fs.readFileSync(phtmltpl).toString()
@@ -381,7 +393,7 @@ const btn_decline = $('#pnl_edit-btn_decline')
 		tplscript = tplscript.replace('/*--__UPLOADOPENED__--*/', uploadopened);
 		tplscript = tplscript.replace('/*--__UPLOADCREATENEW__--*/', uploadcreatenew);
 
-
+		tplscript = tplscript.replace('/*--__BUTTONSTATE__--*/', buttonstate)
 		 
 		
 		

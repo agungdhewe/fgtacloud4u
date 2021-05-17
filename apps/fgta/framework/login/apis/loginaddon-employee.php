@@ -6,6 +6,7 @@ $LoginAddonExecute = function($userdata, $db) {
 		$sql = "
 			select 
 			  A.empl_id
+			, A.empl_name
 			, A.site_id, A.dept_id
 			, (select site_name from mst_site where site_id = A.site_id) as site_name 
 			, (select dept_name from mst_dept where dept_id = A.dept_id) as dept_name
@@ -21,6 +22,8 @@ $LoginAddonExecute = function($userdata, $db) {
 
 		if ($row!=null) {
 			$userdata->employee_id = $row['empl_id'];
+			$userdata->empl_id = $row['empl_id'];
+			$userdata->empl_name = $row['empl_name'];
 			$userdata->dept_id = $row['dept_id'];
 			$userdata->dept_name = $row['dept_name'];
 			$userdata->site_id = $row['site_id'];

@@ -58,7 +58,9 @@ if (\is_file($tp_datamodel_path)) {
 		<link rel="stylesheet" type="text/css" href="index.php/public/assets/styles/fonts.css" />
 		<link rel="stylesheet" type="text/css" href="index.php/public/assets/styles/style-default.css" />
 		<link rel="stylesheet" type="text/css" href="index.php/public/assets/styles/style-content.css" />
-			<?php if (is_file($this->reqinfo->modulecsspath)) { ?>		
+		
+		
+		<?php if (is_file($this->reqinfo->modulecsspath)) { ?>		
 	<!-- CSS Module <?php //echo($this->reqinfo->modulecsspath) ?> -->	
 		<link rel="stylesheet" type="text/css" href="<?=$this->reqinfo->modulecssurl?>" />
 		<?php } ?>

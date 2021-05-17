@@ -120,7 +120,7 @@ module.exports = async (fsd, genconfig) => {
 		
 		var fieldresturnsel = "'" + fieldreturn.join("', '") + "'"
 
-
+		uploadfileparam = "";
 		if (withupload) {
 			uploadfileparam = ', $files';
 		}

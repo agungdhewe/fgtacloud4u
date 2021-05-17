@@ -21,7 +21,7 @@
 <!--__DETILPANEL__-->
 
 
-	<div style="margin-top: 30px; margin-left:-5px; margin-right: -5px; background-color: #cccccc; height: 40px; display: flex; justify-content: space-between; padding: 5px 2px 2px 2px ">
+	<div style="margin-top: 30px; margin-left:-5px; margin-right: -5px; background-color: #cccccc; display: flex; justify-content: space-between; padding: 10px 2px 2px 2px ">
 		<div>
 			<!-- letakkan tombol yang lin disini -->
 			<!--__PRINTBUTTON__-->
@@ -29,7 +29,7 @@
 			<!--__APPROVEBUTTON__-->
 		</div>
 		<div>
-			<a id="pnl_edit-btn_delete" class="easyui-linkbutton c5" style="width">Hapus</a>
+			<a id="pnl_edit-btn_delete" class="easyui-linkbutton c5" style="margin-bottom: 10px; margin-right: 10px">Hapus</a>
 		</div>
 	</div>
 

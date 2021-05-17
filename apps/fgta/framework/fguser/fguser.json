@@ -2,7 +2,7 @@
 	"title" : "Users",
 	"icon" : "icon-user-white.png",
 	"allowanonymous" : true,
-	"allowedgroups" : ["super", "administrator"],
+	"allowedgroups" : ["public"],
 	"apis" : {
 		"save" : { "allowanonymous": false, "allowedgroups" : ["public"] },
 		"delete" : { "allowanonymous": false, "allowedgroups" : ["public"] },

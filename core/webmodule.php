@@ -48,4 +48,25 @@ class WebModule {
 		echo "</div>\r\n";
 	}
 
+
+
+	public function Section($sectionname, $cancollapse=false, $collapse=false) {
+		$cb = "";
+		if ($cancollapse) {
+			if ($collapse) {
+				$cb = "<div class=\"fgta-toggle-link\" onclick=\"togleview(this)\" style=\"cursor:pointer\">show</div>";
+			} else {
+				$cb = "<div class=\"fgta-toggle-link\" onclick=\"togleview(this)\" style=\"cursor:pointer\">hide</div>";
+			}
+		}
+		return "
+		<div class=\"form_row\" style=\"margin-top: 30px; margin-bottom: 20px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between\">
+			<div style=\"width: 150px; background: linear-gradient(to right, rgba(204,204,204,1) 0%,rgba(204,204,204,0.67) 33%,rgba(204,204,204,0) 100%); padding-left: 5px\">
+				<div style=\"background-color: #ccc; width: 150px; font-weight: bold; padding: 4px; transform: skew(20deg,0deg)\"><div style=\"transform: skew(-20deg,0deg)\">{$sectionname}</div></div>
+			</div>
+			$cb
+		</div>	 		
+		";
+	}
+
 }
