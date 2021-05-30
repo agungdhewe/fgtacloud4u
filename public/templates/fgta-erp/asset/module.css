@@ -633,3 +633,30 @@ h1 {
 	padding-left: 15px;
 	overflow: hidden;
 }
+
+
+.flashhighlight-on {
+	transition: 100ms;
+	background-color: #d9b800af;
+	/* background: rgb(217,184,0);
+	background: linear-gradient(180deg, rgba(217,184,0,1) 0%, rgba(217,184,0,1) 89%, rgba(255,255,255,0) 100%); */
+	box-shadow: -1px -7px 5px 0px rgba(217,184,0,0.75);
+	-webkit-box-shadow: -1px -7px 5px 0px rgba(217,184,0,0.75);
+	-moz-box-shadow: -1px -7px 5px 0px rgba(217,184,0,0.75);
+}
+
+.flashhighlight-off {
+	background-color: #ffffff00;
+	transition: 500ms;
+}
+
+/* @media only screen and (max-width: 768px) {
+	.flashhighlight-on {
+		background-color: rgba(217, 184, 0, 0.685);
+	}
+
+	.flashhighlight-off {
+		background-color: rgba(217, 184, 0, 0.685);
+		transition: 1000ms;
+	}
+} */

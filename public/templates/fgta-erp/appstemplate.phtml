@@ -162,6 +162,20 @@ if (!defined('FGTA4')) {
 				return chk.checked
 			}
 
+
+			window.panel_flashhighlight = (pnl) => {
+				var obj = pnl;
+				if (typeof pnl === "string") {
+					obj = $('#' + pnl);
+				} 
+				obj.removeClass('flashhighlight-off');
+				obj.addClass('flashhighlight-on');
+				setTimeout(()=>{
+					obj.addClass('flashhighlight-off');
+					obj.removeClass('flashhighlight-on');
+				}, 200);
+			}
+
 			global.setup = {
 				<?php if (property_exists($this, 'setup')) { 
 						if (is_object($this->setup)) {

@@ -231,8 +231,7 @@ export function createnew(hdata) {
 async function form_datasaving(data, options) {
 	options.api = `${global.modulefullname}/<!--__DETILNAME__-->-save`
 
-/*--__SKIPPEDFIELD__--*/
-
+	options.skipmappingresponse = [/*--__SKIPPEDFIELD__--*/];
 }
 
 async function form_datasaved(result, options) {

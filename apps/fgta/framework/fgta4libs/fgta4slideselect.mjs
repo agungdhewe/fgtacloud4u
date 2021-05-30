@@ -38,6 +38,7 @@ export function fgta4slideselect(obj, options) {
 		OnDataLoaded : (result, options) => {},
 		OnSelecting: (value, display, record, arg) => {},
 		OnSelected: (value, display, record, arg) => {},
+		setEdit: (editmode) => { setEdit(self, editmode)  }
 	}, options)
 
 	CreatePanel(self)
@@ -48,6 +49,16 @@ export function fgta4slideselect(obj, options) {
 		grd_list : self.grd_list,
 		btn_load: self.btn_load,
 		tbl_list: self.tbl_list,
+	}
+}
+
+function setEdit(self, editmode) {
+	if (editmode) {
+		self.obj.textbox('textbox').addClass('input-modeedit');
+		self.obj.textbox('textbox').removeClass('input-modeview');
+	} else {
+		self.obj.textbox('textbox').addClass('input-modeview');
+		self.obj.textbox('textbox').removeClass('input-modeedit');
 	}
 }
 
@@ -237,8 +248,7 @@ function btn_load_click(self) {
 function grd_list_rowclick(self, tr, ev) {
 	var dataid = tr.getAttribute('dataid')
 	var record = self.grd_list.DATA[dataid]
-	$ui.getPages().show(self.options.returnpage)
-	$ui.ResumeScroll(()=>{})
+
 
 	var SelectingArgument = {
 		Cancel: false
@@ -246,7 +256,8 @@ function grd_list_rowclick(self, tr, ev) {
 	
 	var SelectedArgument = {
 		PreviousValue: self.obj.combo('getValue'),
-		PreviousText: self.obj.combo('getText')
+		PreviousText: self.obj.combo('getText'),
+		flashhighlight: true
 	}
 
 	self.options.OnSelecting(record[self.options.fieldValue], record[self.options.fieldDisplay], record, SelectingArgument)
@@ -262,6 +273,24 @@ function grd_list_rowclick(self, tr, ev) {
 	}
 
 	self.options.OnSelected(record[self.options.fieldValue], record[self.options.fieldDisplay], record, SelectedArgument)
+
+
+	$ui.getPages().show(self.options.returnpage, ()=>{
+
+		var pnl = self.obj.parent().parent();
+		if (SelectedArgument.flashhighlight) {
+			pnl.removeClass('flashhighlight-off');
+			pnl.addClass('flashhighlight-on');
+		}
+		$ui.ResumeScroll(()=>{
+			if (SelectedArgument.flashhighlight) {
+				setTimeout(()=>{
+					pnl.addClass('flashhighlight-off');
+					pnl.removeClass('flashhighlight-on');
+				}, 200);
+			}
+		});
+	});
 
 }
 

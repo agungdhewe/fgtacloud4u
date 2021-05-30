@@ -1,0 +1,19 @@
+## backup
+
+--skip-triggers 
+
+mysqldump -u root --routines fgtadb > fgtadb-backup-$(date +%F).sql
+
+
+
+
+## restore
+
+mysql -u root --init-command="SET SESSION FOREIGN_KEY_CHECKS=0;" fgtadb < /home/agung/Development/fgtacloud4u/server/rootdir/backupdb/fgtadb-backup-2021-05-27.sql
+
+ 
+
+
+
+
+

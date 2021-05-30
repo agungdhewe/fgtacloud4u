@@ -1,8 +1,16 @@
 {
 	"title": "home *****",
 	"modules": [
+		"hrms/master/empl",	
+
+		"finact/fin/billinverify",
+		"finact/fin/billin",	
+		"finact/fin/payment",	
 
 		"finact/acct/jurnal",	
+		"finact/acct/jurnallink",	
+		"finact/master/jurnaltype",	
+		"finact/master/jurnalsource",	
 
 		"finact/fin/billout",	
 		"finact/collection/collaccmtn",	

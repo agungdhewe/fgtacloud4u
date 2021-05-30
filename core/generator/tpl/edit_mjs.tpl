@@ -271,8 +271,7 @@ async function form_datasaving(data, options) {
 	//    options.cancel = true
 
 	// Modifikasi object data, apabila ingin menambahkan variabel yang akan dikirim ke server
-
-/*--__SKIPPEDFIELD__--*/
+	options.skipmappingresponse = [/*--__SKIPPEDFIELD__--*/];
 }
 
 async function form_datasaveerror(err, options) {

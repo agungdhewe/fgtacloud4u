@@ -82,7 +82,7 @@ export function fgta4form(frm, opt) {
 			return self.options.autoid
 		},
 
-
+		setDisable: (obj, disabled) => { return setDisable(self, obj, disabled) } ,
 		getCurrentId: () => { return getCurrentId(self) },
 		setValue: (obj, value, display) => { return setValue(self, obj, value, display) },
 		getValue: (obj) => { return getValue(self, obj) },
@@ -880,8 +880,9 @@ function set_state_textbox(self, obj, viewonly) {
 	var isfilebox = obj.hasClass('easyui-filebox') ? true : false;
 	var opt = obj.textbox('options')
 	if (obj.object_isdisabled || opt.disabled) {
+		obj.textbox('textbox').removeClass('input-modeedit');
+		obj.textbox('textbox').removeClass('input-modeview');
 		obj.textbox('textbox').css('background-color', '');
-
 	} else {
 		if (viewonly) {
 			obj.textbox('readonly', true)
@@ -1318,4 +1319,35 @@ function iseventsuspended(self) {
 
 function  getCurrentId(self) {
 	return self.primary.textbox('getValue');
+}
+
+
+function setDisable(self, obj, disabled) {
+	var viewonly = isInViewMode(self);
+
+	var fdisable = disabled ? 'disable' : 'enable';
+	if (obj.hasClass('easyui-textbox')) {
+		obj.textbox(fdisable);
+		set_state_textbox(self, obj, viewonly);
+	} else if (obj.hasClass('easyui-checkbox')) {
+		obj.checkbox(fdisable);
+	} else if (obj.hasClass('easyui-datebox')) {
+		obj.datebox(fdisable);
+		set_state_textbox(self, obj, viewonly);
+	} else if (obj.hasClass('easyui-numberbox')) {
+		obj.numberbox(fdisable);
+		set_state_textbox(self, obj, viewonly);
+	} else if (obj.hasClass('easyui-combobox')) {
+		obj.combobox(fdisable);
+		set_state_textbox(self, obj, viewonly);
+	} else if (obj.hasClass('easyui-combo')) {
+		obj.combo(fdisable);
+		set_state_textbox(self, obj, viewonly);
+	} else if (obj.hasClass('easyui-filebox')) {
+		obj.filebox(fdisable);
+		set_state_textbox(self, obj, viewonly);
+	} else if (obj.hasClass('easyui-texteditor')) {
+		obj.texteditor(fdisable);
+	}
+	
 }

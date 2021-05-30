@@ -52,20 +52,21 @@ class MPCHelper {
 			}
 		}
 	}
+	
+	
+    static function CreateVerifierCode() {
+        $verifier_bytes = random_bytes(64);
+        $code_verifier = rtrim(strtr(base64_encode($verifier_bytes), "+/", "-_"), "=");
+        return $code_verifier;
+    }
 
+    static function CreateChalangeCode() {
+        $code_verifier = self::CreateVerifierCode();
+        $challenge_bytes = hash("sha256", $code_verifier, true);
+        $code_challenge = rtrim(strtr(base64_encode($challenge_bytes), "+/", "-_"), "=");
+        return $code_challenge;
+    }
 
-	static function CreateVerifierCode() {
-		$verifier_bytes = random_bytes(64);
-		$code_verifier = rtrim(strtr(base64_encode($verifier_bytes), "+/", "-_"), "=");
-		return $code_verifier;
-	}
-
-	static function CreateChalangeCode() {
-		$code_verifier = self::CreateVerifierCode();
-		$challenge_bytes = hash("sha256", $code_verifier, true);
-		$code_challenge = rtrim(strtr(base64_encode($challenge_bytes), "+/", "-_"), "=");
-		return $code_challenge;
-	}	
 
 	
 }
