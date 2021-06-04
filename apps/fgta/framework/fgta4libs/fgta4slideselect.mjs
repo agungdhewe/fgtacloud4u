@@ -53,12 +53,15 @@ export function fgta4slideselect(obj, options) {
 }
 
 function setEdit(self, editmode) {
+	console.log('set edit');
+	var textbox = self.obj.combo('textbox')
+	textbox.css('background-color', '');
 	if (editmode) {
-		self.obj.textbox('textbox').addClass('input-modeedit');
-		self.obj.textbox('textbox').removeClass('input-modeview');
+		textbox.addClass('input-modeedit');
+		textbox.removeClass('input-modeview');
 	} else {
-		self.obj.textbox('textbox').addClass('input-modeview');
-		self.obj.textbox('textbox').removeClass('input-modeedit');
+		textbox.addClass('input-modeview');
+		textbox.removeClass('input-modeedit');
 	}
 }
 
