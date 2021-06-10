@@ -1,39 +1,39 @@
 {
 	"title": "home *****",
+	"test_jurnal_id" : "AP21060002",
 	"modules": [
-		"hrms/master/empl",	
 
-		"finact/fin/billinverify",
-		"finact/fin/billin",	
+
+		"finact/budget/projbudget",	
+		"finact/budget/deptbudget",	
+		"finact/budget/deptbudgetrev",	
+
+		"finact/acct/receivable",	
+		"finact/acct/payable",	
 		"finact/fin/payment",	
-
+		"finact/fin/ofrecv",	
 		"finact/acct/jurnal",	
+
+
+		"finact/fin/billin",	
+		"finact/fin/billinverify",
+
+
+		"finact/collection/temprecv",
+
 		"finact/acct/jurnallink",	
-		"finact/master/jurnaltype",	
-		"finact/master/jurnalsource",	
+		"finact/master/jurnaltype",
+		"finact/master/jurnalmodel",	
+		"finact/master/jurnalsource",
 
-		"finact/fin/billout",	
-		"finact/collection/collaccmtn",	
 
-		"finact/items/itemgroup",	
-		"finact/items/itemmodel",	
-		"finact/items/itemclass",	
-		"finact/items/itemasset",	
-		
-		"finact/budget/corpbudget",
-		"finact/budget/deptbudget",
-		"finact/budget/projbudget",
-		
-		"finact/items/inquiryselect",
-		"finact/items/inquirymodel",
-		"finact/items/inquirytype",
+		"ent/organisation/docs",
+		"ent/organisation/auth",
+		"finact/master/project",
 
-		"finact/items/inquiry",
-		"finact/items/inquiryprocess",
-		
-		"finact/items/itemstocksaldo",
+		"hrms/master/empluser"
 
-		"finact/procurement/request",
-		"finact/procurement/order"
+
+
 	]
 }

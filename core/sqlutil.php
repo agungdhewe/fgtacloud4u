@@ -12,9 +12,14 @@ class SqlUtility {
 			$where_params = [];
 			foreach ($criteriaparams as $rulekey => $value) {
 				if (array_key_exists($rulekey, $rules)) {
-					if ($rules[$rulekey]!='') {
+					if ($rules[$rulekey]=='--') {
 						$where_params[':'.$rulekey] = $value;
+					} else if ($rules[$rulekey]!='') {
 						$where_fields[] = $rules[$rulekey];
+						$varname = ":$rulekey"; 
+						if(strpos($rules[$rulekey], $varname) !== false){
+							$where_params[':'.$rulekey] = $value;
+						}
 					}
 				} else {
 					throw new \Exception("Criteria untuk '$rulekey' belum didefinisikan. Cek API.");
