@@ -34,6 +34,7 @@ export function fgta4slideselect(obj, options) {
 		fields: [],
 		data: null,
 		OnCreated: () => {},
+		OnPanelShowing: (arg) => {},
 		OnDataLoading: (criteria, options) => {},
 		OnDataLoaded : (result, options) => {},
 		OnSelecting: (value, display, record, arg) => {},
@@ -101,6 +102,10 @@ function CreatePanel(self) {
 			onShowPanel: () => { 
 				self.obj.combo('hidePanel'); 
 				if (self.disabled) return;
+
+				var args = { cancel : false }
+				self.options.OnPanelShowing(args)
+				if (args.cancel==true) return;
 
 				$ui.KeepScroll()
 				$ui.getPages().show(self.options.panelname)
@@ -185,18 +190,28 @@ function CreateHandler(self) {
 function CreatePanelContent(self) {
 	var th = ''
 	var trhead = ''
+	var icol = 0;
 	for (var t of self.options.fields) {
 		var formatter = '';
 		if (t.formatter!=null) {
 			formatter = `formatter="${t.formatter}"`;
 		}
 
+		icol++;
+
 		var style= '';
 		var addstyle = '';
 		if (t.style!=null) {
 			style = `style="${t.style}"`;
 			addstyle = `; ${t.style}`;
+		} else {
+			if (icol==1) {
+				style = `style="width:100px"`;
+				addstyle = `; ${t.style}`;
+			}
 		}
+
+
 
 		th += `<th mapping="${t.mapping}" ${formatter} ${style}>${t.text}</th>`
 		trhead += `<td class="fgtable-head-alt1" style="border-bottom: 1px solid #000000; ${addstyle}">${t.text}</td>`
@@ -228,11 +243,9 @@ function CreatePanelContent(self) {
 					<thead>
 						<tr>
 							${th}
-							<th mapping=""></th>
 						</tr>
 						<tr style="background-color: #cccccc; height: 30px">
 							${trhead}
-							<td style="border-bottom: 1px solid #000000;">&nbsp;</td>
 						</tr>
 					</thead>
 				</table>

@@ -21,6 +21,17 @@ class ModuleRoute extends Route {
 		$reqinfo->modulecssurl = $reqinfo->modulerequestinfo == '' ? "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulename.css" : "./index.php/asset/$reqinfo->modulefullname/$reqinfo->modulerequestinfo.css";
 
 
+		if ($reqinfo->moduleconfig->main && $reqinfo->modulerequestinfo == '') {
+			$mainmodule = $reqinfo->moduleconfig->main;
+			$reqinfo->modulecontrollerpath = "$reqinfo->moduledir/$mainmodule.php";
+			$reqinfo->moduleviewpath = "$reqinfo->moduledir/$mainmodule.phtml";
+			$reqinfo->modulejspath = "$reqinfo->moduledir/$mainmodule.mjs";
+			$reqinfo->modulejsurl = "./index.php/asset/$reqinfo->modulefullname/$mainmodule.mjs";
+			$reqinfo->modulecsspath = "$reqinfo->moduledir/$mainmodule.css";
+			$reqinfo->modulecssurl = "./index.php/asset/$reqinfo->modulefullname/$mainmodule.css";
+	
+		}
+
 		
 		if (array_key_exists('variancename', $_GET)) {
 			$reqinfo->variancename = $_GET['variancename'];

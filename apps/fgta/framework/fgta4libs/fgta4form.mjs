@@ -109,6 +109,8 @@ export function fgta4form(frm, opt) {
 		SuspendEvent: (suspend) => { return suspendevent(self, suspend)},
 		isEventSuspended: () => { return iseventsuspended(self) },
 
+		set_state_textbox: (obj, viewonly) => { return set_state_textbox(self, obj, viewonly) },
+
 		addAboutInfo: (name, descr) => {  self.customaboutinfo.push({name: name, descr: descr}); }
 	}
 

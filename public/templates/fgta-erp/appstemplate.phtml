@@ -180,7 +180,7 @@ if (!defined('FGTA4')) {
 				<?php if (property_exists($this, 'setup')) { 
 						if (is_object($this->setup)) {
 							foreach ($this->setup as $key=>$value) { ?>
-				<?=$key?>: <?= is_bool($value) ? $value ? 'true' : 'false' :  (is_numeric($value) ? $value : "'" . $value . "'") ?>,
+				<?=$key?>: <?= is_bool($value) ? $value ? 'true' : 'false' :  (is_numeric($value) ? $value : ((is_array($value) || is_object($value))?json_encode($value):"'" . $value . "'")) ?>,
 				<?php }}} ?>	
 			} 
 

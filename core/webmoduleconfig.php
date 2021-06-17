@@ -38,6 +38,10 @@ class WebModuleConfig {
 					$moduleconfig->variance = new \stdClass;
 				}
 
+				if (!property_exists($moduleconfig, 'main')) {
+					$moduleconfig->main = null;
+				}
+
 				if (!property_exists($moduleconfig, 'allowanonymous')) {
 					$moduleconfig->allowanonymous = false;
 				}
@@ -68,6 +72,7 @@ class WebModuleConfig {
 						
 				$this->title = $moduleconfig->title;
 				$this->variance = $moduleconfig->variance;
+				$this->main = $moduleconfig->main;
 				$this->allowanonymous = $moduleconfig->allowanonymous;
 				$this->allowedgroups = $moduleconfig->allowedgroups;
 				$this->disabled = $moduleconfig->disabled;
@@ -87,6 +92,11 @@ class WebModuleConfig {
 				if (property_exists($moduleconfig, 'variance')) {
 					$this->variance = $moduleconfig->variance;
 				}				
+
+
+				if (property_exists($moduleconfig, 'main')) {
+					$this->main = $moduleconfig->main;
+				}
 
 
 				if (property_exists($moduleconfig, 'allowanonymous')) {

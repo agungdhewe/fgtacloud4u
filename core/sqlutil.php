@@ -6,6 +6,8 @@ if (!defined('FGTA4')) {
 
 class SqlUtility {
 	
+	static $MONTHS = [1=>'JAN','FEB','MAR','APR','MEI','JUN','JUL','AGS','SEP','OKT','NOV','DES'];
+
 	public static function BuildCriteria($criteriaparams, $rules) {
 		try {
 			$where_fields = [];
@@ -207,9 +209,14 @@ class SqlUtility {
 		try {
 			$rowid = '';
 			$logmethod = 'CREATENEWLOG';
-			if ($action=='MODIFY' || $action=='MODIFY-DETIL') {
+			$interval15 = property_exists($logparam, 'interval15') ? $logparam->interval15 : false;
+			if ($action=='MODIFY' || $action=='MODIFY-DETIL' || $interval15) {
 				// apakah paling terakhir masih sama
-				$sql = "SELECT * FROM xlog WHERE tablename=:tablename AND id=:id AND (action='MODIFY' or action='MODIFY-DETIL') and timestamp>DATE_ADD(NOW(), INTERVAL -15 MINUTE)  ORDER BY timestamp DESC";
+				if ($interval15) {
+					$sql = "SELECT * FROM xlog WHERE tablename=:tablename AND id=:id AND (action='$action') and timestamp>DATE_ADD(NOW(), INTERVAL -15 MINUTE)  ORDER BY timestamp DESC";
+				} else {
+					$sql = "SELECT * FROM xlog WHERE tablename=:tablename AND id=:id AND (action='MODIFY' or action='MODIFY-DETIL') and timestamp>DATE_ADD(NOW(), INTERVAL -15 MINUTE)  ORDER BY timestamp DESC";
+				}
 				$stmt = $db->prepare($sql);
 				$stmt->execute([
 					':tablename' => $tablename,
@@ -225,7 +232,8 @@ class SqlUtility {
 			if ($logmethod == 'UPDATEPREVLOG') {
 				$obj = (object)[
 					'rowid' => $rowid,
-					'timestamp' => date("Y-m-d H:i:s")
+					'timestamp' => date("Y-m-d H:i:s"),
+					'note' => property_exists($logparam, 'note') ? $logparam->note : '',
 				];
 				$key = (object) ['rowid' => $rowid];
 				$cmd = self::CreateSQLUpdate('xlog', $obj, $key);
@@ -270,6 +278,10 @@ class SqlUtility {
 		if (!\property_exists($criteria, $name)) {
 			$criteria->{$name} = $defaultvalue;
 		}
+	}
+
+	public static function getMonthName($mo) {
+		return self::$MONTHS[$mo];
 	}
 
 }
