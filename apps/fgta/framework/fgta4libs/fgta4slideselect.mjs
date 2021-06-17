@@ -267,6 +267,8 @@ function grd_list_rowclick(self, tr, ev) {
 
 
 	var SelectingArgument = {
+		PreviousValue: self.obj.combo('getValue'),
+		PreviousText: self.obj.combo('getText'),
 		Cancel: false
 	}
 	
