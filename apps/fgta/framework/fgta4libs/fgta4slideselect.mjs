@@ -18,6 +18,7 @@ export function fgta4slideselect(obj, options) {
 			self.obj.combo('enable');
 		}
 	}
+	obj.reset = () => { reset(self) }
 
 
 	self.options = Object.assign({
@@ -50,6 +51,7 @@ export function fgta4slideselect(obj, options) {
 		grd_list : self.grd_list,
 		btn_load: self.btn_load,
 		tbl_list: self.tbl_list,
+		
 	}
 }
 
@@ -342,4 +344,16 @@ function retrieveData(self) {
 	}, 500)
 	
 
+}
+
+function reset(self) {
+	var opt = self.obj.combo('options')
+	var form  = self.options.form;
+	if (form!=undefined) {
+		if (opt.required) {
+			form.setValue(self.obj, '0', '-- PILIH --');
+		} else {
+			form.setValue(self.obj, '--NULL--', 'NONE');
+		}
+	}
 }

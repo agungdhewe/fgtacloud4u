@@ -2,28 +2,40 @@
 	"title": "home *****",
 	"modules": [
 
-		"finact/master/billtype",
-		"finact/fin/billin",
+		"finact/procurement/request",
+		"finact/procurement/orderout",
 
-		"finact/items/inquirymodel",
-		"finact/items/inquirytype",
+		"finact/items/itemmodel",
 		"finact/items/itemclass",
-
-		"finact/budget/rptaccbudget",
-		"finact/acct/rptcoa",
+		"finact/items/item",
+		"finact/items/inquirytype",
+		"finact/items/inquiryselect",
+		"finact/master/trxmodel",
 
 		"finact/master/project",
 		"finact/master/projecttask",
 
-		"finact/budget/corpbudget",	
+		"ent/organisation/dept",	
 
 		"finact/budget/deptbudget",	
 		"finact/budget/deptbudgetrev",	
 		"finact/budget/deptbudgetview",	
 
+		"finact/budget/corpbudget",	
+
 		"finact/budget/projbudget",	
 		"finact/budget/projbudgetrev",	
 
+		"finact/budget/rptaccbudget",
+		"finact/acct/rptcoa",
+
+
+		"finact/procurement/recv",
+
+		"finact/fin/billin",
+		"finact/items/itemclass",
+
+		"ent/organisation/dept",
 		"ent/organisation/docs",
 		"ent/organisation/auth",
 		"hrms/master/empluser"

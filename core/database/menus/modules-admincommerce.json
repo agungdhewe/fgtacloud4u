@@ -18,7 +18,10 @@
 				"retail/webcommerce/webproptype",
 				"retail/webcommerce/webbrand",
 				"retail/webcommerce/webcity",
-				"retail/webcommerce/webeditorialtype"			
+				"retail/webcommerce/webeditorialtype",
+				"retail/webcommerce/webseagroup",
+				"retail/webcommerce/websea"	,
+				"retail/webcommerce/webmerchformat"					
 			]
 		},
 

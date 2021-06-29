@@ -87,7 +87,16 @@ module.exports = async (fsd, genconfig) => {
 				lookupsetvalue += `\r\n\t\t\t.setValue(obj.${prefix}${fieldname}, result.record.${fieldname}, result.record.${field_display_name})`
 
 				var pilihnone = '';
-				var allownull = data[fieldname].null;
+				// var allownull = data[fieldname].null;
+				var allownull = true;
+				if (data[fieldname].null==false) {
+					allownull = false;
+				} else if (data[fieldname].options!=null) {
+					if (data[fieldname].options.required==true) {
+						allownull = false;
+					}
+				}
+
 				if (allownull) {
 					setdefaultcombo += `\t\tdata.${fieldname} = '--NULL--'\r\n`
 					setdefaultcombo += `\t\tdata.${field_display_name} = 'NONE'\r\n`
@@ -125,7 +134,7 @@ module.exports = async (fsd, genconfig) => {
 
 				} else if (allownull) {
 					// skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
-					skippedfield += `${fieldname}, `;
+					skippedfield += `'${fieldname}', `;
 					updateskippedfield += `\tform.setValue(obj.${prefix}${fieldname}, result.dataresponse.${field_display_name}!=='--NULL--' ? result.dataresponse.${fieldname} : '--NULL--', result.dataresponse.${field_display_name}!=='--NULL--'?result.dataresponse.${field_display_name}:'NONE')\r\n`;
 				}
 
@@ -536,7 +545,12 @@ function cek_approval(genconfig) {
 		if (data[declineby]==null) { throw `Belum ada field '${declineby}' di table header`; }
 		if (data[declinedate]==null) { throw `Belum ada field '${declinedate}' di table header`; }
 		if (data['doc_id']==null) { throw `Belum ada field 'doc_id' di table header`; }
-		if (data['dept_id']==null) { throw `Belum ada field 'dept_id' di table header`; }
+
+		if (data['dept_id']==null) {
+			if (genconfig.dept_id_field==null) {
+				{ throw `Belum ada field 'dept_id' di table header, atau belum mendefinisikan 'dept_id_field' pada konfigurasi`; }
+			}
+		} 
 
 	} catch (err) {
 		throw err

@@ -14,6 +14,8 @@ module.exports = async (fsd, genconfig) => {
 		console.log(`-----------------------------------------------`)
 		console.log(`Generate API Base ...`)
 
+		var dept_id_field = genconfig.dept_id_field;
+
 		var headertable_name = genconfig.schema.header
 		var headertable = genconfig.persistent[headertable_name]
 		var data = headertable.data
@@ -28,6 +30,12 @@ module.exports = async (fsd, genconfig) => {
 		var approval_execute = "";
 		var approval_function = "";
 		if (add_approval) {
+
+			var fn_dept_param = `'dept_id'`;
+			if (dept_id_field!=null) {
+				fn_dept_param = `'${dept_id_field}'`
+			}
+
 			approval_require = "require_once __ROOT_DIR.'/core/approval.php';";
 			approval_use = "use \FGTA4\StandartApproval;";
 			approval_execute = `			$this->set_approval($currentdata);`
@@ -39,7 +47,8 @@ module.exports = async (fsd, genconfig) => {
 				$currentdata,
 				$this->approval_tablename, 
 				["$this->main_primarykey"=> $currentdata->header->{$this->main_primarykey}, "$this->approval_primarykey"=>null],
-				$currentdata->header->doc_id
+				$currentdata->header->doc_id,
+				${fn_dept_param}
 			);
 
 		} catch (\Exception $ex) {

@@ -148,23 +148,7 @@ function init(self) {
 		} else if (obj.objecttypeclass=='easyui-texteditor') {
 
 		} else {
-			// if (obj.attr('maxlength')!==undefined) {
-			// 	var textbox = obj.textbox('textbox')
-			// 	$(textbox).attr('maxlength', obj.attr('maxlength'))
-			// }
-
-			// if (obj.objecttypeclass=='easyui-combobox') {
-			// 	// valueField:'id', textField:'text'"
-			// 	// console.log(opt.valueField, opt.textField)
-			// 	var opt = obj.combobox('options')
-			// 	obj.object_isdisabled = opt.disabled
-			// 	obj.originalbackground = obj.textbox('textbox').css('background')
-
-			// 	obj.display = obj.attr('display')
-			// 	obj.valueField = opt.valueField
-			// 	obj.textField = opt.textField
-			// } else 	
-			
+		
 			if (obj.hasClass('easyui-combo')) {
 				var opt = obj.combo('options')
 				obj.object_isdisabled = opt.disabled
