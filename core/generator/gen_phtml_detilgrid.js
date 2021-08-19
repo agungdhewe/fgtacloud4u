@@ -45,7 +45,15 @@ module.exports = async (fsd, genconfig) => {
 		if (comptype=='combo') {
 			var options = data[fieldname].comp.options
 			var labeltext = data[fieldname].text !== undefined ? data[fieldname].text : options.field_display;
-			headermap_script += `\t\t\t\t\t<th mapping="${options.field_display}">${options.field_display}</th>\r\n`
+
+
+			var combodisplay = options.field_display;
+			var field_display_name = options.field_display_name;
+			if (field_display_name!=null) {
+				combodisplay = field_display_name
+			}
+
+			headermap_script += `\t\t\t\t\t<th mapping="${combodisplay}">${combodisplay}</th>\r\n`
 			headerrow_script += `\t\t\t\t\t<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">${labeltext}</td>\r\n`
 		} else {
 			var labeltext = data[fieldname].text !== undefined ? data[fieldname].text : fieldname;

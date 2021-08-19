@@ -51,7 +51,6 @@ $API = new class extends {__BASENAME__}Base {
 
 			$sql = \FGTA4\utils\SqlUtility::Select('/*{__TABLENAME__}*/ A', [
 				/*{__FIELDS__}*/
-				, '_createby', '_createdate', '_modifyby', '_modifydate' 
 			], $where->sql);
 
 			$stmt = $this->db->prepare($sql);

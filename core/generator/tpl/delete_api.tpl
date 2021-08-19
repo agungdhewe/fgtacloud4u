@@ -51,6 +51,7 @@ $API = new class extends {__BASENAME__}Base {
 			$this->db->beginTransaction();
 
 			try {
+				/*{__DELETE_REFERENCE__}*/
 				$cmd = \FGTA4\utils\SqlUtility::CreateSQLDelete($tablename, $key);
 				$stmt = $this->db->prepare($cmd->sql);
 				$stmt->execute($cmd->params);

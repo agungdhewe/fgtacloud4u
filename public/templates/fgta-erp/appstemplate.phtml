@@ -265,7 +265,7 @@ if (!defined('FGTA4')) {
 				requiredcombo: {
 					validator: function(value, param) {
 						var cbo_value = $('#'+param[0]).combo('getValue');
-						if (cbo_value==='0' || cbo_value===0 || cbo_value==='')
+						if (cbo_value==='0' || cbo_value===0 || cbo_value==='' ||  cbo_value==='--NULL--')
 							return false;
 						else
 							return true;
@@ -287,6 +287,15 @@ if (!defined('FGTA4')) {
 				var d = date.getDate();
 				return y + '-' + (m < 10 ? '0' + m : m) + '-' +  (d < 10 ? '0' + d : d);		 
 			}
+
+			window.from_sql_date = (sqlDate) => {
+				var sqlDateArr1 = sqlDate.split("-");
+				var sYear = sqlDateArr1[0];
+				var sMonth = (Number(sqlDateArr1[1]) - 1).toString();
+				var sDay = sqlDateArr1[2];
+				return new Date(sYear,sMonth,sDay);	 
+			}
+
 
 			window.togleview = (el) => {
 				// console.log(el);

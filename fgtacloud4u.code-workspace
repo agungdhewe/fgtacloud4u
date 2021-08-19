@@ -19,7 +19,34 @@
 			"public_*": true
 		},
 		"editor.insertSpaces": false,
-		"editor.detectIndentation": false
+		"editor.detectIndentation": false,
+		"restoreTerminals.terminals": [
+			{
+				"splitTerminals": [
+					{
+						"name": "Generator",
+						"commands": [],
+						"shouldRunCommands": false
+					}
+				]
+			},
+			{
+				"splitTerminals": [
+					{
+						"name": "Log",
+						"commands": ["rm -f ../server_clients/tvone/data/debug/log.txt", "touch ../server_clients/tvone/data/debug/log.txt", "clear", "tail -F ../server_clients/tvone/data/debug/log.txt"],
+					},
+					{
+						"name": "PouchDb",
+						"commands": ["cd ../../pouchdb", "clear"],
+					}					
+				]
+			}
+
+		],
+
+
+		
 	},
 
 

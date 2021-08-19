@@ -4,7 +4,10 @@ if (!defined('FGTA4')) {
 	die('Forbiden');
 }
 
-class WebAPI {
+require_once __DIR__ . '/webprog.php';
+
+
+class WebAPI extends \FGTA4\WebProg {
 	
 	public function ActionIsAllowedFor($api_info, $user_owned_groups) {
 	

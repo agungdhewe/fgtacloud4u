@@ -195,7 +195,7 @@ class StandartApproval {
 		}
 	}
 
-	static function getUserApprovalData($db, $param) {
+	static function getUserApprovalData($db, $param, $dept_id_field = 'dept_id') {
 		$id = $param->approvalsource['id'];
 		$userdata = $param->approvalsource['userdata'];
 		$tablename_head = $param->approvalsource['tablename_head'];
@@ -229,7 +229,7 @@ class StandartApproval {
 					and A.authlevel_id  IN (
 						select authlevel_id from mst_auth where empl_id = (select empl_id from mst_empluser where user_id = :user_id)
 					)
-					and B.dept_id = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
+					and B.$dept_id_field = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
 				) D
 				order by D.docauth_order
 		
@@ -251,7 +251,7 @@ class StandartApproval {
 	}
 
 
-	static function getDownlinePendingApprovalData($db, $param) {
+	static function getDownlinePendingApprovalData($db, $param, $dept_id_field='dept_id') {
 		$id = $param->approvalsource['id'];
 		$userdata = $param->approvalsource['userdata'];
 		$tablename_head = $param->approvalsource['tablename_head'];
@@ -281,9 +281,7 @@ class StandartApproval {
 						and A.auth_id IN (
 							select auth_id from mst_auth where empl_id = (select empl_id from mst_empluser where user_id = :user_id)
 						)
-						
 						UNION 
-						
 						select 
 						A.docauth_order
 						from $tablename_appr A inner join $tablename_head B on B.$field_id = A.$field_id 
@@ -293,14 +291,12 @@ class StandartApproval {
 						and A.authlevel_id  IN (
 							select authlevel_id from mst_auth where empl_id = (select empl_id from mst_empluser where user_id = :user_id)
 						)
-						and B.dept_id = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
+						and B.{$dept_id_field} = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
 					) D
 					order by D.docauth_order
 					limit 1
-					
 				)
 			";
-
 
 		
 			$sqlparam = [
@@ -324,7 +320,7 @@ class StandartApproval {
 		}
 	}
 
-	static function getUplineApprovedData($db, $param) {
+	static function getUplineApprovedData($db, $param, $dept_id_field='dept_id') {
 		$id = $param->approvalsource['id'];
 		$userdata = $param->approvalsource['userdata'];
 		$tablename_head = $param->approvalsource['tablename_head'];
@@ -368,7 +364,7 @@ class StandartApproval {
 						and A.authlevel_id  IN (
 							select authlevel_id from mst_auth where empl_id = (select empl_id from mst_empluser where user_id = :user_id)
 						)
-						and B.dept_id = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
+						and B.{$dept_id_field} = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
 					) D
 					order by D.docauth_order
 					limit 1
@@ -400,7 +396,7 @@ class StandartApproval {
 	}
 
 
-	static function Approve($db, $param) {
+	static function Approve($db, $param, $dept_id_field='dept_id') {
 
 		$id = $param->approvalsource['id'];
 		$userdata = $param->approvalsource['userdata'];
@@ -434,7 +430,7 @@ class StandartApproval {
 			$stmt = $db->prepare($sql);
 
 			// debug::log('approve');
-			$rows = self::getUserApprovalData($db, $param);
+			$rows = self::getUserApprovalData($db, $param, $dept_id_field);
 			try {
 
 				foreach ($rows as $row) {
@@ -461,7 +457,7 @@ class StandartApproval {
 		}
 	}
 
-	static function Decline($db, $param) {
+	static function Decline($db, $param, $dept_id_field = 'dept_id') {
 		$id = $param->approvalsource['id'];
 		$userdata = $param->approvalsource['userdata'];
 		$tablename_head = $param->approvalsource['tablename_head'];
@@ -495,7 +491,7 @@ class StandartApproval {
 
 			// debug::log('decline');
 			
-			$rows = self::getUserApprovalData($db, $param);
+			$rows = self::getUserApprovalData($db, $param, $dept_id_field = 'dept_id');
 			try {
 
 				foreach ($rows as $row) {
@@ -627,10 +623,10 @@ class StandartApproval {
 	}
 
 
-	static function CheckAuthoriryToApprove($db, $param) {
+	static function CheckAuthoriryToApprove($db, $param, $dept_id_field = 'dept_id') {
 		$id = $param->approvalsource['id'];
 		try {
-			$rows = self::getUserApprovalData($db, $param);
+			$rows = self::getUserApprovalData($db, $param, $dept_id_field);
 			if (count($rows)==0) {
 				throw new \Exception("Tidak ada otoritas untuk approve/decline document '$id'");
 			}
@@ -640,14 +636,14 @@ class StandartApproval {
 		}
 	}
 
-	static function CheckPendingApproval($db, $param) {
+	static function CheckPendingApproval($db, $param, $dept_id_field='dept_id') {
 
 		$id = $param->approvalsource['id'];
 
 		try {
 			
 			// Dowline pending
-			$rows = self::getDownlinePendingApprovalData($db, $param);	
+			$rows = self::getDownlinePendingApprovalData($db, $param, $dept_id_field);	
 			if (count($rows)==0) {
 				throw new \Exception("Tidak bisa approve/decline document '$id', cek fail.");
 			}
@@ -657,7 +653,7 @@ class StandartApproval {
 			}		
 			
 			// Upline Approval
-			$rows = self::getUplineApprovedData($db, $param);	
+			$rows = self::getUplineApprovedData($db, $param, $dept_id_field);	
 			if (count($rows)==0) {
 				throw new \Exception("Tidak bisa approve/decline document '$id', cek fail.");
 			}
@@ -676,7 +672,7 @@ class StandartApproval {
 	}
 
 
-	static function SkipApprovedOrDeclinedRow($db, $row, $options, $userdata) {
+	static function SkipApprovedOrDeclinedRow($db, $row, $options, $userdata, $dept_id_field='dept_id') {
 		
 		$userdata = $options->approvalsource['userdata'];
 		$tablename_head = $options->approvalsource['tablename_head'];
@@ -703,13 +699,13 @@ class StandartApproval {
 
 		try {
 			// skip kalai gak punya otoritas
-			$rows = self::getUserApprovalData($db, $param);
+			$rows = self::getUserApprovalData($db, $param, $dept_id_field='dept_id');
 			if (count($rows)==0) {
 				return true;
 			}
 
 			// skip kalau masih ada pending di downline
-			$rows = self::getDownlinePendingApprovalData($db, $param);	
+			$rows = self::getDownlinePendingApprovalData($db, $param, $dept_id_field);	
 			debug::log(print_r($rows, true));
 			if (count($rows)>0) {
 				$pending_approve = $rows[0]['pending_approve'];
@@ -745,7 +741,7 @@ class StandartApproval {
 					and A.authlevel_id  IN (
 						select authlevel_id from mst_auth where empl_id = (select empl_id from mst_empluser where user_id = :user_id)
 					)
-					and B.dept_id = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
+					and B.{$dept_id_field} = (select dept_id from mst_empl where empl_isdisabled = 0 and empl_id = (select empl_id from mst_empluser where user_id = :user_id))
 					and $flag_appr = 0
 					and $flag_decl = 0
 

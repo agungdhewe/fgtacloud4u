@@ -1,0 +1,36 @@
+
+		"finact/items/itemmodel",
+		"finact/items/itemclass",
+		"finact/items/item",
+		"finact/items/inquirytype",
+		"finact/items/inquiryselect",
+		"finact/master/trxmodel",
+
+		"finact/master/project",
+		"finact/master/projecttask",
+
+		"ent/organisation/dept",	
+
+		"finact/budget/deptbudget",	
+		"finact/budget/deptbudgetrev",	
+		"finact/budget/deptbudgetview",	
+
+		"finact/budget/corpbudget",	
+
+		"finact/budget/projbudget",	
+		"finact/budget/projbudgetrev",	
+
+		"finact/budget/rptaccbudget",
+		"finact/acct/rptcoa",
+
+
+
+
+		"finact/fin/billin",
+		"finact/items/itemclass",
+
+		"ent/organisation/dept",
+		"ent/organisation/docs",
+		"ent/organisation/auth",
+		"hrms/master/empluser",
+		"hrms/master/empl"

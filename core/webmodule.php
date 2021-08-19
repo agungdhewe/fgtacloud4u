@@ -4,7 +4,9 @@ if (!defined('FGTA4')) {
 	die('Forbiden');
 }
 
-class WebModule {
+require_once __DIR__ . '/webprog.php';
+
+class WebModule extends \FGTA4\WebProg {
     public function __call($method, $args)
     {
         if (isset($this->$method)) {

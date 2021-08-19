@@ -29,12 +29,19 @@ module.exports = async (fsd, genconfig) => {
 	var headertable = genconfig.persistent[headertable_name]
 	var headerprimarykey = headertable.primarykeys[0]
 	
-	var script = ''
+	var script = '-- SET FOREIGN_KEY_CHECKS=0;'
 	try {
 		console.log(`-----------------------------------------------`)
 		console.log(`Generate DDL...`)
 		// var headertable_keys = {}
 		// var headertable_name = genconfig.schema.header
+
+		script += "\r\n\r\n";
+		for (var tablename in  genconfig.persistent) {
+			script += `-- drop table if exists \`${tablename}\`;\r\n`;
+		}
+		script += "\r\n\r\n";
+
 		for (var tablename in  genconfig.persistent) {
 			// if (tablename==headertable_name) {
 			// 	var headertable_fields = genconfig.persistent[headertable_name].data
@@ -172,6 +179,26 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 
 				ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY `"+fieldname+"` (`"+fieldname+"`);\r\n"
 				ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `"+ usefkname +"` FOREIGN KEY (`"+fieldname+"`) REFERENCES `" + opt.table + "` (`" + opt.field_value + "`);\r\n"
+			} else {
+
+				var reference = options.data[fieldname].reference
+				if (reference!=undefined) {
+					var ref_table = reference.table
+					var ref_field_value = reference.field_value
+					var fkname = "fk_" + tablename + "_" + ref_table ;
+					var usefkname = fkname;
+					if (fks[fkname]==null) {
+						fks[fkname] = 1
+					} else {
+						fks[fkname]++;
+						usefkname = fkname + '_' + fks[fkname];
+					}
+
+					ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY `"+fieldname+"` (`"+fieldname+"`);\r\n"
+					ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `"+ usefkname +"` FOREIGN KEY (`"+fieldname+"`) REFERENCES `" +ref_table + "` (`" + ref_field_value + "`);\r\n"
+				}
+
+
 			}
 
 

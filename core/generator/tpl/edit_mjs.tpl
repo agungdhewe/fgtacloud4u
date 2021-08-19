@@ -114,11 +114,12 @@ export async function init(opt) {
 
 }
 
-
 export function OnSizeRecalculated(width, height) {
 }
 
-
+export function getForm() {
+	return form
+}
 
 
 export function open(data, rowid, viewmode=true, fn_callback) {

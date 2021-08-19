@@ -27,6 +27,7 @@ module.exports = async (fsd, genconfig) => {
 		fields.push(fieldname)
 
 		var comptype = data[fieldname].comp.comptype
+		var reference =  data[fieldname].reference;
 
 		// untuk componen yang tienya combo, tambah lookup
 		if (comptype=='combo') {
@@ -38,7 +39,18 @@ module.exports = async (fsd, genconfig) => {
 			lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
 		} else if  (data[fieldname].lookup==='user') {
 			lookupfields += `\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
+		}	
+		
+		if (reference!=undefined) {
+			if (reference.field_display!=null) {
+				var field_display_name = reference.field_display
+				if (reference.field_display_name!=null) {
+					field_display_name = reference.field_display_name;
+				}
+				lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${reference.table}', '${reference.field_value}', '${reference.field_display}'),\r\n`
+			}
 		}		
+
 	}	
 	
 	var primarykey = detiltable.primarykeys[0]

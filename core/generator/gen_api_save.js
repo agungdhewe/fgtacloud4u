@@ -35,11 +35,15 @@ module.exports = async (fsd, genconfig) => {
 		for (var fieldname in data) {
 			fields.push(fieldname)
 			fieldreturn.push(fieldname)
-
-
+			var options = data[fieldname].comp.options
 			var comptype = data[fieldname].comp.comptype
+
+			if (options==undefined) {
+				options = {}
+			}
+
 			if (comptype=='datebox') {
-				tosqldate += `\t\t\t$obj->${fieldname} = (\\DateTime::createFromFormat('d/m/Y',$obj->${fieldname}))->format('Y-m-d');`;
+				tosqldate += `\t\t\t$obj->${fieldname} = (\\DateTime::createFromFormat('d/m/Y',$obj->${fieldname}))->format('Y-m-d');\r\n`;
 				lookupfields += `\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($row['${fieldname}'])),\r\n`;
 			}	
 			
@@ -51,16 +55,20 @@ module.exports = async (fsd, genconfig) => {
 				uppercasefields += `\t\t\t$obj->${fieldname} = strtolower($obj->${fieldname});\r\n`
 			}
 
-
-			var allownull = data[fieldname].null;
-			if (allownull) {
-				setnullfields += `\t\t\t// if ($obj->${fieldname}=='--NULL--') { unset($obj->${fieldname}); }\r\n`
+			if (comptype!='combo') {
+				var allownull = data[fieldname].null;
+				if (allownull) {
+					var required = options.required;;
+					if (!(required===true)) {
+						// setnullfields += `\t\t\t// if ($obj->${fieldname}=='--NULL--') { unset($obj->${fieldname}); }\r\n`
+						setnullfields += `\t\t\tif ($obj->${fieldname}=='') { $obj->${fieldname} = '--NULL--'; }\r\n`
+					}
+				}
 			}
 
 
 			// untuk componen yang tienya combo, tambah lookup
 			if (comptype=='combo') {
-				var options = data[fieldname].comp.options
 				var field_display_name = options.field_display;
 				if (options.field_display_name!=null) {
 					field_display_name = options.field_display_name;
@@ -70,6 +78,11 @@ module.exports = async (fsd, genconfig) => {
 				lookupfields += `\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
 			}
 
+
+
+
+
+			
 			if (comptype=='filebox') { 
 				withupload = true;
 				var idsuffix = data[fieldname].idsuffix;

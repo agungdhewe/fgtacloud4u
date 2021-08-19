@@ -38,11 +38,11 @@ $API = new class extends {__BASENAME__}Base {
 				throw new \Exception('your group authority is not allowed to do this action.');
 			}
 
-
+			// \FGTA4\utils\SqlUtility::setDefaultCriteria($options->criteria, '--fieldscriteria--', '--value--');
 			$where = \FGTA4\utils\SqlUtility::BuildCriteria(
 				$options->criteria,
 				[
-					"search" => " /*{__SEARCHSQLLINE__}*/ "
+					"search" => " /*{__SEARCHSQLLINE__}*/ "/*{__ADDITIONALSEARCHSQLLINE__}*/
 				]
 			);
 

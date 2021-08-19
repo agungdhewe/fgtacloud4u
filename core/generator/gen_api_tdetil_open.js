@@ -40,8 +40,10 @@ module.exports = async (fsd, genconfig) => {
 			var field_display_name = options.field_display;
 			if (options.field_display_name!=null) {
 				field_display_name = options.field_display_name;
-			}			
-			lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
+			}
+			
+			var lookuptable = options.view != null ? options.view : options.table;
+			lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${lookuptable}', '${options.field_value}', '${options.field_display}'),\r\n`
 		}
 
 		if (comptype=='filebox') {

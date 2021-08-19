@@ -579,11 +579,16 @@ function setValue(self, obj, value, display) {
 	} else if (obj.objecttypeclass=='easyui-filebox') {
 		var textbox = obj.filebox('textbox');
 		textbox[0].value = value;
+	} else if (obj.objecttypeclass=='easyui-combo') {
+		obj.combo('setValue', value)
+		if (display!==undefined) {
+			obj.combo('setText', display)
+		}
 	} else {
 		obj.textbox('setValue', value)
-		if (display!==undefined) {
-			obj.textbox('setText', display)
-		}
+		// if (display!==undefined) {
+		// 	obj.textbox('setText', display)
+		// }
 	}
 
 	obj.currentValue = value
@@ -1199,7 +1204,7 @@ async function createnew(self, fn_callback) {
 		}
  	}
 
-	// console.log(data)
+	console.log(data)
 	for (var f in self.ITEMS) {
 		var obj = self.ITEMS[f]
 		if (obj.hasClass('easyui-combobox') || obj.hasClass('easyui-combo')) {
@@ -1223,18 +1228,21 @@ async function createnew(self, fn_callback) {
 	}) 
 	
 	// $ui.SetRecord({
-	self.SetRecord({	
-		_createby : '',
-		_createby_username : '',
-		_createdate : new Date(),
-		_modifyby : '',
-		_modifyby_username : '',
-		_modifydate : ''		
-	})
+	if (typeof self.SetRecord == 'function') {
+		self.SetRecord({	
+			_createby : '',
+			_createby_username : '',
+			_createdate : new Date(),
+			_modifyby : '',
+			_modifyby_username : '',
+			_modifydate : ''		
+		});
+	}	
 
 
-	if (typeof options.OnCreated === 'function') {
-		options.OnCreated();
+
+	if (typeof options.OnNewData === 'function') {
+		options.OnNewData(data);
 	}
 
 	var errordiv = self.errordiv;

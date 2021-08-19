@@ -51,6 +51,7 @@ module.exports = async (fsd, genconfig) => {
 			if (fieldexclude.includes(fieldname)) { continue }
 			var prefix = data[fieldname].comp.prefix
 			var comptype = data[fieldname].comp.comptype
+			
 			var recursivetable = false;
 			var initialvalue =  data[fieldname].initialvalue;
 
@@ -149,14 +150,27 @@ module.exports = async (fsd, genconfig) => {
 			{${fieldname}:'${fieldname}-tiga', ${options.field_display}:'${options.field_display}-tiga'},
 		]
 					`;
-				} 
+				}
+				
+				var apiloader = `$ui.apis.load_${fieldname}`;
+				if (options.api.startsWith("local:")) {
+					var apiloadername =  options.api.replace("local:", '').trim();
+					apiloader = '`${global.modulefullname}/' + apiloadername + '`';
+				}
+
+				var OnSelectedScript =  data[fieldname].comp.options.OnSelectedScript===undefined? '' : data[fieldname].comp.options.OnSelectedScript;
+				// console.log( data[fieldname].comp);
+				// console.log('-----------')
+				// console.log(OnSelectedScript)
+				// console.log('-----------')
+
 
 				slideselectlib = `import {fgta4slideselect} from  '../../../../../index.php/asset/fgta/framework/fgta4libs/fgta4slideselect.mjs'`
 				slideselects += `
 	new fgta4slideselect(obj.${prefix}${fieldname}, {
 		title: 'Pilih ${fieldname}',
 		returnpage: this_page_id,
-		api: $ui.apis.load_${fieldname},
+		api: ${apiloader},
 		fieldValue: '${fieldname}',
 		fieldValueMap: '${options.field_value}',
 		fieldDisplay: '${options.field_display}',
@@ -168,7 +182,10 @@ module.exports = async (fsd, genconfig) => {
 		OnDataLoaded : (result, options) => {
 			${hapuspilihansama}${pilihnone}	
 		},
-		OnSelected: (value, display, record) => {}
+		OnSelected: (value, display, record, args) => {
+			if (value!=args.PreviousValue ) {${OnSelectedScript}				
+			}
+		}
 	})				
 				`;
 			}

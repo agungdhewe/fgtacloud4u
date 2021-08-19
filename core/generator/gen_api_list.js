@@ -26,6 +26,8 @@ module.exports = async (fsd, genconfig) => {
 			fields.push(fieldname)
 
 			var comptype = data[fieldname].comp.comptype
+			var reference =  data[fieldname].reference;
+
 
 			// untuk componen yang tienya combo, tambah lookup
 			if (comptype=='combo') {
@@ -34,10 +36,22 @@ module.exports = async (fsd, genconfig) => {
 				if (options.field_display_name!=null) {
 					field_display_name = options.field_display_name;
 				}
-				lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
+				var lookuptable = options.view != null ? options.view : options.table;
+				lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${lookuptable}', '${options.field_value}', '${options.field_display}'),\r\n`
 			} else if  (data[fieldname].lookup==='user') {
-				lookupfields += `\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
-			}				
+				lookupfields += `\t\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
+			}	
+			
+			if (reference!=undefined) {
+				if (reference.field_display!=null) {
+					var field_display_name = reference.field_display
+					if (reference.field_display_name!=null) {
+						field_display_name = reference.field_display_name;
+					}
+					lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${reference.table}', '${reference.field_value}', '${reference.field_display}'),\r\n`
+				}
+			}
+
 		}
 
 
@@ -64,6 +78,18 @@ module.exports = async (fsd, genconfig) => {
 		var scrsqlline = srclines.join(' OR ');
 
 
+		var additionalscrsqlline = '';
+		var additionalsearch = headertable.additionalsearch;
+		if (additionalsearch != undefined) {
+			var additionalscrline = [];
+			for (var srcfieldname in additionalsearch) {
+				var srcfield = additionalsearch[srcfieldname].trim();
+				additionalscrline.push(`\t\t\t\t\t"${srcfieldname}" => " ${srcfield} "`)
+			}
+			additionalscrsqlline = ',\r\n' 
+			additionalscrsqlline += additionalscrline.join(",\r\n")
+		}
+
 
 
 
@@ -75,6 +101,8 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 		tplscript = tplscript.replace('/*{__LOOKUPFIELDS__}*/', lookupfields)
 		tplscript = tplscript.replace('/*{__SEARCHSQLLINE__}*/', scrsqlline)
+		tplscript = tplscript.replace('/*{__ADDITIONALSEARCHSQLLINE__}*/', additionalscrsqlline)
+		
 		tplscript = tplscript.replace(/{__BASENAME__}/g, genconfig.basename);
 		tplscript = tplscript.replace(/{__TABLENAME__}/g, headertable_name)
 		tplscript = tplscript.replace(/{__MODULEPROG__}/g, genconfig.modulename + '/apis/list.php');

@@ -33,6 +33,7 @@ $API = new class extends {__BASENAME__}Base {
 		
 		try {
 
+			// \FGTA4\utils\SqlUtility::setDefaultCriteria($options->criteria, '--fieldscriteria--', '--value--');
 			$where = \FGTA4\utils\SqlUtility::BuildCriteria(
 				$options->criteria,
 				[
