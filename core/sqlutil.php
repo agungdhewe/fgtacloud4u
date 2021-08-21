@@ -186,7 +186,7 @@ class SqlUtility {
 	}
 
 	
-	public static function Lookup($value, $db, $tablename, $field_id, $field_display, $valueifnull='--NULL--') {
+	public static function Lookup($value, $db, $tablename, $field_id, $field_display, $valueifnull='NONE') {
 		try {
 			$row = self::LookupRow($value, $db, $tablename, $field_id);
 			if (is_array($row)) {
@@ -196,7 +196,11 @@ class SqlUtility {
 					throw new \Exception("kolom $field_display tidak ditemukan pada  $tablename");
 				}
 			} else {
-				return  $valueifnull;
+				if ($value==null) {
+					return $valueifnull;
+				} else {
+					return  "## DATA BROKEN ### ($value)";
+				}
 			}
 			
 		} catch (\Exception $ex) {
