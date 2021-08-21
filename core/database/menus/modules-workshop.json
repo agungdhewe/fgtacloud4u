@@ -1,8 +1,34 @@
 {
 	"title": "home",
 	"modules": [
+		"hrms/master/empl",
+		"hrms/master/empluser",
 		"ent/organisation/auth",
 		"ent/organisation/dept",
-		"ent/organisation/docs"
+		"ent/organisation/docs",
+
+		"ent/general/bank",
+		"finact/master/bankrekening",
+
+
+		"ent/affiliation/partner",
+		"finact/master/accfingroup",
+		"finact/master/accfin",
+		"finact/master/coagroup",
+		"finact/master/coa",
+		"finact/acct/rptcoa",
+		"finact/master/accbudgetgroup",
+		"finact/master/accbudget",
+		"finact/budget/rptaccbudget",
+		"finact/budget/deptbudgetacc",
+		
+		"finact/master/project",
+		"finact/budget/finbudget",
+		"finact/budget/deptbudget",
+		"finact/budget/projbudget",
+
+		"finact/fin/billin",
+		"finact/fin/payment"
+
 	]
 }
