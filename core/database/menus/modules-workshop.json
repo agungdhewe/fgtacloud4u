@@ -4,6 +4,7 @@
 		"hrms/master/empl",
 		"hrms/master/empluser",
 		"ent/organisation/auth",
+		"ent/organisation/deptgroup",
 		"ent/organisation/dept",
 		"ent/organisation/docs",
 
@@ -22,13 +23,16 @@
 		"finact/budget/rptaccbudget",
 		"finact/budget/deptbudgetacc",
 		
+		"finact/master/projecttype",
 		"finact/master/project",
 		"finact/budget/finbudget",
 		"finact/budget/deptbudget",
 		"finact/budget/projbudget",
 
 		"finact/fin/billin",
-		"finact/fin/payment"
+		"finact/fin/payment",
+		
+		"finact/procurement/inquirytype"
 
 	]
 }
