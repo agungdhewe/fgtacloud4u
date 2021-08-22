@@ -83,6 +83,7 @@ export function fgta4grid(tbl, opt) {
 		clear: () => { clear(self) },
 		clearactiverow: () => { clearactiverow(self) },
 		removechecked: (options) => { removechecked(self, options) },
+		IterateChecked: (options) => { IterateChecked(self, options) },
 		update: (trid, data) => { update (self, trid, data) },
 		removerow: (trid) => { removerow(self, trid) },
 		getLastId: () => { return getLastId(self) },
@@ -518,9 +519,44 @@ async function removechecked(self, options) {
 			}
 		}
 	}
-	
+}
+
+
+
+async function IterateChecked(self, options) {
+	var tbl = self.table
+
+	var chks = tbl.find('[rowselector="true"]')
+	var trids = []
+	for (var chk of chks) {
+		if (chk.checked) {
+			var trid = chk.getAttribute('trid')
+			trids.push(trid)
+		}
+	}
+
+	var args = {
+		count: 0
+	}
+	var trid
+	while (trid = trids.pop()) {
+		args.count++;
+		var tr = document.getElementById(trid)
+		var dataid = tr.getAttribute('dataid')
+		var data = self.DATA[dataid]	
+		if (typeof options.OnIterating === 'function') {
+			var opt = { data: data, remove: true}
+			await options.OnIterating(opt)
+		}
+	}
+
+	if (typeof options.OnIterated === 'function') {
+		await options.OnIterated(args)
+	}
 
 }
+
+
 
 // function btnFirst_click(self) {
 // 	console.log('first')
