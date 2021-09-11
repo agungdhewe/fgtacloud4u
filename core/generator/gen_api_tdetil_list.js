@@ -54,13 +54,12 @@ module.exports = async (fsd, genconfig) => {
 	}	
 	
 	var primarykey = detiltable.primarykeys[0]
-
 	var header_primarykey = headertable.primarykeys[0]
-	
+	var fieldsselect = 'A.' + fields.join(', A.');
 
 	var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'tdetil-list_api.tpl')
 	var tplscript = fs.readFileSync(mjstpl).toString()
-	tplscript = tplscript.replace('/*{__FIELDS__}*/', fields.join(', '))
+	tplscript = tplscript.replace('/*{__FIELDS__}*/', fieldsselect)
 	tplscript = tplscript.replace(/<!--__TABLENAME__-->/g, tablename)
 	tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)
 	tplscript = tplscript.replace('/*{__HEADERPRIMARYID__}*/', header_primarykey)

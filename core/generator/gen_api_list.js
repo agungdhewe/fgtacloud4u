@@ -90,12 +90,13 @@ module.exports = async (fsd, genconfig) => {
 			additionalscrsqlline += additionalscrline.join(",\r\n")
 		}
 
-
+		/* tambah alias tablename */
+		var fieldsselect = 'A.' + fields.join(', A.');
 
 
 		var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'list_api.tpl')
 		var tplscript = fs.readFileSync(mjstpl).toString()
-		tplscript = tplscript.replace('/*{__FIELDS__}*/', fields.join(', '))
+		tplscript = tplscript.replace('/*{__FIELDS__}*/', fieldsselect)
 		tplscript = tplscript.replace('/*{__TABLENAME__}*/', headertable_name)
 		tplscript = tplscript.replace('/*{__TABLENAME__}*/', headertable_name)
 		tplscript = tplscript.replace('/*{__PRIMARYID__}*/', primarykey)

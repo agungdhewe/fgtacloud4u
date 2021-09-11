@@ -1,6 +1,7 @@
 {
 	"title": "home",
 	"modules": [
+		
 		"hrms/master/empl",
 		"hrms/master/empluser",
 		"ent/organisation/auth",
@@ -8,16 +9,20 @@
 		"ent/organisation/dept",
 		"ent/organisation/docs",
 
+		"ent/general/curr",
 		"ent/general/bank",
 		"finact/master/bankrekening",
-
 
 		"ent/affiliation/partner",
 		"finact/master/accfingroup",
 		"finact/master/accfin",
+		"finact/master/coareport",
+		"finact/master/coamodel",
 		"finact/master/coagroup",
 		"finact/master/coa",
 		"finact/acct/rptcoa",
+		"finact/master/accbudgetmodel",
+		"finact/master/accbudgettype",
 		"finact/master/accbudgetgroup",
 		"finact/master/accbudget",
 		"finact/budget/rptaccbudget",
@@ -26,13 +31,27 @@
 		"finact/master/projecttype",
 		"finact/master/project",
 		"finact/budget/finbudget",
+		"finact/budget/corpbudget",
 		"finact/budget/deptbudget",
+		{"program": "finact/budget/deptbudget", "variancename":"approval"},	
 		"finact/budget/projbudget",
+		"finact/budget/rptbudgettrialbal",
+		"finact/budget/rptbudgetbs",
+		"finact/budget/rptbudgetis",
 
 		"finact/fin/billin",
 		"finact/fin/payment",
 		
-		"finact/procurement/inquirytype"
+		"finact/procurement/inquirytype",
+		
+		"finact/items/itemclass",
+		
+		"finact/procurement/inquiry",
+		
+		"finact/budget/accbudgetformat",
+		"finact/budget/accbudgetformatset",
+		
+		"finact/acct/jurnal"
 
 	]
 }

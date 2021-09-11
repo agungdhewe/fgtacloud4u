@@ -43,8 +43,6 @@ define('DB_CONFIG_PARAM', [
 // untuk remote debugging:
 // ssh -R 9000:localhost:9000 agung@ubserver01
 
-
-
 ob_start();
 
 // Saat pertama site di load tampa parameter, 
@@ -264,7 +262,7 @@ try {
 				require_once $redirectsourcepath;
 
 				$startmodule = __STARTMODULE; 
-				echo "<script>location.href='index.php/module/$startmodule'</script>";
+				echo "<script>location.href='index.php/module/$startmodule#'</script>";
 				die();
 				
 		}

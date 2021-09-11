@@ -8,11 +8,7 @@
 		"finact/procurement/orderout",
 		"finact/procurement/recv",
 		"finact/fin/billin",
-		
 		"finact/master/accfin",
 		"finact/budget/finbudget"
-
 	]
 }
-
-

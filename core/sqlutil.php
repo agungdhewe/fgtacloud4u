@@ -196,7 +196,7 @@ class SqlUtility {
 					throw new \Exception("kolom $field_display tidak ditemukan pada  $tablename");
 				}
 			} else {
-				if ($value==null) {
+				if ($value==null || $value=='--NULL--') {
 					return $valueifnull;
 				} else {
 					return  "## DATA BROKEN ### ($value)";

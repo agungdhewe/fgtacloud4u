@@ -20,6 +20,9 @@ if (!defined('FGTA4')) {
 		<?php 
 		$fmt = array_key_exists('template', $_GET) ? $_GET['template'] : "";
 		switch ($fmt) {
+			case "format-01-a3-landscape" :
+				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/fgta-printout/asset/format-01-a3-landscape.css\" />";
+				break;
 			case "format-01-a4-landscape" :
 				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/fgta-printout/asset/format-01-a4-landscape.css\" />";
 				break;

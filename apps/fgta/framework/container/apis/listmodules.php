@@ -239,8 +239,15 @@ class ModuleShorcut extends ModuleIcon {
 		$this->icon = $moduleconfig->icon;
 		$this->forecolor = $moduleconfig->forecolor;
 		$this->backcolor = $moduleconfig->backcolor;
-		//$this->disabled = $moduleconfig->disabled;
 		$this->allowedgroups = $moduleconfig->allowedgroups;
+
+		$iconinfo = IconInfo::getIconInfo($moduleconfig->icon);
+		if (array_key_exists('backgrounColor', $iconinfo)) {
+			// WebAPI::log($iconinfo['backgrounColor'] . ' -- ' . $this->backcolor);
+			if ($this->backcolor=='' && !($iconinfo['backgrounColor'] == '#000000' || $iconinfo['backgrounColor'] == '#ffffff')) {
+				$this->backcolor = $iconinfo['backgrounColor'];
+			}
+		}
 		
 		// cek apakah modulenya diperbolehkan
 		$this->disabled = true;
@@ -290,6 +297,41 @@ class ModuleShorcut extends ModuleIcon {
 	}
 
 }
+
+
+class IconInfo {
+	public function getIconInfo($icon) {
+		$info = [];
+
+		$path = __ROOT_DIR . '/public/images/icons/' . $icon;
+		if (\is_file($path)) {
+			$ext = pathinfo($path, PATHINFO_EXTENSION);
+			if ($ext=='svg') {
+				$svgDoc = new \DOMDocument();
+				$svgDoc->load($path);
+
+				$pagecolor="";
+				$svgEl = $svgDoc->documentElement;
+				foreach ($svgEl->childNodes as $el) {
+					// echo $el->nodeName . "\r\n";
+					if ($el->nodeName=='sodipodi:namedview') {
+						$pagecolor = $el->getAttribute('pagecolor');
+						break;
+					}
+				}
+
+				if ($pagecolor!="") {
+					$info['backgrounColor'] = $pagecolor;
+				}
+			}
+		}
+
+		return $info;
+
+	}
+}
+
+
 
 
 $API = new ListModules();
