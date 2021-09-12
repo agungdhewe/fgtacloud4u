@@ -264,13 +264,12 @@ if (!defined('FGTA4')) {
 
 
 	<script>
-
 	window.fgtaTimingPatch = (navigator.userAgent.indexOf("Firefox") != -1)		
 	if(window.fgtaTimingPatch) {
 		$.parser.auto = false;
 		setTimeout(()=>{
 			$.parser.parse();
-		}, 300);
+		}, 400);
 	};
 	</script>	
 
@@ -454,6 +453,7 @@ if (!defined('FGTA4')) {
 
 
 		var startModule = () => {	
+				$.parser.onComplete = ()=>{};
 				$(window).scroll(function() {
 					$('#__progressmask__').css('top', $(this).scrollTop() + "px");
 					$('#__progresswaitmask__').css('top', $(this).scrollTop() + "px");
