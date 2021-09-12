@@ -82,6 +82,20 @@ export function fgta4form(frm, opt) {
 			return self.options.autoid
 		},
 
+		getDefaultPrompt(ismandatory) {
+			if (ismandatory) {
+				return {
+					value:null,
+					text:'-- PILIH --'
+				}
+			} else {
+				return {
+					value:'--NULL--',
+					text:'NONE'
+				}
+			}
+		},
+
 		setDisable: (obj, disabled) => { return setDisable(self, obj, disabled) } ,
 		getCurrentId: () => { return getCurrentId(self) },
 		setValue: (obj, value, display) => { return setValue(self, obj, value, display) },
@@ -161,6 +175,13 @@ function init(self) {
 					var text = obj.combo('getText');
 					var options = Object.assign(opt, options);
 					obj.combo(options);
+
+					var promptMandatory = self.fgta4form.getDefaultPrompt(true);
+					var promptOptional = self.fgta4form.getDefaultPrompt(false);
+
+					if ((options.required && text==promptOptional.text) || !options.required && text==promptMandatory.text) {
+						text = options.prompt;
+					} 
 					self.fgta4form.setValue(obj, value, text);
 					self.fgta4form.setDisable(obj, opt.disabled);
 				}

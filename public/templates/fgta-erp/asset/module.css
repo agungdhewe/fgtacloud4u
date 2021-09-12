@@ -112,6 +112,12 @@ h1 {
 }
 
 
+.hidden {
+	display: none;
+}
+
+
+
 @media screen and (max-width: 450px) {
 
 	.panel-pdf-view {

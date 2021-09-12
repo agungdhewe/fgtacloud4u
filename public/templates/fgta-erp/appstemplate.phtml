@@ -193,126 +193,13 @@ if (!defined('FGTA4')) {
 		<script src="jslibs/cookie.js"></script>	
 		<!-- <script src="jslibs/preventback.js"></script>	 -->
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>		 -->
-		<script src="jslibs/jquery.min.js"></script>
-		<script src="jslibs/easyui/jquery.easyui-1.9.9.min.js"></script>
+
 		<!-- <script>
 		$.parser.auto = false;
 		</script>	 -->
 
 
 
-		<script src="jslibs/crypto-js.min.js"></script>
-
-
-		<script>
-
-			// /* patch textbox */
-			(function($){
-				let original_disable = $.fn.textbox.methods.disable;
-				let original_enable = $.fn.textbox.methods.enable;
-				$.extend($.fn.textbox.methods, {
-					disable: function(jq, value) {
-						var opt = jq.textbox('options')
-						opt.disabled = true
-						var ret = original_disable(jq, value)
-						return ret
-					},
-					enable: function(jq, value) {
-						var opt = jq.textbox('options')
-						opt.disabled = false						
-						var ret = original_enable(jq, value)
-						return ret
-					}
-				})
-			})(jQuery);		
-
-
-			// /* patch checkbox, agar pewarnaannya menyesuaikan pattern dari FGTA */
-			(function($){
-				let original_check = $.fn.checkbox.methods.check;
-				$.extend($.fn.checkbox.methods, {
-					check: function(jq, value) {
-						var ret = original_check(jq, value)
-						ret.parent().find('span.checkbox.inputbox.checkbox-checked').removeClass('checkbox-checked')
-						return ret
-					}
-				})
-			})(jQuery);
-
-			/* parser untuk tampilan datebox agar formatnya dd/mm/yyyy */
-			$.fn.datebox.defaults.formatter = function(date) {
-				var y = date.getFullYear();
-				var m = date.getMonth() + 1;
-				var d = date.getDate();
-				return (d < 10 ? '0' + d : d) + '/' + (m < 10 ? '0' + m : m) + '/' + y;
-			};
-
-			$.fn.datebox.defaults.parser = function(s) {
-				if (s) {
-					var a = s.split('/');
-					var d = new Number(a[0]);  // jshint ignore:line
-					var m = new Number(a[1]);  // jshint ignore:line
-					var y = new Number(a[2]);  // jshint ignore:line
-					var dd = new Date(y, m-1, d);
-					return dd;
-				} else {
-					return new Date();
-				}
-			};
-
-
-			$.extend($.fn.validatebox.defaults.rules, {
-				requiredcombo: {
-					validator: function(value, param) {
-						var cbo_value = $('#'+param[0]).combo('getValue');
-						if (cbo_value==='0' || cbo_value===0 || cbo_value==='' ||  cbo_value==='--NULL--')
-							return false;
-						else
-							return true;
-					},
-					message: 'Harus dipilih'
-				}
-			});
-
-		</script>	
-
-
-
-		<script>
-			// helper script
-			window.to_sql_date = (ststr) => {
-				var date = $.fn.datebox.defaults.parser(ststr);
-				var y = date.getFullYear();
-				var m = date.getMonth() + 1;
-				var d = date.getDate();
-				return y + '-' + (m < 10 ? '0' + m : m) + '-' +  (d < 10 ? '0' + d : d);		 
-			}
-
-			window.from_sql_date = (sqlDate) => {
-				var sqlDateArr1 = sqlDate.split("-");
-				var sYear = sqlDateArr1[0];
-				var sMonth = (Number(sqlDateArr1[1]) - 1).toString();
-				var sDay = sqlDateArr1[2];
-				return new Date(sYear,sMonth,sDay);	 
-			}
-
-
-			window.togleview = (el) => {
-				// console.log(el);
-				var next = el.parentNode.nextElementSibling;
-				if (next.classList.contains('fgta_section_collapsible')) {
-					if ((window.getComputedStyle(next).display === "none")) {
-						// hidden
-						next.style.display = "block";
-						el.innerHTML = 'hide';
-					} else {
-						// visible
-						next.style.display = "none";
-						el.innerHTML = 'show';
-					}
-				}
-			}
-		</script>
 
 		<style>
 			.container-bar {
@@ -372,6 +259,135 @@ if (!defined('FGTA4')) {
 
 
 
+	<script src="jslibs/jquery.min.js"></script>
+	<script src="jslibs/easyui/jquery.easyui-1.9.9.min.js"></script>
+
+
+	<script>
+
+	window.fgtaTimingPatch = (navigator.userAgent.indexOf("Firefox") != -1)		
+	if(window.fgtaTimingPatch) {
+		$.parser.auto = false;
+		setTimeout(()=>{
+			$.parser.parse();
+		}, 300);
+	};
+	</script>	
+
+
+
+	<script src="jslibs/crypto-js.min.js"></script>
+
+
+	<script>
+
+		// /* patch textbox */
+		(function($){
+			let original_disable = $.fn.textbox.methods.disable;
+			let original_enable = $.fn.textbox.methods.enable;
+			$.extend($.fn.textbox.methods, {
+				disable: function(jq, value) {
+					var opt = jq.textbox('options')
+					opt.disabled = true
+					var ret = original_disable(jq, value)
+					return ret
+				},
+				enable: function(jq, value) {
+					var opt = jq.textbox('options')
+					opt.disabled = false						
+					var ret = original_enable(jq, value)
+					return ret
+				}
+			})
+		})(jQuery);		
+
+
+		// /* patch checkbox, agar pewarnaannya menyesuaikan pattern dari FGTA */
+		(function($){
+			let original_check = $.fn.checkbox.methods.check;
+			$.extend($.fn.checkbox.methods, {
+				check: function(jq, value) {
+					var ret = original_check(jq, value)
+					ret.parent().find('span.checkbox.inputbox.checkbox-checked').removeClass('checkbox-checked')
+					return ret
+				}
+			})
+		})(jQuery);
+
+		/* parser untuk tampilan datebox agar formatnya dd/mm/yyyy */
+		$.fn.datebox.defaults.formatter = function(date) {
+			var y = date.getFullYear();
+			var m = date.getMonth() + 1;
+			var d = date.getDate();
+			return (d < 10 ? '0' + d : d) + '/' + (m < 10 ? '0' + m : m) + '/' + y;
+		};
+
+		$.fn.datebox.defaults.parser = function(s) {
+			if (s) {
+				var a = s.split('/');
+				var d = new Number(a[0]);  // jshint ignore:line
+				var m = new Number(a[1]);  // jshint ignore:line
+				var y = new Number(a[2]);  // jshint ignore:line
+				var dd = new Date(y, m-1, d);
+				return dd;
+			} else {
+				return new Date();
+			}
+		};
+
+
+		$.extend($.fn.validatebox.defaults.rules, {
+			requiredcombo: {
+				validator: function(value, param) {
+					var cbo_value = $('#'+param[0]).combo('getValue');
+					if (cbo_value==='0' || cbo_value===0 || cbo_value==='' ||  cbo_value==='--NULL--')
+						return false;
+					else
+						return true;
+				},
+				message: 'Harus dipilih'
+			}
+		});
+
+	</script>	
+
+
+
+	<script>
+		// helper script
+		window.to_sql_date = (ststr) => {
+			var date = $.fn.datebox.defaults.parser(ststr);
+			var y = date.getFullYear();
+			var m = date.getMonth() + 1;
+			var d = date.getDate();
+			return y + '-' + (m < 10 ? '0' + m : m) + '-' +  (d < 10 ? '0' + d : d);		 
+		}
+
+		window.from_sql_date = (sqlDate) => {
+			var sqlDateArr1 = sqlDate.split("-");
+			var sYear = sqlDateArr1[0];
+			var sMonth = (Number(sqlDateArr1[1]) - 1).toString();
+			var sDay = sqlDateArr1[2];
+			return new Date(sYear,sMonth,sDay);	 
+		}
+
+
+		window.togleview = (el) => {
+			// console.log(el);
+			var next = el.parentNode.nextElementSibling;
+			if (next.classList.contains('fgta_section_collapsible')) {
+				if ((window.getComputedStyle(next).display === "none")) {
+					// hidden
+					next.style.display = "block";
+					el.innerHTML = 'hide';
+				} else {
+					// visible
+					next.style.display = "none";
+					el.innerHTML = 'show';
+				}
+			}
+		}
+	</script>
 
 
 		
@@ -419,19 +435,25 @@ if (!defined('FGTA4')) {
 		window.preparemodule = async (fn_callback) => {
 			if (window.$ui!==undefined) {
 				await window.$ui.ready()
-				
+				// window.$ui.iframe_resize();
+
 				var variancename = document.querySelector('meta[name="variancename"]').content
 				await window.$ui.init({
 					variancename: variancename,
 					parameter:  JSON.parse(Base64.decode(`<?=base64_encode(json_encode($this->getParameter()))?>`))
 				});
+
 			}
 			fn_callback()
 		}
 
-		//window.onload = () => {
-		$(document).ready(function(){
 
+
+		// $(document).ready(function(){
+		// $.parser.onComplete = () => {
+
+
+		var startModule = () => {	
 				$(window).scroll(function() {
 					$('#__progressmask__').css('top', $(this).scrollTop() + "px");
 					$('#__progresswaitmask__').css('top', $(this).scrollTop() + "px");
@@ -443,10 +465,6 @@ if (!defined('FGTA4')) {
 				window.addEventListener('popstate', function(ev) {
 					history.pushState(null, null, window.location.pathname);
 				}, false);				
-
-
-
-
 
 				window.preparemodule(() => {
 					let loadwaitmask = document.getElementById('loadwaitmask')
@@ -478,7 +496,17 @@ if (!defined('FGTA4')) {
 				});
 				<?php } ?>				
 	
-		})
+		}
+
+
+		if(window.fgtaTimingPatch) {
+			$.parser.onComplete = startModule;
+		} else {
+			$(document).ready(function(){
+				startModule();
+			});
+		}
+
 	</script>
 
 

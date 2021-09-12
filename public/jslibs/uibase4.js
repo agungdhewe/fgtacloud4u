@@ -59,21 +59,14 @@ export async function ready() {
 		fn_cancel(events.OnButtonHome.detail.cancel)
 	}
 
+	if(window.fgtaTimingPatch) {
+		setTimeout($ui.iframe_resize, 100);
+	}
 
-	// var parse = async () => {
-	// 	return new Promise((resolve, reject) => {
-	// 		$.parser.onComplete = function() {
-	// 			console.log('parsed');
-	// 			resolve();
-	// 		}
-	// 		$.parser.parse();
-	// 	});
-	// }
 
-	// await parse();
-	// $.parser.parse();
 	console.log(`module ready`);
 }
+	
 
 
 /**
