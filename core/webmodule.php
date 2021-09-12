@@ -71,4 +71,17 @@ class WebModule extends \FGTA4\WebProg {
 		";
 	}
 
+
+	public function error($message) {
+		echo '<div class="xdebug-error">';
+		echo nl2br($message);
+		echo '</a>';
+	}
+
+	public function warning($message) {
+		echo '<div class="fgta-warning">';
+		echo  nl2br($message);
+		echo '</a>';
+	}
+
 }

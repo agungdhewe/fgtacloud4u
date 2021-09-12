@@ -461,9 +461,9 @@ async function readfile(file) {
  */
 export async function apicall(api, args, files) {
 
-	if (fgta_output_content.find('.xdebug-error').length==0) {
-		fgta_output_content.html('')	
-		fgta_output_error.html('')
+	if (fgta_output_content.find('.xdebug-error').length==0 && fgta_output_content.find('.fgta-warning').length==0) {
+		// fgta_output_content.html('')	
+		// fgta_output_error.html('')
 	}
 
 	let postparams = {}
@@ -516,7 +516,10 @@ export async function apicall(api, args, files) {
 					}
 
 					try {
-						var xhr_response = xhr.response;	
+						var xhr_response = xhr.response;
+
+						console.log(xhr_response);
+
 						if (otp.encrypt) {
 							if ($ui.Crypto===undefined) {
 								$ui.Crypto = new Encryption();

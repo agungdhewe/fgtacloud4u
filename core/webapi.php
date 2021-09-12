@@ -59,5 +59,22 @@ class WebAPI extends \FGTA4\WebProg {
 		}
 	}
 
+
+	public function debug($obj) {
+		$this->debugoutput = true;
+		if (is_array($obj) || \is_object($obj)) {
+			echo "<pre>";
+			var_dump($obj);
+			echo "</pre>";
+		} else {
+			echo nl2br($obj);
+		}
+	}
+
+	public function isDebugOutput() {
+		$debugoutput = \property_exists($this, 'debugoutput') ? $this->debugoutput : false;
+		return $debugoutput;
+	}
+
 }
 

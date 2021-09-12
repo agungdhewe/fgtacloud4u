@@ -78,9 +78,9 @@ class ApiRoute extends Route {
 		}
 
 
-		if (property_exists($API, 'debugoutput')) {
-			$this->debugoutput = $API->debugoutput;
-		}
+		// if (property_exists($API, 'debugoutput')) {
+		// 	$this->debugoutput = $API->debugoutput;
+		// }
 
 		if (!method_exists($API, 'execute')) {
 			throw new \FGTA4\exceptions\WebException("Method 'execute' pada API tidak ditemukan", 500);
@@ -127,6 +127,7 @@ class ApiRoute extends Route {
 
 		try {
 			$this->result = $apimethod->invokeArgs($API, $executingparameters);
+			$this->debugoutput = $API->isDebugOutput();
 		} catch (\Exception $ex) {
 			throw $ex;
 		}

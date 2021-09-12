@@ -487,13 +487,34 @@ if (!defined('FGTA4')) {
 
 				let fgta_output = $('#fgta_output')
 				let fgta_output_content = $('#fgta_output_content')
-				fgta_output_content.html(`<?=$content?>`)	
-				fgta_output.window({
-					title:'Output',
-					width:600,
-					height:400,
-					modal:true
-				});
+				fgta_output_content.html(`<?=$content?>`)
+
+				var dispwarning = fgta_output_content.find('.fgta-warning').length>0
+				var disperror = fgta_output_content.find('.xdebug-error').length>0
+
+				if (dispwarning || disperror) {
+					var title = disperror ? 'ERROR' : 'WARNING';
+					fgta_output.window({
+						title:title,
+						width:600,
+						height:400,
+						modal:true,
+						collapsible: false,
+						maximizable: false,
+						minimizable: false,
+						closable: false
+					});
+					
+				} else {
+					fgta_output.window({
+						title:'Output',
+						width:600,
+						height:400,
+						modal:true
+					});
+				}
+				
+
 				<?php } ?>				
 	
 		}
