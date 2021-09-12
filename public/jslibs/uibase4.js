@@ -461,10 +461,10 @@ async function readfile(file) {
  */
 export async function apicall(api, args, files) {
 
-	fgta_output_content.html('')	
-	fgta_output_error.html('')
-
-
+	if (fgta_output_content.find('.xdebug-error').length==0) {
+		fgta_output_content.html('')	
+		fgta_output_error.html('')
+	}
 
 	let postparams = {}
 	for (let paramname in args) {
