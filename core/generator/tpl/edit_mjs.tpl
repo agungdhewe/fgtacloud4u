@@ -19,7 +19,7 @@ const obj = {
 /*--__RECORDSTATUS__--*/
 
 
-let form = {}
+let form;
 
 export async function init(opt) {
 	this_page_id = opt.id;
@@ -272,7 +272,17 @@ async function form_datasaving(data, options) {
 	//    options.cancel = true
 
 	// Modifikasi object data, apabila ingin menambahkan variabel yang akan dikirim ke server
-	options.skipmappingresponse = [/*--__SKIPPEDFIELD__--*/];
+	// options.skipmappingresponse = [/*--__SKIPPEDFIELD__--*/];
+	options.skipmappingresponse = [];
+	for (var objid in obj) {
+		var o = obj[objid]
+		if (o.isCombo() && !o.isRequired()) {
+			var id = o.getFieldValueName()
+			options.skipmappingresponse.push(id)
+			console.log(id)
+		}
+	}
+
 }
 
 async function form_datasaveerror(err, options) {
@@ -299,8 +309,23 @@ async function form_datasaved(result, options) {
 
 	var data = {}
 	Object.assign(data, form.getData(), result.dataresponse)
-
+	/*
 /*--__UPDATESKIPPEDFIELD__--*/
+	*/
+
+	var pOpt = form.getDefaultPrompt(false)
+	for (var objid in obj) {
+		var o = obj[objid]
+		if (o.isCombo() && !o.isRequired()) {
+			var value =  result.dataresponse[o.getFieldValueName()];
+			var text = result.dataresponse[o.getFieldValueName()];
+			if (value==null ) {
+				value = pOpt.value;
+				text = pOpt.text;
+			}
+			form.setValue(o, value, text);
+		}
+	}
 	form.rowid = $ui.getPages().ITEMS['pnl_list'].handler.updategrid(data, form.rowid)
 }
 

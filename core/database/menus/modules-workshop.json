@@ -9,10 +9,14 @@
 		"ent/organisation/dept",
 		"ent/organisation/docs",
 
+		"ent/location/site",
+
 		"ent/general/curr",
 		"ent/general/bank",
 		"finact/master/bankrekening",
 
+		"ent/affiliation/partnercategory",
+		"ent/affiliation/partnertype",
 		"ent/affiliation/partner",
 		"finact/master/accfingroup",
 		"finact/master/accfin",

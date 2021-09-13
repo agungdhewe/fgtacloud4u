@@ -21,6 +21,12 @@ export function fgta4slideselect(obj, options) {
 	obj.reset = () => { reset(self) }
 
 
+	obj.isCombo = () => { return true }
+	obj.isRequired = () => { return obj.combo('options').required }
+	obj.getFieldValueName = () => { return options.fieldValue }
+	obj.getFieldDisplayName = () => { return options.fieldDisplay }
+	obj.getSetupParam = () => { return options }
+
 	self.options = Object.assign({
 		form: obj.form,
 		title: 'Slide Select',

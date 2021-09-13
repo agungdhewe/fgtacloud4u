@@ -151,6 +151,9 @@ function init(self) {
 		obj.name = obid
 		obj.mapping = obj.attr('mapping')
 		obj.objecttypeclass = getEasyuiClass(self, obj)
+
+		obj.isCombo = () => { return false }
+
 		// console.log(obid, obj.objecttypeclass);
 		if (obj.objecttypeclass=='easyui-checkbox') {
 			var opt = obj.checkbox('options')

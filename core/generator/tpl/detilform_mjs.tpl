@@ -19,8 +19,8 @@ const obj = {
 }
 
 
-let form = {}
-let header_data = {}
+let form;
+let header_data;
 
 
 
@@ -231,14 +231,39 @@ export function createnew(hdata) {
 async function form_datasaving(data, options) {
 	options.api = `${global.modulefullname}/<!--__DETILNAME__-->-save`
 
-	options.skipmappingresponse = [/*--__SKIPPEDFIELD__--*/];
+	// options.skipmappingresponse = [/*--__SKIPPEDFIELD__--*/];
+	options.skipmappingresponse = [];
+	for (var objid in obj) {
+		var o = obj[objid]
+		if (o.isCombo() && !o.isRequired()) {
+			var id = o.getFieldValueName()
+			options.skipmappingresponse.push(id)
+			console.log(id)
+		}
+	}	
 }
 
 async function form_datasaved(result, options) {
 	var data = {}
 	Object.assign(data, form.getData(), result.dataresponse)
 
+	/*
 /*--__UPDATESKIPPEDFIELD__--*/
+	*/
+
+	var pOpt = form.getDefaultPrompt(false)
+	for (var objid in obj) {
+		var o = obj[objid]
+		if (o.isCombo() && !o.isRequired()) {
+			var value =  result.dataresponse[o.getFieldValueName()];
+			var text = result.dataresponse[o.getFieldValueName()];
+			if (value==null ) {
+				value = pOpt.value;
+				text = pOpt.text;
+			}
+			form.setValue(o, value, text);
+		}
+	}
 	form.rowid = $ui.getPages().ITEMS['pnl_edit<!--__DETILNAME__-->grid'].handler.updategrid(data, form.rowid)
 
 	var autoadd = chk_autoadd.prop("checked")

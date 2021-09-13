@@ -517,9 +517,6 @@ export async function apicall(api, args, files) {
 
 					try {
 						var xhr_response = xhr.response;
-
-						console.log(xhr_response);
-
 						if (otp.encrypt) {
 							if ($ui.Crypto===undefined) {
 								$ui.Crypto = new Encryption();
