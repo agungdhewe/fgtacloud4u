@@ -124,21 +124,33 @@ export function getForm() {
 
 export function open(data, rowid, viewmode=true, fn_callback) {
 
-
+	var pOpt = form.getDefaultPrompt(false)
 	var fn_dataopening = async (options) => {
 		options.criteria[form.primary.mapping] = data[form.primary.mapping]
 	}
 
 	var fn_dataopened = async (result, options) => {
+		var record = result.record;
+		updatefilebox(record);
 
-		updatefilebox(result.record);
-
+		/*
 /*--__NULLRESULTLOADED__--*/
-  		updaterecordstatus(result.record)
+		*/
+		for (var objid in obj) {
+			let o = obj[objid]
+			if (o.isCombo() && !o.isRequired()) {
+				var value =  result.record[o.getFieldValueName()];
+				if (value==null ) {
+					record[o.getFieldValueName()] = pOpt.value;
+					record[o.getFieldDisplayName()] = pOpt.text;
+				}
+			}
+		}
+  		updaterecordstatus(record)
 
 		form.SuspendEvent(true);
 		form
-			.fill(result.record)/*--__LOOKUPSETVALUE__--*/
+			.fill(record)/*--__LOOKUPSETVALUE__--*/
 			.setViewMode(viewmode)
 			.lock(false)
 			.rowid = rowid
@@ -154,7 +166,7 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 		/* commit form */
 		form.commit()
 		form.SuspendEvent(false); 
-		updatebuttonstate(result.record)
+		updatebuttonstate(record)
 
 		// tampilkan form untuk data editor
 		fn_callback()
@@ -312,7 +324,7 @@ async function form_datasaved(result, options) {
 		var o = obj[objid]
 		if (o.isCombo() && !o.isRequired()) {
 			var value =  result.dataresponse[o.getFieldValueName()];
-			var text = result.dataresponse[o.getFieldValueName()];
+			var text = result.dataresponse[o.getFieldDisplayName()];
 			if (value==null ) {
 				value = pOpt.value;
 				text = pOpt.text;

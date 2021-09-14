@@ -85,7 +85,7 @@ module.exports = async (fsd, genconfig) => {
 				if (options.field_display_name!=null) {
 					field_display_name = options.field_display_name;
 				}
-				lookupsetvalue += `\r\n\t\t\t.setValue(obj.${prefix}${fieldname}, result.record.${fieldname}, result.record.${field_display_name})`
+				lookupsetvalue += `\r\n\t\t\t.setValue(obj.${prefix}${fieldname}, record.${fieldname}, record.${field_display_name})`
 
 				var pilihnone = '';
 				// var allownull = data[fieldname].null;

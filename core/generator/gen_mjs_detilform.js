@@ -85,7 +85,7 @@ module.exports = async (fsd, genconfig) => {
 			if (options.field_display_name!=null) {
 				field_display_name = options.field_display_name;
 			}			
-			lookupsetvalue += `\r\n\t\t\t.setValue(obj.${prefix}${fieldname}, result.record.${fieldname}, result.record.${field_display_name})`
+			lookupsetvalue += `\r\n\t\t\t.setValue(obj.${prefix}${fieldname}, record.${fieldname}, record.${field_display_name})`
 
 			var pilihnone = '';
 			// var allownull = data[fieldname].null;
@@ -102,7 +102,7 @@ module.exports = async (fsd, genconfig) => {
 			if (allownull) {
 				setdefaultcombo += `\t\t\tdata.${fieldname} = '--NULL--'\r\n`
 				setdefaultcombo += `\t\t\tdata.${field_display_name} = 'NONE'\r\n`
-				nullresultloaded += `\t\tif (result.record.${fieldname}==null) { result.record.${fieldname}='--NULL--'; result.record.${field_display_name}='NONE'; }\r\n`;
+				nullresultloaded += `\t\tif (record.${fieldname}==null) { record.${fieldname}='--NULL--'; record.${field_display_name}='NONE'; }\r\n`;
 				pilihnone = `result.records.unshift({${options.field_value}:'--NULL--', ${options.field_display}:'NONE'});`	
 			} else {
 				setdefaultcombo += `\t\t\tdata.${fieldname} = '0'\r\n`

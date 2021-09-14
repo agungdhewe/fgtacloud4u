@@ -134,20 +134,31 @@ export function open(data, rowid, hdata) {
 	txt_title.html(hdata.<--__HEADERVIEWKEY__-->)
 	header_data = hdata
 
+	var pOpt = form.getDefaultPrompt(false)
 	var fn_dataopening = async (options) => {
 		options.api = `${global.modulefullname}/<!--__DETILNAME__-->-open`
 		options.criteria[form.primary.mapping] = data[form.primary.mapping]
 	}
 
 	var fn_dataopened = async (result, options) => {
-
+		var record = result.record;
 		updatefilebox(result.record);
-
+/*
 /*--__NULLRESULTLOADED__--*/
-
+*/
+		for (var objid in obj) {
+			let o = obj[objid]
+			if (o.isCombo() && !o.isRequired()) {
+				var value =  result.record[o.getFieldValueName()];
+				if (value==null ) {
+					record[o.getFieldValueName()] = pOpt.value;
+					record[o.getFieldDisplayName()] = pOpt.text;
+				}
+			}
+		}
 		form.SuspendEvent(true);
 		form
-			.fill(result.record)/*--__LOOKUPSETVALUE__--*/
+			.fill(record)/*--__LOOKUPSETVALUE__--*/
 			.setViewMode()
 			.rowid = rowid
 
@@ -257,7 +268,7 @@ async function form_datasaved(result, options) {
 		var o = obj[objid]
 		if (o.isCombo() && !o.isRequired()) {
 			var value =  result.dataresponse[o.getFieldValueName()];
-			var text = result.dataresponse[o.getFieldValueName()];
+			var text = result.dataresponse[o.getFieldDisplayName()];
 			if (value==null ) {
 				value = pOpt.value;
 				text = pOpt.text;
