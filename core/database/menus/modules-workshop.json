@@ -33,6 +33,7 @@
 		"finact/budget/deptbudgetacc",
 		
 		"finact/master/projecttype",
+		"finact/master/projectmodel",
 		"finact/master/project",
 		"finact/budget/finbudget",
 		"finact/budget/corpbudget",
@@ -50,12 +51,15 @@
 		
 		"finact/items/itemclass",
 		
-		"finact/procurement/inquiry",
+		
 		
 		"finact/budget/accbudgetformat",
 		"finact/budget/accbudgetformatset",
 		
-		"finact/acct/jurnal"
+		"finact/acct/jurnal",
+
+		"finact/procurement/inquiry",
+		"finact/procurement/request"
 
 	]
 }

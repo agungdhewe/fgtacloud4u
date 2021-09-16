@@ -6,6 +6,7 @@ import * as cbutton from './containerbutton.mjs'
 const btn_apps_back = $('#btn_apps_back')
 const btn_menu_back = $('#btn_menu_back')
 const btn_home = $('#btn_home')
+const btn_reload = $('#btn_reload');
 const btn_logout = $('#btn_logout')
 const btn_preference = $('#btn_preference')
 const pnl_menu = $('#pnl_menu')
@@ -37,6 +38,7 @@ export const ModuleShortcuts = []
 export async function init() {
 	init_btn_testmenu()
 	init_btn_home()
+	init_btn_reload();
 	init_btn_apps_back()
 	init_btn_menu_back()
 	init_btn_logout()
@@ -175,6 +177,12 @@ function init_btn_logout() {
 	})
 }
 
+function init_btn_reload() {
+	btn_reload.linkbutton({
+		onClick: () => { btn_reload_click() }
+	})
+}
+
 function init_btn_preference() {
 	btn_preference.on('click', ()=>{
 		btn_preference_click();
@@ -211,6 +219,8 @@ export function OpenModule(module, fn_loaded) {
 	CurrentState.LastMenuTitle = obj_txt_title.html()
 	btn_preference.hide();
 
+
+	btn_reload.show();
 	cbutton.SwapButtonRight(btn_logout, btn_home)
 	cbutton.SwapButtonLeft(btn_menu_back, btn_apps_back)
 
@@ -230,6 +240,7 @@ export function OpenModule(module, fn_loaded) {
 	}, 5*1000)
 
 	var module_url = './index.php/module/' + module.modulefullname + '?variancename=' + (module.variancename===undefined ? '' : module.variancename);
+	el_pnl_iframe.module_url = module_url;
 	if (module.url_param!=undefined) {
 		module_url += '&' + module.url_param;
 	}
@@ -269,6 +280,7 @@ export async function OpenHomeMenu() {
 	
 	btn_preference.show();
 
+	btn_reload.hide();	
 	cbutton.SwapButtonRight(btn_home, btn_logout)
 
 	if (CurrentState.MenuLevel==1) {
@@ -503,3 +515,9 @@ async function CreateModuleList(mdlist) {
 	}
 }
 
+
+function btn_reload_click() {
+	// var params = new URLSearchParams(el_pnl_iframe.contentWindow.location.search)
+	var module_url = el_pnl_iframe.module_url;
+	el_pnl_iframe.contentWindow.location.href = module_url;
+}
