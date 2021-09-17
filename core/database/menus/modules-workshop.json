@@ -2,6 +2,8 @@
 	"title": "home",
 	"modules": [
 		
+		"finact/dashboards/dash01",
+
 		"hrms/master/empl",
 		"hrms/master/empluser",
 		"ent/organisation/auth",
@@ -50,16 +52,20 @@
 		"finact/procurement/inquirytype",
 		
 		"finact/items/itemclass",
-		
-		
+		"finact/items/item",
+		"finact/items/itemstock",
+		"finact/items/itemasset",
+		"finact/items/itemassetmove",
 		
 		"finact/budget/accbudgetformat",
 		"finact/budget/accbudgetformatset",
 		
 		"finact/acct/jurnal",
 
+		"finact/procurement/ordercontract",
 		"finact/procurement/inquiry",
-		"finact/procurement/request"
-
+		"finact/procurement/request",
+		"finact/procurement/orderout",
+		"finact/procurement/recv"
 	]
 }
