@@ -1228,7 +1228,6 @@ async function createnew(self, fn_callback) {
 		}
  	}
 
-	console.log(data)
 	for (var f in self.ITEMS) {
 		var obj = self.ITEMS[f]
 		if (obj.hasClass('easyui-combobox') || obj.hasClass('easyui-combo')) {
