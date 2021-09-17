@@ -532,16 +532,16 @@ function InitFrontPage(mdlist) {
 
 	if (frontpage=='dashboard') {
 		pnl_menu.hide();
-		$('.container-bar .column.left').hide();
-		$('.container-bar .column.right').hide();
+		$('.container-bar .row').hide();
+		// $('.container-bar .column.right').hide();
 		CreateModuleList(mdlist)
 		OpenModule({modulefullname: 'finact/dashboards/dash01'}, () => {
 			btn_apps_back.hide();
 			btn_menu_back.hide();
 			btn_reload.hide();
 			// btn_home.hide();
-			$('.container-bar .column.left').show();
-			$('.container-bar .column.right').show();
+			$('.container-bar .row').show();
+			// $('.container-bar .column.right').show();
 		})
 	} else {
 		btn_home.linkbutton({text:'Home'});
