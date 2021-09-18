@@ -89,6 +89,7 @@ export function fgta4grid(tbl, opt) {
 		getLastId: () => { return getLastId(self) },
 		dataload: (records) => { return dataload(self, records) }, 
 		listload: (fn_listloading, fn_listloaded) => { listload(self, fn_listloading, fn_listloaded) },
+
 		nextpageload: () => ( nextpageload(self) ),
 
 		getdata: () => { return getdata(self) }
@@ -440,13 +441,13 @@ function CreateCheckbox(self, opt) {
 }
 
 
-function fill(self, data) {
+function fill(self, data, OnCompleteFn) {
 	var row = {
 		OnClick: (typeof self.options.OnRowClick === 'function') ? self.options.OnRowClick : (tr)=>{},
 		OnRender: (typeof self.options.OnRowRender === 'function') ? self.options.OnRowRender : (tr)=>{},
 		OnCellRender: (typeof self.options.OnCellRender === 'function') ? self.options.OnCellRender : (td)=>{},
 		hasCellClickEvent: (typeof self.options.OnCellClick === 'function') ? true : false,
-	
+		record: {}
 	}
 
 	for (var i in data) {
@@ -463,6 +464,11 @@ function fill(self, data) {
 	}
 
 	self.lasttrid = tr.id
+	if (typeof OnCompleteFn === 'function') {
+		OnCompleteFn();
+	} else if (typeof self.options.OnFillCompleted === 'function') {
+		self.options.OnFillCompleted();
+	}
 }
 
 function clear(self) {
@@ -671,10 +677,8 @@ async function dataload(self, records) {
 	self.datastate.maxrow = result.maxrow
 
 
-
 	if (result.records.length>0) {
-		fill(self, result.records)
-
+		fill(self, result.records, ()=>{})
 
 		if (self.datastate.offset<self.datastate.total) {
 			var sisa = self.datastate.total - self.datastate.offset; 
@@ -687,7 +691,11 @@ async function dataload(self, records) {
 	} else {
 		self.btnNext.disable()
 		self.btnNext.innerHTML = 'no data'
-	}	
+	}
+	
+	if (typeof self.options.OnFillCompleted === 'function') {
+		self.options.OnFillCompleted();
+	}
 
 }
 
@@ -741,8 +749,7 @@ async function listload(self, fn_listloading, fn_listloaded) {
 		self.datastate.maxrow = result.maxrow
 
 		if (result.records.length>0) {
-			fill(self, result.records)
-
+			fill(self, result.records, ()=>{})
 
 			if (self.datastate.offset<self.datastate.total) {
 				var sisa = self.datastate.total - self.datastate.offset; 
@@ -756,6 +763,12 @@ async function listload(self, fn_listloading, fn_listloaded) {
 			self.btnNext.disable()
 			self.btnNext.innerHTML = 'no data'
 		}
+
+		if (typeof self.options.OnFillCompleted === 'function') {
+			self.options.OnFillCompleted();
+		}
+
+
 		
 	} catch (err) {
 		var errormessage = err.errormessage !== undefined ? err.errormessage : err

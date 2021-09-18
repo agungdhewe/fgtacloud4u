@@ -54,6 +54,12 @@ global.dbtype = {
 }
 
 
+global.section = {
+	Begin: (label, csscboxlassname='') => { return {position:'begin', label: label, csscboxlassname:csscboxlassname} },
+	End: () => { return {position:'end' }}
+}
+
+
 console.log('FGTA4 Program Generator')
 console.log('=======================')
 

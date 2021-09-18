@@ -666,3 +666,9 @@ h1 {
 		transition: 1000ms;
 	}
 } */
+
+
+
+.defbottomborder {
+	border-bottom: 1px solid #ccc;
+}

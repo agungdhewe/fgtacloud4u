@@ -31,6 +31,8 @@ module.exports = async (fsd, genconfig) => {
 			if (fieldexclude.includes(fieldname)) { continue }
 
 			var labeltext = data[fieldname].text !== undefined ? data[fieldname].text : fieldname;
+			var caption = data[fieldname].caption !== undefined ? data[fieldname].caption : '';
+			var section = data[fieldname].section;
 			var compclass = data[fieldname].comp.class
 			var prefix = data[fieldname].comp.prefix
 			var type = data[fieldname].type
@@ -96,10 +98,27 @@ module.exports = async (fsd, genconfig) => {
 			}
 			
 
+
+			/* SECTION BEGIN --------------------------------------------------- */
+			if (section!=null) {
+				if (section.position=='begin') {
+					var label = section.label;
+					var csscboxlassname = section.csscboxlassname != null ? section.csscboxlassname : '' ;
+					formcomp_script += `
+		<?=$this->Section('${label}', true, true)?>
+		<div class="fgta_section_collapsible ${csscboxlassname}" style="display: none">
+					`;
+				}
+			}
+			/* SECTION BEGIN --------------------------------------------------- */
+
+
+
 			if (compclass=='easyui-checkbox') {
+
 				formcomp_script += `
 		<div class="form_row" ${formrowstyle}>
-			<div class="form_label_col"></div>
+			<div class="form_label_col">${caption}</div>
 			<div class="form_input_col" style="border: 0px solid black">
 				<input id="pnl_edit-${prefix}${fieldname}" class="easyui-checkbox c1" mapping="${fieldname}" data-options="label: '${labeltext}', labelPosition: 'after', checked: false ${stroptions}">
 			</div>
@@ -212,6 +231,18 @@ module.exports = async (fsd, genconfig) => {
 		</div>\r\n`				
 
 			}
+
+
+
+			/* SECTION END --------------------------------------------------- */
+			if (section!=null) {
+				if (section.position=='end') {
+					formcomp_script += `
+		</div>
+					`;
+				}
+			}
+			/* SECTION END --------------------------------------------------- */			
 
 		}
 

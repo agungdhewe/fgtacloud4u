@@ -34,9 +34,11 @@
 		"finact/budget/rptaccbudget",
 		"finact/budget/deptbudgetacc",
 		
+		"finact/master/trxmodel",
 		"finact/master/projecttype",
 		"finact/master/projectmodel",
 		"finact/master/project",
+		"finact/master/projecttask",
 		"finact/budget/finbudget",
 		"finact/budget/corpbudget",
 		"finact/budget/deptbudget",
@@ -49,6 +51,8 @@
 		"finact/fin/billin",
 		"finact/fin/payment",
 		
+		"finact/procurement/inquiryselect",
+		"finact/procurement/inquirymodel",
 		"finact/procurement/inquirytype",
 		
 		"finact/items/itemclass",
