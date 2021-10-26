@@ -64,10 +64,14 @@ async function openpage(self, api, args) {
 		
 	}
 
-	console.log(postparams);
 
 
 	let apiurl = `index.php/printout/${api}`
+
+	console.log(apiurl);
+	console.log(postparams);
+
+	
 	let ajax = async (apiurl, postparams, otp) => {
 		let urlEncodedDataPairs = [];
 		for (let postparamname in postparams) {

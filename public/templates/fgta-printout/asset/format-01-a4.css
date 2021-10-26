@@ -162,6 +162,7 @@ tfoot:after {
 	border: 1px solid #fff;
 	padding: 0;
 	margin: 0;
+	pointer-events: none;
 	/* display: none; */
 }
 

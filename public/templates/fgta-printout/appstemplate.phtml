@@ -197,11 +197,13 @@ if (!defined('FGTA4')) {
 	<!-- Script Module <?php //echo($this->reqinfo->modulejspath) ?> -->	
 	<?php if (is_file($this->reqinfo->modulejspath)) { ?>
 	<script type="module">
-		import * as uiprintout from './index.php/jslibs/uiprintout.js'
-		import * as ui from '<?=$this->reqinfo->modulejsurl?>';
+		import * as uibaseclass from './index.php/jslibs/uibase4.js'
+		import * as uiprintoutclass from './index.php/jslibs/uiprintout.js'
+		import * as uiclass from '<?=$this->reqinfo->modulejsurl?>';
 
-		let uibase = Object.assign({}, uiprintout);
-		window.$ui = Object.assign(uibase, ui);
+		let uibase = Object.assign({}, uibaseclass);
+		let uiprintout = Object.assign(uibase, uiprintoutclass);
+		window.$ui = Object.assign(uiprintout, uiclass);
 
 	</script>
 	<?php } ?>

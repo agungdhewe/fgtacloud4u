@@ -1,21 +1,7 @@
 {
 	"title": "home",
 	"modules": [
-		
-		"finact/dashboards/dash01",
 
-		"hrms/master/empl",
-		"hrms/master/empluser",
-		"ent/organisation/auth",
-		"ent/organisation/deptgroup",
-		"ent/organisation/dept",
-		"ent/organisation/docs",
-
-		"ent/location/site",
-
-		"ent/general/curr",
-		"ent/general/bank",
-		"finact/master/bankrekening",
 
 		"ent/affiliation/partnercategory",
 		"ent/affiliation/partnertype",
@@ -55,6 +41,7 @@
 		"finact/procurement/inquirymodel",
 		"finact/procurement/inquirytype",
 		
+		"finact/items/itemmodel",
 		"finact/items/itemclass",
 		"finact/items/item",
 		"finact/items/itemstock",
@@ -70,6 +57,52 @@
 		"finact/procurement/inquiry",
 		"finact/procurement/request",
 		"finact/procurement/orderout",
-		"finact/procurement/recv"
+		"finact/procurement/recv",
+
+		"finact/acct/rpttrialbal",
+		"finact/budget/rptaccbudgetrealisasi",
+
+		"finact/acct/rptagingar",
+		"finact/acct/rptagingardetil",
+
+		"finact/fin/billout",
+		
+		"finact/collection/collector",
+		"finact/collection/colltarget",
+		"finact/collection/collcashdisc",
+
+		"finact/collection/collfuptype",
+		"finact/collection/collaccmtn",
+
+		"finact/collection/colltemprecv",
+		"finact/collection/colltarrowtype",
+		"finact/collection/colltarprd",
+		"finact/collection/collschupd"
+	],
+
+	"archieve": [
+		
+		"fgta/framework/fguser",
+		"hrms/master/empl",
+		"hrms/master/empluser",
+		"ent/organisation/auth",
+		"ent/organisation/deptgroup",
+		"ent/organisation/dept",
+		"ent/organisation/docs",
+
+		"ent/location/site",
+		"ent/location/room",
+
+		"ent/general/curr",
+		"ent/general/bank",
+
+		"ent/general/checktpl",
+		"ent/general/checktype",
+		"ent/general/checkval",
+
+		"finact/master/periode",
+
+		"finact/master/bankrekening"
 	]
+	
 }

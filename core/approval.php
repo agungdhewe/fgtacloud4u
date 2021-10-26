@@ -100,6 +100,12 @@ class StandartApproval {
 				(:$field_id, :$field_idline, :docauth_descr, :docauth_order, :docauth_value, :docauth_min, :authlevel_id, :authlevel_name, :auth_id, :auth_name, :_createby, :_createdate)
 			");
 
+			$stmt_project_auth = $db->prepare("
+				select 
+				auth_id, 
+				(select auth_name from mst_auth where auth_id=A.auth_id) as auth_name
+				from mst_dept A where dept_id =(select dept_id from mst_projbudget where projbudget_id = :projbudget_id);			
+			");
 
 
 			$sql = "
@@ -144,6 +150,16 @@ class StandartApproval {
 				if ($row['auth_id']=='') {
 					if ($row['authlevel_id']==self::AUTHLEVEL_BUDGETOWNER) {
 						// based on projbudget_id
+						if (!\property_exists($currentdata->header, 'projbudget_id')) {
+							throw new Exception('tidak ada field projbudget_id di header');
+						}
+						$projbudget_id = $currentdata->header->projbudget_id;
+						$stmt_project_auth->execute([':projbudget_id'=>$projbudget_id]);
+						$projbudgetauthrow = $stmt_project_auth->fetch(\PDO::FETCH_ASSOC);
+						$p_auth_id = $projbudgetauthrow['auth_id'];
+						$p_auth_name =  $projbudgetauthrow['auth_name'];
+						$param[':auth_id'] = $p_auth_id;
+						$param[':auth_name'] = $p_auth_name;						
 					} else {
 						if (\array_key_exists($authlevel_id, $auths)) {
 							$param[':auth_id'] = $auths[$authlevel_id]['auth_id'];
@@ -491,7 +507,7 @@ class StandartApproval {
 
 			// debug::log('decline');
 			
-			$rows = self::getUserApprovalData($db, $param, $dept_id_field = 'dept_id');
+			$rows = self::getUserApprovalData($db, $param, $dept_id_field);
 			try {
 
 				foreach ($rows as $row) {

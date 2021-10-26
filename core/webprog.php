@@ -3,9 +3,21 @@
 
 class WebProg {
 
-	function log($obj) {
+	function log($obj, $traceinfo=true) {
 		$max_rows = 10;
 		$debug_path = __LOCALDB_DIR . '/debug/log.txt';
+
+		if ($traceinfo) {
+			$bt = debug_backtrace();
+			$caller = array_shift($bt);
+
+			$trace  = "\r\n--------------------------------\r\n";
+			$trace .= $caller['file'] . " line " . $caller['line'];
+			$trace .= "\r\n--------------------------------\r\n";
+
+		} else {
+			$trace = "";
+		}
 		
 		try {
 			if  (!is_file($debug_path)) {
@@ -21,9 +33,9 @@ class WebProg {
 
 			$fp = fopen($debug_path, 'a');
 			if (is_array($obj) || is_object($obj)) {
-				fputs($fp, print_r($obj, true) . "\r\n");
+				fputs($fp, $trace . print_r($obj, true) . "\r\n");
 			} else {
-				fputs($fp, $obj . "\r\n");
+				fputs($fp, $trace . $obj . "\r\n");
 			}
 			fclose($fp);
 			

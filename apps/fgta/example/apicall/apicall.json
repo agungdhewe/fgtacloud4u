@@ -1,0 +1,9 @@
+{
+	"title" : "API",
+	"allowanonymous" : true,
+	"allowedgroups" : ["public"],
+	"apis" : {
+		"myapi" : { "allowanonymous": true, "allowedgroups" : ["public"] }
+	}	
+}
+
