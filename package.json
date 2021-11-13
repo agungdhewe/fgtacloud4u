@@ -9,12 +9,14 @@
 		"fgta/framework/formdev/microservice-debug": "nodemon --exec node ./apps/fgta/framework/formdev/microservice/server.js --config ./apps/fgta/framework/formdev/microservice/nodemon.json ",
 		"retail/inv/arpt/microservice-debug": "nodemon --exec node ./apps/retail/inv/arpt/microservice/server.js --config ./apps/retail/inv/arpt/microservice/nodemon.json ",
 		"fgta/example/longrun/microservice-debug": "nodemon --exec node --preserve-symlinks ./apps/fgta/example/longrun/microservice/server.js --config ./apps/fgta/example/longrun/microservice/nodemon.json ",
-		"fgta/example/longrun/microservice": "node --preserve-symlinks ./apps/fgta/example/longrun/microservice/server.js --config ./apps/fgta/example/longrun/microservice/nodemon.json "
+		"fgta/example/longrun/microservice": "node --preserve-symlinks ./apps/fgta/example/longrun/microservice/server.js --config ./apps/fgta/example/longrun/microservice/nodemon.json ",
+		"finact/procurement/recv/printmulti": "node --preserve-symlinks ./apps/finact/procurement/recv/microservice/printmulti.js"
 	},
 	"author": "",
 	"license": "ISC",
 	"description": "",
 	"dependencies": {
+		"html-pdf-node": "^1.0.7",
 		"rimraf": "^3.0.2"
 	},
 	"devDependencies": {

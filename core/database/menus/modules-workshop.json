@@ -1,7 +1,14 @@
 {
 	"title": "home",
 	"modules": [
-
+		"finact/collection/collagingar",
+		"finact/collection/rptcolltarget",
+		"hrms/master/empl",
+		"hrms/master/empluser",
+		"ent/organisation/auth",
+		"ent/organisation/deptgroup",
+		"ent/organisation/dept",
+		"ent/organisation/docs",
 
 		"ent/affiliation/partnercategory",
 		"ent/affiliation/partnertype",
@@ -55,6 +62,7 @@
 
 		"finact/procurement/ordercontract",
 		"finact/procurement/inquiry",
+		"finact/procurement/inquiryprocess",
 		"finact/procurement/request",
 		"finact/procurement/orderout",
 		"finact/procurement/recv",
@@ -69,6 +77,7 @@
 		
 		"finact/collection/collector",
 		"finact/collection/colltarget",
+		"finact/collection/colltargetprint",
 		"finact/collection/collcashdisc",
 
 		"finact/collection/collfuptype",

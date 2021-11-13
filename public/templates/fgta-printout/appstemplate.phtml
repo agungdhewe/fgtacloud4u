@@ -88,10 +88,18 @@ if (!defined('FGTA4')) {
 				return check;
 			};
 
-
+			window.format_number = (value) => {
+				var val = parseFloat(value);
+				if (!isNaN(val)) {
+					return val.toLocaleString('en-US');	
+				} else {
+					return value;
+				}			
+			}
 
 			function adjustPage(param) {
-				// default value
+				// console.log(param);
+
 				param = Object.assign({
 					adjust_height_report: 3,
 					adjust_height_page: -2
@@ -122,9 +130,6 @@ if (!defined('FGTA4')) {
 				reporttotalpage.innerHTML = pcount;
 
 
-
-
-				
 				var top = 0
 				var height = 0;
 				pageheight_px = pageheight_px + param.adjust_height_report ;
@@ -137,16 +142,26 @@ if (!defined('FGTA4')) {
 						pagenumber.appendChild(document.createTextNode(`Page ${i} of ${pcount}`));
 					}
 
-					top = (i*pageheight_px) - pageheight_px;
-					height = pageheight_px + param.adjust_height_page;
+
+					var adjusted_page_height = pageheight_px + param.adjust_height_page;
+
+					// top = (i*pageheight_px) - pageheight_px;
+					// height = pageheight_px + param.adjust_height_page;
+					top = (i*adjusted_page_height) - adjusted_page_height;
+					height = adjusted_page_height;
+
+
+					// console.log(height);
 
 					ph.appendChild(pagenumber)
 					ph.classList.add('paging');
-					ph.style.top = `${(i*pageheight_px) - pageheight_px}px`;
-					ph.style.height = `${pageheight_px-2}px`
+					// ph.style.top = `${(i*pageheight_px) - pageheight_px}px`;
+					// ph.style.height = `${pageheight_px-2}px`
+					ph.style.top = `${top}px`;
+					ph.style.height = `${height}px`
 					document.body.appendChild(ph);
 				}
-				document.body.style.height = `${top + height}px`;
+				// document.body.style.height = `${top + height}px`;
 				document.body.style.justifyContent = "space-between";
 
 			}

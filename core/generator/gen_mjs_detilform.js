@@ -162,6 +162,14 @@ module.exports = async (fsd, genconfig) => {
 			var OnSelectedScript =  data[fieldname].comp.options.OnSelectedScript===undefined? '' : data[fieldname].comp.options.OnSelectedScript;
 
 
+			var fieldMappings = '';
+			if (data[fieldname].comp.options.field_mappings!==undefined) {
+				fieldMappings = "\r\n";
+				for (var mp of data[fieldname].comp.options.field_mappings) {
+					fieldMappings += "\t\t\t" + mp + ',\r\n'
+				}
+			} 
+
 			slideselectlib = `import {fgta4slideselect} from  '../../../../../index.php/asset/fgta/framework/fgta4libs/fgta4slideselect.mjs'`
 			slideselects += `
 	obj.${prefix}${fieldname}.name = '${fsd.panel}-${prefix}${fieldname}'		
@@ -174,9 +182,9 @@ module.exports = async (fsd, genconfig) => {
 		fieldDisplay: '${options.field_display}',
 		fields: [
 			{mapping: '${options.field_value}', text: '${options.field_value}'},
-			{mapping: '${options.field_display}', text: '${options.field_display}'},
+			{mapping: '${options.field_display}', text: '${options.field_display}'},${fieldMappings}
 		]${datasample},
-		OnDataLoading: (criteria) => {},
+		OnDataLoading: (criteria, options) => {},
 		OnDataLoaded : (result, options) => {
 			${pilihnone}	
 		},
