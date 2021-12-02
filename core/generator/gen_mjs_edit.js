@@ -172,6 +172,7 @@ module.exports = async (fsd, genconfig) => {
 					}
 				} 
 
+				var staticfilter = options.staticfilter!=null ? options.staticfilter.trim() : '';
 
 				slideselectlib = `import {fgta4slideselect} from  '../../../../../index.php/asset/fgta/framework/fgta4libs/fgta4slideselect.mjs'`
 				slideselects += `
@@ -186,7 +187,9 @@ module.exports = async (fsd, genconfig) => {
 			{mapping: '${options.field_value}', text: '${options.field_value}'},
 			{mapping: '${options.field_display}', text: '${options.field_display}'},${fieldMappings}
 		]${datasample},
-		OnDataLoading: (criteria) => {},
+		OnDataLoading: (criteria) => {
+			${staticfilter}			
+		},
 		OnDataLoaded : (result, options) => {
 			${hapuspilihansama}${pilihnone}	
 		},

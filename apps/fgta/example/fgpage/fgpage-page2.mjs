@@ -5,7 +5,7 @@ import { fgta4ParallelProcess } from '../../../../../index.php/asset/fgta/framew
 
 var this_page_id;
 var pnl_form = $('#pnl_editpage2-form'); 
-
+var seq = 0;
 
 export async function init(opt) {
 	this_page_id = opt.id
@@ -122,12 +122,13 @@ export function FormatPage() {
 
 	}
 
-	FormatPage_Init(objchecklist);
+	seq++;
+	FormatPage_Init(objchecklist, seq);
 
 }
 
 
-async function FormatPage_Init(objchecklist) {
+async function FormatPage_Init(objchecklist, seq) {
 	$.parser.parse('#pnl_editpage2-form');
 
 
@@ -140,7 +141,7 @@ async function FormatPage_Init(objchecklist) {
 		if (objcl.item.type === 'combo') {
 			console.log(id);
 			
-			objcl.name = id	
+			objcl.name = id	+ '_' + seq;
 			new fgta4slideselect(objcl, {
 				title: 'Pilih ' + objcl.item.caption,
 				returnpage: this_page_id,

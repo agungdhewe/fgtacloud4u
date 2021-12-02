@@ -458,7 +458,14 @@ class StandartApproval {
 					]);
 				}
 
-				$isfinalapproval = self::DoFinalApproval($db, $param);
+
+				$bypassauthority = property_exists($param, 'bypassauthority') ? $param->bypassauthority : false;
+				if ($bypassauthority) {
+					$isfinalapproval = true;
+				} else {
+					$isfinalapproval = self::DoFinalApproval($db, $param);
+				}
+
 				$ret = (object)['isfinalapproval'=>false];
 				if ($isfinalapproval) {
 					$ret->isfinalapproval = true;
@@ -640,19 +647,27 @@ class StandartApproval {
 
 
 	static function CheckAuthoriryToApprove($db, $param, $dept_id_field = 'dept_id') {
+		$bypassauthority = property_exists($param, 'bypassauthority') ? $param->bypassauthority : false;
+		if ($bypassauthority) {
+			return;
+		}
+
 		$id = $param->approvalsource['id'];
 		try {
 			$rows = self::getUserApprovalData($db, $param, $dept_id_field);
 			if (count($rows)==0) {
 				throw new \Exception("Tidak ada otoritas untuk approve/decline document '$id'");
 			}
-
 		} catch (\Exception $ex) {
 			throw $ex;
 		}
 	}
 
 	static function CheckPendingApproval($db, $param, $dept_id_field='dept_id') {
+		$bypassauthority = property_exists($param, 'bypassauthority') ? $param->bypassauthority : false;
+		if ($bypassauthority) {
+			return;
+		}
 
 		$id = $param->approvalsource['id'];
 

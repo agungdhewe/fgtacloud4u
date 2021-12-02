@@ -84,4 +84,20 @@ class WebModule extends \FGTA4\WebProg {
 		echo '</a>';
 	}
 
+
+	public function ArrayValueAdd(&$arrdata, $aradd) {
+		foreach ($arrdata as $name => $value) {
+			if (array_key_exists($name, $aradd)) {
+				$adder = (float)$aradd[$name];
+				$arrdata[$name] += $adder;
+			}
+		}
+	}
+
+	public function ArayValueReset(&$arrdata) {
+		foreach ($arrdata as $name => $value) {
+			$arrdata[$name] = 0;
+		}
+	}
+
 }

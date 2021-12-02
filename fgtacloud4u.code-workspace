@@ -44,11 +44,9 @@
 			}
 
 		],
-
-
+		"restoreTerminals.runOnStartup": true,
+		"restoreTerminals.artificialDelayMilliseconds": 100,
+		"terminal.integrated.persistentSessionReviveProcess":"never"
 		
 	},
-
-
-
 }
