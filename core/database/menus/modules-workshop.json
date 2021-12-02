@@ -2,6 +2,9 @@
 	"title": "home",
 	"modules": [
 		
+		"finact/sales/orderin",
+		"finact/sales/orderintype",
+
 		{
 			"title" : "General Setup",
 			"modules" : [
