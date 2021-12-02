@@ -2,6 +2,16 @@
 
 
 $LoginAddonExecute = function($userdata, $db) {
+
+	// cek apakah tabel mst_empl sudah ada
+	$stmt = $db->prepare("SHOW TABLES LIKE 'mst_empl';");
+	$stmt->execute();
+	$rows  = $stmt->fetchall(\PDO::FETCH_ASSOC);
+	if (count($rows)==0) {
+		return;
+	}
+
+
 	try {
 		$sql = "
 			select 
