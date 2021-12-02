@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="fgtacloudicon.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 50.799998 50.800002"
+   height="192"
+   width="192">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     inkscape:window-maximized="1"
+     inkscape:window-y="27"
+     inkscape:window-x="41"
+     inkscape:window-height="1025"
+     inkscape:window-width="1879"
+     units="px"
+     showgrid="false"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="111.84701"
+     inkscape:cx="104.79968"
+     inkscape:zoom="3.5797281"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-288.53332)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       sodipodi:nodetypes="ccccccccccsccccc"
+       inkscape:connector-curvature="0"
+       id="path815"
+       d="m 5.8950155,336.38601 c -13.001216,-15.87714 1.1470467,-33.16684 7.8249335,-30.09532 -6.6090747,-14.78664 16.682394,-21.69793 20.431772,-9.38774 9.636806,-12.23709 20.211089,7.62758 10.143434,13.78405 5.919666,0.85279 11.261199,19.55338 -2.463405,25.46831 l -20.721585,0.10726 3.032733,-10.37068 9.93637,0.49614 1.376611,-7.4471 -9.204561,-0.16718 c 0.828903,-2.63255 1.704601,-5.90972 3.241546,-7.88865 2.937208,-3.78171 10.221555,-1.42252 12.214577,2.96163 l 3.103051,-5.7003 c -3.914989,-6.75807 -18.346381,-11.01938 -25.149388,4.37659 L 8.7931366,336.49333 Z"
+       style="fill:#0066ff;stroke:none;stroke-width:1.46902px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>
