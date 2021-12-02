@@ -1,0 +1,125 @@
+@font-face {
+	font-family: "Karla";
+	font-style: normal;
+	font-weight: 400;	
+    src: url('../../index.php/public/assets/karla-v13-latin-regular.woff2') format("woff2")
+}
+
+
+
+/* module.css */
+* {
+    font-family: "Karla"; 
+}
+
+
+body {
+	font-family: "Karla";
+/*	font-size: 12px;*/
+	background: #efefef url('../../index.php/public/assets/bg.jpg') fixed ; 
+}
+
+
+
+
+.panel-header, .panel-body {
+	border-style: none !important;
+}
+
+
+.textbox-focused {
+  border-color: #027387;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  -moz-box-shadow: 0 0 3px 0 transparent;
+  -webkit-box-shadow: 0 0 3px 0 transparent;
+  box-shadow: 0 0 3px 0 transparent;
+		
+}
+
+
+.textbox {
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+
+
+
+
+
+
+.main-bgmenu {
+	background: rgb(127,117,128);
+	background: linear-gradient(90deg, rgba(127,117,128,1) 0%, rgba(188,159,163,1) 69%, rgba(223,201,204,1) 100%);
+}
+
+
+
+
+.icon-noselect {
+	-webkit-box-shadow: 1px 1px 2px 0px rgb(87, 87, 87);
+	-moz-box-shadow: 1px 1px 2px 0px rgb(87, 87, 87);
+	box-shadow: 1px 1px 2px 0px  rgb(87, 87, 87);
+	border-top: 1px solid #fff;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+
+.form_label_col {
+	font-weight: bold;
+	color: #687b8a;
+}
+
+.fgta-page-title {
+	font-size: 16px !important;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 1px;	
+}
+
+
+
+@media only screen and (max-width: 768px) {
+	.icon-noselect {
+		margin-right: 10px;
+		margin-bottom: 10px;
+	}
+
+	.form_row {
+		margin-top: 40px;
+	}
+
+	.form_input_col .textbox {
+		width: 100% !important;
+	}
+
+}
+
+
+
+
+.fgta-recordstatus-button {
+	margin-top: 20px !important;
+	margin-bottom: 50px !important;
+	font-weight: bold;
+}
+
+
+.fgta-recordstatus-button[name="fgta-record-status"]  {
+	padding-left: 5px !important;
+	padding-right: 8px !important;
+}
+
+.fgta-recordstatus-button[name="fgta-record-log"]  {
+	padding-left: 8px !important;
+}
+
+
+.fgta-recordstatus-button > a {
+	color: #687b8a !important;
+}
