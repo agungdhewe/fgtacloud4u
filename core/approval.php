@@ -128,6 +128,9 @@ class StandartApproval {
 				':doc_id' => $doc_id
 			]);
 			$rows = $stmt->fetchall(\PDO::FETCH_ASSOC);
+			if (count($rows)==0) {
+				throw new \Exception("Approval untuk Dokumen '$doc_id' belum di setup"); 
+			}
 			foreach ($rows as $row) {
 				// debug::log(print_r($row, true));
 

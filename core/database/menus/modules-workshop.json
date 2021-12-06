@@ -1,43 +1,119 @@
 {
 	"title": "home",
 	"modules": [
-		
-		"finact/sales/orderin",
-		"finact/sales/orderintype",
+
+
+		"finact/budget/projbudgetrev",
+
+		{"program": "finact/budget/projbudget", "variancename":"view"},
+		{"program": "finact/budget/projbudget", "variancename":"propose"},
+		{"program": "finact/budget/projbudget", "variancename":"approval"},
+		"finact/budget/projbudget",
 
 		{
-			"title" : "General Setup",
+			"title" : "Budgeting",
 			"modules" : [
-				"ent/general/bank",
-				"ent/general/country",
-				"ent/general/curr",
-				"ent/general/doctype",
-				"ent/general/gender",
-				"ent/general/religion",
-				"ent/affiliation/contacttype",
-				"ent/affiliation/partnertype",
-				"ent/affiliation/partnerorg",
-				"ent/affiliation/partnercategory",
-				"ent/affiliation/partner",
-				"ent/affiliation/brandtype",
-				"ent/affiliation/brand"
+				
+				
+				{"program": "finact/budget/deptbudget", "variancename":"view"},
+				{"program": "finact/budget/deptbudget", "variancename":"propose"},
+				{"program": "finact/budget/deptbudget", "variancename":"approval"},
+				"finact/budget/deptbudget",
+
+				{"program": "finact/budget/deptbudgetrev", "variancename":"view"},
+				{"program": "finact/budget/deptbudgetrev", "variancename":"propose"},
+				{"program": "finact/budget/deptbudgetrev", "variancename":"approval"},
+				"finact/budget/deptbudgetrev",
+		
+
+				{
+					"title" : "Budget Setup",
+					"modules" : [
+						"finact/master/accbudgetmodel",
+						"finact/master/accbudgetgroup",
+						"finact/master/accbudget",
+						"finact/budget/deptbudgetacc",
+						"finact/budget/accbudgetformat",
+						"finact/budget/accbudgetformatset"
+					]
+				}
+
+
+
 			]
 		},
 
+
 		{
-			"title" : "Location Setup",
+			"title": "Setup",
+			"modules": [
+
+
+
+
+				{
+					"title" : "General Setup",
+					"modules" : [
+						"ent/general/bank",
+						"ent/general/country",
+						"ent/general/curr",
+						"ent/general/doctype",
+						"ent/general/gender",
+						"ent/general/religion",
+						"ent/affiliation/contacttype",
+						"ent/affiliation/partnertype",
+						"ent/affiliation/partnerorg",
+						"ent/affiliation/partnercategory",
+						"ent/affiliation/partner",
+						"ent/affiliation/brandtype",
+						"ent/affiliation/brand"
+					]
+				},
+		
+				{
+					"title" : "Location Setup",
+					"modules" : [
+						"ent/location/area",
+						"ent/location/prov",
+						"ent/location/city",
+						"ent/location/zone",
+						"ent/location/land",
+						"ent/location/site",
+						"ent/location/landtype",
+						"ent/location/sitemodel",
+						"ent/location/sitegroup"
+					]
+				},
+		
+				{
+					"title" : "Organisation Setup",
+					"modules" : [
+						"ent/organisation/depttype",
+						"ent/organisation/deptmodel",
+						"ent/organisation/deptgroup",
+						"ent/organisation/authlevel",
+						"ent/organisation/auth",
+						"ent/organisation/dept",
+						"ent/organisation/unitgroup",
+						"ent/organisation/unit",
+						"ent/organisation/docs"
+					]
+				}
+
+			]
+		},
+
+
+	
+
+		{
+			"title" : "HR",
 			"modules" : [
-				"ent/location/area",
-				"ent/location/prov",
-				"ent/location/city",
-				"ent/location/zone",
-				"ent/location/land",
-				"ent/location/site",
-				"ent/location/landtype",
-				"ent/location/sitemodel",
-				"ent/location/sitegroup"
+				"hrms/master/empl",
+				"hrms/master/empluser"
 			]
 		}
+
 
 	],
 

@@ -44,8 +44,10 @@ module.exports = async (fsd, genconfig) => {
 				}
 			}
 		}
+
+		var tablelist = tabletodelete.length > 0 ? `['${tabletodelete.join("', '")}']` : '[]'; 
 		var deletereference = `
-				$tabletodelete = ['${tabletodelete.join("', '")}'];
+				$tabletodelete = ${tablelist};
 				foreach ($tabletodelete as $reftablename) {
 					$cmd = \\FGTA4\\utils\\SqlUtility::CreateSQLDelete($reftablename, $key);
 					$stmt = $this->db->prepare($cmd->sql);
