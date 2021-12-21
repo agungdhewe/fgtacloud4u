@@ -267,13 +267,24 @@ class ModuleShorcut extends ModuleIcon {
 				$this->title = $variancedata->title;
 			}
 
-			if (property_exists($variancedata, 'icon')) {
-				$this->icon = $variancedata->icon;
-			}
 
 			if (property_exists($variancedata, 'backcolor')) {
 				$this->backcolor = $variancedata->backcolor;
+
 			}
+
+
+			if (property_exists($variancedata, 'icon')) {
+				$this->icon = $variancedata->icon;
+				$iconinfo = IconInfo::getIconInfo($this->icon);
+				if (array_key_exists('backgrounColor', $iconinfo)) {
+					// WebAPI::log($iconinfo['backgrounColor'] . ' -- ' . $this->backcolor);
+					if ($this->backcolor=='' && !($iconinfo['backgrounColor'] == '#000000' || $iconinfo['backgrounColor'] == '#ffffff')) {
+						$this->backcolor = $iconinfo['backgrounColor'];
+					}
+				}
+			}
+
 
 			if (property_exists($variancedata, 'allowedgroups')) {
 				$this->allowedgroups = $variancedata->allowedgroups;

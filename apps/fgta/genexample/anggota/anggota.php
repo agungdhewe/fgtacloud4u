@@ -2,10 +2,10 @@
 
 
 /**
- * {__MODULEPROG__}
+ * fgta/genexample/anggota/anggota.php
  *
  * ===================================================================
- * Entry point Program Module {__BASENAME__}
+ * Entry point Program Module anggota
  * ===================================================================
  * Program yang akan pertama kali diakses 
  * oleh semua request untuk menampilkan modul 
@@ -14,7 +14,7 @@
  * Tangerang, 26 Maret 2021
  *
  * digenerate dengan FGTA4 generator
- * tanggal {__GENDATE__}
+ * tanggal 17/12/2021
  */
 $MODULE = new class extends WebModule {
 
@@ -31,7 +31,7 @@ $MODULE = new class extends WebModule {
 			// dengan memanggil variable global.setup.<namavariable>
 			$this->setup = (object)array(
 				'print_to_new_window' => false,
-				'username' => $userdata->username,/*--__AUTOBYLOGIN__--*//*--__DEFDOCID__--*/
+				'username' => $userdata->username,
 			);
 
 			$variancename = $_GET['variancename'];

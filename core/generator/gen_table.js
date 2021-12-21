@@ -16,7 +16,7 @@ const colFgBlack = "\x1b[30m"
 const colBright = "\x1b[1m"
 const BgYellow = "\x1b[43m"
 
-const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'lowercase', 'text', 'caption', 'section', 'suppresslist', 'options', 'unset', 'tips', 'tipstype', 'initialvalue', 'hidden', 'lookup', 'idsuffix']
+const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'lowercase', 'text', 'caption', 'section', 'suppresslist', 'options', 'unset', 'tips', 'tipstype', 'initialvalue', 'hidden', 'lookup', 'idsuffix', 'autobylogin']
 const detil_props = ['table', 'form', 'headerview', 'title', 'isapprovalform']
 
 
@@ -129,9 +129,14 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 
 		var fks = [];
 
+		var add_unique = ''
+		var add_columns = ''
+		var modify_columns = ''
 		var ddl_keys = ''
 		var ddl_constraint = ''
 		var ddl_fields = ''
+
+		var last_fieldname = '';
 		for (var fieldname in options.data) {
 			var field = options.data[fieldname]
 			console.log(`${tablename} ${fieldname}`)
@@ -177,8 +182,8 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 					usefkname = fkname + '_' + fks[fkname];
 				}
 
-				ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY `"+fieldname+"` (`"+fieldname+"`);\r\n"
-				ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `"+ usefkname +"` FOREIGN KEY (`"+fieldname+"`) REFERENCES `" + opt.table + "` (`" + opt.field_value + "`);\r\n"
+				ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY IF NOT EXISTS `"+fieldname+"` (`"+fieldname+"`);\r\n"
+				ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `"+ usefkname +"` FOREIGN KEY IF NOT EXISTS  (`"+fieldname+"`) REFERENCES `" + opt.table + "` (`" + opt.field_value + "`);\r\n"
 			} else {
 
 				var reference = options.data[fieldname].reference
@@ -194,8 +199,8 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 						usefkname = fkname + '_' + fks[fkname];
 					}
 
-					ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY `"+fieldname+"` (`"+fieldname+"`);\r\n"
-					ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `"+ usefkname +"` FOREIGN KEY (`"+fieldname+"`) REFERENCES `" +ref_table + "` (`" + ref_field_value + "`);\r\n"
+					ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY IF NOT EXISTS  `"+fieldname+"` (`"+fieldname+"`);\r\n"
+					ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `"+ usefkname +"` FOREIGN KEY IF NOT EXISTS (`"+fieldname+"`) REFERENCES `" +ref_table + "` (`" + ref_field_value + "`);\r\n"
 				}
 
 
@@ -204,27 +209,50 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 
 			if (headertable_name!=tablename) {
 				if (fieldname==headerprimarykey) {
-					ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY `"+fieldname+"` (`"+fieldname+"`);\r\n"
-					ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `fk_" + tablename + "_" + headertable_name + "` FOREIGN KEY (`"+fieldname+"`) REFERENCES `" + headertable_name + "` (`" + headerprimarykey + "`);\r\n"
+					ddl_keys += "ALTER TABLE `"+ tablename +"` ADD KEY IF NOT EXISTS `"+fieldname+"` (`"+fieldname+"`);\r\n"
+					ddl_constraint += "ALTER TABLE `"+ tablename +"` ADD CONSTRAINT `fk_" + tablename + "_" + headertable_name + "` FOREIGN KEY IF NOT EXISTS (`"+fieldname+"`) REFERENCES `" + headertable_name + "` (`" + headerprimarykey + "`);\r\n"
 
 				}
 			}
 
+			if (!primarykeys.includes(fieldname) && !['_createby', '_createdate', '_modifyby', '_modifydate'].includes(fieldname)) {
+				add_columns += "ALTER TABLE `"+ tablename + "` ADD COLUMN IF NOT EXISTS  " + field_def + " AFTER `"  + last_fieldname + "`;\r\n"
+				modify_columns += "ALTER TABLE `"+ tablename + "` MODIFY COLUMN IF EXISTS  " + field_def + " AFTER `"  + last_fieldname + "`;\r\n"
+			}
+
+			
+
+
+			last_fieldname = fieldname
 		}	
 
-		var sql = `CREATE TABLE \`${tablename}\` (\r\n`
+		var sql = `CREATE TABLE IF NOT EXISTS \`${tablename}\` (\r\n`
 		sql += ddl_fields
 
 		// uniques
 		for (var uniquekeyname in options.uniques) {
 			var uniquefields = options.uniques[uniquekeyname]
 			sql += '	UNIQUE KEY `' + uniquekeyname + '` (`' + uniquefields.join('`, `') + '`),\r\n'
+
+			add_unique += "ALTER TABLE `"+ tablename + "` ADD CONSTRAINT `" + uniquekeyname + "` UNIQUE IF NOT EXISTS " + ' (`' + uniquefields.join('`, `') + '`);\r\n'
 		}
 
 		sql += '	PRIMARY KEY (`' + primarykeys.join('`, `') + '`)\r\n'
 		sql += ') \r\n'
 		sql += 'ENGINE=InnoDB\r\n'
 		sql += `COMMENT='${comment}';\r\n\r\n`
+
+		sql += "\r\n"
+		sql += add_columns
+		sql += "\r\n"
+
+		sql += "\r\n"
+		sql += modify_columns
+		sql += "\r\n"
+
+		sql += "\r\n"
+		sql += add_unique
+		sql += "\r\n"
 
 		sql += ddl_keys
 		sql += "\r\n"

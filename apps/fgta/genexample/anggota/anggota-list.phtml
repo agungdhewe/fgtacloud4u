@@ -1,0 +1,42 @@
+<div id="pnl_list">
+	<div class="fgta-page-title">Daftar Anggota</div>
+
+	<div id="pnl_list-pnl_head" style="display: flex; align-items: flex-end">
+		<!-- Simple Query -->
+		<div class="list-buttonbaru" style="text-align: right; width: calc(100% - 10px); float: right;  position: absolute">
+			<a href="javascript:void(0)" id="pnl_list-btn_new" class="easyui-linkbutton c8" style="width: 60px">Baru</a>
+		</div>
+		<div class="list-search-wrap" style="width: calc(100% - 65px); display: flex;">
+			<div class="list-search-item" style="width: 50px;">Cari</div>
+			<div class="list-search-item">
+				<input id="pnl_list-txt_search" class="easyui-textbox" style="width: 100%">
+			</div>
+			<div class="list-search-item" style="width: 45px">
+				<a href="javascript:void(0)" id="pnl_list-btn_load" class="easyui-linkbutton c8" style="width: 45px">Load</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div style="margin-top: 10px">
+		<table id="pnl_list-tbl_list" paging="true" cellspacing="0" width="100%" class="deftable">
+			<thead>
+				<tr>
+					<th mapping="anggota_id">anggota_id</th>
+					<th mapping="anggota_name">anggota_name</th>
+					<th mapping="kota_name">kota_name</th>
+
+				</tr>
+				<tr style="background-color: #cccccc; height: 30px">
+					<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">ID</td>
+					<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">Unit</td>
+					<td class="fgtable-head" style="width: 100px; border-bottom: 1px solid #000000">Kota</td>
+
+				</tr>
+			</thead>
+		</table>
+	</div>
+
+
+
+</div>

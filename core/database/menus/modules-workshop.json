@@ -1,20 +1,28 @@
 {
 	"title": "home",
 	"modules": [
+		
+		"finact/sales/orderintype",
 
+		"retail/master/merchitemctg",
+		"retail/master/merchitem",
+		"retail/sales/merchquotout",
+		"retail/sales/merchorderin",
 
-		"finact/budget/projbudgetrev",
-
-		{"program": "finact/budget/projbudget", "variancename":"view"},
-		{"program": "finact/budget/projbudget", "variancename":"propose"},
-		{"program": "finact/budget/projbudget", "variancename":"approval"},
-		"finact/budget/projbudget",
+		{
+			"title" : "Account",
+			"modules" : [
+				"finact/master/coagroup",
+				"finact/master/coa",
+				"finact/master/accbudgetgroup",
+				"finact/master/accbudget"
+			]
+		},
 
 		{
 			"title" : "Budgeting",
 			"modules" : [
-				
-				
+
 				{"program": "finact/budget/deptbudget", "variancename":"view"},
 				{"program": "finact/budget/deptbudget", "variancename":"propose"},
 				{"program": "finact/budget/deptbudget", "variancename":"approval"},
@@ -25,10 +33,25 @@
 				{"program": "finact/budget/deptbudgetrev", "variancename":"approval"},
 				"finact/budget/deptbudgetrev",
 		
+				{"program": "finact/budget/projbudget", "variancename":"view"},
+				{"program": "finact/budget/projbudget", "variancename":"propose"},
+				{"program": "finact/budget/projbudget", "variancename":"approval"},
+				"finact/budget/projbudget",
+
+
+				{"program": "finact/budget/projbudgetrev", "variancename":"view"},
+				{"program": "finact/budget/projbudgetrev", "variancename":"propose"},
+				{"program": "finact/budget/projbudgetrev", "variancename":"approval"},
+				"finact/budget/projbudgetrev",
+			
 
 				{
 					"title" : "Budget Setup",
 					"modules" : [
+
+						"finact/master/projecttype",
+						"finact/master/project",
+
 						"finact/master/accbudgetmodel",
 						"finact/master/accbudgetgroup",
 						"finact/master/accbudget",
@@ -45,11 +68,45 @@
 
 
 		{
+			"title" : "Items",
+			"modules" : [
+				"finact/items/itemclass",
+				"finact/items/item",
+				"finact/items/itemstock",
+				"finact/items/itemasset"
+			]
+		},
+
+		{
+			"title" : "Billing",
+			"modules" : [
+				"media/sales/mediaorder",
+				"media/sales/logproof",
+				"media/sales/logproofassign",
+				"media/sales/logproofbilling",
+				"finact/fin/billout"
+			]
+		},
+
+
+		{
+			"title" : "Expenditure",
+			"modules" : [
+				"finact/procurement/inquirytype",
+				"finact/procurement/inquiry",
+				"finact/procurement/request",
+				"finact/procurement/orderout",
+				"finact/procurement/recv"
+			]
+		},
+
+		{
 			"title": "Setup",
 			"modules": [
 
 
-
+				"finact/sales/orderintype",
+				"finact/items/itemclass",
 
 				{
 					"title" : "General Setup",
@@ -66,7 +123,8 @@
 						"ent/affiliation/partnercategory",
 						"ent/affiliation/partner",
 						"ent/affiliation/brandtype",
-						"ent/affiliation/brand"
+						"ent/affiliation/brand",
+						{"program":"ent/affiliation/brand", "variancename":"manual-id-input"}
 					]
 				},
 		
@@ -110,6 +168,7 @@
 			"title" : "HR",
 			"modules" : [
 				"hrms/master/empl",
+				"fgta/framework/fguser",
 				"hrms/master/empluser"
 			]
 		}

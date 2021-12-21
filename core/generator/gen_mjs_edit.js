@@ -70,7 +70,12 @@ module.exports = async (fsd, genconfig) => {
 				setdefaultnow += `\t\tdata.${fieldname} = 0\r\n`
 			} else if (comptype=='textbox') {
 				if (typeof initialvalue === 'string') {
-					setdefaultnow += `\t\tdata.${fieldname} = '${initialvalue}'\r\n`
+					if (initialvalue.startsWith('global.setup')) {
+						setdefaultnow += `\t\tdata.${fieldname} = ${initialvalue}\r\n`
+					} else {
+						setdefaultnow += `\t\tdata.${fieldname} = '${initialvalue}'\r\n`
+					}
+					
 				}
 			} else if (comptype=='checkbox') {
 				if (data[fieldname].default!==undefined) {
@@ -99,12 +104,21 @@ module.exports = async (fsd, genconfig) => {
 				}
 
 				if (allownull) {
-					setdefaultcombo += `\t\tdata.${fieldname} = '--NULL--'\r\n`
-					setdefaultcombo += `\t\tdata.${field_display_name} = 'NONE'\r\n`
+					if (typeof initialvalue === 'object') { 
+						setdefaultcombo += `\t\tdata.${fieldname} = ${initialvalue.id}\r\n`
+						setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.name}\r\n`
+					} else {
+						setdefaultcombo += `\t\tdata.${fieldname} = '--NULL--'\r\n`
+						setdefaultcombo += `\t\tdata.${field_display_name} = 'NONE'\r\n`
+					}
+
 					nullresultloaded += `\t\tif (result.record.${fieldname}==null) { result.record.${fieldname}='--NULL--'; result.record.${field_display_name}='NONE'; }\r\n`;
 					pilihnone = `result.records.unshift({${options.field_value}:'--NULL--', ${options.field_display}:'NONE'});`	
 				} else {
-					if (add_approval && fieldname=='doc_id') {
+					if (typeof initialvalue === 'object') { 
+						setdefaultcombo += `\t\tdata.${fieldname} = ${initialvalue.id}\r\n`
+						setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.name}\r\n`
+					} else if (add_approval && fieldname=='doc_id') {
 						setdefaultcombo += `\t\tdata.${fieldname} = global.setup.doc_id\r\n`
 						setdefaultcombo += `\t\tdata.${field_display_name} = global.setup.doc_id\r\n`
 					} else if (initialvalue!=null) {

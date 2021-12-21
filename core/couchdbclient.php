@@ -60,6 +60,7 @@ class CouchDbClient {
 				->setCredentials($conf->username, $conf->password)
 				->setHeaders(array('Content-Type' =>  'application/json'))
 				->doPut("/{$conf->database}/{$id}", json_encode($doc));
+
 			return new CouchDbResultset($result);
 		} catch (HttpException $ex) {
 			$this->ProcessError($ex);
