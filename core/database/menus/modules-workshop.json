@@ -9,6 +9,10 @@
 		"retail/sales/merchquotout",
 		"retail/sales/merchorderin",
 
+
+		"finact/sales/orderin",
+		"finact/fin/billout",
+
 		{
 			"title" : "Account",
 			"modules" : [

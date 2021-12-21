@@ -464,6 +464,7 @@ class StandartApproval {
 
 				$bypassauthority = property_exists($param, 'bypassauthority') ? $param->bypassauthority : false;
 				if ($bypassauthority) {
+					self::DoFinalApproval($db, $param);
 					$isfinalapproval = true;
 				} else {
 					$isfinalapproval = self::DoFinalApproval($db, $param);
@@ -578,10 +579,12 @@ class StandartApproval {
 				throw new \Exception("Tidak ada data approval di '$id'");
 			}
 
+			$bypassauthority = property_exists($param, 'bypassauthority') ? $param->bypassauthority : false;
+
 
 			$task = $rows[0]['task'];
 			$completed = $rows[0]['completed'];
-			if ($completed==$task) {
+			if ($completed==$task || $bypassauthority===true) {
 				$sql = "
 					update $tablename_head
 					set
