@@ -105,8 +105,17 @@ module.exports = async (fsd, genconfig) => {
 
 				if (allownull) {
 					if (typeof initialvalue === 'object') { 
-						setdefaultcombo += `\t\tdata.${fieldname} = ${initialvalue.id}\r\n`
-						setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.name}\r\n`
+						if (initialvalue.id.startsWith('global.setup')) {
+							setdefaultcombo += `\t\tdata.${fieldname} = ${initialvalue.id}\r\n`
+						} else {
+							setdefaultcombo += `\t\tdata.${fieldname} = '${initialvalue.id}'\r\n`
+						}
+						if (initialvalue.text.startsWith('global.setup')) {
+							setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.text}\r\n`
+						} else {
+							setdefaultcombo += `\t\tdata.${field_display_name} = '${initialvalue.text}'\r\n`
+						}
+						
 					} else {
 						setdefaultcombo += `\t\tdata.${fieldname} = '--NULL--'\r\n`
 						setdefaultcombo += `\t\tdata.${field_display_name} = 'NONE'\r\n`
@@ -116,8 +125,19 @@ module.exports = async (fsd, genconfig) => {
 					pilihnone = `result.records.unshift({${options.field_value}:'--NULL--', ${options.field_display}:'NONE'});`	
 				} else {
 					if (typeof initialvalue === 'object') { 
-						setdefaultcombo += `\t\tdata.${fieldname} = ${initialvalue.id}\r\n`
-						setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.name}\r\n`
+						if (initialvalue.id.startsWith('global.setup')) {
+							setdefaultcombo += `\t\tdata.${fieldname} = ${initialvalue.id}\r\n`
+						} else {
+							setdefaultcombo += `\t\tdata.${fieldname} = '${initialvalue.id}'\r\n`
+						}
+
+						if (initialvalue.text.startsWith('global.setup')) {
+							setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.text}\r\n`
+						} else {
+							setdefaultcombo += `\t\tdata.${field_display_name} = '${initialvalue.text}'\r\n`
+						}		
+						
+						
 					} else if (add_approval && fieldname=='doc_id') {
 						setdefaultcombo += `\t\tdata.${fieldname} = global.setup.doc_id\r\n`
 						setdefaultcombo += `\t\tdata.${field_display_name} = global.setup.doc_id\r\n`

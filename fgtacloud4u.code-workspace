@@ -41,7 +41,23 @@
 						"commands": ["cd ../../pouchdb", "clear"],
 					}					
 				]
-			}
+			},
+			{
+				"splitTerminals": [
+					{
+						"name": "Backup",
+						"commands": ["cd rootdir/backupdb", "clear"],
+					}
+				]
+			},
+			{
+				"splitTerminals": [
+					{
+						"name": "CLI",
+						"commands": ["cd ../server_clients/tvone", "clear"],
+					}
+				]
+			},					
 
 		],
 		"restoreTerminals.runOnStartup": true,

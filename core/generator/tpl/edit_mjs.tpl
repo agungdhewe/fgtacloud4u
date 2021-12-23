@@ -3,6 +3,7 @@ var this_page_options;
 
 /*--__SLIDESELECTLIB__--*/
 
+
 const btn_edit = $('#pnl_edit-btn_edit')
 const btn_save = $('#pnl_edit-btn_save')
 const btn_delete = $('#pnl_edit-btn_delete')
@@ -20,6 +21,7 @@ const obj = {
 
 
 let form;
+let rowdata;
 
 export async function init(opt) {
 	this_page_id = opt.id;
@@ -121,8 +123,16 @@ export function getForm() {
 	return form
 }
 
+export function getCurrentRowdata() {
+	return rowdata;
+}
 
 export function open(data, rowid, viewmode=true, fn_callback) {
+
+	rowdata = {
+		data: data,
+		rowid: rowid
+	}
 
 	var pOpt = form.getDefaultPrompt(false)
 	var fn_dataopening = async (options) => {
@@ -169,7 +179,10 @@ export function open(data, rowid, viewmode=true, fn_callback) {
 		updatebuttonstate(record)
 
 		// tampilkan form untuk data editor
-		fn_callback()
+		if (typeof fn_callback==='function') {
+			fn_callback();
+		}
+		
 	}
 
 	var fn_dataopenerror = (err) => {

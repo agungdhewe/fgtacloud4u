@@ -2,6 +2,8 @@
 	"title": "home",
 	"modules": [
 		
+
+
 		"finact/sales/orderintype",
 
 		"retail/master/merchitemctg",
@@ -11,6 +13,7 @@
 
 
 		"finact/sales/orderin",
+		"finact/sales/orderindelv",
 		"finact/fin/billout",
 
 		{

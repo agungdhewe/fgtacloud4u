@@ -20,3 +20,15 @@
 
 
 		"finact/fin/billout",
+
+
+		"finact/sales/orderintype",
+
+		"retail/master/merchitemctg",
+		"retail/master/merchitem",
+		"retail/sales/merchquotout",
+		"retail/sales/merchorderin",
+
+
+		"finact/sales/orderin",
+		"finact/fin/billout",

@@ -3,6 +3,9 @@ var this_page_options;
 
 /*--__SLIDESELECTLIB__--*/
 
+const reload_header_modified = true;
+
+
 const txt_title = $('#<!--__PANELNAME__-->-title')
 const btn_edit = $('#<!--__PANELNAME__-->-btn_edit')
 const btn_save = $('#<!--__PANELNAME__-->-btn_save')
@@ -284,6 +287,12 @@ async function form_datasaved(result, options) {
 			btn_addnew_click()
 		}, 1000)
 	}
+
+	if (reload_header_modified) {
+		var currentRowdata =  $ui.getPages().ITEMS['pnl_edit'].handler.getCurrentRowdata();
+		$ui.getPages().ITEMS['pnl_edit'].handler.open(currentRowdata.data, currentRowdata.rowid, false);
+	}
+
 }
 
 async function form_deleting(data, options) {
@@ -294,7 +303,12 @@ async function form_deleted(result, options) {
 	options.suppressdialog = true
 	$ui.getPages().show('pnl_edit<!--__DETILNAME__-->grid', ()=>{
 		$ui.getPages().ITEMS['pnl_edit<!--__DETILNAME__-->grid'].handler.removerow(form.rowid)
-	})
+	});
+
+	if (reload_header_modified) {
+		var currentRowdata =  $ui.getPages().ITEMS['pnl_edit'].handler.getCurrentRowdata();
+		$ui.getPages().ITEMS['pnl_edit'].handler.open(currentRowdata.data, currentRowdata.rowid, false);
+	}
 	
 }
 
