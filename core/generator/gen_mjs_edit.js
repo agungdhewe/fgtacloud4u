@@ -17,7 +17,7 @@ module.exports = async (fsd, genconfig) => {
 	try {
 
 		console.log(`-----------------------------------------------`)
-		console.log(`Generate Edit PHTML...`)
+		console.log(`Generate Edit MJS...`)
 
 
 
@@ -47,6 +47,8 @@ module.exports = async (fsd, genconfig) => {
 		var uploadopened = '';
 		var uploadcreatenew = '';
 
+		var objhandlers = ''; 
+
 		for (var fieldname in data) {
 			if (fieldexclude.includes(fieldname)) { continue }
 			var prefix = data[fieldname].comp.prefix
@@ -55,7 +57,21 @@ module.exports = async (fsd, genconfig) => {
 			var recursivetable = false;
 			var initialvalue =  data[fieldname].initialvalue;
 
+
 			
+			if (data[fieldname].handlers!=undefined) {
+				for (var objhndname in data[fieldname].handlers) {
+					var hndf = data[fieldname].handlers[objhndname];
+					objhandlers += `
+	obj.${prefix}${fieldname}.${comptype}({${objhndname}: (${hndf.params}) => { 
+		if (typeof hnd.${hndf.functionname}==='function') {hnd.${hndf.functionname}(${hndf.params})} 
+	}});
+	`
+				}
+			}
+
+
+
 
 			if (data[fieldname].comp.options!==undefined) {
 				recursivetable = data[fieldname].comp.options.table===headertable_name ? true : false;
@@ -103,6 +119,7 @@ module.exports = async (fsd, genconfig) => {
 					}
 				}
 
+
 				if (allownull) {
 					if (typeof initialvalue === 'object') { 
 						if (initialvalue.id.startsWith('global.setup')) {
@@ -110,10 +127,13 @@ module.exports = async (fsd, genconfig) => {
 						} else {
 							setdefaultcombo += `\t\tdata.${fieldname} = '${initialvalue.id}'\r\n`
 						}
-						if (initialvalue.text.startsWith('global.setup')) {
-							setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.text}\r\n`
-						} else {
-							setdefaultcombo += `\t\tdata.${field_display_name} = '${initialvalue.text}'\r\n`
+
+						if (initialvalue.text!=null) {
+							if (initialvalue.text.startsWith('global.setup')) {
+								setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.text}\r\n`
+							} else {
+								setdefaultcombo += `\t\tdata.${field_display_name} = '${initialvalue.text}'\r\n`
+							}
 						}
 						
 					} else {
@@ -124,6 +144,7 @@ module.exports = async (fsd, genconfig) => {
 					nullresultloaded += `\t\tif (result.record.${fieldname}==null) { result.record.${fieldname}='--NULL--'; result.record.${field_display_name}='NONE'; }\r\n`;
 					pilihnone = `result.records.unshift({${options.field_value}:'--NULL--', ${options.field_display}:'NONE'});`	
 				} else {
+
 					if (typeof initialvalue === 'object') { 
 						if (initialvalue.id.startsWith('global.setup')) {
 							setdefaultcombo += `\t\tdata.${fieldname} = ${initialvalue.id}\r\n`
@@ -131,11 +152,14 @@ module.exports = async (fsd, genconfig) => {
 							setdefaultcombo += `\t\tdata.${fieldname} = '${initialvalue.id}'\r\n`
 						}
 
-						if (initialvalue.text.startsWith('global.setup')) {
-							setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.text}\r\n`
-						} else {
-							setdefaultcombo += `\t\tdata.${field_display_name} = '${initialvalue.text}'\r\n`
-						}		
+						if (initialvalue.text!=null) {
+							if (initialvalue.text.startsWith('global.setup')) {
+								setdefaultcombo += `\t\tdata.${field_display_name} = ${initialvalue.text}\r\n`
+							} else {
+								setdefaultcombo += `\t\tdata.${field_display_name} = '${initialvalue.text}'\r\n`
+							}	
+						}
+	
 						
 						
 					} else if (add_approval && fieldname=='doc_id') {
@@ -208,6 +232,26 @@ module.exports = async (fsd, genconfig) => {
 
 				var staticfilter = options.staticfilter!=null ? options.staticfilter.trim() : '';
 
+				var slideselect_on_selected_handler = '';
+				var slideselect_on_dataloading_handler = '';
+				var slideselect_on_dataloaded_handler = '';
+				
+				if (genconfig.schema.editorHandler != undefined) {
+					slideselect_on_selected_handler = `if (typeof hnd.${prefix}${fieldname}_selected === 'function') {
+					hnd.${prefix}${fieldname}_selected(value, display, record, args);
+				}`;
+
+				slideselect_on_dataloading_handler = `if (typeof hnd.${prefix}${fieldname}_dataloading === 'function') {
+				hnd.${prefix}${fieldname}_dataloading(criteria);
+			}`;
+
+				slideselect_on_dataloaded_handler = `if (typeof hnd.${prefix}${fieldname}_dataloaded === 'function') {
+				hnd.${prefix}${fieldname}_dataloaded(result, options);
+			}`;
+
+				}
+
+
 				slideselectlib = `import {fgta4slideselect} from  '../../../../../index.php/asset/fgta/framework/fgta4libs/fgta4slideselect.mjs'`
 				slideselects += `
 	new fgta4slideselect(obj.${prefix}${fieldname}, {
@@ -222,13 +266,16 @@ module.exports = async (fsd, genconfig) => {
 			{mapping: '${options.field_display}', text: '${options.field_display}'},${fieldMappings}
 		]${datasample},
 		OnDataLoading: (criteria) => {
-			${staticfilter}			
+			${staticfilter}
+			${slideselect_on_dataloading_handler}	
 		},
 		OnDataLoaded : (result, options) => {
 			${hapuspilihansama}${pilihnone}	
+			${slideselect_on_dataloaded_handler}
 		},
 		OnSelected: (value, display, record, args) => {
-			if (value!=args.PreviousValue ) {${OnSelectedScript}				
+			if (value!=args.PreviousValue ) {${OnSelectedScript}
+				${slideselect_on_selected_handler}
 			}
 		}
 	})				
@@ -402,6 +449,15 @@ const btn_decline = $('#pnl_edit-btn_decline')
 		}
 
 
+		var xtionbuttons = '';
+		var xtionhandlerassignment = '';
+		for (var xtionname in genconfig.schema.xtions) {
+			var xtion = genconfig.schema.xtions[xtionname]
+			xtionbuttons += `const ${xtion.buttonname} = $('#pnl_edit-${xtion.buttonname}')\r\n`;
+			xtionhandlerassignment += `\t${xtion.buttonname}.linkbutton({ onClick: () => { btn_action_click({ action: '${xtionname}' }); } });\r\n`
+		}
+
+
 		var actionfunction = get_action_function(add_commiter, add_approval, genconfig);
 		var actionbuttonstate = get_action_buttonstate (add_commiter, add_approval, genconfig);
 		var actionbuttoninitstate = get_action_buttoninitstate (add_commiter, add_approval, genconfig);
@@ -420,6 +476,55 @@ const btn_decline = $('#pnl_edit-btn_decline')
 		}
 
 		
+
+		// form handler
+		var handlerlib = '';
+		var handlerassignment = '';
+		var form_opened_handler = '';
+		var form_newdata_handler = '';
+		var form_datasaving_handler = '';
+		var form_datasaved_handler = '';
+		var form_deleting_handler = '';
+		var form_deleted_handler = '';
+
+		if (genconfig.schema.editorHandler != undefined) {
+			handlerlib = `\r\nimport * as hnd from  './${genconfig.schema.editorHandler}'`;
+			handlerassignment = `\tif (typeof hnd.init==='function') {
+		hnd.init({
+			form: form,
+			obj: obj,
+			opt: opt,
+		})
+	}`;
+
+			form_opened_handler = `if (typeof hnd.form_dataopened == 'function') {
+			hnd.form_dataopened(result, options);
+		}`;
+
+			form_newdata_handler = `\t\tif (typeof hnd.form_newdata == 'function') {
+			hnd.form_newdata(data, options);
+		}`;	
+
+			form_datasaving_handler = `if (typeof hnd.form_datasaving == 'function') {
+		hnd.form_datasaving(data, options);
+	}`;	
+
+			form_datasaved_handler = `if (typeof hnd.form_datasaved == 'function') {
+		hnd.form_datasaved(result, rowdata, options);
+	}`;	
+
+			form_deleting_handler = `if (typeof hnd.form_deleting == 'function') {
+		hnd.form_deleting(data);
+	}`;	
+
+			form_deleted_handler = `if (typeof hnd.form_deleted == 'function') {
+		hnd.form_deleted(result, options);
+	}`;	
+
+
+		}
+
+
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'edit_mjs.tpl')
 		var tplscript = fs.readFileSync(phtmltpl).toString()
 		tplscript = tplscript.replace('/*--__FORMCOMP__--*/', formcomp.join(`,\r\n`))
@@ -449,6 +554,11 @@ const btn_decline = $('#pnl_edit-btn_decline')
 		tplscript = tplscript.replace('/*--__APPROVEBUTTON__--*/', approvebutton)
 		tplscript = tplscript.replace('/*--__APPROVEHANDLERASSIGNMENT__--*/', approvehandlerassignment)
 
+		tplscript = tplscript.replace('/*--__XTIONSBUTTONS__--*/', xtionbuttons)
+		tplscript = tplscript.replace('/*--__XTIONSHANDLERASSIGNMENT__--*/', xtionhandlerassignment)
+
+
+
 		tplscript = tplscript.replace('/*--__ACTIONFUNCTION__--*/', actionfunction);
 		tplscript = tplscript.replace('/*--__ACTIONBUTTONSTATE__--*/', actionbuttonstate);
 		tplscript = tplscript.replace('/*--__ACTIONBUTTONINITSTATE__--*/', actionbuttoninitstate);
@@ -467,9 +577,25 @@ const btn_decline = $('#pnl_edit-btn_decline')
 		tplscript = tplscript.replace('/*--__UPLOADCREATENEW__--*/', uploadcreatenew);
 
 		tplscript = tplscript.replace('/*--__BUTTONSTATE__--*/', buttonstate)
-		 
+
+		tplscript = tplscript.replace('/*--__HANDLERLIB__--*/', handlerlib)
+		tplscript = tplscript.replace('/*--__HANDLERASSIGNMENT__--*/', handlerassignment)
 		
+		tplscript = tplscript.replace('/*--__FORMOPENEDHANDLER__--*/', form_opened_handler)
+		tplscript = tplscript.replace('/*--__FORMNEWDATAHANDLER__--*/', form_newdata_handler)
+
+		tplscript = tplscript.replace('/*--__FORMDATASAVINGHANDLER__--*/', form_datasaving_handler)
+		tplscript = tplscript.replace('/*--__FORMDATASAVEDHANDLER__--*/', form_datasaved_handler)
+	
+		tplscript = tplscript.replace('/*--__FORMDELETINGHANDLER__--*/', form_deleting_handler)
+		tplscript = tplscript.replace('/*--__FORMDELETEDHANDLER__--*/', form_deleted_handler)
+			
+		tplscript = tplscript.replace('/*--__OBJHANDLERASSIGNMENT__--*/', objhandlers)
+			
 		
+		  
+		
+
 
 		 /*--__RECORDSTATUSDATAOPEN__--*/   /*--__RECORDSTATUSNEW__--*/
 
@@ -484,13 +610,7 @@ const btn_decline = $('#pnl_edit-btn_decline')
 
 function get_print_handlerassignment() {
 	return `
-
-	btn_print.linkbutton({
-		onClick: () => {
-			btn_print_click();
-		}
-	});	
-	
+	btn_print.linkbutton({ onClick: () => { btn_print_click(); } });	
 	`
 }
 
@@ -631,6 +751,10 @@ function get_action_function(add_commiter, add_approval, genconfig) {
 	var resultuncommit_appr = '';
 	var optioncaseapproval = '';
 	if (add_approval) {
+
+		var approval_xtion = genconfig.approval_xtion==null ? 'xtion-approve' : genconfig.approval_xtion;
+
+
 		varapprove = `
 	var chk_isapprovalprogress = obj.chk_${basetableentity}_isapprovalprogress;	
 	var chk_isapprove = obj.chk_${basetableentity}_isapproved;
@@ -645,7 +769,7 @@ function get_action_function(add_commiter, add_approval, genconfig) {
 		`;
 		optioncaseapproval = `
 		case 'approve' :
-			args.act_url = \`\${global.modulefullname}/xtion-approve\`;
+			args.act_url = \`\${global.modulefullname}/${approval_xtion}\`;
 			args.act_msg_quest = \`Apakah anda yakin akan <b>\${args.action}</b> \${docname} no \${args.id} ?\`;
 			args.act_msg_result = \`\${docname} no \${args.id} telah di \${args.action}.\`;
 			args.use_otp = true;
@@ -664,7 +788,7 @@ function get_action_function(add_commiter, add_approval, genconfig) {
 			break;
 
 		case 'decline' :
-			args.act_url = \`\${global.modulefullname}/xtion-approve\`;
+			args.act_url = \`\${global.modulefullname}/${approval_xtion}\`;
 			args.act_msg_quest = '', //\`Apakah anda yakin akan <b>\${args.action}</b> \${docname} no \${args.id} ?\`;
 			args.act_msg_result = \`\${docname} no \${args.id} telah di \${args.action}.\`;
 			args.use_otp = true;
@@ -684,6 +808,37 @@ function get_action_function(add_commiter, add_approval, genconfig) {
 
 	}
 
+
+	var commiter_xtion = genconfig.commiter_xtion==null ? 'xtion-commit' : genconfig.commiter_xtion;
+	var uncommiter_xtion = genconfig.uncommiter_xtion==null ? 'xtion-uncommit' : genconfig.uncommiter_xtion;
+	var title = genconfig.schema.title==null ? genconfig.title : genconfig.schema.title;
+
+	var optioncasextions = '';
+	for (var xtionname in genconfig.schema.xtions) {
+		var xtion = genconfig.schema.xtions[xtionname];
+		var xtion_success_handler = ''
+
+		if (genconfig.schema.editorHandler != undefined) {
+			xtion_success_handler = `if (typeof hnd.xtion_${xtionname}_success === 'function') {
+					hnd.xtion_${xtionname}_success(result);
+				}`
+		}
+
+
+		optioncasextions += `\t\tcase '${xtionname}' :
+			args.act_url = \`\${global.modulefullname}/${xtion.api}\`;
+			args.act_msg_quest = \`Apakah anda yakin akan <b>\${args.action}</b> \${docname} no \${args.id} ?\`;
+			args.act_msg_result = \`\${docname} no \${args.id} telah di \${args.action}.\`;
+			args.param = {}
+			args.act_do = (result) => {
+				${xtion_success_handler}
+			}
+			break;		
+		`;
+	}
+
+
+
 	return `
 async function btn_action_click(args) {
 	if (form.isDataChanged() || !form.isInViewMode()) {
@@ -692,7 +847,7 @@ async function btn_action_click(args) {
 	}
 
 
-	var docname = '${genconfig.schema.title}'
+	var docname = '${title}'
 	var txt_version = obj.txt_${basetableentity}_version;
 	var chk_iscommit = obj.chk_${basetableentity}_iscommit;
 	${varapprove}
@@ -711,7 +866,7 @@ async function btn_action_click(args) {
 
 	switch (args.action) {
 		case 'commit' :
-			args.act_url = \`\${global.modulefullname}/xtion-\${args.action}\`;
+			args.act_url = \`\${global.modulefullname}/${commiter_xtion}\`;
 			args.act_msg_quest = \`Apakah anda yakin akan <b>\${args.action}</b> \${docname} no \${args.id} ?\`;
 			args.act_msg_result = \`\${docname} no \${args.id} telah di \${args.action}.\`;
 			args.act_do = (result) => {
@@ -722,7 +877,7 @@ async function btn_action_click(args) {
 			break;
 
 		case 'uncommit' :
-			args.act_url = \`\${global.modulefullname}/xtion-\${args.action}\`;
+			args.act_url = \`\${global.modulefullname}/${uncommiter_xtion}\`;
 			args.act_msg_quest = \`Apakah anda yakin akan <b>\${args.action}</b> \${docname} no \${args.id} ?\`;
 			args.act_msg_result = \`\${docname} no \${args.id} telah di \${args.action}.\`;
 			args.act_do = (result) => {
@@ -733,7 +888,11 @@ async function btn_action_click(args) {
 			}
 			break;
 
-		${optioncaseapproval}	
+		${optioncaseapproval}
+
+${optioncasextions}	
+		
+
 	}
 
 
@@ -744,10 +903,13 @@ async function btn_action_click(args) {
 			if (err) {
 				$ui.ShowMessage('[WARNING]' + err.message);	
 			} else {
-				updaterecordstatus(result.dataresponse);
+				if (result.dataresponse!=undefined) { updaterecordstatus(result.dataresponse) };
 				args.act_do(result);
-				updatebuttonstate(result.dataresponse);
-				updategridstate(result.dataresponse);
+
+				if (result.dataresponse!=undefined) {
+					updatebuttonstate(result.dataresponse);
+					updategridstate(result.dataresponse);
+				}
 				if (args.act_msg_result!=='') $ui.ShowMessage('[INFO]' + args.act_msg_result);	
 			}
 		});
@@ -860,10 +1022,10 @@ function get_action_buttoninitstate (add_commiter, add_approval, genconfig) {
 	var buttonstate = "";
 	if (add_commiter) {
 		buttonstate = `
-	var button_commit_on = true;
-	var button_uncommit_on = false;
-	btn_commit.linkbutton(button_commit_on ? 'enable' : 'disable');
-	btn_uncommit.linkbutton(button_uncommit_on ? 'enable' : 'disable');
+		var button_commit_on = true;
+		var button_uncommit_on = false;
+		btn_commit.linkbutton(button_commit_on ? 'enable' : 'disable');
+		btn_uncommit.linkbutton(button_uncommit_on ? 'enable' : 'disable');
 		`
 		if (add_approval) {
 			buttonstate = `

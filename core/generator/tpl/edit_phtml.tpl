@@ -27,6 +27,7 @@
 			<!--__PRINTBUTTON__-->
 			<!--__COMMITBUTTON__-->
 			<!--__APPROVEBUTTON__-->
+			<!--__XTIONBUTTONS__-->
 		</div>
 		<div>
 			<a id="pnl_edit-btn_delete" class="easyui-linkbutton c5" style="margin-bottom: 10px; margin-right: 10px">Hapus</a>

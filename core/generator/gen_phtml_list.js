@@ -79,6 +79,8 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('<!--__HEADERMAP__-->', headermap_script)
 		tplscript = tplscript.replace('<!--__HEADERROW__-->', headerrow_script)
 		tplscript = tplscript.replace('<!--__PAGETITLE__-->', pagetitle)
+		tplscript = tplscript.replace('<!--__CUSTOMVIEWINC__-->', `${genconfig.basename}-list-customview.phtml`)
+		tplscript = tplscript.replace('<!--__CUSTOMSEARCHINC__-->', `${genconfig.basename}-list-customsearch.phtml`)
 		
 		
 

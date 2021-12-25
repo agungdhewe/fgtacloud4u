@@ -16,8 +16,8 @@ const colFgBlack = "\x1b[30m"
 const colBright = "\x1b[1m"
 const BgYellow = "\x1b[43m"
 
-const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'lowercase', 'text', 'caption', 'section', 'suppresslist', 'options', 'unset', 'tips', 'tipstype', 'initialvalue', 'hidden', 'lookup', 'idsuffix', 'autobylogin']
-const detil_props = ['table', 'form', 'headerview', 'title', 'isapprovalform']
+const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'lowercase', 'text', 'caption', 'section', 'suppresslist', 'options', 'unset', 'tips', 'tipstype', 'initialvalue', 'hidden', 'lookup', 'idsuffix', 'autobylogin', 'handlers']
+const detil_props = ['table', 'form', 'headerview', 'title', 'isapprovalform', 'editorHandler', 'listHandler']
 
 
 module.exports = async (fsd, genconfig) => {
@@ -139,7 +139,7 @@ async function CreateTableScript(tablename, options, headertable_name, headerpri
 		var last_fieldname = '';
 		for (var fieldname in options.data) {
 			var field = options.data[fieldname]
-			console.log(`${tablename} ${fieldname}`)
+			// console.log(`${tablename} ${fieldname}`)
 			for (var propname in field) {
 				if (!field_props.includes(propname)) {
 					throw `table: '${tablename}', property '${colFgYellow}${propname}${colReset}' pada field '${colBright}${fieldname}${colReset}' tidak dikenal!`

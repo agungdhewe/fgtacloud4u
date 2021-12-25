@@ -1,6 +1,7 @@
 var this_page_id;
 var this_page_options;
 
+/*--__HANDLERLIB__--*/
 const tbl_list = $('#<!--__PANELNAME__-->-tbl_list');
 const txt_title = $('#<!--__PANELNAME__-->-title');
 const pnl_control = $('#<!--__PANELNAME__-->-control');
@@ -63,7 +64,10 @@ export async function init(opt) {
 				grd_list.nextpageload();
 			}			
 		}
-	});			
+	});	
+
+/*--__HANDLERASSIGNMENT__--*/	
+
 }
 
 
@@ -163,7 +167,7 @@ function grd_list_cellclick(td, ev) {
 }
 
 function grd_list_cellrender(td) {
-
+	/*--__HANDLERCELLRENDER__--*/
 }
 
 function grd_list_rowrender(tr) {

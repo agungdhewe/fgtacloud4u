@@ -45,7 +45,7 @@ module.exports = async (fsd, genconfig) => {
 		renderrow = `
 	var dataid = tr.getAttribute('dataid')
 	var record = grd_list.DATA[dataid]
-	console.log(record);
+	//console.log(record);
 	$(tr).find('td').each((i, td) => {
 		var mapping = td.getAttribute('mapping')
 		if (mapping=='docauth_descr') {
@@ -80,9 +80,49 @@ module.exports = async (fsd, genconfig) => {
 		} 
 		});		
 		`;
+	} else {
+
+		var handlerrowrender = '';
+		if (detil.listHandler != undefined) {
+			handlerrowrender = `if (typeof hnd.grd_list_rowrender === 'function') {
+			hnd.grd_list_rowrender({tr:tr, td:td, record:record, mapping:mapping, dataid:dataid, i:i});
+		}`;
+		}
+
+		renderrow = `
+	var dataid = tr.getAttribute('dataid')
+	var record = grd_list.DATA[dataid]
+	$(tr).find('td').each((i, td) => {
+		var mapping = td.getAttribute('mapping')
+		${handlerrowrender}
+	});
+		`;
 	}
 
 
+
+	var handlerlib = '';
+	var handlerassignment = ''
+	var handlercellrender = '';
+
+
+	if (detil.listHandler != undefined) {
+		handlerlib = `import * as hnd from  './${detil.listHandler}'\r\n`;
+		handlerassignment = `\tif (typeof hnd.init==='function') {
+		hnd.init({
+			grd_list: grd_list,
+			opt: opt,
+			header_data: header_data
+		})
+	}`;
+
+
+	handlercellrender = `if (typeof hnd.grd_list_cellrender === 'function') {
+		hnd.grd_list_cellrender({td:td, mapping:td.mapping, text:td.innerHTML});
+	}`;
+
+
+	}
 
 	var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'detilgrid_mjs.tpl')
 	var tplscript = fs.readFileSync(mjstpl).toString()
@@ -96,8 +136,12 @@ module.exports = async (fsd, genconfig) => {
 
 	tplscript = tplscript.replace('<!--__RENDERROW__-->', renderrow)
 
+	tplscript = tplscript.replace('/*--__HANDLERLIB__--*/', handlerlib)
+	tplscript = tplscript.replace('/*--__HANDLERASSIGNMENT__--*/', handlerassignment)
 
+	tplscript = tplscript.replace('/*--__HANDLERCELLRENDER__--*/', handlercellrender)
 
+	handlercellrender
 
 	fsd.script = tplscript
 }

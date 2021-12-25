@@ -56,6 +56,7 @@ module.exports = async (fsd, genconfig) => {
 	var uploadevent = ''; 
 	var uploadopened = '';
 	var uploadcreatenew = '';
+	var objhandlers = ''; 
 
 	for (var fieldname in data) {
 		if (fieldexclude.includes(fieldname)) { continue }
@@ -63,6 +64,19 @@ module.exports = async (fsd, genconfig) => {
 		var comptype = data[fieldname].comp.comptype
 		var recursivetable = false;
 		var initialvalue =  data[fieldname].initialvalue;
+
+
+		if (data[fieldname].handlers!=undefined) {
+			for (var objhndname in data[fieldname].handlers) {
+				var hndf = data[fieldname].handlers[objhndname];
+				objhandlers += `
+	obj.${prefix}${fieldname}.${comptype}({${objhndname}: (${hndf.params}) => { 
+		if (typeof hnd.${hndf.functionname}==='function') {hnd.${hndf.functionname}(${hndf.params})} 
+	}});
+	`
+			}
+		}
+
 
 		if (data[fieldname].comp.options!==undefined) {
 			recursivetable = data[fieldname].comp.options.table===tablename ? true : false;
@@ -100,13 +114,13 @@ module.exports = async (fsd, genconfig) => {
 
 
 			if (allownull) {
-				setdefaultcombo += `\t\t\tdata.${fieldname} = '--NULL--'\r\n`
-				setdefaultcombo += `\t\t\tdata.${field_display_name} = 'NONE'\r\n`
+				setdefaultcombo += `\t\tdata.${fieldname} = '--NULL--'\r\n`
+				setdefaultcombo += `\t\tdata.${field_display_name} = 'NONE'\r\n`
 				nullresultloaded += `\t\tif (record.${fieldname}==null) { record.${fieldname}='--NULL--'; record.${field_display_name}='NONE'; }\r\n`;
 				pilihnone = `result.records.unshift({${options.field_value}:'--NULL--', ${options.field_display}:'NONE'});`	
 			} else {
-				setdefaultcombo += `\t\t\tdata.${fieldname} = '0'\r\n`
-				setdefaultcombo += `\t\t\tdata.${field_display_name} = '-- PILIH --'\r\n`
+				setdefaultcombo += `\t\tdata.${fieldname} = '0'\r\n`
+				setdefaultcombo += `\t\tdata.${field_display_name} = '-- PILIH --'\r\n`
 			}				
 
 			// if (recursivetable) {
@@ -282,6 +296,58 @@ const ${prefix}${fieldname}_lnk = $('#${fsd.panel}-${prefix}${fieldname}_link');
 	}
 
 
+	// form handler
+	var handlerlib = '';
+	var handlerassignment = '';
+	var form_opened_handler = '';
+	var form_newdata_handler = '';
+	var form_datasaving_handler = '';
+	var form_datasaved_handler = '';
+	var form_deleting_handler = '';
+	var form_deleted_handler = '';
+
+	if (detil.editorHandler != undefined) {
+		handlerlib = `\r\nimport * as hnd from  './${detil.editorHandler}'`;
+		handlerassignment = `\tif (typeof hnd.init==='function') {
+		hnd.init({
+			form: form,
+			obj: obj,
+			opt: opt,
+			header_data: header_data
+		})
+	}`;
+
+		form_opened_handler = `if (typeof hnd.form_dataopened == 'function') {
+			hnd.form_dataopened(result, options);
+		}`;
+
+		form_newdata_handler = `\t\tif (typeof hnd.form_newdata == 'function') {
+			hnd.form_newdata(data, options);
+		}`;	
+
+		form_datasaving_handler = `if (typeof hnd.form_datasaving == 'function') {
+		hnd.form_datasaving(data, options);
+	}`;	
+
+		form_datasaved_handler = `if (typeof hnd.form_datasaved == 'function') {
+		hnd.form_datasaved(result, rowdata, options);
+	}`;	
+
+		form_deleting_handler = `if (typeof hnd.form_deleting == 'function') {
+		hnd.form_deleting(data);
+	}`;	
+
+		form_deleted_handler = `if (typeof hnd.form_deleted == 'function') {
+		hnd.form_deleted(result, options);
+	}`;	
+
+
+
+	}
+
+
+
+
 	var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'detilform_mjs.tpl')
 	var tplscript = fs.readFileSync(mjstpl).toString()
 	tplscript = tplscript.replace(/<!--__PANELNAME__-->/g, fsd.panel)
@@ -321,6 +387,23 @@ const ${prefix}${fieldname}_lnk = $('#${fsd.panel}-${prefix}${fieldname}_link');
 
 	tplscript = tplscript.replace('/*--__UPLOADOPENED__--*/', uploadopened);
 	tplscript = tplscript.replace('/*--__UPLOADCREATENEW__--*/', uploadcreatenew);
+
+
+	tplscript = tplscript.replace('/*--__HANDLERLIB__--*/', handlerlib)
+	tplscript = tplscript.replace('/*--__HANDLERASSIGNMENT__--*/', handlerassignment)
+
+
+	tplscript = tplscript.replace('/*--__FORMOPENEDHANDLER__--*/', form_opened_handler)
+	tplscript = tplscript.replace('/*--__FORMNEWDATAHANDLER__--*/', form_newdata_handler)
+
+	tplscript = tplscript.replace('/*--__FORMDATASAVINGHANDLER__--*/', form_datasaving_handler)
+	tplscript = tplscript.replace('/*--__FORMDATASAVEDHANDLER__--*/', form_datasaved_handler)
+
+	tplscript = tplscript.replace('/*--__FORMDELETINGHANDLER__--*/', form_deleting_handler)
+	tplscript = tplscript.replace('/*--__FORMDELETEDHANDLER__--*/', form_deleted_handler)
+		
+	tplscript = tplscript.replace('/*--__OBJHANDLERASSIGNMENT__--*/', objhandlers)
+	
 
 
 	fsd.script = tplscript

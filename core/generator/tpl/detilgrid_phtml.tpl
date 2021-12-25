@@ -19,6 +19,11 @@
 	<div style="margin-top: 10px; margin-bottom: 15px">
 		<table id="<!--__PANELNAME__-->-tbl_list" paging="true" cellspacing="0" width="100%" class="deftable">
 			<thead>
+				<?php
+				$customview = __DIR__.'/<!--__CUSTOMVIEWINC__-->'; 
+				if (is_file($customview)) {
+					include $customview;
+				} else { ?>
 				<tr>
 <!--__HEADERMAPCHK__-->					
 <!--__HEADERMAP__-->
@@ -29,6 +34,7 @@
 <!--__HEADERROW__-->
 					<td class="fgtable-head" style="border-bottom: 1px solid #000000; text-align: center">&nbsp;</td>
 				</tr>
+				<?php } ?>
 			</thead>
 		</table>
 	</div>

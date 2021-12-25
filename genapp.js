@@ -98,7 +98,7 @@ genconfig.dirname = __dirname
 		// Tulis Script ke file
 		for (var fsd of fsdata) {
 			if (fsd.script!==undefined) {
-				console.log(fsd.name)
+				// console.log(fsd.name)
 				await fsd.write();				
 			} else {
 				

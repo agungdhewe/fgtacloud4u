@@ -34,7 +34,7 @@ module.exports = async (fsd, genconfig) => {
 				autofill_dept = "\r\n\t\t\t\t" + "'dept_id' => $userdata->dept_id,\r\n\t\t\t\t'dept_name' => $userdata->dept_name,";
 				data[fieldname].initialvalue = {
 					id: 'global.setup.dept_id',
-					name: 'global.setup.dept_name'
+					text: 'global.setup.dept_name'
 				}
 
 
@@ -42,7 +42,7 @@ module.exports = async (fsd, genconfig) => {
 				autofill_empl = "\r\n\t\t\t\t" + "'empl_id' => $userdata->empl_id,\r\n\t\t\t\t'empl_name' => $userdata->empl_name,"
 				data[fieldname].initialvalue = {
 					id: 'global.setup.empl_id',
-					name: 'global.setup.empl_name'
+					text: 'global.setup.empl_name'
 				}
 			}
 		}

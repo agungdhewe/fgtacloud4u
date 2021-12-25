@@ -2,7 +2,7 @@
 	"title": "home",
 	"modules": [
 		
-
+		"finact/master/jurnaltype",
 
 		"finact/sales/orderintype",
 
@@ -15,6 +15,10 @@
 		"finact/sales/orderin",
 		"finact/sales/orderindelv",
 		"finact/fin/billout",
+
+
+		"finact/fin/ofrecv",
+		"finact/fin/payment",
 
 		{
 			"title" : "Account",

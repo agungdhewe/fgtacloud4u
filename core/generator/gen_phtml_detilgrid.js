@@ -93,6 +93,8 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('<!--__HEADERROWCHK__-->', '<td class="fgtable-head" style="width: 30px; border-bottom: 1px solid #000000; text-align: center">*</td>')
 	}
 
-	
+	tplscript = tplscript.replace('<!--__CUSTOMVIEWINC__-->', `${genconfig.basename}-${fsd.detilname}grid-customview.phtml`)
+
+
 	fsd.script = tplscript
 }

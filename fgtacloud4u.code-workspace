@@ -30,18 +30,7 @@
 					}
 				]
 			},
-			{
-				"splitTerminals": [
-					{
-						"name": "Log",
-						"commands": ["rm -f ../server_clients/tvone/data/debug/log.txt", "touch ../server_clients/tvone/data/debug/log.txt", "clear", "tail -F ../server_clients/tvone/data/debug/log.txt"],
-					},
-					{
-						"name": "PouchDb",
-						"commands": ["cd ../../pouchdb", "clear"],
-					}					
-				]
-			},
+
 			{
 				"splitTerminals": [
 					{
@@ -53,11 +42,24 @@
 			{
 				"splitTerminals": [
 					{
+						"name": "PouchDb",
+						"commands": ["cd ../../pouchdb", "clear"],
+					}	
+				]
+			},		
+			
+			{
+				"splitTerminals": [
+					{
+						"name": "Log",
+						"commands": ["rm -f ../server_clients/tvone/data/debug/log.txt", "touch ../server_clients/tvone/data/debug/log.txt", "clear", "tail -F ../server_clients/tvone/data/debug/log.txt"],
+					},
+					{
 						"name": "CLI",
 						"commands": ["cd ../server_clients/tvone", "clear"],
-					}
+					}				
 				]
-			},					
+			},
 
 		],
 		"restoreTerminals.runOnStartup": true,

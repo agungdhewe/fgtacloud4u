@@ -1,6 +1,7 @@
 var this_page_id;
 var this_page_options;
 
+/*--__HANDLERLIB__--*/
 const tbl_list = $('#pnl_list-tbl_list')
 
 const txt_search = $('#pnl_list-txt_search')
@@ -26,12 +27,14 @@ export async function init(opt) {
 	})
 
 
-	txt_search.textbox('textbox').bind('keypress', (evt)=>{
-		if (evt.key==='Enter') {
-			btn_load_click(self)
-		}
-	})
-	
+	if (txt_search!=null) {
+		txt_search.textbox('textbox').bind('keypress', (evt)=>{
+			if (evt.key==='Enter') {
+				btn_load_click(self)
+			}
+		})
+	}
+
 
 	btn_load.linkbutton({
 		onClick: () => { btn_load_click() }
@@ -56,7 +59,9 @@ export async function init(opt) {
 	
 /*--__BUTTONSTATE__--*/
 
-	btn_load_click()
+/*--__AUTOLOAD__--*/
+/*--__HANDLERASSIGNMENT__--*/
+
 }
 
 
@@ -96,6 +101,8 @@ function btn_load_click() {
 			options.criteria['search'] = search
 		}
 
+		/*--__HANDLERCUSTOMSERACH__--*/
+		
 		// switch (this_page_options.variancename) {
 		// 	case 'commit' :
 		//		break;
@@ -144,11 +151,7 @@ function grd_list_cellclick(td, ev) {
 }
 
 function grd_list_cellrender(td) {
-	// var text = td.innerHTML
-	// if (td.mapping == 'id') {
-	// 	// $(td).css('background-color', 'red')
-	// 	td.innerHTML = `<a href="javascript:void(0)">${text}</a>`
-	// }
+	/*--__HANDLERCELLRENDER__--*/
 }
 
 function grd_list_rowrender(tr) {
@@ -156,17 +159,8 @@ function grd_list_rowrender(tr) {
 	var record = grd_list.DATA[dataid]
 
 	$(tr).find('td').each((i, td) => {
-		// var mapping = td.getAttribute('mapping')
-		// if (mapping=='id') {
-		// 	if (!record.disabled) {
-		// 		td.classList.add('fgtable-rowred')
-		// 	}
-		// }
-		if (record.disabled=="1" || record.disabled==true) {
-			td.classList.add('fgtable-row-disabled')
-		} else {
-			td.classList.remove('fgtable-row-disabled')
-		}
+		var mapping = td.getAttribute('mapping')
+		/*--__HANDLERROWRENDER__--*/
 	})
 }
 

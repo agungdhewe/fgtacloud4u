@@ -310,17 +310,26 @@ ${detilrow}
 				<a id="pnl_edit-btn_decline" href="javascript:void(0)" class="easyui-linkbutton c8" style="margin-left:10px; margin-bottom: 10px;" data-options="plain:true,iconCls:'fgta-icon-unposting'">Decline</a>
 				`;
 			}
-		}		
+		}
+		
+		var xtionbuttons = '';
+		for (var xtionname in genconfig.schema.xtions) {
+			var xtion = genconfig.schema.xtions[xtionname]
+			xtionbuttons += `\t\t\t\t<a id="pnl_edit-${xtion.buttonname}" href="javascript:void(0)" class="easyui-linkbutton c8" style="width: 80px; margin-left:10px; margin-bottom: 10px;" data-options="plain:true">${xtion.buttontext}</a>\r\n`
+		}
+
 
 		var phtmltpl = path.join(genconfig.GENLIBDIR, 'tpl', 'edit_phtml.tpl')
 		var tplscript = fs.readFileSync(phtmltpl).toString()
 		tplscript = tplscript.replace('<!--__FORMCOMP__-->', formcomp_script)
 		tplscript = tplscript.replace('<!--__DETILPANEL__-->', detilpanel_script)
 		tplscript = tplscript.replace('<!--__PAGETITLE__-->', pagetitle)
-		tplscript = tplscript.replace('	<!--__PRINTBUTTON__-->', printbutton)
-		tplscript = tplscript.replace('	<!--__COMMITBUTTON__-->', commitbutton)
-		tplscript = tplscript.replace('	<!--__APPROVEBUTTON__-->', approvebutton)
+		tplscript = tplscript.replace('<!--__PRINTBUTTON__-->', printbutton)
+		tplscript = tplscript.replace('<!--__COMMITBUTTON__-->', commitbutton)
+		tplscript = tplscript.replace('<!--__APPROVEBUTTON__-->', approvebutton)
+		tplscript = tplscript.replace('<!--__XTIONBUTTONS__-->', xtionbuttons)
 
+		
 
 		fsd.script = tplscript		
 

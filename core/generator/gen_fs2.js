@@ -233,7 +233,7 @@ async function PrepareFile(programpath, fd) {
 		fd.programpath = programpath
 		fd.write = async () => {
 			var fspath = path.join(fd.programpath, fd.name)
-			process.stdout.write(`Cek file ${fspath}... `);
+			// process.stdout.write(`Cek file ${fspath}... `);
 			try {
 				var fspath_dirname = path.dirname(fspath)
 				var fspath_filename = path.basename(fspath)
@@ -249,9 +249,9 @@ async function PrepareFile(programpath, fd) {
 				// console.log('OK.')
 				//------------------------------
 
-				process.stdout.write(`Writing script file `);
+				// process.stdout.write(`Writing script file `);
 				fs.writeFileSync(fspath, fd.script)
-				console.log('OK.')
+				// console.log('OK.')
 		
 			} catch (err) {
 				throw err
