@@ -174,7 +174,7 @@ module.exports = async (fsd, genconfig) => {
 					}
 				}				
 
-				hapuspilihansama = '';
+				var hapuspilihansama = '';
 				if (recursivetable) {
 					//  skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
 					skippedfield += `${fieldname}, `;

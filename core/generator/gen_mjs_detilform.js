@@ -129,7 +129,7 @@ module.exports = async (fsd, genconfig) => {
 			// }
 
 
-			hapuspilihansama = '';
+			var hapuspilihansama = '';
 			if (recursivetable) {
 				// skippedfield += `\toptions.skipmappingresponse = ["${fieldname}"];\r\n`;
 				skippedfield += `'${fieldname}', `;
@@ -186,6 +186,31 @@ module.exports = async (fsd, genconfig) => {
 
 			var staticfilter = options.staticfilter!=null ? options.staticfilter.trim() : '';
 
+
+			// handler
+			var slideselect_on_selected_handler = '';
+			var slideselect_on_dataloading_handler = '';
+			var slideselect_on_dataloaded_handler = '';
+			
+			if (genconfig.schema.editorHandler != undefined) {
+
+				slideselect_on_selected_handler = `if (typeof hnd.${prefix}${fieldname}_selected === 'function') {
+					hnd.${prefix}${fieldname}_selected(value, display, record, args);
+				}`;
+
+				slideselect_on_dataloading_handler = `if (typeof hnd.${prefix}${fieldname}_dataloading === 'function') {
+				hnd.${prefix}${fieldname}_dataloading(criteria);
+			}`;
+
+				slideselect_on_dataloaded_handler = `if (typeof hnd.${prefix}${fieldname}_dataloaded === 'function') {
+				hnd.${prefix}${fieldname}_dataloaded(result, options);
+			}`;
+
+			}
+
+
+
+
 			slideselectlib = `import {fgta4slideselect} from  '../../../../../index.php/asset/fgta/framework/fgta4libs/fgta4slideselect.mjs'`
 			slideselects += `
 	obj.${prefix}${fieldname}.name = '${fsd.panel}-${prefix}${fieldname}'		
@@ -202,12 +227,15 @@ module.exports = async (fsd, genconfig) => {
 		]${datasample},
 		OnDataLoading: (criteria, options) => {
 			${staticfilter}	
+			${slideselect_on_dataloading_handler}
 		},
 		OnDataLoaded : (result, options) => {
-			${pilihnone}	
+			${hapuspilihansama}${pilihnone}	
+			${slideselect_on_dataloaded_handler}
 		},
 		OnSelected: (value, display, record, args) => {
 			if (value!=args.PreviousValue ) {${OnSelectedScript}
+				${slideselect_on_selected_handler}
 			}			
 		}
 	})				
@@ -312,8 +340,7 @@ const ${prefix}${fieldname}_lnk = $('#${fsd.panel}-${prefix}${fieldname}_link');
 		hnd.init({
 			form: form,
 			obj: obj,
-			opt: opt,
-			header_data: header_data
+			opt: opt
 		})
 	}`;
 

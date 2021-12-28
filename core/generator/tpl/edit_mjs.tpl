@@ -58,7 +58,10 @@ export async function init(opt) {
 		OnRecordStatusCreated: () => {
 			/*--__STATUSCREATED__--*/			
 		}		
-	})
+	});
+	form.getHeaderData = () => {
+		return getHeaderData();
+	}
 
 /*--__PRINTHANDLERASSIGNMENT__--*/
 /*--__COMMITHANDLERASSIGNMENT__--*/
@@ -233,6 +236,14 @@ export function createnew() {
 }
 
 
+export function getHeaderData() {
+	var header_data = form.getData();
+	if (typeof hnd.form_getHeaderData == 'function') {
+		hnd.form_getHeaderData(header_data);
+	}
+	return header_data;
+}
+
 export function detil_open(pnlname) {
 	if (form.isDataChanged()) {
 		$ui.ShowMessage('Simpan dulu perubahan datanya.')
@@ -240,9 +251,23 @@ export function detil_open(pnlname) {
 	}
 
 	//$ui.getPages().show(pnlname)
-	$ui.getPages().show(pnlname, () => {
-		$ui.getPages().ITEMS[pnlname].handler.OpenDetil(form.getData())
-	})	
+	let header_data = getHeaderData();
+	if (typeof hnd.form_detil_opening == 'function') {
+		hnd.form_detil_opening(pnlname, (cancel)=>{
+			if (cancel===true) {
+				return;
+			}
+			$ui.getPages().show(pnlname, () => {
+				$ui.getPages().ITEMS[pnlname].handler.OpenDetil(header_data)
+			})
+		});
+	} else {
+		$ui.getPages().show(pnlname, () => {
+			$ui.getPages().ITEMS[pnlname].handler.OpenDetil(header_data)
+		})
+	}
+
+	
 }
 
 

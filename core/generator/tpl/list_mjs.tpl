@@ -25,7 +25,9 @@ export async function init(opt) {
 		OnCellRender: (td) => { grd_list_cellrender(td) },
 		OnRowRender: (tr) => { grd_list_rowrender(tr) }
 	})
-
+	grd_list.doLoad = () => {
+		btn_load_click();
+	}
 
 	if (txt_search!=null) {
 		txt_search.textbox('textbox').bind('keypress', (evt)=>{
@@ -59,7 +61,7 @@ export async function init(opt) {
 	
 /*--__BUTTONSTATE__--*/
 
-/*--__AUTOLOAD__--*/
+
 /*--__HANDLERASSIGNMENT__--*/
 
 }

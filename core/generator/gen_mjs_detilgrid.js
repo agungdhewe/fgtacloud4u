@@ -113,8 +113,12 @@ module.exports = async (fsd, genconfig) => {
 			grd_list: grd_list,
 			opt: opt,
 			header_data: header_data
-		})
+		}, ()=>{})
 	}`;
+
+
+
+
 
 
 	handlercellrender = `if (typeof hnd.grd_list_cellrender === 'function') {

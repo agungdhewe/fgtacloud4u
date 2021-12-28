@@ -45,7 +45,7 @@ module.exports = async (fsd, genconfig) => {
 		var comptype = data[fieldname].comp.comptype
 		if (comptype=='datebox') {
 			tosqldate += `\t\t\t$obj->${fieldname} = (\\DateTime::createFromFormat('d/m/Y',$obj->${fieldname}))->format('Y-m-d');\r\n`
-			lookupfields += `\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($row['${fieldname}'])),\r\n`;
+			lookupfields += `\t\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($row['${fieldname}'])),\r\n`;
 		}
 		
 		var uppercase = data[fieldname].uppercase;
@@ -75,7 +75,7 @@ module.exports = async (fsd, genconfig) => {
 			if (options.field_display_name!=null) {
 				field_display_name = options.field_display_name;
 			}			
-			lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
+			lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
 		}
 
 

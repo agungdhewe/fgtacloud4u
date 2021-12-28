@@ -46,7 +46,10 @@ export async function init(opt) {
 		OnDataDeleted: async (result, options) => { await form_deleted(result, options) },
 		OnIdSetup : (options) => { form_idsetup(options) },
 		OnViewModeChanged : (viewonly) => { form_viewmodechanged(viewonly) }
-	})	
+	});
+	form.getHeaderData = () => {
+		return header_data;
+	}	
 
 	form.AllowAddRecord = <--__ALLOWADDRECORD__-->
 	form.AllowRemoveRecord = <--__ALLOWREMOVERECORD__-->

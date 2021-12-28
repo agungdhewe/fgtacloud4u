@@ -17,7 +17,7 @@ const colBright = "\x1b[1m"
 const BgYellow = "\x1b[43m"
 
 const field_props = ['type', 'null', 'default', 'comp', 'reference', 'uppercase', 'lowercase', 'text', 'caption', 'section', 'suppresslist', 'options', 'unset', 'tips', 'tipstype', 'initialvalue', 'hidden', 'lookup', 'idsuffix', 'autobylogin', 'handlers']
-const detil_props = ['table', 'form', 'headerview', 'title', 'isapprovalform', 'editorHandler', 'listHandler']
+const detil_props = ['table', 'form', 'headerview', 'title', 'isapprovalform', 'editorHandler', 'listHandler', 'overwrite', 'tabvisible']
 
 
 module.exports = async (fsd, genconfig) => {
@@ -65,6 +65,8 @@ module.exports = async (fsd, genconfig) => {
 		}
 
 		
+
+
 
 		var childtable = {}
 		for (var detilname in genconfig.schema.detils) {

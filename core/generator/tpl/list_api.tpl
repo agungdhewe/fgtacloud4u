@@ -7,6 +7,11 @@ if (!defined('FGTA4')) {
 require_once __ROOT_DIR.'/core/sqlutil.php';
 require_once __DIR__ . '/xapi.base.php';
 
+if (is_file(__DIR__ .'/data-header-handler.php')) {
+	require_once __DIR__ .'/data-header-handler.php';
+}
+
+
 
 use \FGTA4\exceptions\WebException;
 
@@ -30,6 +35,18 @@ $API = new class extends {__BASENAME__}Base {
 	public function execute($options) {
 
 		$userdata = $this->auth->session_get_user();
+
+		$handlerclassname = "\\FGTA4\\apis\\{__BASENAME__}_headerHandler";
+		if (class_exists($handlerclassname)) {
+			$hnd = new {__BASENAME__}_headerHandler($data, $options);
+			$hnd->caller = $this;
+			$hnd->db = $this->db;
+			$hnd->auth = $this->auth;
+			$hnd->reqinfo = $reqinfo->reqinfo;
+		} else {
+			$hnd = new \stdClass;
+		}
+
 
 		try {
 		
@@ -64,11 +81,24 @@ $API = new class extends {__BASENAME__}Base {
 			$stmt->execute($where->params);
 			$rows  = $stmt->fetchall(\PDO::FETCH_ASSOC);
 
+			$beforeloopdata = new \stdClass;
+			if (is_object($hnd)) {
+				if (method_exists(get_class($hnd), 'DataListBeforeLoop')) {
+					$beforeloopdata = $hnd->DataListBeforeLoop((object[]));
+				}
+			}
+
 			$records = [];
 			foreach ($rows as $row) {
 				$record = [];
 				foreach ($row as $key => $value) {
 					$record[$key] = $value;
+				}
+
+				if (is_object($hnd)) {
+					if (method_exists(get_class($hnd), 'DataListLooping')) {
+						$hnd->DataListLooping($record, $beforeloopdata);
+					}
 				}
 
 				array_push($records, array_merge($record, [
@@ -77,6 +107,10 @@ $API = new class extends {__BASENAME__}Base {
 				 	//'tambahan' => 'dta'
 /*{__LOOKUPFIELDS__}*/					 
 				]));
+
+
+
+
 			}
 
 			// kembalikan hasilnya

@@ -44,7 +44,7 @@ module.exports = async (fsd, genconfig) => {
 
 			if (comptype=='datebox') {
 				tosqldate += `\t\t\t$obj->${fieldname} = (\\DateTime::createFromFormat('d/m/Y',$obj->${fieldname}))->format('Y-m-d');\r\n`;
-				lookupfields += `\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($row['${fieldname}'])),\r\n`;
+				lookupfields += `\t\t\t\t\t'${fieldname}' => date("d/m/Y", strtotime($row['${fieldname}'])),\r\n`;
 			}	
 			
 			var uppercase = data[fieldname].uppercase;
@@ -73,9 +73,9 @@ module.exports = async (fsd, genconfig) => {
 				if (options.field_display_name!=null) {
 					field_display_name = options.field_display_name;
 				}				
-				lookupfields += `\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
+				lookupfields += `\t\t\t\t\t'${field_display_name}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, '${options.table}', '${options.field_value}', '${options.field_display}'),\r\n`
 			}  else if  (data[fieldname].lookup==='user') {
-				lookupfields += `\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
+				lookupfields += `\t\t\t\t\t'${fieldname}' => \\FGTA4\\utils\\SqlUtility::Lookup($record['${fieldname}'], $this->db, $GLOBALS['MAIN_USERTABLE'], 'user_id', 'user_fullname'),\r\n`
 			}
 
 
@@ -126,10 +126,10 @@ module.exports = async (fsd, genconfig) => {
 
 		}
 
-		fieldreturn.push('_createby')
-		fieldreturn.push('_createdate')
-		fieldreturn.push('_modifyby')
-		fieldreturn.push('_modifydate')
+		// fieldreturn.push('_createby')
+		// fieldreturn.push('_createdate')
+		// fieldreturn.push('_modifyby')
+		// fieldreturn.push('_modifydate')
 		
 		var fieldresturnsel = "'" + fieldreturn.join("', '") + "'"
 

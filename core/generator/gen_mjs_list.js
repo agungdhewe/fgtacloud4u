@@ -27,11 +27,18 @@ module.exports = async (fsd, genconfig) => {
 
 		if (genconfig.schema.listHandler != undefined) {
 			handlerlib = `import * as hnd from  './${genconfig.schema.listHandler}'\r\n`;
-			handlerassignment = `\tif (typeof hnd.init==='function') {
-		hnd.init({
-			grd_list: grd_list,
-			opt: opt,
-		})
+			handlerassignment = `\tgrd_list.autoload = true;
+	if (typeof hnd.init==='function') {
+			hnd.init({
+				grd_list: grd_list,
+				opt: opt,
+			}, ()=>{
+				if (grd_list.autoload) {
+					btn_load_click();
+				}
+			})
+		} else {
+			btn_load_click();
 	}`;
 
 			handlercustomsearch = `if (typeof hnd.customsearch === 'function') {
@@ -49,10 +56,10 @@ module.exports = async (fsd, genconfig) => {
 
 		}
 
-		var autoload = '';
-		if (genconfig.schema.autoload!==false) {
-			autoload = "\tbtn_load_click()";
-		}
+		// var autoload = '';
+		// if (genconfig.schema.autoload!==false) {
+		// 	autoload = "\tbtn_load_click()";
+		// }
 
 
 
@@ -61,7 +68,7 @@ module.exports = async (fsd, genconfig) => {
 		tplscript = tplscript.replace('/*--__BUTTONSTATE__--*/', buttonstate)
 		tplscript = tplscript.replace('/*--__HANDLERLIB__--*/', handlerlib)
 		tplscript = tplscript.replace('/*--__HANDLERASSIGNMENT__--*/', handlerassignment)
-		tplscript = tplscript.replace('/*--__AUTOLOAD__--*/', autoload)
+		// tplscript = tplscript.replace('/*--__AUTOLOAD__--*/', autoload)
 		tplscript = tplscript.replace('/*--__HANDLERCUSTOMSERACH__--*/', handlercustomsearch)
 
 		tplscript = tplscript.replace('/*--__HANDLERROWRENDER__--*/', handlerrowrender)
