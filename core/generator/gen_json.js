@@ -29,12 +29,23 @@ module.exports = async (fsd, genconfig) => {
 		}
 
 
+		var variance = "";
+		if (genconfig.variance!=null) {
+			variance += `\r\n\t\t`;
+			for (var vkey in genconfig.variance) {
+				variance += `"${vkey}" : ${JSON.stringify(genconfig.variance[vkey])}`
+			}
+			variance += `\r\n\t`;
+		}
+
+
+
 		var mjstpl = path.join(genconfig.GENLIBDIR, 'tpl', 'json.tpl')
 		var tplscript = fs.readFileSync(mjstpl).toString()
 		tplscript = tplscript.replace('__PROGRAM_TITLE__', title)
 		tplscript = tplscript.replace('__PROGRAM_ICON__', config_icon)
 		tplscript = tplscript.replace('__PROGRAM_BACKCOLOR__', config_backcolor)
-
+		tplscript = tplscript.replace('__PROGRAM_VARIANCE__', variance)
 
 
 

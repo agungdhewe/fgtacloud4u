@@ -4,7 +4,7 @@ var this_page_options;
 /*--__HANDLERLIB__--*/
 const tbl_list = $('#<!--__PANELNAME__-->-tbl_list');
 const txt_title = $('#<!--__PANELNAME__-->-title');
-const pnl_control = $('#<!--__PANELNAME__-->-control');
+const pnl_control = $('.<!--__PANELNAME__-->-control');
 const btn_removechecked  = $('#<!--__PANELNAME__-->-removechecked');
 const btn_addrow = $('#<!--__PANELNAME__-->-addrow');
 
@@ -25,7 +25,7 @@ export async function init(opt) {
 		OnRowRender: (tr) => { grd_list_rowrender(tr) }
 	});	
 	grd_list.doLoad = () => {
-		btn_load_click();
+		OpenDetil(header_data);
 	}
 
 
@@ -75,6 +75,14 @@ export async function init(opt) {
 
 }
 
+export function getObject(name) {
+	switch (name) {
+		case 'grd_list' : return grd_list;
+		case 'page_id' : return this_page_id;
+		case 'page_options' : return this_page_options;
+		case 'last_scrolltop' : return last_scrolltop;
+	}
+}
 
 export function OnSizeRecalculated(width, height) {
 }
@@ -119,6 +127,13 @@ export function OpenDetil(data) {
 		} else {
 			btn_removechecked.hide()
 		}
+
+		if (typeof hnd!=='undefined') { 
+			if (typeof hnd.OpenDetil === 'function') {
+				hnd.OpenDetil(data, result, options);
+			}
+		}
+
 
 	}
 

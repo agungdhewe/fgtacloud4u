@@ -70,8 +70,10 @@ module.exports = async (fsd, genconfig) => {
 			for (var objhndname in data[fieldname].handlers) {
 				var hndf = data[fieldname].handlers[objhndname];
 				objhandlers += `
-	obj.${prefix}${fieldname}.${comptype}({${objhndname}: (${hndf.params}) => { 
-		if (typeof hnd.${hndf.functionname}==='function') {hnd.${hndf.functionname}(${hndf.params})} 
+	obj.${prefix}${fieldname}.${comptype}({${objhndname}: (${hndf.params}) => {
+		if (typeof hnd!=='undefined') {
+			if (typeof hnd.${hndf.functionname}==='function') {hnd.${hndf.functionname}(${hndf.params})} 
+		}
 	}});
 	`
 			}
@@ -194,16 +196,22 @@ module.exports = async (fsd, genconfig) => {
 			
 			if (genconfig.schema.editorHandler != undefined) {
 
-				slideselect_on_selected_handler = `if (typeof hnd.${prefix}${fieldname}_selected === 'function') {
-					hnd.${prefix}${fieldname}_selected(value, display, record, args);
+				slideselect_on_selected_handler = `if (typeof hnd!=='undefined') {  
+					if (typeof hnd.${prefix}${fieldname}_selected === 'function') {
+						hnd.${prefix}${fieldname}_selected(value, display, record, args);
+					}
 				}`;
 
-				slideselect_on_dataloading_handler = `if (typeof hnd.${prefix}${fieldname}_dataloading === 'function') {
-				hnd.${prefix}${fieldname}_dataloading(criteria);
+				slideselect_on_dataloading_handler = `if (typeof hnd!=='undefined') { 
+				if (typeof hnd.${prefix}${fieldname}_dataloading === 'function') {
+					hnd.${prefix}${fieldname}_dataloading(criteria);
+				}
 			}`;
 
-				slideselect_on_dataloaded_handler = `if (typeof hnd.${prefix}${fieldname}_dataloaded === 'function') {
-				hnd.${prefix}${fieldname}_dataloaded(result, options);
+				slideselect_on_dataloaded_handler = `if (typeof hnd!=='undefined') { 
+				if (typeof hnd.${prefix}${fieldname}_dataloaded === 'function') {
+					hnd.${prefix}${fieldname}_dataloaded(result, options);
+				}
 			}`;
 
 			}

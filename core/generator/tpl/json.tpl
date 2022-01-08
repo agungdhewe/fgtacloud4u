@@ -2,7 +2,7 @@
 	"title" : "__PROGRAM_TITLE__",
 	__PROGRAM_ICON__
 	__PROGRAM_BACKCOLOR__
-	"variance" : {},
+	"variance" : {__PROGRAM_VARIANCE__},
 	"allowanonymous" : true,
 	"allowedgroups" : ["public"],
 	"apis" : {

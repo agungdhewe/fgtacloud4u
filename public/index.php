@@ -234,6 +234,10 @@ try {
 				require_once __ROOT_DIR.'/core/routes/route-cfs.php';
 				break;						
 
+			case 'profilepicture' :
+				$isapps = false;
+				require_once __ROOT_DIR.'/core/routes/route-profilepicture.php';
+				break;					
 
 			case 'favicon.ico' :
 				$isapps = false;

@@ -181,12 +181,15 @@ async function PrepareFs(genconfig) {
 				handlers.push({name:`apis/data-${detilname}-handler.php`, program:'gen_api_handler', identity:detilname})
 			}
 			for (var hndname of handlermod) {
+				var gen = hndname=='editorHandler' ? 'gen_blank_editor' : 'gen_blank_list'
+				var hndfname = hndname=='editorHandler' ? 'form' : 'grid';
 				if (detil[hndname]!=undefined) {
-					var gen = hndname=='editorHandler' ? 'gen_blank_editor' : 'gen_blank_list'
-					var hndfname = hndname=='editorHandler' ? 'form' : 'grid';
 					// handlers.push({name:detil[hndname], program: gen});
 					handlers.push({name:`${basename}-${detilname}${hndfname}-hnd.mjs`, program: gen});
 				}
+				//  else if (detil.handlers===true) {
+				// 	handlers.push({name:`${basename}-${detilname}${hndfname}-hnd.mjs`, program: gen});
+				// }
 			}
 		}
 

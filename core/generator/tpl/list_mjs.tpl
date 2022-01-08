@@ -66,6 +66,14 @@ export async function init(opt) {
 
 }
 
+export function getObject(name) {
+	switch (name) {
+		case 'grd_list' : return grd_list;
+		case 'page_id' : return this_page_id;
+		case 'page_options' : return this_page_options;
+		case 'last_scrolltop' : return last_scrolltop;
+	}
+}
 
 export function OnSizeRecalculated(width, height) {
 }

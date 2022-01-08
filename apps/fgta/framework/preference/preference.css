@@ -1,0 +1,34 @@
+.pref-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+
+.pref-container .colfoto {
+	width: 220px;
+}
+
+
+/* .pref-container .colform {
+	width: 300px;
+} */
+
+.form_label_col {
+	text-align: left;
+	width: 100px;
+	margin-top: 14px;
+}
+
+
+.form_label_col.passcol {
+	width: 150px;
+}
+
+
+.updater-container {
+	padding: 30px;
+	border: 1px solid #ccc;
+	display: none;
+	margin-top: 20px;
+}

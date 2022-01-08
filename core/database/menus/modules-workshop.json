@@ -125,7 +125,8 @@
 						"ent/affiliation/partner",
 						"ent/affiliation/brandtype",
 						"ent/affiliation/brand",
-						{"program":"ent/affiliation/brand", "variancename":"manual-id-input"}
+						{"program":"ent/affiliation/brand", "variancename":"manual-id-input"},
+						"ent/general/interface"
 					]
 				},
 		
@@ -171,6 +172,32 @@
 				"hrms/master/empl",
 				"fgta/framework/fguser",
 				"hrms/master/empluser"
+			]
+		},
+
+
+		{
+			"title" : "Wholesale",
+			"modules" : [
+
+
+				"finact/sales/orderintype",
+
+				"ent/affiliation/brand",
+
+				"retail/master/merchseagroup",
+				"retail/master/merchsea",
+				
+				"retail/master/merchitemgro",
+				"retail/master/merchitemctg",
+
+				"retail/master/merchitem",
+				"retail/sales/merchquotout",
+				"retail/sales/merchorderin",
+
+				"finact/sales/orderindelv",
+
+				"finact/fin/billout"
 			]
 		}
 

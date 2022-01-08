@@ -88,3 +88,9 @@
 		"restoreTerminals.runOnStartup": true,
 		"restoreTerminals.artificialDelayMilliseconds": 100,
 		"terminal.integrated.persistentSessionReviveProcess":"never"		
+
+
+
+		linkedin.com/in/pt-trans-fashion-indonesia-26b98574
+
+		211227-008427

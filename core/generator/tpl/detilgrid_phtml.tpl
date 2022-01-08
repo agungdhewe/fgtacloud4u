@@ -39,7 +39,9 @@
 		</table>
 	</div>
 
-	<div id="<!--__PANELNAME__-->-control" style="display: flex; justify-content: space-between; margin-bottom: 100px">
+
+
+	<div class="<!--__PANELNAME__-->-control" style="display: flex; justify-content: space-between; margin-bottom: 100px">
 		<div>
 			<a id="<!--__PANELNAME__-->-removechecked" href="javascript:void(0)" class="easyui-linkbutton c8">Hapus Checked</a>
 		</div>

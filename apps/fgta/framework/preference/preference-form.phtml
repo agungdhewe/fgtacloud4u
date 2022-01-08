@@ -1,0 +1,125 @@
+<div id="pnl_form">
+
+	<h1>Preference</h1>
+
+
+	
+		<div class="pref-container">
+			<div class="colfoto">
+				<img id="pnl_form-profilepicture" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="200px" alt="profile">
+			</div>
+			<div class="colform">
+				
+				<form id="pnl_form-form">
+					<div class="form_row" >
+						<div class="form_label_col"  style="border: 0px solid black; vertical-align: top;">User Id</div>
+						<div class="form_input_col" style="border: 0px solid black">
+							<input id="pnl_form-txt_user_id" class="easyui-textbox" mapping="user_id"  maxlength="14"  style="width: 400px" data-options="multiline:false,disabled:true,value:'loading...'  ">
+							<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+						</div>
+					</div>
+
+					<div class="form_row" >
+						<div class="form_label_col"  style="border: 0px solid black; vertical-align: top;">User Name</div>
+						<div class="form_input_col" style="border: 0px solid black">
+							<input id="pnl_form-txt_user_name" class="easyui-textbox" mapping="user_name"  maxlength="14"  style="width: 400px" data-options="multiline:false,disabled:true,value:'loading...'  ">
+							<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+						</div>
+					</div>
+
+					<div class="form_row" >
+						<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; ">User FullName</div>
+						<div class="form_input_col" style="border: 0px solid black">
+							<input id="pnl_form-txt_user_fullname" class="easyui-textbox" mapping="user_fullname"  maxlength="14"  style="width: 400px" data-options="multiline:false ,disabled:true, value:'loading...' ">
+							<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+						</div>
+					</div>
+
+					<div class="form_row" >
+						<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; ">Email</div>
+						<div class="form_input_col" style="border: 0px solid black">
+							<input id="pnl_form-txt_user_email" class="easyui-textbox" mapping="user_email"  maxlength="14"  style="width: 400px" data-options="multiline:false ,disabled:true, value:'loading...' ">
+							<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+						</div>
+					</div>
+
+					<div class="form_row" >
+						<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; ">My Group(s)</div>
+						<div class="form_input_col" style="border: 0px solid black" id="pnl_form-groupinfo">
+						<ul><li>loading...</li></ul>
+						</div>
+					</div>
+
+
+					<div style="margin-top: 20px">
+						<a href="javascript:void(0)" id="pnl_form-btn_password_change" class="easyui-linkbutton" style="width: 150px" data-options="plain: true, toggle: true">Change Password</a>
+						<a href="javascript:void(0)" id="pnl_form-btn_picture_change" class="easyui-linkbutton" style="width: 150px" data-options="plain: true, toggle: true">Change Picture</a>
+					</div>
+
+					<div id="pnl_form-passwordupdate" class="updater-container">
+						<div class="form_row" >
+							<div class="form_label_col passcol"  style="border: 0px solid black; vertical-align: top; ">Previous Password</div>
+							<div class="form_input_col" style="border: 0px solid black">
+								<input id="pnl_form-txt_password_previous" class="easyui-passwordbox" mapping="password_previous"  maxlength="14"  style="width: 300px" data-options="multiline:false  ">
+								<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+							</div>
+						</div>
+						<div class="form_row" >
+							<div class="form_label_col passcol"  style="border: 0px solid black; vertical-align: top; ">New Password</div>
+							<div class="form_input_col" style="border: 0px solid black">
+								<input id="pnl_form-txt_password_new" class="easyui-passwordbox" mapping="password_new"  maxlength="14"  style="width: 300px" data-options="multiline:false  ">
+								<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+							</div>
+						</div>
+						<div class="form_row" >
+							<div class="form_label_col passcol"  style="border: 0px solid black; vertical-align: top; ">Confirm Password</div>
+							<div class="form_input_col" style="border: 0px solid black">
+								<input id="pnl_form-txt_password_confirm" class="easyui-passwordbox" mapping="password_confirm"  maxlength="14"  style="width: 300px" data-options="multiline:false  ">
+								<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+							</div>
+						</div>
+
+						<div class="form_row" >
+							<div class="form_label_col passcol"  style="border: 0px solid black; vertical-align: top; ">Confirm Password</div>
+							<div class="form_input_col" style="border: 0px solid black">
+								<a href="javascript:void(0)" id="pnl_form-btn_password_update"  class="easyui-linkbutton c8" style="width: 150px">Update Password</a>
+							</div>
+						</div>						
+
+					</div>
+
+
+
+					<div id="pnl_form-pictureupdate" class="updater-container" >
+						<div class="form_row " >
+							<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;">Picture</div>
+							<div class="form_input_col" style="border: 0px solid black">
+								<input id="pnl_form-fl_profile_picture" class="easyui-filebox" mapping="profile_picture" style="width: 300px" data-options="multiline: false , accept: 'image/*' ">
+								<div style="margin-top: 3px; margin-bottom: 5px; font-size: 0.75em; font-style: italic; color:#54381d;"></div>
+							</div>
+						</div>
+
+						<div class="form_row " >
+							<div class="form_label_col"  style="border: 0px solid black; vertical-align: top; margin-top: 7px;"></div>
+							<div class="form_input_col" style="border: 0px solid black">
+								<a href="javascript:void(0)"  id="pnl_form-btn_picture_update" class="easyui-linkbutton c8" style="width: 70px">Update</a>
+							</div>
+						</div>
+					</div>
+
+
+				</form>
+
+			</div>
+		</div>
+
+
+	<!-- // TODO: Preference -> buat halaman preference -->
+
+
+	<!-- <div>
+		<a href="javascript:void(0)" id="pnl_form-btn_refresh" class="easyui-linkbutton c8" style="width: 75px">Refresh</a>
+	</div> -->
+
+
+</div>
