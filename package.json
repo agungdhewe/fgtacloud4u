@@ -20,6 +20,6 @@
 		"rimraf": "^3.0.2"
 	},
 	"devDependencies": {
-		"javascript-obfuscator": "^1.1.0"
+		"javascript-obfuscator": "^4.0.2"
 	}
 }
